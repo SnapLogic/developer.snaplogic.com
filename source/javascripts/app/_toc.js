@@ -32,6 +32,26 @@
       $("#nav-button").toggleClass('open');
       return false;
     });
+    
+    $("#expand-collapse").click(
+    	function() {
+    		var isShowAll = $(this).data('show');
+	    	if (isShowAll) {
+				$('#toc').tocify({
+					'showAndHideOnScroll': true
+				});
+				$('.tocify-subheader').css('display', 'none'); 
+				$(this).text("Collapse Table of Contents");
+			} else {
+				$('#toc').tocify({
+					'showAndHideOnScroll': false
+				});
+				$('.tocify-subheader').css('display', 'block'); 
+				$(this).text("Expand Table of Contents");
+			}
+			$(this).data('show', !isShowAll);
+		}
+	);
 
     $(".page-wrapper").click(closeToc);
     $(".tocify-item").click(closeToc);
