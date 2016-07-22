@@ -140,7 +140,7 @@
 
 <p><img alt="Snap Anatomy" src="http://dl.dropboxusercontent.com/u/3519578/Screenshots/iKCt.png" /></p>
 
-<p>The have metadata that define their view settings and configuration. They can read/poll from an endpoint, batch execute or process each input individually, and may write to another endpoint.</p>
+<p>They have metadata that define their view settings and configuration. They can read/poll from an endpoint, batch execute or process each input individually, and may write to another endpoint.</p>
 
 <p>Snaps can provide design-time Suggest/lookup and Preview/validate data capabilities, or run in full execution mode.</p>
 
@@ -148,7 +148,7 @@
 
 <h2 id="snaps-vs-scripts">Snaps vs Scripts</h2>
 
-<p>SnapLogic&rsquo;s <a href="http://doc.snaplogic.com/com-snaplogic-snaps-script-script_2">Script Snap</a> executes a Javascript, Jython, or JRuby script using the JVM <code class="prettyprint">ScriptEngine</code> mechanism. </p>
+<p>SnapLogic&rsquo;s <a href="http://doc.snaplogic.com/com-snaplogic-snaps-script-script_2">Script Snap</a> executes a JavaScript, Jython, or JRuby script using the JVM <code class="prettyprint">ScriptEngine</code> mechanism. </p>
 
 <p>Consider the following when deciding whether to develop a custom Snap vs using the Script Snap:</p>
 
@@ -314,7 +314,7 @@ jcc.environment <span class="o">=</span> devsnaplex
 
 <p>The simplest way to start the Snaplex is to run the packaged <code class="prettyprint">jcc.war</code> file.</p>
 
-<p>To check if the Snaplex started correctly, login to the <a href="https://elastic.snaplogic.com/sl/dashboard.html">SnapLogic Dashboard</a>:</p>
+<p>To check if the Snaplex started correctly, log in to the <a href="https://elastic.snaplogic.com/sl/dashboard.html">SnapLogic Dashboard</a>:</p>
 
 <p><img alt="SnapLogic Dashboard Snaplex Health" src="http://dl.dropboxusercontent.com/u/3519578/Screenshots/1Z0t.png" /></p>
 
@@ -373,8 +373,8 @@ A green check mark beside the Snaplex entry will indicate a healthy instance.
 <li><code class="prettyprint">@Inputs</code>: specifies the minimum and maximum number of Input Views and the type of input they accept (JSON Documents or Binary data).</li>
 <li><code class="prettyprint">@Outputs</code>: specifies the minimum and maximum number of Output Views and the type of output they produce (JSON Documents or Binary data).</li>
 <li><code class="prettyprint">@Errors</code>: specifies whether an Error Views should be written to</li>
-<li><code class="prettyprint">@Version</code>: version number for the Snap (not to be confused with its build number).</li>
-<li><code class="prettyprint">@Category</code>: categorizes the Snap and determines the icon/color of the Snap within the SnapLogic Designer.</li>
+<li><code class="prettyprint">@Version</code>: version number for the Snap (not to be confused with the Snap Pack version).</li>
+<li><code class="prettyprint">@Category</code>: <a href="#snap-categories">categorizes the Snap</a> and determines the icon/color of the Snap within the SnapLogic Designer.</li>
 </ul>
 
 <h3 id="snap-interface">Snap interface</h3>
