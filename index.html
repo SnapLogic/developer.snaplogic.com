@@ -379,11 +379,11 @@ A green check mark beside the Snaplex entry will indicate a healthy instance.
 
 <h3 id="snap-interface">Snap interface</h3>
 
-<p>The <code class="prettyprint">com.snaplogic.api.Snap</code> interface that should be implemented by the Snap developers to convert their business logic into entity that can be used inside SnapLogic Pipelines.</p>
+<p>The <code class="prettyprint">com.snaplogic.api.Snap</code> interface that should be implemented by the Snap developers to convert their business logic into an entity that can be used inside SnapLogic Pipelines.</p>
 
 <p><strong><code class="prettyprint">defineProperties</code></strong></p>
 
-<p>Defines the Snap properties using the given <code class="prettyprint">PropertyBuilder</code>. This method is called during the <code class="prettyprint">compile</code> phase and generates the <code class="prettyprint">settings</code> Snap schema property that the SnapLogic Designer uses to build the user interface.</p>
+<p>Defines the Snap properties using the given <code class="prettyprint">PropertyBuilder</code>. This method is called during <a href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Build_Lifecycle_Basics">the <code class="prettyprint">compile</code> phase</a> and generates the <code class="prettyprint">settings</code> Snap schema property that the SnapLogic Designer uses to build the user interface.</p>
 
 <p><strong><code class="prettyprint">configure</code></strong></p>
 
@@ -552,13 +552,13 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 <p><img alt="Project Structure" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/uzoL.png" /></p>
 </blockquote>
 
+<p>A Snap Project&rsquo;s structure follows <a href="https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html">Maven&rsquo;s Standard Directory Layout</a>.</p>
+
 <h3 id="src-main-assembly"><code class="prettyprint">src/main/assembly</code></h3>
 
 <p><code class="prettyprint">final.xml</code> and <code class="prettyprint">snap.xml</code> are used by the <code class="prettyprint">maven-assembly-plugin</code> to build the Snap Pack zip file that can be uploaded to the SnapLogic Manager. You should not need to alter these files.</p>
 
 <h3 id="src-main-config"><code class="prettyprint">src/main/config</code></h3>
-
-<p><strong>directives</strong></p>
 
 <p><code class="prettyprint">directives</code> contains basic Snap Pack metadata. </p>
 
@@ -678,7 +678,7 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 <p><a href="#snap-anatomy-101">Snap Anatomy 101</a> explains the purpose of each annotation and the overridden methods. The comments above each annotation describe their specific usage for this Snap.</p>
 
 <aside class="notice">
-For simplicity, the **&ldquo;Single Doc Generator&rdquo;** Snap does not permit any input views. However, for general Snap development, there should **almost always** be an input view. See <a href="#reading-documents-from-an-input-view">Reading Documents from an Input View</a> for more.
+For simplicity, the <strong>&ldquo;Single Doc Generator&rdquo;</strong> Snap does not permit any input views. However, for general Snap development, there should <strong>almost always<strong> be an input view. See <a href="#reading-documents-from-an-input-view">Reading Documents from an Input View</a> for more.
 </aside>
 
 <h3 id="snap-lifecycle">Snap Lifecycle</h3>
@@ -693,7 +693,7 @@ For simplicity, the **&ldquo;Single Doc Generator&rdquo;** Snap does not permit 
 
 <p>Finally, the <code class="prettyprint">cleanup</code> method is called to clean-up any resources used.</p>
 
-<p>Due to no user input being required, nor clean-up needed, the <code class="prettyprint">defineProperties</code>, <code class="prettyprint">configure()</code>, and <code class="prettyprint">cleanup</code> methods have no implementation for this Snap. </p>
+<p>Due to no user input being required, nor clean-up needed, the <code class="prettyprint">defineProperties</code>, <code class="prettyprint">configure</code>, and <code class="prettyprint">cleanup</code> methods have no implementation for this Snap. </p>
 
 <p>The <code class="prettyprint">execute</code> method increments an <code class="prettyprint">int</code> member variable, logs a debug statement, creates data, and generates a new Document with this data to be subsequently written to the output view.</p>
 
@@ -712,7 +712,7 @@ For simplicity, the **&ldquo;Single Doc Generator&rdquo;** Snap does not permit 
   xid: a83bcfdd-2bc7-480e-bf1e-5fbdfef3c726   
 </code></pre>
 
-<p>In (<a href="#basic-snap-implementation">the &ldquo;Single Doc Generator&rdquo; sample Snap</a>) above, an SLF4J <code class="prettyprint">Logger</code> static class variable is declared and initialized and is used to write debug messages to the Snaplex/JCC&rsquo;s log.</p>
+<p>In <a href="#basic-snap-implementation">the &ldquo;Single Doc Generator&rdquo; sample Snap</a> above, an SLF4J <code class="prettyprint">Logger</code> static class variable is declared and initialized and is used to write debug messages to the Snaplex/JCC&rsquo;s log.</p>
 
 <p>For example, when previewing or executing the &ldquo;Single Doc Generator&rdquo; Snap in the Designer, the value of the <code class="prettyprint">counter</code> variable is written to the log. </p>
 
@@ -911,8 +911,8 @@ We recommend that you do pass through the original document for greatest flexibi
 
 <aside class="notice">
 SnapLogic&rsquo;s Platform will enforce that all input documents have been fully consumed, otherwise an error will occur and the pipeline will fail.
-
-<p>If some documents are consumed but &ldquo;dropped on the floor&rdquo; (not written to either an output or error view, or used to create another <code>Document</code>), call <code>document.acknowledge</code> to indicate it has been consumed.</p>
+<br />
+<br />If some documents are consumed but &ldquo;dropped on the floor&rdquo; (not written to either an output or error view, or used to create another <code>Document</code>), call <code>document.acknowledge</code> to indicate it has been consumed.
 </aside>
 
 <h2 id="snap-categories">Snap Categories</h2>
@@ -923,7 +923,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 
 <ul>
 <li>the color and icon of the Snaps are different,</li>
-<li>the &ldquo;Doc Consumer&rdquo; Snap inherits an &ldquo;Execute During Preview&rdquo; setting to toggle whether the Snap will execute when the Pipeline is validating/previewing,</li>
+<li>the &ldquo;Doc Consumer&rdquo; Snap inherits an &ldquo;Execute during Preview&rdquo; setting to toggle whether the Snap will execute when the Pipeline is validating/previewing,</li>
 <li>the Snaps are separated when &ldquo;Group By Type&rdquo; is chosen.</li>
 </ul>
 
@@ -975,8 +975,12 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
  * This Snap accepts two inputs and outputs to a single output. To use it, feed
  * it at least one document in each view. It will output a single stream which consists
  * of the combination of the two inputs.
- *
- * @author &lt;you&gt;
+ * 
+ * This Snap extends {@link SimpleSnap} (instead of implementing {@link Snap}).
+ * This means that instead of having a method called 'execute' which is called once,
+ * it has a method called 'process' which is called for every document the Snap receives.
+ * This means you do not have to iterate over incoming documents as 'process' does that
+ * for you.
  */</span>
 <span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Two Inputs"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Accepts two inputs, merges them"</span><span class="o">,</span>
         <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
@@ -985,13 +989,6 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 <span class="nd">@Errors</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
 <span class="nd">@Category</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SnapCategory</span><span class="o">.</span><span class="na">READ</span><span class="o">)</span>
-<span class="cm">/*
- * This Snap extends {@link SimpleSnap} (instead of implementing {@link Snap}).
- * This means that instead of having a method called 'execute' which is called once,
- * it has a method called 'process' which is called for every document the Snap receives.
- * This means you do not have to iterate over incoming documents as 'process' does that
- * for you.
- */</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TwoInputs</span> <span class="kd">extends</span> <span class="n">SimpleSnap</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">log</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">TwoInputs</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
@@ -1169,7 +1166,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 
 <p>The <code class="prettyprint">doWork()</code> method iterates over the Snap&rsquo;s binary input views, returning a <code class="prettyprint">BinaryInput</code> instance for each view. The <code class="prettyprint">BinaryInput</code> contains a <code class="prettyprint">ReadableByteChannel</code> (which can read the bytes of the incoming binary data) and a Document header containing basic metadata (<code class="prettyprint">content-type</code> etc.).</p>
 
-<p>As shown <a href="#writing-binary-data-to-an-output-view">in the <code class="prettyprint">CharacterCounter</code> sample above</a>, these can then be used to create an <code class="prettyprint">InputStream</code> or simliar to access and/or manipulate the binary data.</p>
+<p>As shown <a href="#writing-binary-data-to-an-output-view">in the <strong>&ldquo;Character Counter&rdquo;</strong> sample above</a>, these can then be used to create an <code class="prettyprint">InputStream</code> or simliar to access and/or manipulate the binary data.</p>
 
 <h3 id="headers">Headers</h3>
 
@@ -1178,7 +1175,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 <p>When creating <code class="prettyprint">BinaryOutput</code> instances, a Document header should be created and returned in <code class="prettyprint">getHeader()</code>.</p>
 
 <aside class="success">
-We recommend using standard/popular specification field names, lowercased, when possible e.g. <code>"content-type"</code> from the HTTP specification.
+We recommend using standard/popular specification field names, lowercased, when possible e.g. <code>"content-type"</code>, from the HTTP specification.
 </aside> 
 
 <h2 id="accepting-user-input-with-propertybuilder">Accepting User Input with PropertyBuilder</h2>
@@ -1316,8 +1313,6 @@ All Snaps will have a required <strong>Label</strong> property for customizing t
  * This Snap has one output and writes one document that contains the suggested
  * value. This Snap demonstrates the suggest value functionality that uses the
  * partial configuration information to suggest a property value.
- *
- * @author &lt;you&gt;
  */</span>
 <span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Suggest"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Demo suggest functionality."</span><span class="o">,</span>
         <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
@@ -1755,8 +1750,6 @@ SnapLogic recommends always enabling a Document error view:
  *
  * It will output two streams, one for only males and another for females. 
  * Unknowns will get sent to both.
- *
- * @author &lt;you&gt;
  */</span>
 <span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Two Ins/Outs"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Accepts two inputs, sends to two outputs."</span><span class="o">,</span>
         <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
