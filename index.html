@@ -651,7 +651,7 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ExecutionException</span> <span class="o">{</span>
         <span class="n">counter</span><span class="o">++;</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"counter="</span> <span class="o">+</span> <span class="n">counter</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"counter: {}"</span><span class="o">,</span> <span class="n">counter</span><span class="o">);</span>
 
         <span class="cm">/*
          * Write a single document to outputView. The next Snap in the pipe will
@@ -1023,10 +1023,10 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 
         <span class="n">count</span><span class="o">++;</span>
         <span class="c1">// log current document number</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"count="</span> <span class="o">+</span> <span class="n">count</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"count: {}"</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
 
         <span class="c1">// log current document</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"document: "</span> <span class="o">+</span> <span class="n">newdoc</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"document: {}"</span><span class="o">,</span> <span class="n">newdoc</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 
         <span class="c1">// send new document to next Snap</span>
         <span class="n">outputViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">newdoc</span><span class="o">,</span> <span class="n">document</span><span class="o">);</span>
@@ -1035,7 +1035,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">cleanup</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ExecutionException</span> <span class="o">{</span>
         <span class="c1">// Log final number of documents processed</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Final count="</span> <span class="o">+</span> <span class="n">count</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Final count: {}"</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
@@ -1073,41 +1073,59 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
     <span class="o">...</span>
     <span class="nd">@Override</span>
     <span class="kd">protected</span> <span class="kt">void</span> <span class="n">process</span><span class="o">(</span><span class="kd">final</span> <span class="n">Document</span> <span class="n">header</span><span class="o">,</span> <span class="kd">final</span> <span class="n">ReadableByteChannel</span> <span class="n">readChannel</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+
+        <span class="c1">// Guava Multiset</span>
+        <span class="kd">final</span> <span class="n">Multiset</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">bagOfChars</span> <span class="o">=</span> <span class="n">HashMultiset</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
+
+        <span class="k">try</span> <span class="o">(</span><span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="n">Channels</span><span class="o">.</span><span class="na">newInputStream</span><span class="o">(</span><span class="n">readChannel</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span>
+                    <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">inputStream</span><span class="o">),</span> <span class="n">UTF_8</span><span class="o">);</span>
+
+            <span class="c1">// read in each character</span>
+            <span class="kt">int</span> <span class="n">characterRead</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">((</span><span class="n">characterRead</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">())</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// add the lowercase version of the character to the Multiset</span>
+                <span class="n">bagOfChars</span><span class="o">.</span><span class="na">add</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="n">Character</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">(</span><span class="n">characterRead</span><span class="o">));</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">errorViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="k">new</span> <span class="n">SnapDataException</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()),</span> <span class="n">header</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">// for each letter of English alphabet, write a line with the number of times</span>
+            <span class="c1">// it appeared in the input data</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">char</span> <span class="n">letter</span> <span class="o">=</span> <span class="sc">'a'</span><span class="o">;</span> <span class="n">letter</span> <span class="o">&lt;=</span> <span class="sc">'z'</span><span class="o">;</span> <span class="n">letter</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">letter</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">":"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">bagOfChars</span><span class="o">.</span><span class="na">count</span><span class="o">(</span><span class="n">letter</span><span class="o">))</span>
+                        <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">lineSeparator</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// if there were any errors, write to the error view</span>
+            <span class="n">SnapDataException</span> <span class="n">ex</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SnapDataException</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="s">"Unable to complete counting "</span>
+                    <span class="o">+</span> <span class="s">"characters from input data."</span><span class="o">).</span><span class="na">withResolutionAsDefect</span><span class="o">();</span>
+
+            <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+            <span class="n">data</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"content"</span><span class="o">,</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+
+            <span class="n">errorViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">ex</span><span class="o">,</span> <span class="n">documentUtility</span><span class="o">.</span><span class="na">newDocument</span><span class="o">(</span><span class="n">data</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="c1">// write data to the output view</span>
         <span class="n">outputViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="k">new</span> <span class="n">BinaryOutput</span><span class="o">()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="n">Document</span> <span class="n">getHeader</span><span class="o">()</span> <span class="o">{</span>
-                <span class="c1">// maintain the incoming header</span>
                 <span class="k">return</span> <span class="n">header</span><span class="o">;</span>
             <span class="o">}</span>
 
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="kt">void</span> <span class="n">write</span><span class="o">(</span><span class="n">WritableByteChannel</span> <span class="n">writeChannel</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-                <span class="k">try</span> <span class="o">(</span><span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="n">Channels</span><span class="o">.</span><span class="na">newInputStream</span><span class="o">(</span><span class="n">readChannel</span><span class="o">))</span> <span class="o">{</span>
-                    <span class="n">OutputStream</span> <span class="n">outputStream</span> <span class="o">=</span> <span class="n">Channels</span><span class="o">.</span><span class="na">newOutputStream</span><span class="o">(</span><span class="n">writeChannel</span><span class="o">);</span>
-
-                    <span class="c1">// Guava Multiset</span>
-                    <span class="n">Multiset</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">bagOfChars</span> <span class="o">=</span> <span class="n">HashMultiset</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
-
-                    <span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span>
-                            <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">inputStream</span><span class="o">),</span> <span class="n">UTF_8</span><span class="o">);</span>
-
-                    <span class="c1">// read in each character</span>
-                    <span class="kt">int</span> <span class="n">characterRead</span><span class="o">;</span>
-                    <span class="k">while</span> <span class="o">((</span><span class="n">characterRead</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">read</span><span class="o">())</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="c1">// add the lowercase version of the character to the Multiset</span>
-                        <span class="n">bagOfChars</span><span class="o">.</span><span class="na">add</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span> <span class="n">Character</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">(</span><span class="n">characterRead</span><span class="o">));</span>
-                    <span class="o">}</span>
-
-                    <span class="k">try</span> <span class="o">{</span>
-                        <span class="c1">// for each letter of English alphabet, write a line with the number of times</span>
-                        <span class="c1">// it appeared in the input data</span>
-                        <span class="k">for</span> <span class="o">(</span><span class="kt">char</span> <span class="n">letter</span> <span class="o">=</span> <span class="sc">'a'</span><span class="o">;</span> <span class="n">letter</span> <span class="o">&lt;=</span> <span class="sc">'z'</span><span class="o">;</span> <span class="n">letter</span><span class="o">++)</span> <span class="o">{</span>
-                            <span class="n">String</span> <span class="n">countForLetter</span> <span class="o">=</span> <span class="n">letter</span> <span class="o">+</span> <span class="s">":"</span> <span class="o">+</span> <span class="n">bagOfChars</span><span class="o">.</span><span class="na">count</span><span class="o">(</span><span class="n">letter</span><span class="o">)</span> <span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">lineSeparator</span><span class="o">();</span>
-                            <span class="n">IOUtils</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">countForLetter</span><span class="o">,</span> <span class="n">outputStream</span><span class="o">,</span> <span class="n">UTF_8</span><span class="o">);</span>
-                        <span class="o">}</span>
-                    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-                        <span class="n">IOUtils</span><span class="o">.</span><span class="na">closeQuietly</span><span class="o">(</span><span class="n">outputStream</span><span class="o">);</span>
-                    <span class="o">}</span>
+                <span class="n">OutputStream</span> <span class="n">outputStream</span> <span class="o">=</span> <span class="n">Channels</span><span class="o">.</span><span class="na">newOutputStream</span><span class="o">(</span><span class="n">writeChannel</span><span class="o">);</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">IOUtils</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span> <span class="n">outputStream</span><span class="o">,</span> <span class="n">UTF_8</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+                    <span class="n">IOUtils</span><span class="o">.</span><span class="na">closeQuietly</span><span class="o">(</span><span class="n">outputStream</span><span class="o">);</span>
                 <span class="o">}</span>
             <span class="o">}</span>
         <span class="o">});</span>
@@ -1117,7 +1135,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 
 <p>While JSON-based Documents offer the greatest flexibility of manipulating data within a pipeline, Binary data has advantages too. The costs associated with parsing and formatting data to JSON are avoided, and it can allow easier integration with processes running externally to the pipeline.</p>
 
-<p>The <code class="prettyprint">CharacterCounter</code> sample Snap shown demonstrates writing to a binary output view. It counts the number of times each letter of the English alphabet appears in the incoming binary data, and then writes the results to the binary output view.</p>
+<p>The <code class="prettyprint">CharacterCounter</code> sample Snap shown demonstrates writing to a binary output view. It counts the number of times each letter of the English alphabet appears in the incoming binary data, and then writes the results to the binary output view (or, if there were any exceptions, creates an error Document and writes that to the error view).</p>
 
 <p>In the sample, the <code class="prettyprint">process()</code> method&rsquo;s implementation writes an anonymous <code class="prettyprint">BinaryOutput</code> instance to the Snap&rsquo;s output view. </p>
 
