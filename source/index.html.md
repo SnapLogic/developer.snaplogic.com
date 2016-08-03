@@ -490,7 +490,7 @@ public class SingleDocGenerator implements Snap {
     @Override
     public void execute() throws ExecutionException {
         counter++;
-        log.debug("counter=" + counter);
+        log.debug("counter: {}", counter);
 
         /*
          * Write a single document to outputView. The next Snap in the pipe will
@@ -842,10 +842,10 @@ public class TwoInputs extends SimpleSnap {
 
         count++;
         // log current document number
-        log.debug("count=" + count);
+        log.debug("count: {}", count);
 
         // log current document
-        log.debug("document: " + newdoc.toString());
+        log.debug("document: {}", newdoc.toString());
 
         // send new document to next Snap
         outputViews.write(newdoc, document);
@@ -854,7 +854,7 @@ public class TwoInputs extends SimpleSnap {
     @Override
     public void cleanup() throws ExecutionException {
         // Log final number of documents processed
-        log.debug("Final count=" + count);
+        log.debug("Final count: {}", count);
     }
 }
 ```
@@ -892,41 +892,59 @@ public class CharacterCounter extends SimpleBinaryWriteSnap {
 	...
     @Override
     protected void process(final Document header, final ReadableByteChannel readChannel) {
+        final StringBuilder sb = new StringBuilder();
+
+        // Guava Multiset
+        final Multiset<Character> bagOfChars = HashMultiset.create();
+
+        try (InputStream inputStream = Channels.newInputStream(readChannel)) {
+            Reader reader = new InputStreamReader(
+                    new BufferedInputStream(inputStream), UTF_8);
+
+            // read in each character
+            int characterRead;
+            while ((characterRead = reader.read()) != -1) {
+                // add the lowercase version of the character to the Multiset
+                bagOfChars.add((char) Character.toLowerCase(characterRead));
+            }
+        } catch (IOException e) {
+            errorViews.write(new SnapDataException(e, e.getMessage()), header);
+        }
+
+        try {
+            // for each letter of English alphabet, write a line with the number of times
+            // it appeared in the input data
+            for (char letter = 'a'; letter <= 'z'; letter++) {
+                sb.append(letter)
+                        .append(":")
+                        .append(bagOfChars.count(letter))
+                        .append(System.lineSeparator());
+            }
+        } catch (Exception e) {
+            // if there were any errors, write to the error view
+            SnapDataException ex = new SnapDataException(e, "Unable to complete counting "
+                    + "characters from input data.").withResolutionAsDefect();
+
+            LinkedHashMap<String, String> data = new LinkedHashMap<>();
+            data.put("content", sb.toString());
+
+            errorViews.write(ex, documentUtility.newDocument(data));
+        }
+
+        // write data to the output view
         outputViews.write(new BinaryOutput() {
             @Override
             public Document getHeader() {
-            	// maintain the incoming header
                 return header;
             }
 
             @Override
             public void write(WritableByteChannel writeChannel) throws IOException {
-                try (InputStream inputStream = Channels.newInputStream(readChannel)) {
-                    OutputStream outputStream = Channels.newOutputStream(writeChannel);
-
-                    // Guava Multiset
-                    Multiset<Character> bagOfChars = HashMultiset.create();
-
-                    Reader reader = new InputStreamReader(
-                            new BufferedInputStream(inputStream), UTF_8);
-
-                    // read in each character
-                    int characterRead;
-                    while ((characterRead = reader.read()) != -1) {
-                        // add the lowercase version of the character to the Multiset
-                        bagOfChars.add((char) Character.toLowerCase(characterRead));
-                    }
-
-                    try {
-                        // for each letter of English alphabet, write a line with the number of times
-                        // it appeared in the input data
-                        for (char letter = 'a'; letter <= 'z'; letter++) {
-                            String countForLetter = letter + ":" + bagOfChars.count(letter) + System.lineSeparator();
-                            IOUtils.write(countForLetter, outputStream, UTF_8);
-                        }
-                    } finally {
-                        IOUtils.closeQuietly(outputStream);
-                    }
+                OutputStream outputStream = Channels.newOutputStream(writeChannel);
+                try {
+                    IOUtils.write(sb.toString(), outputStream, UTF_8);
+                } finally {
+                    IOUtils.closeQuietly(outputStream);
                 }
             }
         });
@@ -936,7 +954,7 @@ public class CharacterCounter extends SimpleBinaryWriteSnap {
 
 While JSON-based Documents offer the greatest flexibility of manipulating data within a pipeline, Binary data has advantages too. The costs associated with parsing and formatting data to JSON are avoided, and it can allow easier integration with processes running externally to the pipeline.
 
-The `CharacterCounter` sample Snap shown demonstrates writing to a binary output view. It counts the number of times each letter of the English alphabet appears in the incoming binary data, and then writes the results to the binary output view.
+The `CharacterCounter` sample Snap shown demonstrates writing to a binary output view. It counts the number of times each letter of the English alphabet appears in the incoming binary data, and then writes the results to the binary output view (or, if there were any exceptions, creates an error Document and writes that to the error view).
 
 In the sample, the `process()` method's implementation writes an anonymous `BinaryOutput` instance to the Snap's output view. 
 
