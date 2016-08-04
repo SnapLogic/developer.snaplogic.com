@@ -890,6 +890,7 @@ public class CharacterCounter extends SimpleBinaryWriteSnap {
 
     private static final String UTF_8 = "UTF-8";
 	...
+	
     @Override
     protected void process(final Document header, final ReadableByteChannel readChannel) {
         final StringBuilder sb = new StringBuilder();
@@ -898,8 +899,7 @@ public class CharacterCounter extends SimpleBinaryWriteSnap {
         final Multiset<Character> bagOfChars = HashMultiset.create();
 
         try (InputStream inputStream = Channels.newInputStream(readChannel)) {
-            Reader reader = new InputStreamReader(
-                    new BufferedInputStream(inputStream), UTF_8);
+            Reader reader = new InputStreamReader(new BufferedInputStream(inputStream), UTF_8);
 
             // read in each character
             int characterRead;
@@ -915,13 +915,11 @@ public class CharacterCounter extends SimpleBinaryWriteSnap {
             // for each letter of English alphabet, write a line with the number of times
             // it appeared in the input data
             for (char letter = 'a'; letter <= 'z'; letter++) {
-                sb.append(letter)
-                        .append(":")
-                        .append(bagOfChars.count(letter))
+                sb.append(letter).append(":").append(bagOfChars.count(letter))
                         .append(System.lineSeparator());
             }
         } catch (Exception e) {
-            // if there were any errors, write to the error view
+            // write to the error view when a problem processing the input data is encountered
             SnapDataException ex = new SnapDataException(e, "Unable to complete counting "
                     + "characters from input data.").withResolutionAsDefect();
 
@@ -929,9 +927,9 @@ public class CharacterCounter extends SimpleBinaryWriteSnap {
             data.put("content", sb.toString());
 
             errorViews.write(ex, documentUtility.newDocument(data));
+            return;
         }
 
-        // write data to the output view
         outputViews.write(new BinaryOutput() {
             @Override
             public Document getHeader() {
