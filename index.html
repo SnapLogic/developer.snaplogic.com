@@ -1071,6 +1071,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">UTF_8</span> <span class="o">=</span> <span class="s">"UTF-8"</span><span class="o">;</span>
     <span class="o">...</span>
+
     <span class="nd">@Override</span>
     <span class="kd">protected</span> <span class="kt">void</span> <span class="n">process</span><span class="o">(</span><span class="kd">final</span> <span class="n">Document</span> <span class="n">header</span><span class="o">,</span> <span class="kd">final</span> <span class="n">ReadableByteChannel</span> <span class="n">readChannel</span><span class="o">)</span> <span class="o">{</span>
         <span class="kd">final</span> <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
@@ -1079,8 +1080,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
         <span class="kd">final</span> <span class="n">Multiset</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">bagOfChars</span> <span class="o">=</span> <span class="n">HashMultiset</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
 
         <span class="k">try</span> <span class="o">(</span><span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="n">Channels</span><span class="o">.</span><span class="na">newInputStream</span><span class="o">(</span><span class="n">readChannel</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span>
-                    <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">inputStream</span><span class="o">),</span> <span class="n">UTF_8</span><span class="o">);</span>
+            <span class="n">Reader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">inputStream</span><span class="o">),</span> <span class="n">UTF_8</span><span class="o">);</span>
 
             <span class="c1">// read in each character</span>
             <span class="kt">int</span> <span class="n">characterRead</span><span class="o">;</span>
@@ -1096,13 +1096,11 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
             <span class="c1">// for each letter of English alphabet, write a line with the number of times</span>
             <span class="c1">// it appeared in the input data</span>
             <span class="k">for</span> <span class="o">(</span><span class="kt">char</span> <span class="n">letter</span> <span class="o">=</span> <span class="sc">'a'</span><span class="o">;</span> <span class="n">letter</span> <span class="o">&lt;=</span> <span class="sc">'z'</span><span class="o">;</span> <span class="n">letter</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">letter</span><span class="o">)</span>
-                        <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">":"</span><span class="o">)</span>
-                        <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">bagOfChars</span><span class="o">.</span><span class="na">count</span><span class="o">(</span><span class="n">letter</span><span class="o">))</span>
+                <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">letter</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="s">":"</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="n">bagOfChars</span><span class="o">.</span><span class="na">count</span><span class="o">(</span><span class="n">letter</span><span class="o">))</span>
                         <span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">lineSeparator</span><span class="o">());</span>
             <span class="o">}</span>
         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// if there were any errors, write to the error view</span>
+            <span class="c1">// write to the error view when a problem processing the input data is encountered</span>
             <span class="n">SnapDataException</span> <span class="n">ex</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SnapDataException</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="s">"Unable to complete counting "</span>
                     <span class="o">+</span> <span class="s">"characters from input data."</span><span class="o">).</span><span class="na">withResolutionAsDefect</span><span class="o">();</span>
 
@@ -1110,9 +1108,9 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
             <span class="n">data</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"content"</span><span class="o">,</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 
             <span class="n">errorViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">ex</span><span class="o">,</span> <span class="n">documentUtility</span><span class="o">.</span><span class="na">newDocument</span><span class="o">(</span><span class="n">data</span><span class="o">));</span>
+            <span class="k">return</span><span class="o">;</span>
         <span class="o">}</span>
 
-        <span class="c1">// write data to the output view</span>
         <span class="n">outputViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="k">new</span> <span class="n">BinaryOutput</span><span class="o">()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="n">Document</span> <span class="n">getHeader</span><span class="o">()</span> <span class="o">{</span>
