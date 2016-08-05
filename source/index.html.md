@@ -148,7 +148,7 @@ jcc.location = sidekick
 jcc.sldb_uri = https://elastic.snaplogic.com:443
 ...
 # The subscriber ID assigned for the customer. This will be available after
-# the customer account is created.
+# the customer account is created. Usually this should match your Organization name.
 jcc.subscriber_id = snaplogic
 
 # This is the runtime environment in which the Snaplex should be started.
