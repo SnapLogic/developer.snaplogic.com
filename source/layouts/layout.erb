@@ -21,7 +21,30 @@ under the License.
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="icon" href="favicon.ico" type="image/x-icon"/ >
-    <title><%= current_page.data.title || "API Documentation" %></title>
+    
+    <title><%= current_page.data.title || "Snap Development Documentation" %></title>
+    <meta name="description" content="This documentation guides a developer through the steps necessary to develop Snaps for the SnapLogic Elastic Integration Platform." />
+    
+    <!-- Twitter Card data -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@SnapLogic">
+	<meta name="twitter:title" content="Snap Development Documentation">
+	<meta name="twitter:description" content="A guide for developers creating Snaps for the SnapLogic Elastic Integration Platform.">
+	<meta name="twitter:creator" content="@robinhowlett">
+	<-- Twitter Summary card images must be at least 120x120px -->
+	<meta name="twitter:image" content="http://dl.dropboxusercontent.com/u/3519578/Screenshots/EX5M.png">
+
+	<!-- Open Graph data -->
+	<meta property="og:title" content="Snap Development Documentation" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="http://developer.snaplogic.com/" />
+	<meta property="og:image" content="http://dl.dropboxusercontent.com/u/3519578/Screenshots/EX5M.png" />
+	<meta property="og:description" content="A guide for developers creating Snaps for the SnapLogic Elastic Integration Platform." /> 
+	<meta property="og:site_name" content="SnapLogic" />
+	<meta property="fb:admins" content="139487059826192" />
+	
+	<!-- Google Search Console verification -->
+	<meta name="google-site-verification" content="Y5HefmIT29LMZPMWI4B6aCgKFIDgH1H49VwABxZM-r8" />
 
     <style>
       <%= Rouge::Themes::Base16::Monokai.render(:scope => '.highlight') %>
@@ -33,6 +56,18 @@ under the License.
     <% else %>
       <%= javascript_include_tag  "all_nosearch" %>
     <% end %>
+    
+	<!-- Google Analytics -->
+    <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-39614376-8', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
   </head>
 
   <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
