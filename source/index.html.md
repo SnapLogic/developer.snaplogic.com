@@ -2303,11 +2303,11 @@ The following sections will use the unit tests included in the [Snap Maven Arche
 public class SingleDocGeneratorTest {
 
     @TestFixture(snap = SingleDocGenerator.class,
-            <strong>outputs = "output0"</strong>)
+            outputs = "output0")
     public void testSingleDocGeneratorFunctionality(TestResult testResult)
             throws Exception {
         assertNull(testResult.getException());
-        <strong>OutputRecorder outputRecorder = testResult.getOutputViewByName("output0");</strong>
+        OutputRecorder outputRecorder = testResult.getOutputViewByName("output0");
         assertEquals(1, outputRecorder.getRecordedData().size());
     }
 
@@ -2327,7 +2327,7 @@ public class SchemaExampleTest {
     @TestFixture(snap = SchemaExample.class,
             input = "data/schema_invalid_input.data",
             outputs = "output0",
-            <strong>errors = "error0"</strong>)
+            errors = "error0")
     public void testInValidDataAgainstSchema(TestResult testResult)
             throws Exception {
         // Since the input document does not conform to the expected schema,
@@ -2337,7 +2337,7 @@ public class SchemaExampleTest {
 
         // Input document should be forwarded to the error view as it does not
         // match the expected schema.
-        <strong>OutputRecorder errorRecorder = testResult.getErrorViewByName("error0");</strong>
+        OutputRecorder errorRecorder = testResult.getErrorViewByName("error0");
         assertEquals(1, errorRecorder.getDocumentCount());
     }
 }
