@@ -2292,7 +2292,7 @@ Method | Description
 `injectorModule` 	| [Guice Module](https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Module.html) that can override bindings<br />in the default test module.
 `dataFiles` 		| Returns an array of data file paths.<br />These files will be available in the `URLStreamHandlerFactory` factory.
 `dataFilesSupplier` | If specified, an instance of this class will be created<br />and used to supply an array of data file paths<br />for the `URLStreamHandlerFactory` factory.<br />This is an alternative to specifying `dataFiles` when<br />the same set of data files is needed by multiple tests.<br />If both `dataFiles` and `dataFilesSupplier` are specified,<br />`dataFiles` will be used.
-`dataFilesSupplier` | If specified, an instance of this class will be created<br />and used to supply an array of data file paths<br />for the `URLStreamHandlerFactory` factory.<br />This is an alternative to specifying `dataFiles` when<br />the same set of data files is needed by multiple tests.<br />If both `dataFiles` and `dataFilesSupplier` are specified<br />, `dataFiles` will be used.
+`suggestProperty` 	| The path to the snap property to do suggestions for.<br />The result of the suggestions is written to a<br />fake output view so that you can use the `expectedOutputPath`<br />mechanism to validate the results.
 
 The following sections will use the unit tests included in the [Snap Maven Archetype](#snap-maven-archetype).
 
