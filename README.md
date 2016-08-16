@@ -1,36 +1,47 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lord/img/master/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
-  <br>
-  <a href="https://travis-ci.org/lord/slate"><img src="https://travis-ci.org/lord/slate.svg?branch=master" alt="Build Status"></a>
+  <img src="https://www.snaplogic.com/assets/application/logo-header-096e0919c2ce87a4ebd541deac1f5592.png" alt="SnapLogic Logo" width="226">
 </p>
 
-<p align="center">Slate helps you create beautiful, intelligent, responsive API documentation.</p>
+<p align="center">The <a href="http://developer.snaplogic.com">Snap Development Documentation</a> guides a developer creating Snaps for the <a href="https://www.snaplogic.com/">SnapLogic Elastic Integration Platform</a>.</p>
 
-<p align="center"><img src="https://dl.dropboxusercontent.com/u/95847291/github%20images/slate/slate_screenshot_new.png" width=700 alt="Screenshot of Example Documentation created with Slate"></p>
+<p align="center"><img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/XN3A.png" width=700 alt="Screenshot of Snap Development Documentation"></p>
 
-<p align="center"><em>The example above was created with Slate. Check it out at <a href="https://lord.github.io/slate">lord.github.io/slate</a>.</em></p>
+# Highlights
 
-Features
-------------
+* **Open-Source** - The Snap Development Docs are a fork of [Slate](https://github.com/lord/slate), an open-source API documentation generator. The SnapLogic Community can [contribute back](https://gist.github.com/Chaser324/ce0505fbed06b947d962), [give feedback, open issues](https://github.com/SnapLogic/developer.snaplogic.com/issues) etc. 
 
-* **Clean, intuitive design** — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/api) and [Paypal's](https://developer.paypal.com/webapps/developer/docs/api/) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
+* **Bootstrapped** - The Maven archetype (project building tool) that partners the documentation provides eight sample Snaps to learn from and to build upon. A SnapLogic customer can be up-and-running and deploying custom Snaps to their organization within minutes.
 
-* **Everything on a single page** — Gone are the days when your users had to search through a million pages to find what they wanted. Slate puts the entire documentation on a single page. We haven't sacrificed linkability, though. As you scroll, your browser's hash will update to the nearest header, so linking to a particular point in the documentation is still natural and easy.
+* **Detailed** - In-depth guides to setting up a Snaplex, and developing and deploying your own Snaps, with explanations, screenshots, and code samples side-by-side, including:
 
-* **Slate is just Markdown** — When you write docs with Slate, you're just writing Markdown, which makes it simple to edit and understand. Everything is written in Markdown — even the code samples are just Markdown code blocks.
+	* Creating a Snap
+	* Reading and writing documents and binary data
+	* Accepting and validating user input
+	* Expression-enabled Snap properites
+	* Suggesting property values
+	* Understanding Input/Output View Schemas
+	* Exceptions and Error Views
+	* Authenticating with Accounts
+	* Deploying Snap Packs
+	* Testing Snaps
 
-* **Write code samples in multiple languages** — If your API has bindings in multiple programming languages, you can easily put in tabs to switch between them. In your document, you'll distinguish different languages by specifying the language name at the top of each code block, just like with Github Flavored Markdown.
+* **Fast, serverless** - Single-page static website.
 
-* **Out-of-the-box syntax highlighting** for [almost 100 languages](http://rouge.jneen.net/), no configuration required.
+* **Responsive** - Design adapts to screen size (phone, tablet etc.).
 
-* **Automatic, smoothly scrolling table of contents** on the far left of the page. As you scroll, it displays your current position in the document. It's fast, too. We're using Slate at TripIt to build documentation for our new API, where our table of contents has over 180 entries. We've made sure that the performance remains excellent, even for larger documents.
+* **Searchable** - Basic search supported.
 
-* **Let your users update your documentation for you** — By default, your Slate-generated documentation is hosted in a public Github repository. Not only does this mean you get free hosting for your docs with Github Pages, but it also makes it simple for other developers to make pull requests to your docs if they find typos or other problems. Of course, if you don't want to use GitHub, you're also welcome to host your docs elsewhere.
+* **Portable** - Uses Markdown to decouple content from presentation; multiple themes possible.
 
-Getting started with Slate is super easy! Simply fork this repository and follow the instructions below. Or, if you'd like to check out what Slate is capable of, take a look at the [sample docs](http://lord.github.io/slate).
+* **Coherent** - Table of Contents dynamically highlights what content you are currently reading.
 
-Getting Started with Slate
-------------------------------
+Contributing to this documentation is straightforward. Simply fork this repository and follow the instructions below.
+
+# Contributing Back? Need Help? Found a bug?
+
+[Submit an issue](https://github.com/SnapLogic/developer.snaplogic.com/issues) to the developer.snaplogic.com Github repository if you need any help. And, of course, feel free to [submit pull requests](https://gist.github.com/Chaser324/ce0505fbed06b947d962) with bug fixes or changes.
+
+# Running Locally
 
 ### Prerequisites
 
@@ -43,9 +54,9 @@ You're going to need:
 ### Getting Set Up
 
 1. Fork this repository on Github.
-2. Clone *your forked repository* (not our original one) to your hard drive with `git clone https://github.com/YOURUSERNAME/slate.git`
-3. `cd slate`
-4. Initialize and start Slate. You can either do this locally, or with Vagrant:
+2. Clone *your forked repository* (not our original one) to your hard drive with `git clone https://github.com/YOURUSERNAME/developer.snaplogic.com.git`
+3. `cd developer.snaplogic.com`
+4. Initialize and start the Slate server. You can either do this locally, or with Vagrant:
 
 ```shell
 # either run this to run locally
@@ -58,49 +69,6 @@ vagrant up
 
 You can now see the docs at http://localhost:4567. Whoa! That was fast!
 
-Now that Slate is all set up your machine, you'll probably want to learn more about [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax), or [how to publish your docs](https://github.com/lord/slate/wiki/Deploying-Slate).
+Learn more about [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax).
 
-If you'd prefer to use Docker, instructions are available [in the wiki](https://github.com/lord/slate/wiki/Docker).
-
-Companies Using Slate
----------------------------------
-
-* [NASA](https://api.nasa.gov)
-* [IBM Cloudant](https://docs.cloudant.com/api.html)
-* [Travis-CI](https://docs.travis-ci.com/api/)
-* [Mozilla](http://mozilla.github.io/localForage/)
-* [Appium](http://appium.io/slate/en/master)
-* [Dwolla](https://docs.dwolla.com/)
-* [Clearbit](https://clearbit.com/docs)
-* [Coinbase](https://developers.coinbase.com/api)
-* [Parrot Drones](http://developer.parrot.com/docs/bebop/)
-* [Fidor Bank](http://docs.fidor.de/)
-
-You can view more in [the list on the wiki](https://github.com/lord/slate/wiki/Slate-in-the-Wild).
-
-Need Help? Found a bug?
---------------------
-
-[Submit an issue](https://github.com/lord/slate/issues) to the Slate Github if you need any help. And, of course, feel free to submit pull requests with bug fixes or changes.
-
-Contributors
---------------------
-
-Slate was built by [Robert Lord](https://lord.io) while interning at [TripIt](https://www.tripit.com/).
-
-Thanks to the following people who have submitted major pull requests:
-
-- [@chrissrogers](https://github.com/chrissrogers)
-- [@bootstraponline](https://github.com/bootstraponline)
-- [@realityking](https://github.com/realityking)
-- [@cvkef](https://github.com/cvkef)
-
-Also, thanks to [Sauce Labs](http://saucelabs.com) for helping sponsor the project.
-
-Special Thanks
---------------------
-- [Middleman](https://github.com/middleman/middleman)
-- [jquery.tocify.js](https://github.com/gfranko/jquery.tocify.js)
-- [middleman-syntax](https://github.com/middleman/middleman-syntax)
-- [middleman-gh-pages](https://github.com/edgecase/middleman-gh-pages)
-- [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
+If you'd prefer to use Docker, instructions are available [in the Slate wiki](https://github.com/lord/slate/wiki/Docker).
