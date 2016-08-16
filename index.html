@@ -2569,11 +2569,11 @@ public class ExampleAccount implements ExtendedValidatableAccount&lt;String, Str
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingleDocGeneratorTest</span> <span class="o">{</span>
 
     <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SingleDocGenerator</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
-            <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;)</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">)</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">testSingleDocGeneratorFunctionality</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span>
             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
-        <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">OutputRecorder</span> <span class="n">outputRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getOutputViewByName</span><span class="o">(</span><span class="s">"output0"</span><span class="o">);&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+        <span class="n">OutputRecorder</span> <span class="n">outputRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getOutputViewByName</span><span class="o">(</span><span class="s">"output0"</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">outputRecorder</span><span class="o">.</span><span class="na">getRecordedData</span><span class="o">().</span><span class="na">size</span><span class="o">());</span>
     <span class="o">}</span>
 
@@ -2591,7 +2591,7 @@ public class ExampleAccount implements ExtendedValidatableAccount&lt;String, Str
     <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SchemaExample</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
             <span class="n">input</span> <span class="o">=</span> <span class="s">"data/schema_invalid_input.data"</span><span class="o">,</span>
             <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">,</span>
-            <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">errors</span> <span class="o">=</span> <span class="s">"error0"</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;)</span>
+            <span class="n">errors</span> <span class="o">=</span> <span class="s">"error0"</span><span class="o">)</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">testInValidDataAgainstSchema</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span>
             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="c1">// Since the input document does not conform to the expected schema,</span>
@@ -2601,7 +2601,7 @@ public class ExampleAccount implements ExtendedValidatableAccount&lt;String, Str
 
         <span class="c1">// Input document should be forwarded to the error view as it does not</span>
         <span class="c1">// match the expected schema.</span>
-        <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">OutputRecorder</span> <span class="n">errorRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getErrorViewByName</span><span class="o">(</span><span class="s">"error0"</span><span class="o">);&lt;/</span><span class="n">strong</span><span class="o">&gt;</span>
+        <span class="n">OutputRecorder</span> <span class="n">errorRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getErrorViewByName</span><span class="o">(</span><span class="s">"error0"</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">errorRecorder</span><span class="o">.</span><span class="na">getDocumentCount</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span>
