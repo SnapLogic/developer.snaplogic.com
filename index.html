@@ -485,17 +485,22 @@ Choose com.snaplogic.tools:SnapArchetype version:
 4: 1.3
 5: 1.4
 6: 1.5
-Choose a number: 6: 
-Define value <span class="k">for </span>property <span class="s1">'groupId'</span>: : com.snaplogic.snaps
+7: 1.6
+Choose a number: 7: 7
+Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.jar
+Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.jar <span class="o">(</span>44 KB at 65.5 KB/sec<span class="o">)</span>
+Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.pom
+Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.pom <span class="o">(</span>3 KB at 10.5 KB/sec<span class="o">)</span>
+Define value <span class="k">for </span>property <span class="s1">'groupId'</span>: : com.snaplogic
 Define value <span class="k">for </span>property <span class="s1">'artifactId'</span>: : demosnappack
 Define value <span class="k">for </span>property <span class="s1">'version'</span>:  1.0-SNAPSHOT: : 
-Define value <span class="k">for </span>property <span class="s1">'package'</span>:  com.snaplogic.snaps: : 
+Define value <span class="k">for </span>property <span class="s1">'package'</span>:  com.snaplogic: : com.snaplogic.snaps
 Define value <span class="k">for </span>property <span class="s1">'organization'</span>: : snaplogic
 Define value <span class="k">for </span>property <span class="s1">'assetPath'</span>:  /snaplogic/shared: : /snaplogic/robin/shared
 Define value <span class="k">for </span>property <span class="s1">'snapPack'</span>:  demosnappack: : Demo Snap Pack
 Define value <span class="k">for </span>property <span class="s1">'user'</span>: : rhowlett@snaplogic.com
 Confirm properties configuration:
-groupId: com.snaplogic.snaps
+groupId: com.snaplogic
 artifactId: demosnappack
 version: 1.0-SNAPSHOT
 package: com.snaplogic.snaps
@@ -505,9 +510,9 @@ snapPack: Demo Snap Pack
 user: rhowlett@snaplogic.com
  Y: : Y
 <span class="o">[</span>INFO] ----------------------------------------------------------------------------
-<span class="o">[</span>INFO] Using following parameters <span class="k">for </span>creating project from Archetype: SnapArchetype:1.5
+<span class="o">[</span>INFO] Using following parameters <span class="k">for </span>creating project from Archetype: SnapArchetype:1.6
 <span class="o">[</span>INFO] ----------------------------------------------------------------------------
-<span class="o">[</span>INFO] Parameter: groupId, Value: com.snaplogic.snaps
+<span class="o">[</span>INFO] Parameter: groupId, Value: com.snaplogic
 <span class="o">[</span>INFO] Parameter: artifactId, Value: demosnappack
 <span class="o">[</span>INFO] Parameter: version, Value: 1.0-SNAPSHOT
 <span class="o">[</span>INFO] Parameter: package, Value: com.snaplogic.snaps
@@ -517,7 +522,7 @@ user: rhowlett@snaplogic.com
 <span class="o">[</span>INFO] Parameter: user, Value: rhowlett@snaplogic.com
 <span class="o">[</span>INFO] Parameter: organization, Value: snaplogic
 <span class="o">[</span>INFO] Parameter: assetPath, Value: /snaplogic/robin/shared
-<span class="o">[</span>INFO] Parameter: groupId, Value: com.snaplogic.snaps
+<span class="o">[</span>INFO] Parameter: groupId, Value: com.snaplogic
 <span class="o">[</span>INFO] Parameter: snapPack, Value: Demo Snap Pack
 <span class="o">[</span>INFO] Parameter: artifactId, Value: demosnappack
 <span class="o">[</span>INFO] project created from Archetype <span class="k">in </span>dir: /Users/snapdev/opt/snaplogic-dev/demosnappack
@@ -572,6 +577,18 @@ The Snap archetype catalog is available at <a href="http://maven.clouddev.snaplo
 <td><strong>Schema Example</strong></td>
 <td><em>Demonstrating input and output schemas for IO validation</em></td>
 </tr>
+<tr>
+<td><strong>Character Counter</strong></td>
+<td><em>Binary input and output views</em></td>
+</tr>
+<tr>
+<td><strong>Currency Converter</strong></td>
+<td><em>Demonstrates dependency injection</em></td>
+</tr>
+<tr>
+<td><strong>SnapWithAccount</strong></td>
+<td><em>Authenticating with an <code class="prettyprint">ExampleAccount</code></em></td>
+</tr>
 </tbody></table>
 
 <aside class="warning">
@@ -583,7 +600,8 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 <h2 id="project-structure">Project Structure</h2>
 
 <blockquote>
-<p><img alt="Project Structure" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/uzoL.png" /></p>
+<p><img alt="Project Structure Main" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/Eop8.png" />
+<img alt="Project Structure Test" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/odZU.png" /></p>
 </blockquote>
 
 <p>A Snap Project&rsquo;s structure follows <a href="https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html">Maven&rsquo;s Standard Directory Layout</a>.</p>
@@ -625,17 +643,25 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
     After creating a new Snap class, add it here.
 --&gt;</span>
 <span class="nt">&lt;snap.classes&gt;</span>
+    com.snaplogic.snaps.CharacterCounter,
+    com.snaplogic.snaps.CurrencyConverter,
     com.snaplogic.snaps.DocConsumer,
     com.snaplogic.snaps.DocGenerator,
     com.snaplogic.snaps.PropertyTypes,
     com.snaplogic.snaps.SchemaExample,
     com.snaplogic.snaps.SingleDocGenerator,
+    com.snaplogic.snaps.SnapWithAccount,
     com.snaplogic.snaps.Suggest,
     com.snaplogic.snaps.TwoInputs,
     com.snaplogic.snaps.TwoInputsTwoOutputs
 <span class="nt">&lt;/snap.classes&gt;</span>
-<span class="c">&lt;!-- After creating a new Account class, add it here --&gt;</span>
+<span class="c">&lt;!-- This identifies the classes which represent the actual Accounts
+    (and become accessible on the Snaplex/JCC after deployment).
+
+    After creating a new Account class, add it here.
+--&gt;</span>
 <span class="nt">&lt;account.classes&gt;</span>
+    com.snaplogic.snaps.ExampleAccount
 <span class="nt">&lt;/account.classes&gt;</span>
 </code></pre>
 
@@ -652,16 +678,18 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 <span class="c1">// Also, use the "docLink" parameter to set a link to the documentation</span>
 <span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Single Doc Generator"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Generates one document and completes"</span><span class="o">,</span>
         <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
-<span class="c1">// There is no input view for this Snap</span>
-<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)</span>
-<span class="c1">// This Snap has exactly one document output view</span>
+<span class="c1">// This Snap does not permit input views for demonstration purposes, however, in practice, there</span>
+<span class="c1">// should almost always be an input view</span>
+<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">accepts</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
+<span class="c1">// This snap has exactly one document output view (min = 1, max = 1).</span>
 <span class="c1">// Snaps can also have binary output i.e., offers={ViewType.BINARY}</span>
 <span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
-<span class="c1">// This Snap has an optional document error view</span>
-<span class="nd">@Errors</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
-<span class="c1">// Version number of the Snap</span>
+<span class="c1">// This snap has an optional document error view(min = 1, max = 1).</span>
+<span class="c1">// Snaps can also have binary error view i.e., offers={ViewType.BINARY}</span>
+<span class="nd">@Errors</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
+<span class="c1">// Version number of the snap</span>
 <span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
-<span class="c1">// This Snap belongs to SnapCategory.READ as is does not require input.</span>
+<span class="c1">// This snap belongs to SnapCategory.READ as it is idempotent.</span>
 <span class="nd">@Category</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SnapCategory</span><span class="o">.</span><span class="na">READ</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingleDocGenerator</span> <span class="kd">implements</span> <span class="n">Snap</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">log</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">SingleDocGenerator</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
@@ -685,11 +713,11 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ExecutionException</span> <span class="o">{</span>
         <span class="n">counter</span><span class="o">++;</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"counter: {}"</span><span class="o">,</span> <span class="n">counter</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"counter="</span> <span class="o">+</span> <span class="n">counter</span><span class="o">);</span>
 
         <span class="cm">/*
-         * Write a single document to outputView. The next Snap in the pipe will
-         * only ever see a single document from this Snap.
+         * Write a single document to outputView. The next snap in the pipe will
+         * only ever see a single document from this snap.
          */</span>
         <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;()</span> <span class="o">{{</span>
             <span class="n">put</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">);</span>
@@ -859,15 +887,22 @@ We recommend that you do pass through the original document for greatest flexibi
 <span class="kn">import</span> <span class="nn">com.snaplogic.snap.test.harness.TestFixture</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.snaplogic.snap.test.harness.TestResult</span><span class="o">;</span>
 
+<span class="kn">import</span> <span class="nn">org.junit.runner.RunWith</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">assertNull</span><span class="o">;</span>
+
 <span class="cm">/**
  * Tests that the {@link SingleDocGenerator} Snap sent one Document to the output view.
  */</span>
 <span class="nd">@RunWith</span><span class="o">(</span><span class="n">SnapTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingleDocGeneratorTest</span> <span class="o">{</span>
 
+    <span class="c1">// "snap" attribute targets the Snap being executed</span>
+    <span class="c1">// "outputs" defines the name of the output view to write to</span>
     <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SingleDocGenerator</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
             <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testSingleDocGeneratorFunctionality</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">singleDocGenerator_WithOutputView_OutputsCorrectNumDocuments</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span>
             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
         <span class="n">OutputRecorder</span> <span class="n">outputRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getOutputViewByName</span><span class="o">(</span><span class="s">"output0"</span><span class="o">);</span>
@@ -892,7 +927,7 @@ We recommend that you do pass through the original document for greatest flexibi
 <pre class="highlight java"><code><span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Doc Consumer"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Consumes the incoming documents"</span><span class="o">,</span>
         <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
 <span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">accepts</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
-<span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Errors</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
 <span class="nd">@Category</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SnapCategory</span><span class="o">.</span><span class="na">WRITE</span><span class="o">)</span>
@@ -1006,19 +1041,19 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 
 <h2 id="bootstrapping-with-simplesnap">Bootstrapping with SimpleSnap</h2>
 <pre class="highlight java"><code><span class="cm">/**
- * This Snap accepts two inputs and outputs to a single output. To use it, feed
- * it at least one document in each view. It will output a single stream which consists
- * of the combination of the two inputs.
- * 
- * This Snap extends {@link SimpleSnap} (instead of implementing {@link Snap}).
- * This means that instead of having a method called 'execute' which is called once,
- * it has a method called 'process' which is called for every document the Snap receives.
+ * This snap accepts two inputs and outputs to a single output. To use it, feed
+ * it two JSON documents. It will output a single stream which consists
+ * of the combination of the two inputs, plus an additional "Processed" field in each.
+ *
+ * &lt;p&gt;This Snap extends {@link SimpleSnap} (instead of implementing {@link Snap}).&lt;/p&gt;
+ * &lt;p&gt;This means that instead of having a method called 'execute' which is called once,
+ * it has a method called 'process' which is called for every document the snap receives.
  * This means you do not have to iterate over incoming documents as 'process' does that
  * for you.
  */</span>
-<span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Two Inputs"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Accepts two inputs, merges them"</span><span class="o">,</span>
-        <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
-<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">2</span><span class="o">)</span>
+<span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Two Inputs"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Accepts two inputs (expected phone books, merges them)"</span><span class="o">,</span>
+        <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
+<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="n">accepts</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Errors</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
@@ -1048,6 +1083,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
         <span class="c1">// NOTE: we are *not* duplicating the data.</span>
         <span class="c1">// We will *not* have to convert the map back to a doc.</span>
         <span class="c1">// It's just a pointer representation.</span>
+        <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
         <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">newdoc</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 
         <span class="c1">// assign a value to a field of the map</span>
@@ -1057,19 +1093,19 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 
         <span class="n">count</span><span class="o">++;</span>
         <span class="c1">// log current document number</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"count: {}"</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"count="</span> <span class="o">+</span> <span class="n">count</span><span class="o">);</span>
 
         <span class="c1">// log current document</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"document: {}"</span><span class="o">,</span> <span class="n">newdoc</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"document: "</span> <span class="o">+</span> <span class="n">newdoc</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 
-        <span class="c1">// send new document to next Snap</span>
+        <span class="c1">// send new document to next snap</span>
         <span class="n">outputViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">newdoc</span><span class="o">,</span> <span class="n">document</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">cleanup</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ExecutionException</span> <span class="o">{</span>
         <span class="c1">// Log final number of documents processed</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Final count: {}"</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Final count="</span> <span class="o">+</span> <span class="n">count</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
@@ -1094,8 +1130,10 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 </ul>
 
 <h2 id="writing-binary-data-to-an-output-view">Writing Binary Data to an Output View</h2>
-<pre class="highlight java"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">snaplogic</span><span class="o">.</span><span class="na">snaps</span><span class="o">;</span>
-<span class="o">...</span>
+<pre class="highlight java"><code><span class="cm">/**
+ * A Snap that counts the number of occurrences of each letter in the English language for the
+ * incoming data, and writes the result to a binary output view
+ */</span>
 <span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Character Counter"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Demo writing to Binary Output View"</span><span class="o">,</span>
         <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
 <span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="n">ViewType</span><span class="o">.</span><span class="na">BINARY</span><span class="o">)</span>
@@ -1103,7 +1141,6 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 <span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CharacterCounter</span> <span class="kd">extends</span> <span class="n">SimpleBinaryWriteSnap</span> <span class="o">{</span>
 
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">UTF_8</span> <span class="o">=</span> <span class="s">"UTF-8"</span><span class="o">;</span>
     <span class="o">...</span>
 
     <span class="nd">@Override</span>
@@ -1162,6 +1199,8 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
             <span class="o">}</span>
         <span class="o">});</span>
     <span class="o">}</span>
+
+    <span class="o">...</span>
 <span class="o">}</span>
 </code></pre>
 
@@ -1231,19 +1270,22 @@ We recommend using standard/popular specification field names, lowercased, when 
 <h2 id="accepting-user-input-with-propertybuilder">Accepting User Input with PropertyBuilder</h2>
 <pre class="highlight java"><code><span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Doc Generator"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Generates documents based on the configuration"</span><span class="o">,</span>
         <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
-<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">accepts</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
-<span class="nd">@Errors</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="nd">@Errors</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
 <span class="nd">@Category</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SnapCategory</span><span class="o">.</span><span class="na">READ</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocGenerator</span> <span class="kd">implements</span> <span class="n">Snap</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">COUNT</span> <span class="o">=</span> <span class="s">"count"</span><span class="o">;</span>
 
+    <span class="c1">// Document utility is the only way to create a document</span>
+    <span class="c1">// or manipulate the document header</span>
     <span class="nd">@Inject</span>
     <span class="kd">private</span> <span class="n">DocumentUtility</span> <span class="n">documentUtility</span><span class="o">;</span>
     <span class="nd">@Inject</span>
     <span class="kd">private</span> <span class="n">OutputViews</span> <span class="n">outputViews</span><span class="o">;</span>
-
+    <span class="nd">@Inject</span>
+    <span class="kd">private</span> <span class="n">ErrorViews</span> <span class="n">errorViews</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">count</span><span class="o">;</span>
 
     <span class="nd">@Override</span>
@@ -1260,6 +1302,15 @@ We recommend using standard/popular specification field names, lowercased, when 
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ExecutionException</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">SnapDataException</span> <span class="n">snapDataException</span> <span class="o">=</span>
+                    <span class="k">new</span> <span class="n">SnapDataException</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Invalid count value %d"</span><span class="o">,</span> <span class="n">count</span><span class="o">))</span>
+                            <span class="o">.</span><span class="na">withReason</span><span class="o">(</span><span class="s">"Value of count property cannot be negative"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">withResolution</span><span class="o">(</span><span class="s">"Ensure the count property is greater than or equal "</span> <span class="o">+</span>
+                                    <span class="s">"to zero"</span><span class="o">);</span>
+            <span class="n">errorViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">snapDataException</span><span class="o">);</span>
+        <span class="o">}</span>
+
         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
             <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
             <span class="n">data</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"value"</span> <span class="o">+</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">));</span>
@@ -1358,26 +1409,28 @@ All Snaps will have a required <strong>Label</strong> property for customizing t
 
 <p><img alt="Doc Generator with Expression" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/Zin9.png" /></p>
 
+<p>For <a href="#propertybuilder-reference">composite and table properties</a>, the <code class="prettyprint">getExpressionPropertyFor()</code> method can be used to evaluate child properties embedded in a parent. See <a href="https://github.com/SnapLogic/DemoSnapPack/blob/master/src/main/java/com/snaplogic/snaps/PropertyTypes.java#L136">this example provided in the reference DemoSnapPack GitHub repository</a>.</p>
+
 <h2 id="suggesting-property-values">Suggesting Property Values</h2>
 <pre class="highlight java"><code><span class="cm">/**
  * This Snap has one output and writes one document that contains the suggested
- * value. This Snap demonstrates the suggest value functionality that uses the
- * partial configuration information to suggest a property value.
+ * value.
+ *
+ * &lt;p&gt;This snap demonstrates the suggest value functionality that uses the
+ * partial configuration information to suggest a property value.&lt;/p&gt;
  */</span>
+<span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
 <span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Suggest"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Demo suggest functionality."</span><span class="o">,</span>
         <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
-<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)</span>
-<span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">accepts</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
+<span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Errors</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
-<span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
 <span class="nd">@Category</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SnapCategory</span><span class="o">.</span><span class="na">READ</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Suggest</span> <span class="kd">implements</span> <span class="n">Snap</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PROP_NAME</span> <span class="o">=</span> <span class="s">"name"</span><span class="o">;</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PROP_ECHO</span> <span class="o">=</span> <span class="s">"echo"</span><span class="o">;</span>
-
     <span class="kd">private</span> <span class="n">String</span> <span class="n">valueToWrite</span><span class="o">;</span>
-
     <span class="nd">@Inject</span>
     <span class="kd">private</span> <span class="n">DocumentUtility</span> <span class="n">documentUtility</span><span class="o">;</span>
     <span class="nd">@Inject</span>
@@ -1413,6 +1466,7 @@ All Snaps will have a required <strong>Label</strong> property for customizing t
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">cleanup</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ExecutionException</span> <span class="o">{</span>
+        <span class="c1">// NOOP</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
@@ -1798,14 +1852,13 @@ SnapLogic recommends always enabling a Document error view:
 <pre class="highlight java"><code><span class="cm">/**
  * This Snap demonstrates two inputs and two outputs.
  *
- * It will output two streams, one for only males and another for females. 
- * Unknowns will get sent to both.
+ * &lt;p&gt;To use it, feed it parents.json and children.json. It will output two streams,
+ * one for only males and another for females. Unknowns will get sent to both.&lt;/p&gt;
  */</span>
 <span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Two Ins/Outs"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Accepts two inputs, sends to two outputs."</span><span class="o">,</span>
         <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
-<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">2</span><span class="o">)</span>
+<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="n">accepts</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
-<span class="nd">@Errors</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
 <span class="nd">@Category</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SnapCategory</span><span class="o">.</span><span class="na">READ</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TwoInputsTwoOutputs</span> <span class="kd">extends</span> <span class="n">SimpleSnap</span> <span class="kd">implements</span> <span class="n">ViewProvider</span> <span class="o">{</span>
@@ -1818,7 +1871,6 @@ SnapLogic recommends always enabling a Document error view:
 
     <span class="nd">@Inject</span>
     <span class="kd">private</span> <span class="n">OutputViews</span> <span class="n">outputViews</span><span class="o">;</span>
-
     <span class="nd">@Inject</span>
     <span class="kd">private</span> <span class="n">ErrorViews</span> <span class="n">errorViews</span><span class="o">;</span>
 
@@ -1841,12 +1893,15 @@ SnapLogic recommends always enabling a Document error view:
 
     <span class="o">...</span>
 
+    <span class="cm">/*
+     * process gets called for every document
+     */</span>
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">process</span><span class="o">(</span><span class="n">Document</span> <span class="n">document</span><span class="o">,</span> <span class="n">String</span> <span class="n">inputViewName</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">Document</span> <span class="n">newdoc</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">copy</span><span class="o">();</span>
         <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="n">newdoc</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 
-        <span class="c1">// Add a new field "processed"</span>
+        <span class="c1">// Add a new field "processed" that is set to value - TRUE</span>
         <span class="n">data</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"processed"</span><span class="o">,</span> <span class="s">"True"</span><span class="o">);</span>
 
         <span class="c1">// send males to male output view</span>
@@ -1854,10 +1909,10 @@ SnapLogic recommends always enabling a Document error view:
             <span class="n">outputViews</span><span class="o">.</span><span class="na">getDocumentViewFor</span><span class="o">(</span><span class="n">MALE_VIEW</span><span class="o">).</span><span class="na">write</span><span class="o">(</span><span class="n">newdoc</span><span class="o">);</span>
         <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">data</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"gender"</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">"female"</span><span class="o">))</span> <span class="o">{</span>
             <span class="c1">// send females to female output view</span>
-            <span class="n">outputViews</span><span class="o">.</span><span class="na">getDocumentViewFor</span><span class="o">(</span><span class="n">FEMALE_VIEW</span><span class="o">).</span><span class="na">write</span><span class="o">(</span><span class="n">newdoc</span><span class="o">);</span>
+             <span class="n">outputViews</span><span class="o">.</span><span class="na">getDocumentViewFor</span><span class="o">(</span><span class="n">FEMALE_VIEW</span><span class="o">).</span><span class="na">write</span><span class="o">(</span><span class="n">newdoc</span><span class="o">);</span>
         <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="c1">// send unknowns to error view</span>
-            <span class="n">errorViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">newdoc</span><span class="o">,</span> <span class="n">document</span><span class="o">);</span>
+            <span class="c1">// send unknowns to error views</span>
+             <span class="n">errorViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">newdoc</span><span class="o">,</span> <span class="n">document</span><span class="o">);</span>
         <span class="o">}</span>
     <span class="o">}</span>
 
@@ -2018,6 +2073,157 @@ if (data.get(&ldquo;gender&rdquo;).equals(&ldquo;male&rdquo;)) {
 
 <p>A thrown <code class="prettyprint">SuggestViewAbortException</code> can indicate that the pipeline validation/preview-specific behavior threshold has been reached.</p>
 
+<h2 id="dependency-injection">Dependency Injection</h2>
+<pre class="highlight java"><code><span class="cm">/**
+ * A basic example of a Snap that converts amount values from USD to another currency.
+ */</span>
+<span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Currency Converter"</span><span class="o">,</span> <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span>
+        <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Demonstrates dependency injection"</span><span class="o">,</span>
+        <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
+<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">accepts</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
+<span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
+<span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="nd">@Category</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SnapCategory</span><span class="o">.</span><span class="na">READ</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CurrencyConverter</span> <span class="kd">extends</span> <span class="n">SimpleSnap</span> <span class="kd">implements</span> <span class="n">DependencyManager</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">INPUT_FILE_PROP</span> <span class="o">=</span> <span class="s">"inputFile"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">REGEX_PATTERN_PROTOCOL</span> <span class="o">=</span> <span class="s">"^sldb:///|^http://|^https://|^file:///"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Pattern</span> <span class="n">PATTERN</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">REGEX_PATTERN_PROTOCOL</span><span class="o">);</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">filePath</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">TypeReference</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">mapTypeReference</span> <span class="o">=</span>
+            <span class="k">new</span> <span class="n">TypeReference</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;()</span> <span class="o">{</span>
+            <span class="o">};</span>
+
+    <span class="c1">// the SnapLogic platform takes care of injecting an ObjectMapper instance</span>
+    <span class="nd">@Inject</span>
+    <span class="kd">private</span> <span class="n">ObjectMapper</span> <span class="n">mapper</span><span class="o">;</span>
+    <span class="nd">@Inject</span>
+    <span class="kd">private</span> <span class="n">ForEx</span> <span class="n">foreignExchange</span><span class="o">;</span>
+    <span class="nd">@Inject</span>
+    <span class="kd">private</span> <span class="n">URLEncoder</span> <span class="n">urlEncoder</span><span class="o">;</span>
+    <span class="nd">@Inject</span>
+    <span class="kd">private</span> <span class="n">JfsUtils</span> <span class="n">jfsUtils</span><span class="o">;</span>
+
+    <span class="c1">// Use an instance of Guice's AbstractModule to bind implementations to interfaces</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Module</span> <span class="n">getManagedModule</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">AbstractModule</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">protected</span> <span class="kt">void</span> <span class="n">configure</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">bind</span><span class="o">(</span><span class="n">ForEx</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">ForExImpl</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+                <span class="n">bind</span><span class="o">(</span><span class="n">JfsUtils</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">toInstance</span><span class="o">(</span><span class="n">JfsUtils</span><span class="o">.</span><span class="na">getInstance</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+    <span class="o">}</span>
+
+    <span class="c1">// An optional file selector for providing exchange rates within a file</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">defineProperties</span><span class="o">(</span><span class="n">PropertyBuilder</span> <span class="n">propertyBuilder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">propertyBuilder</span><span class="o">.</span><span class="na">describe</span><span class="o">(</span><span class="n">INPUT_FILE_PROP</span><span class="o">,</span> <span class="s">"Exchange Rates File"</span><span class="o">,</span>
+                <span class="s">"File containing foreign exchange rates"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">expression</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">fileBrowsing</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">schemaAware</span><span class="o">(</span><span class="n">SnapProperty</span><span class="o">.</span><span class="na">DecoratorType</span><span class="o">.</span><span class="na">ACCEPTS_SCHEMA</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">add</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">configure</span><span class="o">(</span><span class="n">PropertyValues</span> <span class="n">propertyValues</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ConfigurationException</span> <span class="o">{</span>
+        <span class="n">filePath</span> <span class="o">=</span> <span class="n">propertyValues</span><span class="o">.</span><span class="na">getAsExpression</span><span class="o">(</span><span class="n">INPUT_FILE_PROP</span><span class="o">).</span><span class="na">eval</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="n">process</span><span class="o">(</span><span class="n">Document</span> <span class="n">document</span><span class="o">,</span> <span class="n">String</span> <span class="n">inputViewName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">docAsMap</span> <span class="o">=</span> <span class="n">documentUtility</span><span class="o">.</span><span class="na">getAsMap</span><span class="o">(</span><span class="n">document</span><span class="o">,</span> <span class="n">errorViews</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">targetCurrency</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">docAsMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"to"</span><span class="o">);</span>
+        <span class="n">BigDecimal</span> <span class="n">amount</span> <span class="o">=</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(((</span><span class="n">Number</span><span class="o">)</span> <span class="n">docAsMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"amount"</span><span class="o">)).</span><span class="na">doubleValue</span><span class="o">());</span>
+
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">exchangeRates</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="c1">// If a file was provided, use the exchange rates within it; otherwise, look them up from</span>
+        <span class="c1">// the service</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isNotBlank</span><span class="o">(</span><span class="n">filePath</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">exchangeRates</span> <span class="o">=</span> <span class="n">getExchangeRatesFromFile</span><span class="o">(</span><span class="n">document</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">exchangeRates</span> <span class="o">=</span> <span class="n">foreignExchange</span><span class="o">.</span><span class="na">getExchangeRates</span><span class="o">(</span><span class="n">targetCurrency</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">exchangeRates</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">outputViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">documentUtility</span><span class="o">.</span><span class="na">newDocument</span><span class="o">(</span>
+                    <span class="n">getExchangeRateForCurrency</span><span class="o">(</span><span class="n">targetCurrency</span><span class="o">,</span> <span class="n">amount</span><span class="o">,</span> <span class="n">exchangeRates</span><span class="o">)),</span> <span class="n">document</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getExchangeRatesFromFile</span><span class="o">(</span><span class="n">Document</span> <span class="n">document</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">exchangeRates</span><span class="o">;</span>
+        <span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">URI</span> <span class="n">filePathUri</span> <span class="o">=</span> <span class="n">urlEncoder</span><span class="o">.</span><span class="na">validateAndEncodeURI</span><span class="o">(</span><span class="n">filePath</span><span class="o">,</span> <span class="n">PATTERN</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+            <span class="n">inputStream</span> <span class="o">=</span> <span class="n">jfsUtils</span><span class="o">.</span><span class="na">openURLConnection</span><span class="o">(</span><span class="n">filePathUri</span><span class="o">).</span><span class="na">getInputStream</span><span class="o">();</span>
+            <span class="n">exchangeRates</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">inputStream</span><span class="o">,</span> <span class="n">mapTypeReference</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">SnapDataException</span><span class="o">(</span><span class="n">document</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span>
+                    <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Unable to read from file path %s"</span><span class="o">,</span> <span class="n">filePath</span><span class="o">));</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">IOUtils</span><span class="o">.</span><span class="na">closeQuietly</span><span class="o">(</span><span class="n">inputStream</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">exchangeRates</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">&gt;</span> <span class="n">getExchangeRateForCurrency</span><span class="o">(</span><span class="n">String</span> <span class="n">targetCurrency</span><span class="o">,</span>
+            <span class="n">BigDecimal</span> <span class="n">amount</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">rate</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">forExRates</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;)</span> <span class="n">rate</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"rates"</span><span class="o">);</span>
+        <span class="n">BigDecimal</span> <span class="n">forExRate</span> <span class="o">=</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span>
+                <span class="o">((</span><span class="n">Number</span><span class="o">)</span> <span class="n">forExRates</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">targetCurrency</span><span class="o">)).</span><span class="na">doubleValue</span><span class="o">());</span>
+
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">&gt;</span> <span class="n">convertedCurrency</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">convertedCurrency</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">targetCurrency</span><span class="o">,</span> <span class="n">amount</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">forExRate</span><span class="o">));</span>
+        <span class="k">return</span> <span class="n">convertedCurrency</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ForEx</span> <span class="o">{</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getExchangeRates</span><span class="o">(</span><span class="n">String</span> <span class="n">currencyCode</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// An implementation of the ForEx interface. Normally this would call out to a database or</span>
+    <span class="c1">// web service; in this demonstration, it returns random exchange rates.</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">ForExImpl</span> <span class="kd">implements</span> <span class="n">ForEx</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">rate</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="n">ForExImpl</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">rate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getExchangeRates</span><span class="o">(</span><span class="n">String</span> <span class="n">currencyCode</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">rate</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"base"</span><span class="o">,</span> <span class="n">currencyCode</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">());</span>
+            <span class="n">rate</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"date"</span><span class="o">,</span> <span class="n">DateTimeFormat</span><span class="o">.</span><span class="na">forPattern</span><span class="o">(</span><span class="s">"yyyy-MM-dd"</span><span class="o">).</span><span class="na">print</span><span class="o">(</span><span class="n">now</span><span class="o">(</span><span class="n">UTC</span><span class="o">)));</span>
+
+            <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">&gt;</span> <span class="n">forExRates</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+            <span class="n">Random</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+            <span class="n">forExRates</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"AUD"</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="na">nextDouble</span><span class="o">()));</span>
+            <span class="n">forExRates</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"GBP"</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="na">nextDouble</span><span class="o">()));</span>
+            <span class="n">forExRates</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"EUR"</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">r</span><span class="o">.</span><span class="na">nextDouble</span><span class="o">()));</span>
+            <span class="n">rate</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"rates"</span><span class="o">,</span> <span class="n">forExRates</span><span class="o">);</span>
+
+            <span class="k">return</span> <span class="n">rate</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>Snaps use Google&rsquo;s <a href="https://github.com/google/guice">Guice</a> library for dependency injection. </p>
+
+<p>Snaps that implement the <code class="prettyprint">DependencyManager</code> interface can return a <a href="https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Module.html">Guice Module</a> that can configure interface bindings to be used by SnapLogic&rsquo;s <a href="https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Injector.html">Injector</a>. </p>
+
+<p>In the &ldquo;Currency Converter&rdquo; example shown, DependencyManager&rsquo;s <code class="prettyprint">getManagedModule</code> method is implemented to return an <code class="prettyprint">AbstractModule</code> instance, with the <code class="prettyprint">ForEx</code> interface bound to the <code class="prettyprint">ForExImpl</code> implementation, and the <code class="prettyprint">JfsUtils</code> interface bound to a specific instance.</p>
+
+<p>This allows taking advantage of the <a href="http://www.martinfowler.com/articles/injection.html">&ldquo;inversion of control&rdquo;</a> software design pattern to provide different implementations of a service interface for a hierarchy of related Snaps.</p>
+
+<p>It also greatly benefits unit testing, since it permits injecting in stub or mock versions of service dependencies; see the <code class="prettyprint">CurrencyConverterTest</code> test class for more.</p>
+
 <h1 id="deploying-snap-packs">Deploying Snap Packs</h1>
 
 <p>Now that we understand how to build a Snap, let&rsquo;s see how to deploy it so it can be used within the SnapLogic Platform.</p>
@@ -2136,12 +2342,18 @@ In the near future, SnapLogic will update the <code>snappack:deploy</code> goal 
 <p>They also permit storing, encrypting, and obfuscating sensitive information like passwords, secret keys etc.</p>
 
 <h2 id="account-configuration">Account Configuration</h2>
-<pre class="highlight java"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">snaplogic</span><span class="o">.</span><span class="na">snaps</span><span class="o">;</span>
-<span class="o">...</span>
+<pre class="highlight java"><code><span class="cm">/**
+ * Demonstrates Snap Accounts. Two security-sensitive properties, User ID and Passphrase, are used
+ * to build a simple hash-token.
+ *
+ * &lt;p&gt;The User ID property is also made available to the Snap (through
+ * the {@code account.userId} expression variable).&lt;/p&gt;
+ */</span>
 <span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Example Snap Account"</span><span class="o">)</span>
 <span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
 <span class="nd">@AccountCategory</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">AccountType</span><span class="o">.</span><span class="na">CUSTOM</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleAccount</span> <span class="kd">implements</span> <span class="n">Account</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleAccount</span> <span class="kd">implements</span> <span class="n">Account</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;,</span> <span class="n">ValidatableAccount</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;,</span>
+        <span class="n">AccountVariableProvider</span> <span class="o">{</span>
 
     <span class="kd">protected</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">USER_ID</span> <span class="o">=</span> <span class="s">"userId"</span><span class="o">;</span>
     <span class="kd">protected</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PASSPHRASE</span> <span class="o">=</span> <span class="s">"passphrase"</span><span class="o">;</span>
@@ -2180,7 +2392,7 @@ In the near future, SnapLogic will update the <code>snappack:deploy</code> goal 
         base64(userId + ":" + expirationTimestamp + ":" +
              md5(userId + ":" + expirationTimestamp + ":" passphrase))
          */</span>
-        <span class="kt">long</span> <span class="n">expiration</span> <span class="o">=</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">plusDays</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">getMillis</span><span class="o">();</span>
+        <span class="kt">long</span> <span class="n">expiration</span> <span class="o">=</span> <span class="n">getExpirationTimestamp</span><span class="o">();</span>
         <span class="kt">byte</span><span class="o">[]</span> <span class="n">md5</span><span class="o">;</span>
 
         <span class="k">try</span> <span class="o">{</span>
@@ -2199,6 +2411,25 @@ In the near future, SnapLogic will update the <code>snappack:deploy</code> goal 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">disconnect</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">ExecutionException</span> <span class="o">{</span>
         <span class="c1">// no-op</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*
+    Make account property values available to a Snap
+     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getAccountVariableValue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">ExpressionVariableAdapter</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">entrySet</span><span class="o">()</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="n">ImmutableSet</span><span class="o">.</span><span class="na">Builder</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;()</span>
+                        <span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">entry</span><span class="o">(</span><span class="n">USER_ID</span><span class="o">,</span> <span class="n">getUserId</span><span class="o">()))</span>
+                        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+    <span class="o">}</span>
+
+    <span class="kd">protected</span> <span class="kt">long</span> <span class="n">getExpirationTimestamp</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">DateTime</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">plusDays</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">getMillis</span><span class="o">();</span>
     <span class="o">}</span>
 
     <span class="o">...</span>
@@ -2568,17 +2799,20 @@ public class ExampleAccount implements ExtendedValidatableAccount&lt;String, Str
 <pre class="highlight java"><code><span class="nd">@RunWith</span><span class="o">(</span><span class="n">SnapTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingleDocGeneratorTest</span> <span class="o">{</span>
 
+    <span class="c1">// "snap" attribute targets the Snap being executed</span>
+    <span class="c1">// "outputs" defines the name of the output view to write to</span>
     <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SingleDocGenerator</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
             <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testSingleDocGeneratorFunctionality</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">singleDocGenerator_WithOutputView_OutputsCorrectNumDocuments</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span>
             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
         <span class="n">OutputRecorder</span> <span class="n">outputRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getOutputViewByName</span><span class="o">(</span><span class="s">"output0"</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">outputRecorder</span><span class="o">.</span><span class="na">getRecordedData</span><span class="o">().</span><span class="na">size</span><span class="o">());</span>
     <span class="o">}</span>
-
 <span class="o">}</span>
 </code></pre>
+
+<p>This example uses a <code class="prettyprint">TestResult</code> argument to instruct the <code class="prettyprint">SnapTestRunner</code> to automatically execute the test but to manually verify the test result.</p>
 
 <p>Specify an output view name in <code class="prettyprint">outputs</code> and then call <code class="prettyprint">getRecordedData()</code> on the <code class="prettyprint">OutputRecorder</code> instance returned by the <code class="prettyprint">testResult.getOutputViewByName()</code> call using that same output view name.</p>
 
@@ -2607,7 +2841,7 @@ public class ExampleAccount implements ExtendedValidatableAccount&lt;String, Str
 <span class="o">}</span>
 </code></pre>
 
-<p>Very similar to <a href="#recording-output-test-data">Recording Output Test Data</a>, except the <code class="prettyprint">testResult.getErrorViewByName()</code> method is called instead.</p>
+<p>Very similar to <a href="#recording-output-test-data">Recording Output Test Data</a>, except the <code class="prettyprint">testResult.getErrorViewByName()</code> method is called instead to inspect the document send to the error view name defined by the <code class="prettyprint">errors</code> fixture parameter.</p>
 
 <h2 id="providing-input-test-data">Providing Input Test Data</h2>
 <pre class="highlight java"><code><span class="nd">@RunWith</span><span class="o">(</span><span class="n">SnapTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
@@ -2707,6 +2941,8 @@ public class ExampleAccount implements ExtendedValidatableAccount&lt;String, Str
         <span class="n">OutputRecorder</span> <span class="n">outputRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getOutputViewByName</span><span class="o">(</span><span class="s">"output0"</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">outputRecorder</span><span class="o">.</span><span class="na">getRecordedData</span><span class="o">().</span><span class="na">size</span><span class="o">());</span>
     <span class="o">}</span>
+
+    <span class="o">...</span>
 <span class="o">}</span>
 </code></pre>
 
@@ -2740,6 +2976,26 @@ public class ExampleAccount implements ExtendedValidatableAccount&lt;String, Str
 }
 </div>
 
+<h2 id="overriding-specific-properties">Overriding Specific Properties</h2>
+<pre class="highlight java"><code><span class="nd">@RunWith</span><span class="o">(</span><span class="n">SnapTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocGeneratorTest</span> <span class="o">{</span>
+
+    <span class="o">...</span>
+
+    <span class="c1">// "propertyOverrides" allows overriding specific values defined in the "properties" file</span>
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">DocGenerator</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">,</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="s">"data/doc_generator/doc_generator_properties.json"</span><span class="o">,</span>
+            <span class="n">propertyOverrides</span> <span class="o">=</span> <span class="o">{</span><span class="s">"$.settings.count.value"</span><span class="o">,</span> <span class="s">"20"</span><span class="o">})</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">docGenerator_WithPropertyOverrides_OutputsCorrectNumDocuments</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span>
+            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
+        <span class="n">OutputRecorder</span> <span class="n">outputRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getOutputViewByName</span><span class="o">(</span><span class="s">"output0"</span><span class="o">);</span>
+        <span class="n">assertEquals</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="n">outputRecorder</span><span class="o">.</span><span class="na">getRecordedData</span><span class="o">().</span><span class="na">size</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
 <p><code class="prettyprint">propertiesOverrides</code> can override the value of a Snap property specified in the <code class="prettyprint">properties</code> file.</p>
 
 <p>The value should be pairs of strings where the left-side is the JSON-Path to write and the right-side is the JSON-encoded value to store in the path.</p>
@@ -2754,38 +3010,214 @@ propertyOverrides = {
 &hellip;
 </div>
 
-<h2 id="injecting-test-dependencies">Injecting Test Dependencies</h2>
+<h2 id="modifying-private-fields-with-testsetup">Modifying Private Fields with TestSetup</h2>
 <pre class="highlight java"><code><span class="nd">@RunWith</span><span class="o">(</span><span class="n">SnapTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocConsumerTest</span> <span class="o">{</span>
 
+    <span class="c1">// a TestSetup argument allows interacting with the test before triggering it</span>
     <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">DocConsumer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="n">testDocConsumerFunctionality</span><span class="o">(</span><span class="n">TestSetup</span> <span class="n">testSetup</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">docConsumer_WithManualTestSetup_UpdatesCounterCorrectly</span><span class="o">(</span><span class="n">TestSetup</span> <span class="n">testSetup</span><span class="o">)</span>
+            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="n">testSetup</span><span class="o">.</span><span class="na">addInputView</span><span class="o">(</span><span class="s">"input0"</span><span class="o">,</span> <span class="n">Arrays</span><span class="o">.&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="n">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">));</span>
 
-        <span class="c1">// This demonstrates how to inject instances/stubs/mocks into Snap fields.</span>
-        <span class="n">AtomicInteger</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicInteger</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+        <span class="c1">// This demonstrates how get a reference to a private field within a Snap using TestSetup</span>
+        <span class="n">AtomicInteger</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicInteger</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
         <span class="n">testSetup</span><span class="o">.</span><span class="na">inject</span><span class="o">().</span><span class="na">fieldName</span><span class="o">(</span><span class="s">"count"</span><span class="o">).</span><span class="na">dependency</span><span class="o">(</span><span class="n">count</span><span class="o">).</span><span class="na">add</span><span class="o">();</span>
 
-        <span class="n">TestResult</span> <span class="n">testResult</span> <span class="o">=</span> <span class="n">testSetup</span><span class="o">.</span><span class="na">test</span><span class="o">();</span>
+        <span class="n">TestResult</span> <span class="n">testResult</span> <span class="o">=</span> <span class="n">testSetup</span><span class="o">.</span><span class="na">test</span><span class="o">();</span> <span class="c1">// test the Snap by running through its lifecycle</span>
         <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
-        <span class="n">assertEquals</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">count</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+        <span class="n">assertEquals</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="n">count</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
 
-<p>The <a href="#reading-documents-from-an-input-view"><code class="prettyprint">DocConsumer</code> sample Snap</a> contains an <code class="prettyprint">AtomicInteger</code> &ldquo;count&rdquo; field.</p>
+<p>The <a href="#reading-documents-from-an-input-view"><code class="prettyprint">DocConsumer</code> sample Snap</a> contains a private <code class="prettyprint">AtomicInteger</code> &ldquo;count&rdquo; field.</p>
 
-<p>If we wish to set this field directly, we can use <code class="prettyprint">inject()</code> from <code class="prettyprint">TestSetup</code>.</p>
+<p>If we wish to change this field directly, we can use <code class="prettyprint">inject()</code> from <code class="prettyprint">TestSetup</code>.</p>
+
+<p>A <code class="prettyprint">TestSetup</code> argument allows modifying what is to be tested in advance of triggering the test&rsquo;s execution with the <code class="prettyprint">test()</code> method.</p>
+
+<h2 id="declarative-testing">Declarative Testing</h2>
+<pre class="highlight java"><code><span class="nd">@RunWith</span><span class="o">(</span><span class="n">SnapTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocGeneratorTest</span> <span class="o">{</span>
+
+    <span class="o">...</span>
+
+    <span class="cm">/**
+     * Tests that the {@link DocGenerator} Snap's output generated for the given value of "count"
+     * property matches with what is provided in a separate file referred to by "expectedOutputPath"
+     * attribute of the TestFixture annotation.
+     */</span>
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">DocGenerator</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">,</span>
+            <span class="n">expectedOutputPath</span> <span class="o">=</span> <span class="s">"data/doc_generator"</span><span class="o">,</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="s">"data/doc_generator/doc_generator_properties.json"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">docGenerator_WithExpectedOutputPath_OutputsDocumentsCorrectly</span><span class="o">()</span>
+            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="c1">// "expectedErrorPath" specifies the folder that contains the</span>
+    <span class="c1">// "docGenerator_WithExpectedErrorPath_OutputsErrorDocumentCorrectly-err.json" file</span>
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">DocGenerator</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+            <span class="n">errors</span> <span class="o">=</span> <span class="s">"error0"</span><span class="o">,</span>
+            <span class="n">expectedErrorPath</span> <span class="o">=</span> <span class="s">"data/doc_generator"</span><span class="o">,</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="s">"data/doc_generator/doc_generator_properties.json"</span><span class="o">,</span>
+            <span class="n">propertyOverrides</span> <span class="o">=</span> <span class="o">{</span><span class="s">"$.settings.count.value"</span><span class="o">,</span> <span class="s">"-2"</span><span class="o">})</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">docGenerator_WithExpectedErrorPath_OutputsErrorDocumentCorrectly</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="o">...</span>
+
+<span class="nd">@RunWith</span><span class="o">(</span><span class="n">SnapTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CharacterCounterTest</span> <span class="o">{</span>
+
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">CharacterCounter</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+            <span class="n">input</span> <span class="o">=</span> <span class="s">"data/character_counter/character_counter_input_pointer.json"</span><span class="o">,</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">,</span>
+            <span class="n">expectedOutputPath</span> <span class="o">=</span> <span class="s">"data/character_counter"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">characterCounter_WithSnapLogicAsInput_CountsOccurrences</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre>
+
+<p>While both <code class="prettyprint">TestSetup</code> and <code class="prettyprint">TestResult</code> allow fine-grained control over the test execution, we can gain a lot of benefits in a declarative model of testing, where test inputs, outputs, and configuration are all defined in files external to the test.</p>
+
+<p>We saw earlier in <a href="#providing-input-test-data">Providing Input Test Data</a> how to use the <code class="prettyprint">input</code> annotation parameter to specify the incoming documents, but we can also externalize the expected output and error documents.</p>
+
+<p>The <code class="prettyprint">expectedOutputPath</code> and <code class="prettyprint">expectedErrorPath</code> attributes specify folders that contains files that following a naming convertion. The file must match the test name plus a suffix like <code class="prettyprint">&quot;-out.json&quot;</code> or <code class="prettyprint">&quot;-err.json&quot;</code>. However, if those files do not exist or differ, the test runner will write the actual output to a temporary file, making it easy to copy them over (if valid):</p>
+
+<p><img alt="Temp result file" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/xamy.png" /></p>
+
+<p>If the output is of <a href="#writing-binary-data-to-an-output-view">binary type</a>, then a folder matching the test name and containing the expected header and data files must be created:</p>
+
+<p><img alt="Expected Test File Name Format" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/Tw5f.png" /></p>
+
+<p><code class="prettyprint">DocGeneratorTest</code> contains two tests that demonstrate externalizing expected output and error content, and <code class="prettyprint">CharacterCounterTest</code> shows similar but for a binary-output Snap.</p>
+
+<h2 id="testing-suggestions">Testing Suggestions</h2>
+<pre class="highlight java"><code><span class="nd">@RunWith</span><span class="o">(</span><span class="n">SnapTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SuggestTest</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FOO</span> <span class="o">=</span> <span class="s">"foo"</span><span class="o">;</span>
+
+    <span class="c1">// asserting using TestSetup.suggest()</span>
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">Suggest</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">suggest_WithTestSetupAndSuggest_ReturnsCorrectValue</span><span class="o">(</span><span class="n">TestSetup</span> <span class="n">testSetup</span><span class="o">)</span>
+            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="c1">// Set the value for the property "name"</span>
+        <span class="n">testSetup</span><span class="o">.</span><span class="na">setPropertyValue</span><span class="o">(</span><span class="n">Suggest</span><span class="o">.</span><span class="na">PROP_NAME</span><span class="o">,</span> <span class="n">FOO</span><span class="o">);</span>
+        <span class="c1">// Call suggest for the property "echo"</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="n">testSetup</span><span class="o">.</span><span class="na">suggest</span><span class="o">(</span><span class="n">Suggest</span><span class="o">.</span><span class="na">PROP_ECHO</span><span class="o">);</span>
+        <span class="c1">// This should return the value that was set for the property "name"</span>
+        <span class="n">assertEquals</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">FOO</span><span class="o">),</span> <span class="n">values</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Suggest</span><span class="o">.</span><span class="na">PROP_ECHO</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="c1">// "suggestProperty" and "expectedOutputPath" can be used together to declare the expected</span>
+    <span class="c1">// output of a Suggest action on the specified property</span>
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">Suggest</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+            <span class="n">suggestProperty</span> <span class="o">=</span> <span class="n">Suggest</span><span class="o">.</span><span class="na">PROP_ECHO</span><span class="o">,</span>
+            <span class="n">expectedOutputPath</span> <span class="o">=</span> <span class="s">"data/suggest"</span><span class="o">,</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="s">"data/suggest/suggest_properties.json"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">suggest_WithSuggestProperty_WritesResultsToSpecialOutputView</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>Testing <a href="#suggesting-property-values">Suggested property values</a> can be done two ways: with the <code class="prettyprint">TestSetup.suggest()</code> method or with the <code class="prettyprint">suggestProperty</code> annotation parameter. </p>
+
+<p>The former executes the <code class="prettyprint">Suggestions</code> instance assigned to the specified property. The latter creates a fake output view for the suggest results and writes it to there; as outlined in the <a href="#declarative-testing">Declarative Testing</a> section, this also benefits from actual executions being written to temp files to be copied to your test resources folder.</p>
+
+<div class="inline-code">
+{
+  &ldquo;out&rdquo;: [{
+    &ldquo;echo&rdquo;: [&ldquo;foo&rdquo;]
+  }]
+}
+</div>
+
+<h2 id="injecting-test-dependencies">Injecting Test Dependencies</h2>
+<pre class="highlight java"><code><span class="nd">@RunWith</span><span class="o">(</span><span class="n">SnapTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CurrencyConverterTest</span> <span class="o">{</span>
+
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">CurrencyConverter</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+            <span class="n">input</span> <span class="o">=</span> <span class="s">"data/currency_converter/input_documents.json"</span><span class="o">,</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">,</span>
+            <span class="n">expectedOutputPath</span> <span class="o">=</span> <span class="s">"data/currency_converter"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">currencyConverstion_WithFieldMockedDirectly_ConvertsCorrectly</span><span class="o">(</span><span class="n">TestSetup</span> <span class="n">testSetup</span><span class="o">)</span>
+            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="c1">// This demonstrates how to inject mocks into Snap fields.</span>
+        <span class="n">ForEx</span> <span class="n">forExMock</span> <span class="o">=</span> <span class="n">createMock</span><span class="o">(</span><span class="n">ForEx</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">expect</span><span class="o">(</span><span class="n">forExMock</span><span class="o">.</span><span class="na">getExchangeRates</span><span class="o">(</span><span class="n">anyString</span><span class="o">()))</span>
+                <span class="o">.</span><span class="na">andReturn</span><span class="o">(</span><span class="k">new</span> <span class="n">FakeForeignExchange</span><span class="o">().</span><span class="na">getExchangeRates</span><span class="o">(</span><span class="s">"USD"</span><span class="o">)).</span><span class="na">anyTimes</span><span class="o">();</span>
+        <span class="n">replay</span><span class="o">(</span><span class="n">forExMock</span><span class="o">);</span>
+
+        <span class="n">testSetup</span><span class="o">.</span><span class="na">inject</span><span class="o">().</span><span class="na">fieldName</span><span class="o">(</span><span class="s">"foreignExchange"</span><span class="o">).</span><span class="na">dependency</span><span class="o">(</span><span class="n">forExMock</span><span class="o">).</span><span class="na">add</span><span class="o">();</span>
+
+        <span class="n">TestResult</span> <span class="n">testResult</span> <span class="o">=</span> <span class="n">testSetup</span><span class="o">.</span><span class="na">test</span><span class="o">();</span>
+        <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
+
+        <span class="n">verify</span><span class="o">(</span><span class="n">forExMock</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">CurrencyConverter</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+            <span class="n">input</span> <span class="o">=</span> <span class="s">"data/currency_converter/input_documents.json"</span><span class="o">,</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">,</span>
+            <span class="n">expectedOutputPath</span> <span class="o">=</span> <span class="s">"data/currency_converter"</span><span class="o">,</span>
+            <span class="n">injectorModule</span> <span class="o">=</span> <span class="n">FakeForeignExchangeInjector</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">currencyConversion_WithCustomInjector_ConvertsCorrectly</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">FakeForeignExchangeInjector</span> <span class="kd">extends</span> <span class="n">AbstractModule</span> <span class="o">{</span>
+        <span class="n">FakeForeignExchange</span> <span class="n">fakeForeignExchange</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FakeForeignExchange</span><span class="o">();</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">protected</span> <span class="kt">void</span> <span class="n">configure</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">bind</span><span class="o">(</span><span class="n">ForEx</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">toInstance</span><span class="o">(</span><span class="n">fakeForeignExchange</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">FakeForeignExchange</span> <span class="kd">implements</span> <span class="n">ForEx</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">rate</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="n">FakeForeignExchange</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">rate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getExchangeRates</span><span class="o">(</span><span class="n">String</span> <span class="n">currencyCode</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">rate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+            <span class="n">rate</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"base"</span><span class="o">,</span> <span class="s">"USD"</span><span class="o">);</span>
+            <span class="n">rate</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"date"</span><span class="o">,</span> <span class="s">"2016-09-12"</span><span class="o">);</span>
+
+            <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">forExRates</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+            <span class="n">forExRates</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"AUD"</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mf">1.3299</span><span class="o">));</span>
+            <span class="n">forExRates</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"GBP"</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mf">0.75249</span><span class="o">));</span>
+            <span class="n">forExRates</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"EUR"</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mf">0.89079</span><span class="o">));</span>
+            <span class="n">rate</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"rates"</span><span class="o">,</span> <span class="n">forExRates</span><span class="o">);</span>
+
+            <span class="k">return</span> <span class="n">rate</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre>
+
+<p>There are two ways of injecting test dependencies - with the <code class="prettyprint">inject()</code> approach described previously or with <code class="prettyprint">injectorModule</code>. Both are shown here in <code class="prettyprint">CurrencyConverterTest</code>.</p>
 
 <p><code class="prettyprint">injectorModule</code> allows providing a custom <code class="prettyprint">AbstractModule</code> class to override Guice bindings and influence fields annotated with <code class="prettyprint">@Inject</code>.</p>
+
+<p>In the test, a <code class="prettyprint">FakeForeignExchange</code> instance is bound to the <code class="prettyprint">ForEx</code> instance instead of the <code class="prettyprint">ForExImpl</code> implementation in the <code class="prettyprint">CurrencyConverter</code> class.</p>
 
 <h1 id="propertybuilder-reference">PropertyBuilder Reference</h1>
 <pre class="highlight java"><code><span class="nd">@General</span><span class="o">(</span><span class="n">title</span> <span class="o">=</span> <span class="s">"Property Types"</span><span class="o">,</span> <span class="n">purpose</span> <span class="o">=</span> <span class="s">"Demonstrates use of different property types"</span><span class="o">,</span>
         <span class="n">author</span> <span class="o">=</span> <span class="s">"Your Company Name"</span><span class="o">,</span> <span class="n">docLink</span> <span class="o">=</span> <span class="s">"http://yourdocslinkhere.com"</span><span class="o">)</span>
 <span class="nd">@Category</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SnapCategory</span><span class="o">.</span><span class="na">READ</span><span class="o">)</span>
 <span class="nd">@Version</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
-<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)</span>
-<span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="nd">@Inputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">accepts</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
+<span class="nd">@Outputs</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">offers</span> <span class="o">=</span> <span class="o">{</span><span class="n">ViewType</span><span class="o">.</span><span class="na">DOCUMENT</span><span class="o">})</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PropertyTypes</span> <span class="kd">extends</span> <span class="n">SimpleSnap</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PASSWORD_PROP</span> <span class="o">=</span> <span class="s">"password_prop"</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">FILE_BROWSER_PROP</span> <span class="o">=</span> <span class="s">"file_browser_prop"</span><span class="o">;</span>
@@ -2797,8 +3229,15 @@ propertyOverrides = {
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">TABLE_PROP</span> <span class="o">=</span> <span class="s">"table_prop"</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PASSWORD_PROP_VALUE</span> <span class="o">=</span> <span class="s">"abc"</span><span class="o">;</span>
 
+    <span class="c1">// Document utility is the only way to create a document</span>
+    <span class="c1">// or manipulate the document header</span>
     <span class="nd">@Inject</span>
     <span class="kd">private</span> <span class="n">DocumentUtility</span> <span class="n">documentUtility</span><span class="o">;</span>
+
+    <span class="n">String</span> <span class="n">password</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">fileBrowser</span><span class="o">;</span>
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">composite</span><span class="o">;</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">table</span><span class="o">;</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">defineProperties</span><span class="o">(</span><span class="kd">final</span> <span class="n">PropertyBuilder</span> <span class="n">propBuilder</span><span class="o">)</span> <span class="o">{</span>
@@ -2806,7 +3245,7 @@ propertyOverrides = {
         <span class="n">propBuilder</span><span class="o">.</span><span class="na">describe</span><span class="o">(</span><span class="n">PASSWORD_PROP</span><span class="o">,</span> <span class="n">PASSWORD_PROP</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">required</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">defaultValue</span><span class="o">(</span><span class="n">PASSWORD_PROP_VALUE</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">obfuscate</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">obfuscate</span><span class="o">()</span> <span class="c1">// hides input and sets sensitivity to High</span>
                 <span class="o">.</span><span class="na">add</span><span class="o">();</span>
 
         <span class="c1">// File Browsing</span>
@@ -2822,8 +3261,7 @@ propertyOverrides = {
                 <span class="o">.</span><span class="na">required</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">fileBrowsing</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-        <span class="n">SnapProperty</span> <span class="n">child</span> <span class="o">=</span> <span class="n">propBuilder</span><span class="o">.</span><span class="na">describe</span><span class="o">(</span><span class="n">CHILD_PROP</span><span class="o">,</span>
-                <span class="n">CHILD_PROP</span><span class="o">)</span>
+        <span class="n">SnapProperty</span> <span class="n">child</span> <span class="o">=</span> <span class="n">propBuilder</span><span class="o">.</span><span class="na">describe</span><span class="o">(</span><span class="n">CHILD_PROP</span><span class="o">,</span> <span class="n">CHILD_PROP</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">required</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">build</span><span class="o">();</span>
         <span class="n">propBuilder</span><span class="o">.</span><span class="na">describe</span><span class="o">(</span><span class="n">PARENT_PROP</span><span class="o">,</span> <span class="n">PARENT_PROP</span><span class="o">)</span>
@@ -2839,8 +3277,7 @@ propertyOverrides = {
                 <span class="o">.</span><span class="na">required</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">fileBrowsing</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-        <span class="n">SnapProperty</span> <span class="n">column</span> <span class="o">=</span> <span class="n">propBuilder</span><span class="o">.</span><span class="na">describe</span><span class="o">(</span><span class="n">COLUMN_PROP</span><span class="o">,</span>
-                <span class="n">COLUMN_PROP</span><span class="o">)</span>
+        <span class="n">SnapProperty</span> <span class="n">column</span> <span class="o">=</span> <span class="n">propBuilder</span><span class="o">.</span><span class="na">describe</span><span class="o">(</span><span class="n">COLUMN_PROP</span><span class="o">,</span> <span class="n">COLUMN_PROP</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">required</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">build</span><span class="o">();</span>
         <span class="n">propBuilder</span><span class="o">.</span><span class="na">describe</span><span class="o">(</span><span class="n">TABLE_PROP</span><span class="o">,</span> <span class="n">TABLE_PROP</span><span class="o">)</span>
@@ -2852,21 +3289,149 @@ propertyOverrides = {
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">configure</span><span class="o">(</span><span class="n">PropertyValues</span> <span class="n">propertyValues</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ConfigurationException</span> <span class="o">{</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">propertyValues</span><span class="o">.</span><span class="na">getAsExpression</span><span class="o">(</span><span class="n">PASSWORD_PROP</span><span class="o">).</span><span class="na">eval</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+        <span class="n">fileBrowser</span> <span class="o">=</span> <span class="n">propertyValues</span><span class="o">.</span><span class="na">getAsExpression</span><span class="o">(</span><span class="n">FILE_BROWSER_PROP</span><span class="o">).</span><span class="na">eval</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+
+        <span class="c1">// also consider storing a reference to the PropertyValues in an instance variable to be</span>
+        <span class="c1">// used when when evaluating expressions against each incoming document in process()</span>
+        <span class="n">composite</span> <span class="o">=</span> <span class="n">buildComposite</span><span class="o">(</span><span class="n">propertyValues</span><span class="o">);</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">buildTable</span><span class="o">(</span><span class="n">propertyValues</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*
+    Demonstrates using getAsExpression and getExpressionPropertyFor to retrieve parent and child
+    components of a composite property set
+     */</span>
+    <span class="kd">protected</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">buildComposite</span><span class="o">(</span><span class="kd">final</span> <span class="n">PropertyValues</span> <span class="n">propertyValues</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// a Map to hold the evaluated property values</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">composite</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+
+        <span class="c1">// get the parent composite as an expression</span>
+        <span class="c1">// the parent will resolve to a map of the child key-value pairs for each child</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">propertyValues</span><span class="o">.</span><span class="na">getAsExpression</span><span class="o">(</span><span class="n">PARENT_PROP</span><span class="o">).</span><span class="na">eval</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+
+        <span class="c1">// the getExpressionPropertyFor() method allows accessing the child expression variables</span>
+        <span class="n">String</span> <span class="n">fileBrowsingChild</span> <span class="o">=</span>
+                <span class="n">propertyValues</span><span class="o">.</span><span class="na">getExpressionPropertyFor</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">CHILD_FILE_BROWSER_PROP</span><span class="o">).</span><span class="na">eval</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">child</span> <span class="o">=</span> <span class="n">propertyValues</span><span class="o">.</span><span class="na">getExpressionPropertyFor</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">CHILD_PROP</span><span class="o">).</span><span class="na">eval</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+
+        <span class="n">composite</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CHILD_FILE_BROWSER_PROP</span><span class="o">,</span> <span class="n">fileBrowsingChild</span><span class="o">);</span>
+        <span class="n">composite</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">CHILD_PROP</span><span class="o">,</span> <span class="n">child</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">composite</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*
+    Table properties are evaluated similarly to Composites, except they return Lists of Maps. The
+    list can be iterated through (representing each "row" of the table) with each key-value pair
+    representing a table property to be evaluated.
+     */</span>
+    <span class="kd">protected</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">buildTable</span><span class="o">(</span><span class="kd">final</span> <span class="n">PropertyValues</span> <span class="n">propertyValues</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// a List of Maps to represent the evaluated property values in a table</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+        <span class="c1">// get the table property as an expression</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">tableProp</span> <span class="o">=</span> <span class="n">propertyValues</span><span class="o">.</span><span class="na">getAsExpression</span><span class="o">(</span><span class="n">TABLE_PROP</span><span class="o">).</span><span class="na">eval</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+
+        <span class="c1">// for each row of the table, get the child properties as an expression</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">aRow</span> <span class="o">:</span> <span class="n">tableProp</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">row</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+
+            <span class="n">String</span> <span class="n">childFileBrowser</span> <span class="o">=</span>
+                    <span class="n">propertyValues</span><span class="o">.</span><span class="na">getExpressionPropertyFor</span><span class="o">(</span><span class="n">aRow</span><span class="o">,</span> <span class="n">COLUMN_FILE_BROWSER_PROP</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">eval</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+            <span class="n">String</span> <span class="n">column</span> <span class="o">=</span> <span class="n">propertyValues</span><span class="o">.</span><span class="na">getExpressionPropertyFor</span><span class="o">(</span><span class="n">aRow</span><span class="o">,</span> <span class="n">COLUMN_PROP</span><span class="o">).</span><span class="na">eval</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+
+            <span class="n">row</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">COLUMN_FILE_BROWSER_PROP</span><span class="o">,</span> <span class="n">childFileBrowser</span><span class="o">);</span>
+            <span class="n">row</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">COLUMN_PROP</span><span class="o">,</span> <span class="n">column</span><span class="o">);</span>
+
+            <span class="n">table</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">row</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">table</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="n">process</span><span class="o">(</span><span class="n">Document</span> <span class="n">document</span><span class="o">,</span> <span class="n">String</span> <span class="n">inputViewName</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;()</span> <span class="o">{{</span>
-            <span class="n">put</span><span class="o">(</span><span class="s">"key"</span><span class="o">,</span> <span class="s">"value"</span><span class="o">);</span>
-        <span class="o">}};</span>
+        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">data</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PASSWORD_PROP</span><span class="o">,</span> <span class="n">getPassword</span><span class="o">());</span>
+        <span class="n">data</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">FILE_BROWSER_PROP</span><span class="o">,</span> <span class="n">getFileBrowser</span><span class="o">());</span>
+        <span class="n">data</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"composite"</span><span class="o">,</span> <span class="n">getComposite</span><span class="o">());</span>
+        <span class="n">data</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"table"</span><span class="o">,</span> <span class="n">getTable</span><span class="o">());</span>
+
         <span class="n">outputViews</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">documentUtility</span><span class="o">.</span><span class="na">newDocument</span><span class="o">(</span><span class="n">data</span><span class="o">),</span> <span class="n">document</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getPassword</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">password</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">getFileBrowser</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">fileBrowser</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">getComposite</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">composite</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">getTable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">table</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
 
 <p>The <code class="prettyprint">PropertyTypes</code> sample Snap in the <a href="#snap-maven-archetype">Snap Maven Archetype</a> demonstrates a number of the various UI components available to a Snap&rsquo;s Settings UI.</p>
 
-<p><img alt="Property Values" src="http://dl.dropboxusercontent.com/u/3519578/Screenshots/qJXX.png" /></p>
+<p><img alt="Property Values" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/LxWM.png" /></p>
+
+<p>The <code class="prettyprint">PropertyTypesTest</code> test class references a properties file that outlines the JSON structure of complex Snap settings like the above:</p>
+
+<div class="inline-code">
+{
+  &ldquo;settings&rdquo;: {
+    &ldquo;password_prop&rdquo;: {
+      &ldquo;value&rdquo;: &ldquo;snaplogic&rdquo;
+    },
+    &ldquo;file_browser_prop&rdquo;: {
+      &ldquo;expression&rdquo;: false,
+      &ldquo;value&rdquo;: &ldquo;file1.json&rdquo;
+    },
+    &ldquo;parent_prop&rdquo;: {
+      &ldquo;value&rdquo;: {
+        &ldquo;child_file_browser_prop&rdquo;: {
+          &ldquo;expression&rdquo;: false,
+          &ldquo;value&rdquo;: &ldquo;file2.json&rdquo;
+        },
+        &ldquo;child_prop&rdquo;: {
+          &ldquo;value&rdquo;: &ldquo;child&rdquo;
+        }
+      }
+    },
+    &ldquo;table_prop&rdquo;: {
+      &ldquo;value&rdquo;: [
+        {
+          &ldquo;column_file_browser_prop&rdquo;: {
+            &ldquo;expression&rdquo;: false,
+            &ldquo;value&rdquo;: &ldquo;file3.json&rdquo;
+          },
+          &ldquo;column_prop&rdquo;: {
+            &ldquo;value&rdquo;: &ldquo;col1&rdquo;
+          }
+        },
+        {
+          &ldquo;column_file_browser_prop&rdquo;: {
+            &ldquo;expression&rdquo;: false,
+            &ldquo;value&rdquo;: &ldquo;file4.json&rdquo;
+          },
+          &ldquo;column_prop&rdquo;: {
+            &ldquo;value&rdquo;: &ldquo;col2&rdquo;
+          }
+        }
+      ]
+    }
+  }
+}
+</div>
 
 <h3 id="snaptype-reference">SnapType Reference</h3>
 
