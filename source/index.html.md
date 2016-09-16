@@ -319,17 +319,22 @@ Choose com.snaplogic.tools:SnapArchetype version:
 4: 1.3
 5: 1.4
 6: 1.5
-Choose a number: 6: 
-Define value for property 'groupId': : com.snaplogic.snaps
+7: 1.6
+Choose a number: 7: 7
+Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.jar
+Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.jar (44 KB at 65.5 KB/sec)
+Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.pom
+Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.pom (3 KB at 10.5 KB/sec)
+Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
-Define value for property 'package':  com.snaplogic.snaps: : 
+Define value for property 'package':  com.snaplogic: : com.snaplogic.snaps
 Define value for property 'organization': : snaplogic
 Define value for property 'assetPath':  /snaplogic/shared: : /snaplogic/robin/shared
 Define value for property 'snapPack':  demosnappack: : Demo Snap Pack
 Define value for property 'user': : rhowlett@snaplogic.com
 Confirm properties configuration:
-groupId: com.snaplogic.snaps
+groupId: com.snaplogic
 artifactId: demosnappack
 version: 1.0-SNAPSHOT
 package: com.snaplogic.snaps
@@ -339,9 +344,9 @@ snapPack: Demo Snap Pack
 user: rhowlett@snaplogic.com
  Y: : Y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.5
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.6
 [INFO] ----------------------------------------------------------------------------
-[INFO] Parameter: groupId, Value: com.snaplogic.snaps
+[INFO] Parameter: groupId, Value: com.snaplogic
 [INFO] Parameter: artifactId, Value: demosnappack
 [INFO] Parameter: version, Value: 1.0-SNAPSHOT
 [INFO] Parameter: package, Value: com.snaplogic.snaps
@@ -351,7 +356,7 @@ user: rhowlett@snaplogic.com
 [INFO] Parameter: user, Value: rhowlett@snaplogic.com
 [INFO] Parameter: organization, Value: snaplogic
 [INFO] Parameter: assetPath, Value: /snaplogic/robin/shared
-[INFO] Parameter: groupId, Value: com.snaplogic.snaps
+[INFO] Parameter: groupId, Value: com.snaplogic
 [INFO] Parameter: snapPack, Value: Demo Snap Pack
 [INFO] Parameter: artifactId, Value: demosnappack
 [INFO] project created from Archetype in dir: /Users/snapdev/opt/snaplogic-dev/demosnappack
@@ -378,6 +383,9 @@ Sample | Description
 **Two Inputs** | *Consuming from two different input sources*
 **Two Inputs Two Outputs** | *Consuming from two different input sources, and outputting two different Documents*
 **Schema Example** | *Demonstrating input and output schemas for IO validation*
+**Character Counter** | *Binary input and output views*
+**Currency Converter** | *Demonstrates dependency injection*
+**SnapWithAccount** | *Authenticating with an `ExampleAccount`*
 
 <aside class="warning">
 If you choose a <code>groupId</code>/<code>package</code> value other than <code>com.snaplogic.snaps</code>, you must provide a HTTP URL value to the <code>docLink</code> parameter of a Snap's <code>@General</code> annotation on a Snap.
@@ -387,7 +395,8 @@ Once `SnapArchetype` has been generated, it can be imported as a Maven project i
 
 ## Project Structure
 
-> ![Project Structure](https://dl.dropboxusercontent.com/u/3519578/Screenshots/uzoL.png)
+> ![Project Structure Main](https://dl.dropboxusercontent.com/u/3519578/Screenshots/Eop8.png)
+> ![Project Structure Test](https://dl.dropboxusercontent.com/u/3519578/Screenshots/odZU.png)
 
 A Snap Project's structure follows [Maven's Standard Directory Layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
 
@@ -430,17 +439,25 @@ This is the Maven POM file. You will change this file when registering new Snaps
 	After creating a new Snap class, add it here.
 -->
 <snap.classes>
+	com.snaplogic.snaps.CharacterCounter,
+	com.snaplogic.snaps.CurrencyConverter,
 	com.snaplogic.snaps.DocConsumer,
 	com.snaplogic.snaps.DocGenerator,
 	com.snaplogic.snaps.PropertyTypes,
 	com.snaplogic.snaps.SchemaExample,
 	com.snaplogic.snaps.SingleDocGenerator,
+	com.snaplogic.snaps.SnapWithAccount,
 	com.snaplogic.snaps.Suggest,
 	com.snaplogic.snaps.TwoInputs,
 	com.snaplogic.snaps.TwoInputsTwoOutputs
 </snap.classes>
-<!-- After creating a new Account class, add it here -->
+<!-- This identifies the classes which represent the actual Accounts
+	(and become accessible on the Snaplex/JCC after deployment).
+	
+	After creating a new Account class, add it here.
+-->
 <account.classes>
+	com.snaplogic.snaps.ExampleAccount
 </account.classes>
 ```
 
@@ -457,16 +474,18 @@ The [Snap Maven Archetype](#snap-maven-archetype) ships with sample Snaps that w
 // Also, use the "docLink" parameter to set a link to the documentation
 @General(title = "Single Doc Generator", purpose = "Generates one document and completes",
         author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
-// There is no input view for this Snap
-@Inputs(min = 0, max = 0)
-// This Snap has exactly one document output view
+// This Snap does not permit input views for demonstration purposes, however, in practice, there
+// should almost always be an input view
+@Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
+// This snap has exactly one document output view (min = 1, max = 1).
 // Snaps can also have binary output i.e., offers={ViewType.BINARY}
 @Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
-// This Snap has an optional document error view
-@Errors(min = 0, max = 1, offers = {ViewType.DOCUMENT})
-// Version number of the Snap
+// This snap has an optional document error view(min = 1, max = 1).
+// Snaps can also have binary error view i.e., offers={ViewType.BINARY}
+@Errors(min = 1, max = 1, offers = {ViewType.DOCUMENT})
+// Version number of the snap
 @Version(snap = 1)
-// This Snap belongs to SnapCategory.READ as is does not require input.
+// This snap belongs to SnapCategory.READ as it is idempotent.
 @Category(snap = SnapCategory.READ)
 public class SingleDocGenerator implements Snap {
     private static final Logger log = LoggerFactory.getLogger(SingleDocGenerator.class);
@@ -490,11 +509,11 @@ public class SingleDocGenerator implements Snap {
     @Override
     public void execute() throws ExecutionException {
         counter++;
-        log.debug("counter: {}", counter);
+        log.debug("counter=" + counter);
 
         /*
-         * Write a single document to outputView. The next Snap in the pipe will
-         * only ever see a single document from this Snap.
+         * Write a single document to outputView. The next snap in the pipe will
+         * only ever see a single document from this snap.
          */
         Map<String, String> data = new LinkedHashMap<String, String>() {{
             put("key", "value");
@@ -672,15 +691,22 @@ import com.snaplogic.snap.test.harness.SnapTestRunner;
 import com.snaplogic.snap.test.harness.TestFixture;
 import com.snaplogic.snap.test.harness.TestResult;
 
+import org.junit.runner.RunWith;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 /**
  * Tests that the {@link SingleDocGenerator} Snap sent one Document to the output view.
  */
 @RunWith(SnapTestRunner.class)
 public class SingleDocGeneratorTest {
 
+    // "snap" attribute targets the Snap being executed
+    // "outputs" defines the name of the output view to write to
     @TestFixture(snap = SingleDocGenerator.class,
             outputs = "output0")
-    public void testSingleDocGeneratorFunctionality(TestResult testResult)
+    public void singleDocGenerator_WithOutputView_OutputsCorrectNumDocuments(TestResult testResult)
             throws Exception {
         assertNull(testResult.getException());
         OutputRecorder outputRecorder = testResult.getOutputViewByName("output0");
@@ -707,7 +733,7 @@ The ["jtest: Snap Unit Testing Framework"](#jtest-snap-unit-testing-framework) s
 @General(title = "Doc Consumer", purpose = "Consumes the incoming documents",
         author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
 @Inputs(min = 1, max = 1, accepts = {ViewType.DOCUMENT})
-@Outputs(min = 0, max = 0)
+@Outputs(min = 0, max = 0, offers = {ViewType.DOCUMENT})
 @Errors(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Version(snap = 1)
 @Category(snap = SnapCategory.WRITE)
@@ -791,19 +817,19 @@ As you develop Snaps, choose the appropriate Snap Category for your use cases.
 
 ```java
 /**
- * This Snap accepts two inputs and outputs to a single output. To use it, feed
- * it at least one document in each view. It will output a single stream which consists
- * of the combination of the two inputs.
- * 
- * This Snap extends {@link SimpleSnap} (instead of implementing {@link Snap}).
- * This means that instead of having a method called 'execute' which is called once,
- * it has a method called 'process' which is called for every document the Snap receives.
+ * This snap accepts two inputs and outputs to a single output. To use it, feed
+ * it two JSON documents. It will output a single stream which consists
+ * of the combination of the two inputs, plus an additional "Processed" field in each.
+ *
+ * <p>This Snap extends {@link SimpleSnap} (instead of implementing {@link Snap}).</p>
+ * <p>This means that instead of having a method called 'execute' which is called once,
+ * it has a method called 'process' which is called for every document the snap receives.
  * This means you do not have to iterate over incoming documents as 'process' does that
  * for you.
  */
-@General(title = "Two Inputs", purpose = "Accepts two inputs, merges them",
-        author = "Your Company Name" docLink = "http://yourdocslinkhere.com")
-@Inputs(min = 2, max = 2)
+@General(title = "Two Inputs", purpose = "Accepts two inputs (expected phone books, merges them)",
+        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+@Inputs(min = 2, max = 2, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Errors(min = 0, max = 1, offers = {ViewType.DOCUMENT})
 @Version(snap = 1)
@@ -833,6 +859,7 @@ public class TwoInputs extends SimpleSnap {
         // NOTE: we are *not* duplicating the data.
         // We will *not* have to convert the map back to a doc.
         // It's just a pointer representation.
+        @SuppressWarnings("unchecked")
         Map<String, Object> data = newdoc.get(Map.class);
 
         // assign a value to a field of the map
@@ -842,19 +869,19 @@ public class TwoInputs extends SimpleSnap {
 
         count++;
         // log current document number
-        log.debug("count: {}", count);
+        log.debug("count=" + count);
 
         // log current document
-        log.debug("document: {}", newdoc.toString());
+        log.debug("document: " + newdoc.toString());
 
-        // send new document to next Snap
+        // send new document to next snap
         outputViews.write(newdoc, document);
     }
 
     @Override
     public void cleanup() throws ExecutionException {
         // Log final number of documents processed
-        log.debug("Final count: {}", count);
+        log.debug("Final count=" + count);
     }
 }
 ```
@@ -879,8 +906,10 @@ There are a number of other "Simple" Snap implementations that can help getting 
 ## Writing Binary Data to an Output View
 
 ```java
-package com.snaplogic.snaps;
-...
+/**
+ * A Snap that counts the number of occurrences of each letter in the English language for the
+ * incoming data, and writes the result to a binary output view
+ */
 @General(title = "Character Counter", purpose = "Demo writing to Binary Output View",
         author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
 @Outputs(min = 1, max = 1, offers = ViewType.BINARY)
@@ -888,9 +917,8 @@ package com.snaplogic.snaps;
 @Version(snap = 1)
 public class CharacterCounter extends SimpleBinaryWriteSnap {
 
-    private static final String UTF_8 = "UTF-8";
-	...
-	
+    ...
+
     @Override
     protected void process(final Document header, final ReadableByteChannel readChannel) {
         final StringBuilder sb = new StringBuilder();
@@ -947,6 +975,8 @@ public class CharacterCounter extends SimpleBinaryWriteSnap {
             }
         });
     }
+
+    ...
 }
 ```
 
@@ -1020,19 +1050,22 @@ We recommend using standard/popular specification field names, lowercased, when 
 ```java
 @General(title = "Doc Generator", purpose = "Generates documents based on the configuration",
         author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
-@Inputs(min = 0, max = 0)
+@Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
-@Errors(min = 0, max = 0)
+@Errors(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Version(snap = 1)
 @Category(snap = SnapCategory.READ)
 public class DocGenerator implements Snap {
     private static final String COUNT = "count";
 
+    // Document utility is the only way to create a document
+    // or manipulate the document header
     @Inject
     private DocumentUtility documentUtility;
     @Inject
     private OutputViews outputViews;
-
+    @Inject
+    private ErrorViews errorViews;
     private int count;
 
     @Override
@@ -1049,6 +1082,15 @@ public class DocGenerator implements Snap {
 
     @Override
     public void execute() throws ExecutionException {
+        if (count < 0) {
+            SnapDataException snapDataException =
+                    new SnapDataException(String.format("Invalid count value %d", count))
+                            .withReason("Value of count property cannot be negative")
+                            .withResolution("Ensure the count property is greater than or equal " +
+                                    "to zero");
+            errorViews.write(snapDataException);
+        }
+
         for (int i = 0; i < count; i++) {
             Map<String, String> data = new LinkedHashMap<>();
             data.put("key", "value" + (i + 1));
@@ -1149,28 +1191,30 @@ To demonstrate this new capability, we can use a "count" [Pipeline Property](htt
 
 ![Doc Generator with Expression](https://dl.dropboxusercontent.com/u/3519578/Screenshots/Zin9.png)
 
+For [composite and table properties](#propertybuilder-reference), the `getExpressionPropertyFor()` method can be used to evaluate child properties embedded in a parent. See [this example provided in the reference DemoSnapPack GitHub repository](https://github.com/SnapLogic/DemoSnapPack/blob/master/src/main/java/com/snaplogic/snaps/PropertyTypes.java#L136).
+
 ## Suggesting Property Values
 
 ```java
 /**
  * This Snap has one output and writes one document that contains the suggested
- * value. This Snap demonstrates the suggest value functionality that uses the
- * partial configuration information to suggest a property value.
+ * value.
+ *
+ * <p>This snap demonstrates the suggest value functionality that uses the
+ * partial configuration information to suggest a property value.</p>
  */
+@Version(snap = 1)
 @General(title = "Suggest", purpose = "Demo suggest functionality.",
         author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
-@Inputs(min = 0, max = 0)
-@Outputs(min = 1, max = 1)
+@Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
+@Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Errors(min = 1, max = 1, offers = {ViewType.DOCUMENT})
-@Version(snap = 1)
 @Category(snap = SnapCategory.READ)
 public class Suggest implements Snap {
 
     public static final String PROP_NAME = "name";
     public static final String PROP_ECHO = "echo";
-    
     private String valueToWrite;
-    
     @Inject
     private DocumentUtility documentUtility;
     @Inject
@@ -1206,6 +1250,7 @@ public class Suggest implements Snap {
 
     @Override
     public void cleanup() throws ExecutionException {
+        // NOOP
     }
 }
 ```
@@ -1565,14 +1610,13 @@ SnapLogic recommends always enabling a Document error view:
 /**
  * This Snap demonstrates two inputs and two outputs.
  *
- * It will output two streams, one for only males and another for females. 
- * Unknowns will get sent to both.
+ * <p>To use it, feed it parents.json and children.json. It will output two streams,
+ * one for only males and another for females. Unknowns will get sent to both.</p>
  */
 @General(title = "Two Ins/Outs", purpose = "Accepts two inputs, sends to two outputs.",
         author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
-@Inputs(min = 2, max = 2)
+@Inputs(min = 2, max = 2, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 2, max = 2, offers = {ViewType.DOCUMENT})
-@Errors(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Version(snap = 1)
 @Category(snap = SnapCategory.READ)
 public class TwoInputsTwoOutputs extends SimpleSnap implements ViewProvider {
@@ -1585,7 +1629,6 @@ public class TwoInputsTwoOutputs extends SimpleSnap implements ViewProvider {
     
     @Inject
     private OutputViews outputViews;
-    
     @Inject
     private ErrorViews errorViews;
 
@@ -1608,12 +1651,15 @@ public class TwoInputsTwoOutputs extends SimpleSnap implements ViewProvider {
 
     ...
 
+    /*
+     * process gets called for every document
+     */
     @Override
     public void process(Document document, String inputViewName) {
         Document newdoc = document.copy();
         Map<String, Object> data = newdoc.get(Map.class);
 
-        // Add a new field "processed"
+        // Add a new field "processed" that is set to value - TRUE
         data.put("processed", "True");
 
         // send males to male output view
@@ -1621,13 +1667,13 @@ public class TwoInputsTwoOutputs extends SimpleSnap implements ViewProvider {
             outputViews.getDocumentViewFor(MALE_VIEW).write(newdoc);
         } else if (data.get("gender").equals("female")) {
             // send females to female output view
-            outputViews.getDocumentViewFor(FEMALE_VIEW).write(newdoc);
+             outputViews.getDocumentViewFor(FEMALE_VIEW).write(newdoc);
         } else {
-            // send unknowns to error view
-            errorViews.write(newdoc, document);
+            // send unknowns to error views
+             errorViews.write(newdoc, document);
         }
     }
-    
+
     ...
 }
 ```
@@ -1787,6 +1833,159 @@ As per the JavaDocs of `SuggestExecutionProvider`, implementing the `configureFo
 
 A thrown `SuggestViewAbortException` can indicate that the pipeline validation/preview-specific behavior threshold has been reached.
 
+## Dependency Injection
+
+```java
+/**
+ * A basic example of a Snap that converts amount values from USD to another currency.
+ */
+@General(title = "Currency Converter", author = "Your Company Name",
+        purpose = "Demonstrates dependency injection",
+        docLink = "http://yourdocslinkhere.com")
+@Inputs(min = 1, max = 1, accepts = {ViewType.DOCUMENT})
+@Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
+@Version(snap = 1)
+@Category(snap = SnapCategory.READ)
+public class CurrencyConverter extends SimpleSnap implements DependencyManager {
+
+    private static final String INPUT_FILE_PROP = "inputFile";
+    private static final String REGEX_PATTERN_PROTOCOL = "^sldb:///|^http://|^https://|^file:///";
+    private static final Pattern PATTERN = Pattern.compile(REGEX_PATTERN_PROTOCOL);
+
+    private String filePath;
+    private TypeReference<Map<String, Object>> mapTypeReference =
+            new TypeReference<Map<String, Object>>() {
+            };
+
+    // the SnapLogic platform takes care of injecting an ObjectMapper instance
+    @Inject
+    private ObjectMapper mapper;
+    @Inject
+    private ForEx foreignExchange;
+    @Inject
+    private URLEncoder urlEncoder;
+    @Inject
+    private JfsUtils jfsUtils;
+
+    // Use an instance of Guice's AbstractModule to bind implementations to interfaces
+    @Override
+    public Module getManagedModule() {
+        return new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(ForEx.class).to(ForExImpl.class);
+                bind(JfsUtils.class).toInstance(JfsUtils.getInstance());
+            }
+        };
+    }
+
+    // An optional file selector for providing exchange rates within a file
+    @Override
+    public void defineProperties(PropertyBuilder propertyBuilder) {
+        propertyBuilder.describe(INPUT_FILE_PROP, "Exchange Rates File",
+                "File containing foreign exchange rates")
+                .expression()
+                .fileBrowsing()
+                .schemaAware(SnapProperty.DecoratorType.ACCEPTS_SCHEMA)
+                .add();
+    }
+
+    @Override
+    public void configure(PropertyValues propertyValues) throws ConfigurationException {
+        filePath = propertyValues.getAsExpression(INPUT_FILE_PROP).eval(null);
+    }
+
+    @Override
+    protected void process(Document document, String inputViewName) {
+        @SuppressWarnings("unchecked")
+        Map<String, Object> docAsMap = documentUtility.getAsMap(document, errorViews);
+        String targetCurrency = (String) docAsMap.get("to");
+        BigDecimal amount = BigDecimal.valueOf(((Number) docAsMap.get("amount")).doubleValue());
+
+        Map<String, Object> exchangeRates = null;
+
+        // If a file was provided, use the exchange rates within it; otherwise, look them up from
+        // the service
+        if (StringUtils.isNotBlank(filePath)) {
+            exchangeRates = getExchangeRatesFromFile(document);
+        } else {
+            exchangeRates = foreignExchange.getExchangeRates(targetCurrency);
+        }
+
+        if (exchangeRates != null) {
+            outputViews.write(documentUtility.newDocument(
+                    getExchangeRateForCurrency(targetCurrency, amount, exchangeRates)), document);
+        }
+    }
+
+    private Map<String, Object> getExchangeRatesFromFile(Document document) {
+        Map<String, Object> exchangeRates;
+        InputStream inputStream = null;
+        try {
+            URI filePathUri = urlEncoder.validateAndEncodeURI(filePath, PATTERN, null);
+            inputStream = jfsUtils.openURLConnection(filePathUri).getInputStream();
+            exchangeRates = mapper.readValue(inputStream, mapTypeReference);
+        } catch (IOException e) {
+            throw new SnapDataException(document, e,
+                    String.format("Unable to read from file path %s", filePath));
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+        return exchangeRates;
+    }
+
+    private Map<String, BigDecimal> getExchangeRateForCurrency(String targetCurrency,
+            BigDecimal amount, Map<String, Object> rate) {
+        Map<String, Object> forExRates = (Map<String, Object>) rate.get("rates");
+        BigDecimal forExRate = BigDecimal.valueOf(
+                ((Number) forExRates.get(targetCurrency)).doubleValue());
+
+        Map<String, BigDecimal> convertedCurrency = new LinkedHashMap<>();
+        convertedCurrency.put(targetCurrency, amount.multiply(forExRate));
+        return convertedCurrency;
+    }
+
+    public interface ForEx {
+        Map<String, Object> getExchangeRates(String currencyCode);
+    }
+
+    // An implementation of the ForEx interface. Normally this would call out to a database or
+    // web service; in this demonstration, it returns random exchange rates.
+    public static class ForExImpl implements ForEx {
+        private Map<String, Object> rate;
+
+        public ForExImpl() {
+            rate = new LinkedHashMap<>();
+        }
+
+        @Override
+        public Map<String, Object> getExchangeRates(String currencyCode) {
+            rate.put("base", currencyCode.toUpperCase());
+            rate.put("date", DateTimeFormat.forPattern("yyyy-MM-dd").print(now(UTC)));
+
+            Map<String, BigDecimal> forExRates = new LinkedHashMap<>();
+            Random r = new Random();
+            forExRates.put("AUD", BigDecimal.valueOf(10 * r.nextDouble()));
+            forExRates.put("GBP", BigDecimal.valueOf(10 * r.nextDouble()));
+            forExRates.put("EUR", BigDecimal.valueOf(10 * r.nextDouble()));
+            rate.put("rates", forExRates);
+
+            return rate;
+        }
+    }
+}
+```
+
+Snaps use Google's [Guice](https://github.com/google/guice) library for dependency injection. 
+
+Snaps that implement the `DependencyManager` interface can return a [Guice Module](https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Module.html) that can configure interface bindings to be used by SnapLogic's [Injector](https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Injector.html). 
+
+In the "Currency Converter" example shown, DependencyManager's `getManagedModule` method is implemented to return an `AbstractModule` instance, with the `ForEx` interface bound to the `ForExImpl` implementation, and the `JfsUtils` interface bound to a specific instance.
+
+This allows taking advantage of the ["inversion of control"](http://www.martinfowler.com/articles/injection.html) software design pattern to provide different implementations of a service interface for a hierarchy of related Snaps.
+
+It also greatly benefits unit testing, since it permits injecting in stub or mock versions of service dependencies; see the `CurrencyConverterTest` test class for more.
+
 # Deploying Snap Packs
 
 Now that we understand how to build a Snap, let's see how to deploy it so it can be used within the SnapLogic Platform.
@@ -1913,12 +2112,18 @@ They also permit storing, encrypting, and obfuscating sensitive information like
 ## Account Configuration
 
 ```java
-package com.snaplogic.snaps;
-...
+/**
+ * Demonstrates Snap Accounts. Two security-sensitive properties, User ID and Passphrase, are used
+ * to build a simple hash-token.
+ *
+ * <p>The User ID property is also made available to the Snap (through
+ * the {@code account.userId} expression variable).</p>
+ */
 @General(title = "Example Snap Account")
 @Version(snap = 1)
 @AccountCategory(type = AccountType.CUSTOM)
-public class ExampleAccount implements Account<String> {
+public class ExampleAccount implements Account<String>, ValidatableAccount<String>,
+        AccountVariableProvider {
 
     protected static final String USER_ID = "userId";
     protected static final String PASSPHRASE = "passphrase";
@@ -1948,7 +2153,7 @@ public class ExampleAccount implements Account<String> {
         userId = propertyValues.get(USER_ID);
         passphrase = propertyValues.get(PASSPHRASE);
     }
-    
+
     @Override
     public String connect() throws ExecutionException {
         /*
@@ -1957,7 +2162,7 @@ public class ExampleAccount implements Account<String> {
         base64(userId + ":" + expirationTimestamp + ":" +
              md5(userId + ":" + expirationTimestamp + ":" passphrase))
          */
-        long expiration = DateTime.now().plusDays(1).getMillis();
+        long expiration = getExpirationTimestamp();
         byte[] md5;
 
         try {
@@ -1977,8 +2182,27 @@ public class ExampleAccount implements Account<String> {
     public void disconnect() throws ExecutionException {
         // no-op
     }
-    
-    ...
+
+    /*
+    Make account property values available to a Snap
+     */
+    @Override
+    public Map<String, Object> getAccountVariableValue() {
+        return new ExpressionVariableAdapter() {
+            @Override
+            public Set<Entry<String, Object>> entrySet() {
+                return new ImmutableSet.Builder<Entry<String, Object>>()
+                        .add(entry(USER_ID, getUserId()))
+                        .build();
+            }
+        };
+    }
+
+    protected long getExpirationTimestamp() {
+        return DateTime.now().plusDays(1).getMillis();
+    }
+
+	...
 }
 ```
 
@@ -2302,17 +2526,20 @@ The following sections will use the unit tests included in the [Snap Maven Arche
 @RunWith(SnapTestRunner.class)
 public class SingleDocGeneratorTest {
 
+    // "snap" attribute targets the Snap being executed
+    // "outputs" defines the name of the output view to write to
     @TestFixture(snap = SingleDocGenerator.class,
             outputs = "output0")
-    public void testSingleDocGeneratorFunctionality(TestResult testResult)
+    public void singleDocGenerator_WithOutputView_OutputsCorrectNumDocuments(TestResult testResult)
             throws Exception {
         assertNull(testResult.getException());
         OutputRecorder outputRecorder = testResult.getOutputViewByName("output0");
         assertEquals(1, outputRecorder.getRecordedData().size());
     }
-
 }
 ```
+
+This example uses a `TestResult` argument to instruct the `SnapTestRunner` to automatically execute the test but to manually verify the test result.
 
 Specify an output view name in `outputs` and then call `getRecordedData()` on the `OutputRecorder` instance returned by the `testResult.getOutputViewByName()` call using that same output view name.
 
@@ -2343,7 +2570,7 @@ public class SchemaExampleTest {
 }
 ```
 
-Very similar to [Recording Output Test Data](#recording-output-test-data), except the `testResult.getErrorViewByName()` method is called instead.
+Very similar to [Recording Output Test Data](#recording-output-test-data), except the `testResult.getErrorViewByName()` method is called instead to inspect the document send to the error view name defined by the `errors` fixture parameter.
 
 ## Providing Input Test Data
 
@@ -2447,6 +2674,8 @@ public class DocGeneratorTest {
         OutputRecorder outputRecorder = testResult.getOutputViewByName("output0");
         assertEquals(5, outputRecorder.getRecordedData().size());
     }
+    
+    ...
 }
 ```
 
@@ -2480,6 +2709,28 @@ Example:
 }
 </div>
 
+## Overriding Specific Properties
+
+```java
+@RunWith(SnapTestRunner.class)
+public class DocGeneratorTest {
+
+	...
+
+    // "propertyOverrides" allows overriding specific values defined in the "properties" file
+    @TestFixture(snap = DocGenerator.class,
+            outputs = "output0",
+            properties = "data/doc_generator/doc_generator_properties.json",
+            propertyOverrides = {"$.settings.count.value", "20"})
+    public void docGenerator_WithPropertyOverrides_OutputsCorrectNumDocuments(TestResult testResult)
+            throws Exception {
+        assertNull(testResult.getException());
+        OutputRecorder outputRecorder = testResult.getOutputViewByName("output0");
+        assertEquals(20, outputRecorder.getRecordedData().size());
+    }
+}
+```
+
 `propertiesOverrides` can override the value of a Snap property specified in the `properties` file.
 
 The value should be pairs of strings where the left-side is the JSON-Path to write and the right-side is the JSON-encoded value to store in the path.
@@ -2494,32 +2745,214 @@ propertyOverrides = {
 ...
 </div>
 
-## Injecting Test Dependencies
+## Modifying Private Fields with TestSetup
 
 ```java
 @RunWith(SnapTestRunner.class)
 public class DocConsumerTest {
 
+    // a TestSetup argument allows interacting with the test before triggering it
     @TestFixture(snap = DocConsumer.class)
-    public void testDocConsumerFunctionality(TestSetup testSetup) throws Exception {
+    public void docConsumer_WithManualTestSetup_UpdatesCounterCorrectly(TestSetup testSetup)
+            throws Exception {
         testSetup.addInputView("input0", Arrays.<Object>asList("1", "2"));
-        
-        // This demonstrates how to inject instances/stubs/mocks into Snap fields.
-        AtomicInteger count = new AtomicInteger(0);
+
+        // This demonstrates how get a reference to a private field within a Snap using TestSetup
+        AtomicInteger count = new AtomicInteger(2);
         testSetup.inject().fieldName("count").dependency(count).add();
 
-        TestResult testResult = testSetup.test();
+        TestResult testResult = testSetup.test(); // test the Snap by running through its lifecycle
         assertNull(testResult.getException());
-        assertEquals(2, count.get());
+        assertEquals(4, count.get());
     }
 }
 ```
 
-The [`DocConsumer` sample Snap](#reading-documents-from-an-input-view) contains an `AtomicInteger` "count" field.
+The [`DocConsumer` sample Snap](#reading-documents-from-an-input-view) contains a private `AtomicInteger` "count" field.
 
-If we wish to set this field directly, we can use `inject()` from `TestSetup`.
+If we wish to change this field directly, we can use `inject()` from `TestSetup`.
+
+A `TestSetup` argument allows modifying what is to be tested in advance of triggering the test's execution with the `test()` method.
+
+## Declarative Testing
+
+```java
+@RunWith(SnapTestRunner.class)
+public class DocGeneratorTest {
+
+	...
+
+    /**
+     * Tests that the {@link DocGenerator} Snap's output generated for the given value of "count"
+     * property matches with what is provided in a separate file referred to by "expectedOutputPath"
+     * attribute of the TestFixture annotation.
+     */
+    @TestFixture(snap = DocGenerator.class,
+            outputs = "output0",
+            expectedOutputPath = "data/doc_generator",
+            properties = "data/doc_generator/doc_generator_properties.json")
+    public void docGenerator_WithExpectedOutputPath_OutputsDocumentsCorrectly()
+            throws Exception {
+    }
+
+    // "expectedErrorPath" specifies the folder that contains the
+    // "docGenerator_WithExpectedErrorPath_OutputsErrorDocumentCorrectly-err.json" file
+    @TestFixture(snap = DocGenerator.class,
+            errors = "error0",
+            expectedErrorPath = "data/doc_generator",
+            properties = "data/doc_generator/doc_generator_properties.json",
+            propertyOverrides = {"$.settings.count.value", "-2"})
+    public void docGenerator_WithExpectedErrorPath_OutputsErrorDocumentCorrectly() throws Exception {
+    }
+    
+}
+
+...
+
+@RunWith(SnapTestRunner.class)
+public class CharacterCounterTest {
+
+    @TestFixture(snap = CharacterCounter.class,
+            input = "data/character_counter/character_counter_input_pointer.json",
+            outputs = "output0",
+            expectedOutputPath = "data/character_counter")
+    public void characterCounter_WithSnapLogicAsInput_CountsOccurrences() throws Exception {
+    }
+
+}
+```
+
+While both `TestSetup` and `TestResult` allow fine-grained control over the test execution, we can gain a lot of benefits in a declarative model of testing, where test inputs, outputs, and configuration are all defined in files external to the test.
+
+We saw earlier in [Providing Input Test Data](#providing-input-test-data) how to use the `input` annotation parameter to specify the incoming documents, but we can also externalize the expected output and error documents.
+
+The `expectedOutputPath` and `expectedErrorPath` attributes specify folders that contains files that following a naming convertion. The file must match the test name plus a suffix like `"-out.json"` or `"-err.json"`. However, if those files do not exist or differ, the test runner will write the actual output to a temporary file, making it easy to copy them over (if valid):
+
+![Temp result file](https://dl.dropboxusercontent.com/u/3519578/Screenshots/xamy.png)
+
+If the output is of [binary type](#writing-binary-data-to-an-output-view), then a folder matching the test name and containing the expected header and data files must be created:
+
+![Expected Test File Name Format](https://dl.dropboxusercontent.com/u/3519578/Screenshots/Tw5f.png)
+
+`DocGeneratorTest` contains two tests that demonstrate externalizing expected output and error content, and `CharacterCounterTest` shows similar but for a binary-output Snap.
+
+## Testing Suggestions
+
+```java
+@RunWith(SnapTestRunner.class)
+public class SuggestTest {
+    private static final String FOO = "foo";
+
+    // asserting using TestSetup.suggest()
+    @TestFixture(snap = Suggest.class)
+    public void suggest_WithTestSetupAndSuggest_ReturnsCorrectValue(TestSetup testSetup)
+            throws Exception {
+        // Set the value for the property "name"
+        testSetup.setPropertyValue(Suggest.PROP_NAME, FOO);
+        // Call suggest for the property "echo"
+        Map<String, Object> values = testSetup.suggest(Suggest.PROP_ECHO);
+        // This should return the value that was set for the property "name"
+        assertEquals(Arrays.asList(FOO), values.get(Suggest.PROP_ECHO));
+    }
+
+    // "suggestProperty" and "expectedOutputPath" can be used together to declare the expected
+    // output of a Suggest action on the specified property
+    @TestFixture(snap = Suggest.class,
+            suggestProperty = Suggest.PROP_ECHO,
+            expectedOutputPath = "data/suggest",
+            properties = "data/suggest/suggest_properties.json")
+    public void suggest_WithSuggestProperty_WritesResultsToSpecialOutputView() throws Exception {
+    }
+}
+```
+
+Testing [Suggested property values](#suggesting-property-values) can be done two ways: with the `TestSetup.suggest()` method or with the `suggestProperty` annotation parameter. 
+
+The former executes the `Suggestions` instance assigned to the specified property. The latter creates a fake output view for the suggest results and writes it to there; as outlined in the [Declarative Testing](#declarative-testing) section, this also benefits from actual executions being written to temp files to be copied to your test resources folder.
+
+<div class="inline-code">
+{
+  "out": [{
+    "echo": ["foo"]
+  }]
+}
+</div>
+
+## Injecting Test Dependencies
+
+```java
+@RunWith(SnapTestRunner.class)
+public class CurrencyConverterTest {
+
+    @TestFixture(snap = CurrencyConverter.class,
+            input = "data/currency_converter/input_documents.json",
+            outputs = "output0",
+            expectedOutputPath = "data/currency_converter")
+    public void currencyConverstion_WithFieldMockedDirectly_ConvertsCorrectly(TestSetup testSetup)
+            throws Exception {
+        // This demonstrates how to inject mocks into Snap fields.
+        ForEx forExMock = createMock(ForEx.class);
+        expect(forExMock.getExchangeRates(anyString()))
+                .andReturn(new FakeForeignExchange().getExchangeRates("USD")).anyTimes();
+        replay(forExMock);
+
+        testSetup.inject().fieldName("foreignExchange").dependency(forExMock).add();
+
+        TestResult testResult = testSetup.test();
+        assertNull(testResult.getException());
+
+        verify(forExMock);
+    }
+
+    @TestFixture(snap = CurrencyConverter.class,
+            input = "data/currency_converter/input_documents.json",
+            outputs = "output0",
+            expectedOutputPath = "data/currency_converter",
+            injectorModule = FakeForeignExchangeInjector.class)
+    public void currencyConversion_WithCustomInjector_ConvertsCorrectly() throws Exception {
+
+    }
+    
+    public static class FakeForeignExchangeInjector extends AbstractModule {
+        FakeForeignExchange fakeForeignExchange = new FakeForeignExchange();
+
+        @Override
+        protected void configure() {
+            bind(ForEx.class).toInstance(fakeForeignExchange);
+        }
+    }
+
+    public static class FakeForeignExchange implements ForEx {
+        private Map<String, Object> rate;
+
+        public FakeForeignExchange() {
+            rate = new LinkedHashMap<>();
+        }
+
+        @Override
+        public Map<String, Object> getExchangeRates(String currencyCode) {
+            Map<String, Object> rate = new LinkedHashMap<>();
+            rate.put("base", "USD");
+            rate.put("date", "2016-09-12");
+
+            Map<String, Object> forExRates = new LinkedHashMap<>();
+            forExRates.put("AUD", BigDecimal.valueOf(1.3299));
+            forExRates.put("GBP", BigDecimal.valueOf(0.75249));
+            forExRates.put("EUR", BigDecimal.valueOf(0.89079));
+            rate.put("rates", forExRates);
+
+            return rate;
+        }
+    }
+    
+}
+```
+
+There are two ways of injecting test dependencies - with the `inject()` approach described previously or with `injectorModule`. Both are shown here in `CurrencyConverterTest`.
 
 `injectorModule` allows providing a custom `AbstractModule` class to override Guice bindings and influence fields annotated with `@Inject`.
+
+In the test, a `FakeForeignExchange` instance is bound to the `ForEx` instance instead of the `ForExImpl` implementation in the `CurrencyConverter` class.
 
 # PropertyBuilder Reference
 
@@ -2528,8 +2961,8 @@ If we wish to set this field directly, we can use `inject()` from `TestSetup`.
         author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
 @Category(snap = SnapCategory.READ)
 @Version(snap = 1)
-@Inputs(min = 0, max = 0)
-@Outputs(min = 1, max = 1)
+@Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
+@Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 public class PropertyTypes extends SimpleSnap {
     private static final String PASSWORD_PROP = "password_prop";
     private static final String FILE_BROWSER_PROP = "file_browser_prop";
@@ -2541,8 +2974,15 @@ public class PropertyTypes extends SimpleSnap {
     private static final String TABLE_PROP = "table_prop";
     private static final String PASSWORD_PROP_VALUE = "abc";
 
+    // Document utility is the only way to create a document
+    // or manipulate the document header
     @Inject
     private DocumentUtility documentUtility;
+
+    String password;
+    String fileBrowser;
+    Map<String, Object> composite;
+    List<Map<String, Object>> table;
 
     @Override
     public void defineProperties(final PropertyBuilder propBuilder) {
@@ -2550,9 +2990,9 @@ public class PropertyTypes extends SimpleSnap {
         propBuilder.describe(PASSWORD_PROP, PASSWORD_PROP)
                 .required()
                 .defaultValue(PASSWORD_PROP_VALUE)
-                .obfuscate()
+                .obfuscate() // hides input and sets sensitivity to High
                 .add();
-                
+
         // File Browsing
         propBuilder.describe(FILE_BROWSER_PROP, FILE_BROWSER_PROP)
                 .required()
@@ -2566,8 +3006,7 @@ public class PropertyTypes extends SimpleSnap {
                 .required()
                 .fileBrowsing()
                 .build();
-        SnapProperty child = propBuilder.describe(CHILD_PROP,
-                CHILD_PROP)
+        SnapProperty child = propBuilder.describe(CHILD_PROP, CHILD_PROP)
                 .required()
                 .build();
         propBuilder.describe(PARENT_PROP, PARENT_PROP)
@@ -2576,15 +3015,14 @@ public class PropertyTypes extends SimpleSnap {
                 .withEntry(fileBrowsingChild)
                 .withEntry(child)
                 .add();
-                
+
         // Table Property
         SnapProperty fileBrowsingColumn = propBuilder.describe(COLUMN_FILE_BROWSER_PROP,
                 COLUMN_FILE_BROWSER_PROP)
                 .required()
                 .fileBrowsing()
                 .build();
-        SnapProperty column = propBuilder.describe(COLUMN_PROP,
-                COLUMN_PROP)
+        SnapProperty column = propBuilder.describe(COLUMN_PROP, COLUMN_PROP)
                 .required()
                 .build();
         propBuilder.describe(TABLE_PROP, TABLE_PROP)
@@ -2596,21 +3034,149 @@ public class PropertyTypes extends SimpleSnap {
 
     @Override
     public void configure(PropertyValues propertyValues) throws ConfigurationException {
+        password = propertyValues.getAsExpression(PASSWORD_PROP).eval(null);
+        fileBrowser = propertyValues.getAsExpression(FILE_BROWSER_PROP).eval(null);
+
+        // also consider storing a reference to the PropertyValues in an instance variable to be
+        // used when when evaluating expressions against each incoming document in process()
+        composite = buildComposite(propertyValues);
+        table = buildTable(propertyValues);
+    }
+
+    /*
+    Demonstrates using getAsExpression and getExpressionPropertyFor to retrieve parent and child
+    components of a composite property set
+     */
+    protected Map<String, Object> buildComposite(final PropertyValues propertyValues) {
+        // a Map to hold the evaluated property values
+        Map<String, Object> composite = new LinkedHashMap<>();
+
+        // get the parent composite as an expression
+        // the parent will resolve to a map of the child key-value pairs for each child
+        Map<String, Object> parent = propertyValues.getAsExpression(PARENT_PROP).eval(null);
+
+        // the getExpressionPropertyFor() method allows accessing the child expression variables
+        String fileBrowsingChild =
+                propertyValues.getExpressionPropertyFor(parent, CHILD_FILE_BROWSER_PROP).eval(null);
+        String child = propertyValues.getExpressionPropertyFor(parent, CHILD_PROP).eval(null);
+
+        composite.put(CHILD_FILE_BROWSER_PROP, fileBrowsingChild);
+        composite.put(CHILD_PROP, child);
+
+        return composite;
+    }
+
+    /*
+    Table properties are evaluated similarly to Composites, except they return Lists of Maps. The
+    list can be iterated through (representing each "row" of the table) with each key-value pair
+    representing a table property to be evaluated.
+     */
+    protected List<Map<String, Object>> buildTable(final PropertyValues propertyValues) {
+        // a List of Maps to represent the evaluated property values in a table
+        List<Map<String, Object>> table = new ArrayList<>();
+
+        // get the table property as an expression
+        List<Map<String, Object>> tableProp = propertyValues.getAsExpression(TABLE_PROP).eval(null);
+
+        // for each row of the table, get the child properties as an expression
+        for (Map<String, Object> aRow : tableProp) {
+            Map<String, Object> row = new LinkedHashMap<>();
+
+            String childFileBrowser =
+                    propertyValues.getExpressionPropertyFor(aRow, COLUMN_FILE_BROWSER_PROP)
+                            .eval(null);
+            String column = propertyValues.getExpressionPropertyFor(aRow, COLUMN_PROP).eval(null);
+
+            row.put(COLUMN_FILE_BROWSER_PROP, childFileBrowser);
+            row.put(COLUMN_PROP, column);
+
+            table.add(row);
+        }
+
+        return table;
     }
 
     @Override
     public void process(Document document, String inputViewName) {
-        Map<String, String> data = new LinkedHashMap<String, String>() {{
-            put("key", "value");
-        }};
+        Map<String, Object> data = new LinkedHashMap<>();
+        data.put(PASSWORD_PROP, getPassword());
+        data.put(FILE_BROWSER_PROP, getFileBrowser());
+        data.put("composite", getComposite());
+        data.put("table", getTable());
+
         outputViews.write(documentUtility.newDocument(data), document);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFileBrowser() {
+        return fileBrowser;
+    }
+
+    public Map<String, Object> getComposite() {
+        return composite;
+    }
+
+    public List<Map<String, Object>> getTable() {
+        return table;
     }
 }
 ```
 
 The `PropertyTypes` sample Snap in the [Snap Maven Archetype](#snap-maven-archetype) demonstrates a number of the various UI components available to a Snap's Settings UI.
 
-![Property Values](http://dl.dropboxusercontent.com/u/3519578/Screenshots/qJXX.png)
+![Property Values](https://dl.dropboxusercontent.com/u/3519578/Screenshots/LxWM.png)
+
+The `PropertyTypesTest` test class references a properties file that outlines the JSON structure of complex Snap settings like the above:
+
+<div class="inline-code">
+{
+  "settings": {
+    "password_prop": {
+      "value": "snaplogic"
+    },
+    "file_browser_prop": {
+      "expression": false,
+      "value": "file1.json"
+    },
+    "parent_prop": {
+      "value": {
+        "child_file_browser_prop": {
+          "expression": false,
+          "value": "file2.json"
+        },
+        "child_prop": {
+          "value": "child"
+        }
+      }
+    },
+    "table_prop": {
+      "value": [
+        {
+          "column_file_browser_prop": {
+            "expression": false,
+            "value": "file3.json"
+          },
+          "column_prop": {
+            "value": "col1"
+          }
+        },
+        {
+          "column_file_browser_prop": {
+            "expression": false,
+            "value": "file4.json"
+          },
+          "column_prop": {
+            "value": "col2"
+          }
+        }
+      ]
+    }
+  }
+}
+</div>
 
 ### SnapType Reference
 
