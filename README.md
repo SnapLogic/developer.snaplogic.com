@@ -41,8 +41,6 @@ Contributing to this documentation is straightforward. Simply fork or clone (Sna
 
 [Submit an issue](https://github.com/SnapLogic/developer.snaplogic.com/issues) to the developer.snaplogic.com Github repository if you need any help. And, of course, feel free to [submit pull requests](https://gist.github.com/Chaser324/ce0505fbed06b947d962) with bug fixes or changes.
 
-No need to fork the repository - 
-
 # Running Locally
 
 ### Prerequisites
