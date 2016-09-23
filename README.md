@@ -56,7 +56,7 @@ You're going to need:
 1. Fork this repository on Github. (SnapLogic employees can skip this step.)
 2. Clone *your forked repository* (not our original one) to your hard drive with `git clone https://github.com/YOURUSERNAME/developer.snaplogic.com.git`
 3. `cd developer.snaplogic.com`
-4. Initialize and start the Slate server. You can either do this locally, or with Vagrant:
+4. Initialize and start the Slate server. You can either do this locally, or with [Vagrant](https://www.vagrantup.com/):
 
 ```shell
 # either run this to run locally
