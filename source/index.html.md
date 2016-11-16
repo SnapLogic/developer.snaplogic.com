@@ -295,7 +295,7 @@ The Snaplex/JCC supports debugging a Snap's execution with your chosen IDE. Simp
 
 ```shell
 $ cd $SNAP_HOME
-$ mvn archetype:generate -DarchetypeCatalog=http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
+$ mvn archetype:generate -DarchetypeCatalog=http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
 [INFO] Scanning for projects...
 [INFO]                                                                         
 [INFO] ------------------------------------------------------------------------
@@ -310,7 +310,7 @@ $ mvn archetype:generate -DarchetypeCatalog=http://maven.clouddev.snaplogic.com:
 [INFO] Generating project in Interactive mode
 [INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
 Choose archetype:
-1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/ -> com.snaplogic.tools:SnapArchetype (This is a sample snap project.)
+1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/ -> com.snaplogic.tools:SnapArchetype (This is a sample snap project.)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
 1: 1.0
@@ -320,11 +320,12 @@ Choose com.snaplogic.tools:SnapArchetype version:
 5: 1.4
 6: 1.5
 7: 1.6
+8: 1.7
 Choose a number: 7: 7
-Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.jar
-Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.jar (44 KB at 65.5 KB/sec)
-Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.pom
-Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.pom (3 KB at 10.5 KB/sec)
+Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.jar
+Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.jar (44 KB at 65.5 KB/sec)
+Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.pom
+Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.pom (3 KB at 10.5 KB/sec)
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -344,31 +345,15 @@ snapPack: Demo Snap Pack
 user: rhowlett@snaplogic.com
  Y: : Y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.6
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.7
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
-[INFO] Parameter: artifactId, Value: demosnappack
-[INFO] Parameter: version, Value: 1.0-SNAPSHOT
-[INFO] Parameter: package, Value: com.snaplogic.snaps
-[INFO] Parameter: packageInPathFormat, Value: com/snaplogic/snaps
-[INFO] Parameter: package, Value: com.snaplogic.snaps
-[INFO] Parameter: version, Value: 1.0-SNAPSHOT
-[INFO] Parameter: user, Value: rhowlett@snaplogic.com
-[INFO] Parameter: organization, Value: snaplogic
-[INFO] Parameter: assetPath, Value: /snaplogic/robin/shared
-[INFO] Parameter: groupId, Value: com.snaplogic
-[INFO] Parameter: snapPack, Value: Demo Snap Pack
-[INFO] Parameter: artifactId, Value: demosnappack
-[INFO] project created from Archetype in dir: /Users/snapdev/opt/snaplogic-dev/demosnappack
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
 ```
 
 A [Maven Archetype](https://maven.apache.org/guides/introduction/introduction-to-archetypes.html) is a Maven project templating toolkit. SnapLogic provides `SnapArchetype` for quickly starting Snap development.
 
 <aside class="notice">
-The Snap archetype catalog is available at <a href="http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/">http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/</a>
+The Snap archetype catalog is available at <a href="http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/">http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/</a>
 </aside>
 
 `SnapArchetype` ships with eight sample Snaps for demonstration purposes:
