@@ -321,7 +321,7 @@ Choose com.snaplogic.tools:SnapArchetype version:
 6: 1.5
 7: 1.6
 8: 1.7
-Choose a number: 7: 7
+Choose a number: 8: 8
 Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.jar
 Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.jar (44 KB at 65.5 KB/sec)
 Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.pom
