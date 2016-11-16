@@ -461,7 +461,7 @@ See the <a href="#exceptions-and-error-views">Exceptions and Error Views</a> sec
 
 <h2 id="snap-maven-archetype">Snap Maven Archetype</h2>
 <pre class="highlight shell"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$SNAP_HOME</span>
-<span class="gp">$ </span>mvn archetype:generate -DarchetypeCatalog<span class="o">=</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
+<span class="gp">$ </span>mvn archetype:generate -DarchetypeCatalog<span class="o">=</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
 <span class="o">[</span>INFO] Scanning <span class="k">for </span>projects...
 <span class="o">[</span>INFO]                                                                         
 <span class="o">[</span>INFO] ------------------------------------------------------------------------
@@ -476,7 +476,7 @@ See the <a href="#exceptions-and-error-views">Exceptions and Error Views</a> sec
 <span class="o">[</span>INFO] Generating project <span class="k">in </span>Interactive mode
 <span class="o">[</span>INFO] No archetype defined. Using maven-archetype-quickstart <span class="o">(</span>org.apache.maven.archetypes:maven-archetype-quickstart:1.0<span class="o">)</span>
 Choose archetype:
-1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/ -&gt; com.snaplogic.tools:SnapArchetype <span class="o">(</span>This is a sample snap project.<span class="o">)</span>
+1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/ -&gt; com.snaplogic.tools:SnapArchetype <span class="o">(</span>This is a sample snap project.<span class="o">)</span>
 Choose a number or apply filter <span class="o">(</span>format: <span class="o">[</span>groupId:]artifactId, <span class="k">case</span> sensitive contains<span class="p">)</span>: : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
 1: 1.0
@@ -486,11 +486,12 @@ Choose com.snaplogic.tools:SnapArchetype version:
 5: 1.4
 6: 1.5
 7: 1.6
+8: 1.7
 Choose a number: 7: 7
-Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.jar
-Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.jar <span class="o">(</span>44 KB at 65.5 KB/sec<span class="o">)</span>
-Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.pom
-Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/com/snaplogic/tools/SnapArchetype/1.6/SnapArchetype-1.6.pom <span class="o">(</span>3 KB at 10.5 KB/sec<span class="o">)</span>
+Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.jar
+Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.jar <span class="o">(</span>44 KB at 65.5 KB/sec<span class="o">)</span>
+Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.pom
+Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.pom <span class="o">(</span>3 KB at 10.5 KB/sec<span class="o">)</span>
 Define value <span class="k">for </span>property <span class="s1">'groupId'</span>: : com.snaplogic
 Define value <span class="k">for </span>property <span class="s1">'artifactId'</span>: : demosnappack
 Define value <span class="k">for </span>property <span class="s1">'version'</span>:  1.0-SNAPSHOT: : 
@@ -510,31 +511,15 @@ snapPack: Demo Snap Pack
 user: rhowlett@snaplogic.com
  Y: : Y
 <span class="o">[</span>INFO] ----------------------------------------------------------------------------
-<span class="o">[</span>INFO] Using following parameters <span class="k">for </span>creating project from Archetype: SnapArchetype:1.6
+<span class="o">[</span>INFO] Using following parameters <span class="k">for </span>creating project from Archetype: SnapArchetype:1.7
 <span class="o">[</span>INFO] ----------------------------------------------------------------------------
 <span class="o">[</span>INFO] Parameter: groupId, Value: com.snaplogic
-<span class="o">[</span>INFO] Parameter: artifactId, Value: demosnappack
-<span class="o">[</span>INFO] Parameter: version, Value: 1.0-SNAPSHOT
-<span class="o">[</span>INFO] Parameter: package, Value: com.snaplogic.snaps
-<span class="o">[</span>INFO] Parameter: packageInPathFormat, Value: com/snaplogic/snaps
-<span class="o">[</span>INFO] Parameter: package, Value: com.snaplogic.snaps
-<span class="o">[</span>INFO] Parameter: version, Value: 1.0-SNAPSHOT
-<span class="o">[</span>INFO] Parameter: user, Value: rhowlett@snaplogic.com
-<span class="o">[</span>INFO] Parameter: organization, Value: snaplogic
-<span class="o">[</span>INFO] Parameter: assetPath, Value: /snaplogic/robin/shared
-<span class="o">[</span>INFO] Parameter: groupId, Value: com.snaplogic
-<span class="o">[</span>INFO] Parameter: snapPack, Value: Demo Snap Pack
-<span class="o">[</span>INFO] Parameter: artifactId, Value: demosnappack
-<span class="o">[</span>INFO] project created from Archetype <span class="k">in </span>dir: /Users/snapdev/opt/snaplogic-dev/demosnappack
-<span class="o">[</span>INFO] ------------------------------------------------------------------------
-<span class="o">[</span>INFO] BUILD SUCCESS
-<span class="o">[</span>INFO] ------------------------------------------------------------------------
 </code></pre>
 
 <p>A <a href="https://maven.apache.org/guides/introduction/introduction-to-archetypes.html">Maven Archetype</a> is a Maven project templating toolkit. SnapLogic provides <code class="prettyprint">SnapArchetype</code> for quickly starting Snap development.</p>
 
 <aside class="notice">
-The Snap archetype catalog is available at <a href="http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/">http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/</a>
+The Snap archetype catalog is available at <a href="http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/">http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/</a>
 </aside>
 
 <p><code class="prettyprint">SnapArchetype</code> ships with eight sample Snaps for demonstration purposes:</p>
