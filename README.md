@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://www.snaplogic.com/assets/application/logo-header-096e0919c2ce87a4ebd541deac1f5592.png" alt="SnapLogic Logo" width="226">
+  <img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/oANO.png" alt="SnapLogic Logo" width="226">
 </p>
 
 <p align="center">The <a href="http://developer.snaplogic.com">Snap Development Documentation</a> guides a developer creating Snaps for the <a href="https://www.snaplogic.com/">SnapLogic Elastic Integration Platform</a>.</p>
