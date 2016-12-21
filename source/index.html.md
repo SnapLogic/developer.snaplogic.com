@@ -1684,8 +1684,8 @@ However, if you wish to allow the user to remove all input and output views, it'
 This can be done by implementing the `ViewProvider` interface and using the `defineViews()` method's `ViewBuilder` argument:
 
 <div class="inline-code">
-@Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
-@Outputs(min = 0, max = 1, offers = {ViewType.DOCUMENT})
+@Inputs(min = 0, max = 2, accepts = {ViewType.DOCUMENT})
+@Outputs(min = 0, max = 2, offers = {ViewType.DOCUMENT})
 ...
 // this creates the two open input views and the two named output views
 @Override

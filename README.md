@@ -69,6 +69,12 @@ vagrant up
 
 You can now see the docs at http://localhost:4567. Whoa! That was fast!
 
+### Deploying
+
+* `git commit -a -m "Commit message"`
+* `git push`
+* `./deploy.sh`
+
 Learn more about [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax).
 
 If you'd prefer to use Docker, instructions are available [in the Slate wiki](https://github.com/lord/slate/wiki/Docker).
