@@ -1926,8 +1926,8 @@ If you cannot guarantee that all input views will be written to, use <code>Input
 <p>This can be done by implementing the <code class="prettyprint">ViewProvider</code> interface and using the <code class="prettyprint">defineViews()</code> method&rsquo;s <code class="prettyprint">ViewBuilder</code> argument:</p>
 
 <div class="inline-code">
-@Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
-@Outputs(min = 0, max = 1, offers = {ViewType.DOCUMENT})
+@Inputs(min = 0, max = 2, accepts = {ViewType.DOCUMENT})
+@Outputs(min = 0, max = 2, offers = {ViewType.DOCUMENT})
 &hellip;
 // this creates the two open input views and the two named output views
 @Override
