@@ -95,6 +95,7 @@ Use of a Snaplex in a Mac OS X environment is supported only for developing Snap
 
 ```shell
 $ cd ~
+$ brew install wget
 $ wget https://s3.amazonaws.com/elastic.snaplogic.com/snaplogic-sidekick...rpm
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ brew install rpm2cpio
