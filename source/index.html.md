@@ -20,7 +20,7 @@ This documentation guides a developer through the steps necessary to develop **S
 
 SnapLogic [Snaps](https://www.snaplogic.com/snaps) are modular collections of integration components built for a specific application or data source. Snaps shield both business users and developers from much of the complexity of the underlying application, data model, and service.
 
-![Transform Snap Pack](http://dl.dropboxusercontent.com/u/3519578/Screenshots/WmuJ.png)
+![Transform Snap Pack](https://dl.dropboxusercontent.com/u/3519578/Screenshots/WmuJ.png)
 
 Snap Packs logically organize Snaps and are the deployable unit when adding/modifying Snaps to the SnapLogic Elastic Integration Platform. For instance, in the above example, the Aggregate Snap is part of the Transform Snap Pack. 
 
@@ -30,13 +30,13 @@ Snaps may be related by functionality or share common code. A Snap Pack may cont
 
 Snaps are streaming data processors. They can consume and/or produce Binary or Document data through input and output views, and can report error Documents to an optional error view. 
 
-![Snap Anatomy](http://dl.dropboxusercontent.com/u/3519578/Screenshots/iKCt.png)
+![Snap Anatomy](https://dl.dropboxusercontent.com/u/3519578/Screenshots/iKCt.png)
 
 They have metadata that define their view settings and configuration. They can read/poll from an endpoint, batch execute or process each input individually, and may write to another endpoint.
 
 Snaps can provide design-time Suggest/lookup and Preview/validate data capabilities, or run in full execution mode.
 
-![Snap Execution](http://dl.dropboxusercontent.com/u/3519578/Screenshots/Yjfr.png)
+![Snap Execution](https://dl.dropboxusercontent.com/u/3519578/Screenshots/Yjfr.png)
 
 ## Snaps vs Scripts
 
@@ -181,7 +181,7 @@ The simplest way to start the Snaplex is to run the packaged `jcc.war` file.
 
 To check if the Snaplex started correctly, log in to the [SnapLogic Dashboard](https://elastic.snaplogic.com/sl/dashboard.html):
 
-![SnapLogic Dashboard Snaplex Health](http://dl.dropboxusercontent.com/u/3519578/Screenshots/1Z0t.png)
+![SnapLogic Dashboard Snaplex Health](https://dl.dropboxusercontent.com/u/3519578/Screenshots/1Z0t.png)
 
 <aside class="success">
 A green check mark beside the Snaplex entry will indicate a healthy instance.
@@ -768,7 +768,7 @@ Iterating over the `Document` objects, the Snap logs that a document was consume
 
 The `cleanup()` method, which is called after the Snap has completed its execution phase, logs the total number of documents consumed.
 
-![Consuming 3 Documents](http://dl.dropboxusercontent.com/u/3519578/Screenshots/KZdv.png)
+![Consuming 3 Documents](https://dl.dropboxusercontent.com/u/3519578/Screenshots/KZdv.png)
 
 <aside class="notice">
 SnapLogic's Platform will enforce that all input documents have been fully consumed, otherwise an error will occur and the pipeline will fail.
@@ -786,16 +786,16 @@ This difference between category types manifests in three ways:
 * the "Doc Consumer" Snap inherits an "Execute during Preview" setting to toggle whether the Snap will execute when the Pipeline is validating/previewing,
 * the Snaps are separated when "Group By Type" is chosen.
 
-![Snap Category Difference](http://dl.dropboxusercontent.com/u/3519578/Screenshots/hEPI.png)
+![Snap Category Difference](https://dl.dropboxusercontent.com/u/3519578/Screenshots/hEPI.png)
 
 Icon | Snap Category | Description
 ----------- | ----------- | -----------
-<img src="http://dl.dropboxusercontent.com/u/3519578/Screenshots/xzQs.png" /> | **READ** | Sources of data in the pipeline.<br />*Example: File Reader*
-<img src="http://dl.dropboxusercontent.com/u/3519578/Screenshots/QJ63.png" /> | **WRITE** | Data destinations or sinks in the pipeline. They also inherit an "Execute during Preview" setting.<br />*Example: File Writer* 
-<img src="http://dl.dropboxusercontent.com/u/3519578/Screenshots/HmYs.png" /> | **PARSE** |	Parse unstructured input data into structured output data.<br />*Example: CSV Parser*
-<img src="http://dl.dropboxusercontent.com/u/3519578/Screenshots/LNZC.png" /> | **FORMAT** | Change data format.<br />*Example: CSV Formatter*
-<img src="http://dl.dropboxusercontent.com/u/3519578/Screenshots/oETU.png" /> | **TRANSFORM** | Modify data significantly.<br />*Example: Aggregate, Join*
-<img src="http://dl.dropboxusercontent.com/u/3519578/Screenshots/NQNT.png" /> | **FLOW** | Change the direction or output of data in the pipeline.<br />*Example: Filter, Router*
+<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/xzQs.png" /> | **READ** | Sources of data in the pipeline.<br />*Example: File Reader*
+<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/QJ63.png" /> | **WRITE** | Data destinations or sinks in the pipeline. They also inherit an "Execute during Preview" setting.<br />*Example: File Writer* 
+<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/HmYs.png" /> | **PARSE** |	Parse unstructured input data into structured output data.<br />*Example: CSV Parser*
+<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/LNZC.png" /> | **FORMAT** | Change data format.<br />*Example: CSV Formatter*
+<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/oETU.png" /> | **TRANSFORM** | Modify data significantly.<br />*Example: Aggregate, Join*
+<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/NQNT.png" /> | **FLOW** | Change the direction or output of data in the pipeline.<br />*Example: Filter, Router*
 
 As you develop Snaps, choose the appropriate Snap Category for your use cases.
 
@@ -1093,7 +1093,7 @@ public class DocGenerator implements Snap {
 
 The `DocGenerator` Snap is similar to the [`SingleDocGenerator`](#basic-snap-implementation) Snap, except the number of documents generated is configurable through user input:
 
-![Doc Generator](http://dl.dropboxusercontent.com/u/3519578/Screenshots/lJqe.png)
+![Doc Generator](https://dl.dropboxusercontent.com/u/3519578/Screenshots/lJqe.png)
 
 <aside class="success">
 All Snaps will have a required <strong>Label</strong> property for customizing the display label of the Snap within a Pipeline.
@@ -1113,7 +1113,7 @@ See the [PropertyBuilder Reference](#propertybuilder-reference) section for more
 
 The SnapLogic Platform will attempt to provide some basic type validation on user input:
 
-![Auto validation](http://dl.dropboxusercontent.com/u/3519578/Screenshots/mi8k.png)
+![Auto validation](https://dl.dropboxusercontent.com/u/3519578/Screenshots/mi8k.png)
 
 If more advanced validation is required, provide the implementation in the `configure` method and throw a `ConfigurationException` when invalid input is encountered. See [Exceptions and Error Views](#exceptions-and-error-views) for more.
 
@@ -1289,7 +1289,7 @@ propertyBuilder.describe("table", "table")
 	.add();
 </div>
 
-![Table Suggest](http://dl.dropboxusercontent.com/u/3519578/Screenshots/NlQw.png)
+![Table Suggest](https://dl.dropboxusercontent.com/u/3519578/Screenshots/NlQw.png)
 
 <aside class="warning">
 Suggestions are not supported within Composite properties.
@@ -1381,13 +1381,13 @@ When understanding how to use a Schema, you must first understand how declaring 
 
 A Snap's input view schema becomes the Target Schema of the Snap (e.g. Mapper) immediately preceding it in the pipeline. This allows the user the opportunity to shape the data to the desired form:
 
-![Input Schema](http://dl.dropboxusercontent.com/u/3519578/Screenshots/M3WA.png)
+![Input Schema](https://dl.dropboxusercontent.com/u/3519578/Screenshots/M3WA.png)
 
 In the `SchemaExample` sample (which creates the **"View Schema"** Snap), an input schema is declared by implementing the `InputSchemaProvider` interface. This interface has a `defineInputSchema` method, where the `SchemaProvider` argument can be used to create child schemas and add them to the provider through a `SchemaBuilder`.
 
 Similarly the Snap's output view schema becomes the Input Schema of the Snap immediately following it in the pipeline, allowing users to anticipate the shape of the data exiting the Snap:
 
-![Output Schema](http://dl.dropboxusercontent.com/u/3519578/Screenshots/gqxF.png)
+![Output Schema](https://dl.dropboxusercontent.com/u/3519578/Screenshots/gqxF.png)
 
 ### Enforcing a Schema
 
@@ -1399,11 +1399,11 @@ In the `SchemaExample` sample above, the `validate` method is called before the 
 
 If the input data contains those keys, the document is written to the output view:
 
-![Valid Input](http://dl.dropboxusercontent.com/u/3519578/Screenshots/fiAa.png)
+![Valid Input](https://dl.dropboxusercontent.com/u/3519578/Screenshots/fiAa.png)
 
 If the input data does not contain all of those keys, a `SnapDataException` is thrown and the document is written to the error view:
 
-![Invalid Input](http://dl.dropboxusercontent.com/u/3519578/Screenshots/f4sZ.png)
+![Invalid Input](https://dl.dropboxusercontent.com/u/3519578/Screenshots/f4sZ.png)
 
 ## Exceptions and Error Views
 
@@ -1568,7 +1568,7 @@ public void execute() throws ExecutionException {
 
 will result in the following content written to the error view:
 
-![Error View Exception](http://dl.dropboxusercontent.com/u/3519578/Screenshots/DmKE.png)
+![Error View Exception](https://dl.dropboxusercontent.com/u/3519578/Screenshots/DmKE.png)
 
 If your Snap extends `SimpleSnap`, it is even easier - just throw the `SnapDataException` and it will be written to the error view as above:
 
@@ -1666,7 +1666,7 @@ public class TwoInputsTwoOutputs extends SimpleSnap implements ViewProvider {
 
 The `TwoInputsTwoOutputs` sample accepts documents from two input views and routes to a particular output view based on the value of the "gender" field:
 
-![TwoInOut](http://dl.dropboxusercontent.com/u/3519578/Screenshots/oHpC.png)
+![TwoInOut](https://dl.dropboxusercontent.com/u/3519578/Screenshots/oHpC.png)
 
 ### Reading from Multiple Input Views
 
@@ -1707,7 +1707,7 @@ public void defineViews(final ViewBuilder viewBuilder) {
 }
 </div>
 
-![Remove Views](http://dl.dropboxusercontent.com/u/3519578/Screenshots/nFE8.png)
+![Remove Views](https://dl.dropboxusercontent.com/u/3519578/Screenshots/nFE8.png)
 
 ### Writing to Multiple Output Views
 
@@ -2043,7 +2043,7 @@ If multiple versions of a custom Snap exist in different location, and with inco
 
 Also, always refresh the browser after uploading a new version of a Snap Pack containing Snap or Account Schema changes. If the problem persists, also consider deleting the entries in your browser's session storage:
 
-![Session Storage](http://dl.dropboxusercontent.com/u/3519578/Screenshots/s45d.png)
+![Session Storage](https://dl.dropboxusercontent.com/u/3519578/Screenshots/s45d.png)
 
 If during local development your find your local Snaplex/JCC picking up Snap changes, stop and restart it.
 
