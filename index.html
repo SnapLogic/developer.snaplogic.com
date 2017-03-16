@@ -162,7 +162,7 @@
 
 <p>SnapLogic <a href="https://www.snaplogic.com/snaps">Snaps</a> are modular collections of integration components built for a specific application or data source. Snaps shield both business users and developers from much of the complexity of the underlying application, data model, and service.</p>
 
-<p><img alt="Transform Snap Pack" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/WmuJ.png" /></p>
+<p><img alt="Transform Snap Pack" src="images/WmuJ.png" /></p>
 
 <p>Snap Packs logically organize Snaps and are the deployable unit when adding/modifying Snaps to the SnapLogic Elastic Integration Platform. For instance, in the above example, the Aggregate Snap is part of the Transform Snap Pack. </p>
 
@@ -172,13 +172,13 @@
 
 <p>Snaps are streaming data processors. They can consume and/or produce Binary or Document data through input and output views, and can report error Documents to an optional error view. </p>
 
-<p><img alt="Snap Anatomy" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/iKCt.png" /></p>
+<p><img alt="Snap Anatomy" src="images/iKCt.png" /></p>
 
 <p>They have metadata that define their view settings and configuration. They can read/poll from an endpoint, batch execute or process each input individually, and may write to another endpoint.</p>
 
 <p>Snaps can provide design-time Suggest/lookup and Preview/validate data capabilities, or run in full execution mode.</p>
 
-<p><img alt="Snap Execution" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/Yjfr.png" /></p>
+<p><img alt="Snap Execution" src="images/Yjfr.png" /></p>
 
 <h2 id="snaps-vs-scripts">Snaps vs Scripts</h2>
 
@@ -351,7 +351,7 @@ jcc.environment <span class="o">=</span> devsnaplex
 
 <p>To check if the Snaplex started correctly, log in to the <a href="https://elastic.snaplogic.com/sl/dashboard.html">SnapLogic Dashboard</a>:</p>
 
-<p><img alt="SnapLogic Dashboard Snaplex Health" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/1Z0t.png" /></p>
+<p><img alt="SnapLogic Dashboard Snaplex Health" src="images/1Z0t.png" /></p>
 
 <aside class="success">
 A green check mark beside the Snaplex entry will indicate a healthy instance.
@@ -586,8 +586,8 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 <h2 id="project-structure">Project Structure</h2>
 
 <blockquote>
-<p><img alt="Project Structure Main" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/Eop8.png" />
-<img alt="Project Structure Test" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/odZU.png" /></p>
+<p><img alt="Project Structure Main" src="images/Eop8.png" />
+<img alt="Project Structure Test" src="images/odZU.png" /></p>
 </blockquote>
 
 <p>A Snap Project&rsquo;s structure follows <a href="https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html">Maven&rsquo;s Standard Directory Layout</a>.</p>
@@ -602,7 +602,7 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 
 <p>The <code class="prettyprint">NAME</code> property is the label of Snap Pack. This is visible when the SnapLogic Designer is grouping by Snap Pack e.g. the Snaps related to SQL Server are grouped under &ldquo;SQL Server&rdquo;.</p>
 
-<p><img alt="SQL Server Snap Pack label" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/AUH9.png" /></p>
+<p><img alt="SQL Server Snap Pack label" src="images/AUH9.png" /></p>
 
 <p>The <code class="prettyprint">ASSET_DIR_PATH</code> property instructs the Snap Pack Installer to deploy the Snap Pack to the specified asset path.</p>
 
@@ -721,7 +721,7 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 
 <p>It is an uncomplicated Snap that generates a single document, without requiring any input data or user input. It implements the <code class="prettyprint">Snap</code> interface.</p>
 
-<p><img alt="SingleDocGeneratorPipeline" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/o6o1.png" /></p>
+<p><img alt="SingleDocGeneratorPipeline" src="images/o6o1.png" /></p>
 
 <p><a href="#snap-anatomy-101">Snap Anatomy 101</a> explains the purpose of each annotation and the overridden methods. The comments above each annotation describe their specific usage for this Snap.</p>
 
@@ -962,7 +962,7 @@ We recommend that you do pass through the original document for greatest flexibi
 
 <p>The <code class="prettyprint">cleanup()</code> method, which is called after the Snap has completed its execution phase, logs the total number of documents consumed.</p>
 
-<p><img alt="Consuming 3 Documents" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/KZdv.png" /></p>
+<p><img alt="Consuming 3 Documents" src="images/KZdv.png" /></p>
 
 <aside class="notice">
 SnapLogic&rsquo;s Platform will enforce that all input documents have been fully consumed, otherwise an error will occur and the pipeline will fail.
@@ -982,7 +982,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 <li>the Snaps are separated when &ldquo;Group By Type&rdquo; is chosen.</li>
 </ul>
 
-<p><img alt="Snap Category Difference" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/hEPI.png" /></p>
+<p><img alt="Snap Category Difference" src="images/hEPI.png" /></p>
 
 <table><thead>
 <tr>
@@ -992,32 +992,32 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 </tr>
 </thead><tbody>
 <tr>
-<td><img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/xzQs.png" /></td>
+<td><img src="images/xzQs.png" /></td>
 <td><strong>READ</strong></td>
 <td>Sources of data in the pipeline.<br /><em>Example: File Reader</em></td>
 </tr>
 <tr>
-<td><img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/QJ63.png" /></td>
+<td><img src="images/QJ63.png" /></td>
 <td><strong>WRITE</strong></td>
 <td>Data destinations or sinks in the pipeline. They also inherit an &ldquo;Execute during Preview&rdquo; setting.<br /><em>Example: File Writer</em></td>
 </tr>
 <tr>
-<td><img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/HmYs.png" /></td>
+<td><img src="images/HmYs.png" /></td>
 <td><strong>PARSE</strong></td>
 <td>Parse unstructured input data into structured output data.<br /><em>Example: CSV Parser</em></td>
 </tr>
 <tr>
-<td><img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/LNZC.png" /></td>
+<td><img src="images/LNZC.png" /></td>
 <td><strong>FORMAT</strong></td>
 <td>Change data format.<br /><em>Example: CSV Formatter</em></td>
 </tr>
 <tr>
-<td><img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/oETU.png" /></td>
+<td><img src="images/oETU.png" /></td>
 <td><strong>TRANSFORM</strong></td>
 <td>Modify data significantly.<br /><em>Example: Aggregate, Join</em></td>
 </tr>
 <tr>
-<td><img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/NQNT.png" /></td>
+<td><img src="images/NQNT.png" /></td>
 <td><strong>FLOW</strong></td>
 <td>Change the direction or output of data in the pipeline.<br /><em>Example: Filter, Router</em></td>
 </tr>
@@ -1102,7 +1102,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 
 <p><code class="prettyprint">SimpleSnap</code> takes care of iterating over the incoming documents (if any) and allowing you to process each document at a time. It also handles the dependency injection for the <code class="prettyprint">Input/Output/ErrorViews</code>, the <code class="prettyprint">DocumentUtility</code>, and the <code class="prettyprint">ExecutionUtil</code> (which handles iterating over the documents in the incoming input view(s) on your behalf, and writing any thrown <code class="prettyprint">SnapDataException</code> instances to the error view).</p>
 
-<p><img alt="Two Inputs" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/IVTO.png" /></p>
+<p><img alt="Two Inputs" src="images/IVTO.png" /></p>
 
 <p>There are a number of other &ldquo;Simple&rdquo; Snap implementations that can help getting started quickly, including:</p>
 
@@ -1198,7 +1198,7 @@ SnapLogic&rsquo;s Platform will enforce that all input documents have been fully
 
 <p>The provided <code class="prettyprint">ReadableByteChannel</code> argument is used to create an <code class="prettyprint">InputStream</code>. The logic for counting each occurrence of each letter then follows before the results are written to an <code class="prettyprint">OutputStream</code>, which is sent the <code class="prettyprint">write()</code> method&rsquo;s <code class="prettyprint">WritableByteChannel</code>, and then on to the Snap&rsquo;s binary output view:</p>
 
-<p><img alt="Character Counter Binary Output" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/xNKZ.png" /></p>
+<p><img alt="Character Counter Binary Output" src="images/xNKZ.png" /></p>
 
 <h2 id="reading-binary-data-from-an-input-view">Reading Binary Data from an Input View</h2>
 <pre class="highlight java"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">snaplogic</span><span class="o">.</span><span class="na">snap</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">write</span><span class="o">;</span>
@@ -1313,7 +1313,7 @@ We recommend using standard/popular specification field names, lowercased, when 
 
 <p>The <code class="prettyprint">DocGenerator</code> Snap is similar to the <a href="#basic-snap-implementation"><code class="prettyprint">SingleDocGenerator</code></a> Snap, except the number of documents generated is configurable through user input:</p>
 
-<p><img alt="Doc Generator" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/lJqe.png" /></p>
+<p><img alt="Doc Generator" src="images/lJqe.png" /></p>
 
 <aside class="success">
 All Snaps will have a required <strong>Label</strong> property for customizing the display label of the Snap within a Pipeline.
@@ -1333,7 +1333,7 @@ All Snaps will have a required <strong>Label</strong> property for customizing t
 
 <p>The SnapLogic Platform will attempt to provide some basic type validation on user input:</p>
 
-<p><img alt="Auto validation" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/mi8k.png" /></p>
+<p><img alt="Auto validation" src="images/mi8k.png" /></p>
 
 <p>If more advanced validation is required, provide the implementation in the <code class="prettyprint">configure</code> method and throw a <code class="prettyprint">ConfigurationException</code> when invalid input is encountered. See <a href="#exceptions-and-error-views">Exceptions and Error Views</a> for more.</p>
 
@@ -1393,7 +1393,7 @@ All Snaps will have a required <strong>Label</strong> property for customizing t
 
 <p>To demonstrate this new capability, we can use a &ldquo;count&rdquo; <a href="http://doc.snaplogic.com/pipeline-properties">Pipeline Property</a> and then reference this in the Snap within a <code class="prettyprint">parseInt</code> expression function:</p>
 
-<p><img alt="Doc Generator with Expression" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/Zin9.png" /></p>
+<p><img alt="Doc Generator with Expression" src="images/Zin9.png" /></p>
 
 <p>For <a href="#propertybuilder-reference">composite and table properties</a>, the <code class="prettyprint">getExpressionPropertyFor()</code> method can be used to evaluate child properties embedded in a parent. See <a href="https://github.com/SnapLogic/DemoSnapPack/blob/master/src/main/java/com/snaplogic/snaps/PropertyTypes.java#L136">this example provided in the reference DemoSnapPack GitHub repository</a>.</p>
 
@@ -1461,7 +1461,7 @@ All Snaps will have a required <strong>Label</strong> property for customizing t
 
 <p>In the &ldquo;Suggest&rdquo; sample Snap, the user enters in a value for the &ldquo;name&rdquo; property. The &ldquo;echo&rdquo; property&rsquo;s suggest action then reads that value and allows the user to select it.</p>
 
-<p><img alt="Suggest" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/e2S6.png" /></p>
+<p><img alt="Suggest" src="images/e2S6.png" /></p>
 
 <p>The suggest capability is enabled through use of the the <code class="prettyprint">PropertyBuilder.withSuggestions(Suggestions suggestions)</code> method. Implementations of the <code class="prettyprint">Suggestions</code> interface should be provided to it.</p>
 
@@ -1505,7 +1505,7 @@ propertyBuilder.describe(&ldquo;table&rdquo;, &ldquo;table&rdquo;)
     .add();
 </div>
 
-<p><img alt="Table Suggest" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/NlQw.png" /></p>
+<p><img alt="Table Suggest" src="images/NlQw.png" /></p>
 
 <aside class="warning">
 Suggestions are not supported within Composite properties.
@@ -1595,13 +1595,13 @@ Suggestions are not supported within Composite properties.
 
 <p>A Snap&rsquo;s input view schema becomes the Target Schema of the Snap (e.g. Mapper) immediately preceding it in the pipeline. This allows the user the opportunity to shape the data to the desired form:</p>
 
-<p><img alt="Input Schema" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/M3WA.png" /></p>
+<p><img alt="Input Schema" src="images/M3WA.png" /></p>
 
 <p>In the <code class="prettyprint">SchemaExample</code> sample (which creates the <strong>&ldquo;View Schema&rdquo;</strong> Snap), an input schema is declared by implementing the <code class="prettyprint">InputSchemaProvider</code> interface. This interface has a <code class="prettyprint">defineInputSchema</code> method, where the <code class="prettyprint">SchemaProvider</code> argument can be used to create child schemas and add them to the provider through a <code class="prettyprint">SchemaBuilder</code>.</p>
 
 <p>Similarly the Snap&rsquo;s output view schema becomes the Input Schema of the Snap immediately following it in the pipeline, allowing users to anticipate the shape of the data exiting the Snap:</p>
 
-<p><img alt="Output Schema" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/gqxF.png" /></p>
+<p><img alt="Output Schema" src="images/gqxF.png" /></p>
 
 <h3 id="enforcing-a-schema">Enforcing a Schema</h3>
 
@@ -1613,11 +1613,11 @@ Suggestions are not supported within Composite properties.
 
 <p>If the input data contains those keys, the document is written to the output view:</p>
 
-<p><img alt="Valid Input" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/fiAa.png" /></p>
+<p><img alt="Valid Input" src="images/fiAa.png" /></p>
 
 <p>If the input data does not contain all of those keys, a <code class="prettyprint">SnapDataException</code> is thrown and the document is written to the error view:</p>
 
-<p><img alt="Invalid Input" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/f4sZ.png" /></p>
+<p><img alt="Invalid Input" src="images/f4sZ.png" /></p>
 
 <h2 id="exceptions-and-error-views">Exceptions and Error Views</h2>
 <pre class="highlight java"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">snaplogic</span><span class="o">.</span><span class="na">api</span><span class="o">;</span>
@@ -1734,7 +1734,7 @@ public void execute() throws ExecutionException {
 
 <p>This results in the following user experience:</p>
 
-<p><img alt="Basic Exception" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/eX3K.png" /></p>
+<p><img alt="Basic Exception" src="images/eX3K.png" /></p>
 
 <p>When creating exceptions, we recommend providing a failure message, a reason, and a resolution:</p>
 
@@ -1775,7 +1775,7 @@ public void execute() throws ExecutionException {
 }       
 </div>
 
-<p><img alt="Reason and Resolution" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/FjIr.png" /></p>
+<p><img alt="Reason and Resolution" src="images/FjIr.png" /></p>
 
 <h3 id="configurationexception">ConfigurationException</h3>
 
@@ -1790,7 +1790,7 @@ public void configure(PropertyValues propertyValues) throws ConfigurationExcepti
 }
 </div>
 
-<p><img alt="Config Exception" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/JAB9.png" /></p>
+<p><img alt="Config Exception" src="images/JAB9.png" /></p>
 
 <h3 id="writing-exceptions-to-the-error-view">Writing Exceptions to the Error View</h3>
 
@@ -1812,7 +1812,7 @@ public void execute() throws ExecutionException {
 
 <p>will result in the following content written to the error view:</p>
 
-<p><img alt="Error View Exception" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/DmKE.png" /></p>
+<p><img alt="Error View Exception" src="images/DmKE.png" /></p>
 
 <p>If your Snap extends <code class="prettyprint">SimpleSnap</code>, it is even easier - just throw the <code class="prettyprint">SnapDataException</code> and it will be written to the error view as above:</p>
 
@@ -1908,7 +1908,7 @@ SnapLogic recommends always enabling a Document error view:
 
 <p>The <code class="prettyprint">TwoInputsTwoOutputs</code> sample accepts documents from two input views and routes to a particular output view based on the value of the &ldquo;gender&rdquo; field:</p>
 
-<p><img alt="TwoInOut" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/oHpC.png" /></p>
+<p><img alt="TwoInOut" src="images/oHpC.png" /></p>
 
 <h3 id="reading-from-multiple-input-views">Reading from Multiple Input Views</h3>
 
@@ -1949,7 +1949,7 @@ public void defineViews(final ViewBuilder viewBuilder) {
 }
 </div>
 
-<p><img alt="Remove Views" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/nFE8.png" /></p>
+<p><img alt="Remove Views" src="images/nFE8.png" /></p>
 
 <h3 id="writing-to-multiple-output-views">Writing to Multiple Output Views</h3>
 
@@ -2260,7 +2260,7 @@ While every effort has been made to ensure the stability of this feature, it is 
 
 <p>This ZIP file can then be uploaded through the Manager UI to the root/project folder/Project Space directory of your choice.</p>
 
-<p><img alt="Manager" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/WhVl.png" /></p>
+<p><img alt="Manager" src="images/WhVl.png" /></p>
 
 <aside class="success">
 We recommended using this method of deployment when releasing a stable version of your custom Snap to your users, and when uploading to the Organization&rsquo;s root shared directory. Preferably, development versions of the Snap Pack should be deleted from development project folders and/or Project Spaces prior to this to avoid confusion.
@@ -2277,7 +2277,7 @@ In the near future, SnapLogic will update the <code>snappack:deploy</code> goal 
 
 <p>Also, always refresh the browser after uploading a new version of a Snap Pack containing Snap or Account Schema changes. If the problem persists, also consider deleting the entries in your browser&rsquo;s session storage:</p>
 
-<p><img alt="Session Storage" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/s45d.png" /></p>
+<p><img alt="Session Storage" src="images/s45d.png" /></p>
 
 <p>If during local development your find your local Snaplex/JCC picking up Snap changes, stop and restart it.</p>
 
@@ -2430,7 +2430,7 @@ In the near future, SnapLogic will update the <code>snappack:deploy</code> goal 
 Unlike Snaps, you cannot <a href="#expression-enabled-properties">expression-enable</a> Account properties.
 </aside>
 
-<p><img alt="Create Custom Account" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/fNOT.png" /></p>
+<p><img alt="Create Custom Account" src="images/fNOT.png" /></p>
 
 <aside class="success">
 Remember to declare the new Account in the Snap POM&rsquo;s <code>&lt;account.classes&gt;</code> element e.g.
@@ -2553,7 +2553,7 @@ Remember to declare the new Snap in the Snap POM&rsquo;s <code>&lt;snap.classes&
 
 <p>The <code class="prettyprint">account.userId</code> and <code class="prettyprint">account.passphrase</code> expression variables can then be used within the Snap&rsquo;s expression-enabled properties:</p>
 
-<p><img alt="Account Expression Variable" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/yF6t.png" /></p>
+<p><img alt="Account Expression Variable" src="images/yF6t.png" /></p>
 
 <aside class="notice">
 Do not prefix the <code>account</code> expression variable with <code>$</code> as it is not in the document. It also has the limitation that it is not listed within the expression UI&rsquo;s &ldquo;Functions and properites&rdquo; dropdown/tree.
@@ -2600,7 +2600,7 @@ public class ExampleAccount implements <strong>ValidatableAccount&lt;String&gt;<
 
 <p>When clicked, this will trigger a call to the Account&rsquo;s <code class="prettyprint">connect()</code> method. If the <code class="prettyprint">connect()</code> method returns successfully (an exception is not thrown), the Account will be deemed validated:</p>
 
-<p><img alt="Successful Account Validation" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/KsZR.png" /></p>
+<p><img alt="Successful Account Validation" src="images/KsZR.png" /></p>
 
 <h2 id="validation-specific-behavior">Validation-specific Behavior</h2>
 <pre class="highlight java"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">snaplogic</span><span class="o">.</span><span class="na">account</span><span class="o">.</span><span class="na">api</span><span class="o">;</span>
@@ -3075,11 +3075,11 @@ propertyOverrides = {
 
 <p>The <code class="prettyprint">expectedOutputPath</code> and <code class="prettyprint">expectedErrorPath</code> attributes specify folders that contains files that following a naming convertion. The file must match the test name plus a suffix like <code class="prettyprint">&quot;-out.json&quot;</code> or <code class="prettyprint">&quot;-err.json&quot;</code>. However, if those files do not exist or differ, the test runner will write the actual output to a temporary file, making it easy to copy them over (if valid):</p>
 
-<p><img alt="Temp result file" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/xamy.png" /></p>
+<p><img alt="Temp result file" src="images/xamy.png" /></p>
 
 <p>If the output is of <a href="#writing-binary-data-to-an-output-view">binary type</a>, then a folder matching the test name and containing the expected header and data files must be created:</p>
 
-<p><img alt="Expected Test File Name Format" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/Tw5f.png" /></p>
+<p><img alt="Expected Test File Name Format" src="images/Tw5f.png" /></p>
 
 <p><code class="prettyprint">DocGeneratorTest</code> contains two tests that demonstrate externalizing expected output and error content, and <code class="prettyprint">CharacterCounterTest</code> shows similar but for a binary-output Snap.</p>
 
@@ -3368,7 +3368,7 @@ propertyOverrides = {
 
 <p>The <code class="prettyprint">PropertyTypes</code> sample Snap in the <a href="#snap-maven-archetype">Snap Maven Archetype</a> demonstrates a number of the various UI components available to a Snap&rsquo;s Settings UI.</p>
 
-<p><img alt="Property Values" src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/LxWM.png" /></p>
+<p><img alt="Property Values" src="images/LxWM.png" /></p>
 
 <p>The <code class="prettyprint">PropertyTypesTest</code> test class references a properties file that outlines the JSON structure of complex Snap settings like the above:</p>
 
