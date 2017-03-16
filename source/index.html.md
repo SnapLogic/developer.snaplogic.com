@@ -20,7 +20,7 @@ This documentation guides a developer through the steps necessary to develop **S
 
 SnapLogic [Snaps](https://www.snaplogic.com/snaps) are modular collections of integration components built for a specific application or data source. Snaps shield both business users and developers from much of the complexity of the underlying application, data model, and service.
 
-![Transform Snap Pack](https://dl.dropboxusercontent.com/u/3519578/Screenshots/WmuJ.png)
+![Transform Snap Pack](images/WmuJ.png)
 
 Snap Packs logically organize Snaps and are the deployable unit when adding/modifying Snaps to the SnapLogic Elastic Integration Platform. For instance, in the above example, the Aggregate Snap is part of the Transform Snap Pack. 
 
@@ -30,13 +30,13 @@ Snaps may be related by functionality or share common code. A Snap Pack may cont
 
 Snaps are streaming data processors. They can consume and/or produce Binary or Document data through input and output views, and can report error Documents to an optional error view. 
 
-![Snap Anatomy](https://dl.dropboxusercontent.com/u/3519578/Screenshots/iKCt.png)
+![Snap Anatomy](images/iKCt.png)
 
 They have metadata that define their view settings and configuration. They can read/poll from an endpoint, batch execute or process each input individually, and may write to another endpoint.
 
 Snaps can provide design-time Suggest/lookup and Preview/validate data capabilities, or run in full execution mode.
 
-![Snap Execution](https://dl.dropboxusercontent.com/u/3519578/Screenshots/Yjfr.png)
+![Snap Execution](images/Yjfr.png)
 
 ## Snaps vs Scripts
 
@@ -181,7 +181,7 @@ The simplest way to start the Snaplex is to run the packaged `jcc.war` file.
 
 To check if the Snaplex started correctly, log in to the [SnapLogic Dashboard](https://elastic.snaplogic.com/sl/dashboard.html):
 
-![SnapLogic Dashboard Snaplex Health](https://dl.dropboxusercontent.com/u/3519578/Screenshots/1Z0t.png)
+![SnapLogic Dashboard Snaplex Health](images/1Z0t.png)
 
 <aside class="success">
 A green check mark beside the Snaplex entry will indicate a healthy instance.
@@ -381,8 +381,8 @@ Once `SnapArchetype` has been generated, it can be imported as a Maven project i
 
 ## Project Structure
 
-> ![Project Structure Main](https://dl.dropboxusercontent.com/u/3519578/Screenshots/Eop8.png)
-> ![Project Structure Test](https://dl.dropboxusercontent.com/u/3519578/Screenshots/odZU.png)
+> ![Project Structure Main](images/Eop8.png)
+> ![Project Structure Test](images/odZU.png)
 
 A Snap Project's structure follows [Maven's Standard Directory Layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
 
@@ -396,7 +396,7 @@ A Snap Project's structure follows [Maven's Standard Directory Layout](https://m
 
 The `NAME` property is the label of Snap Pack. This is visible when the SnapLogic Designer is grouping by Snap Pack e.g. the Snaps related to SQL Server are grouped under "SQL Server".
 
-![SQL Server Snap Pack label](https://dl.dropboxusercontent.com/u/3519578/Screenshots/AUH9.png)
+![SQL Server Snap Pack label](images/AUH9.png)
 
 The `ASSET_DIR_PATH` property instructs the Snap Pack Installer to deploy the Snap Pack to the specified asset path.
 
@@ -517,7 +517,7 @@ public class SingleDocGenerator implements Snap {
 
 It is an uncomplicated Snap that generates a single document, without requiring any input data or user input. It implements the `Snap` interface.
 
-![SingleDocGeneratorPipeline](https://dl.dropboxusercontent.com/u/3519578/Screenshots/o6o1.png)
+![SingleDocGeneratorPipeline](images/o6o1.png)
 
 [Snap Anatomy 101](#snap-anatomy-101) explains the purpose of each annotation and the overridden methods. The comments above each annotation describe their specific usage for this Snap.
 
@@ -768,7 +768,7 @@ Iterating over the `Document` objects, the Snap logs that a document was consume
 
 The `cleanup()` method, which is called after the Snap has completed its execution phase, logs the total number of documents consumed.
 
-![Consuming 3 Documents](https://dl.dropboxusercontent.com/u/3519578/Screenshots/KZdv.png)
+![Consuming 3 Documents](images/KZdv.png)
 
 <aside class="notice">
 SnapLogic's Platform will enforce that all input documents have been fully consumed, otherwise an error will occur and the pipeline will fail.
@@ -786,16 +786,16 @@ This difference between category types manifests in three ways:
 * the "Doc Consumer" Snap inherits an "Execute during Preview" setting to toggle whether the Snap will execute when the Pipeline is validating/previewing,
 * the Snaps are separated when "Group By Type" is chosen.
 
-![Snap Category Difference](https://dl.dropboxusercontent.com/u/3519578/Screenshots/hEPI.png)
+![Snap Category Difference](images/hEPI.png)
 
 Icon | Snap Category | Description
 ----------- | ----------- | -----------
-<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/xzQs.png" /> | **READ** | Sources of data in the pipeline.<br />*Example: File Reader*
-<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/QJ63.png" /> | **WRITE** | Data destinations or sinks in the pipeline. They also inherit an "Execute during Preview" setting.<br />*Example: File Writer* 
-<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/HmYs.png" /> | **PARSE** |	Parse unstructured input data into structured output data.<br />*Example: CSV Parser*
-<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/LNZC.png" /> | **FORMAT** | Change data format.<br />*Example: CSV Formatter*
-<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/oETU.png" /> | **TRANSFORM** | Modify data significantly.<br />*Example: Aggregate, Join*
-<img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/NQNT.png" /> | **FLOW** | Change the direction or output of data in the pipeline.<br />*Example: Filter, Router*
+<img src="images/xzQs.png" /> | **READ** | Sources of data in the pipeline.<br />*Example: File Reader*
+<img src="images/QJ63.png" /> | **WRITE** | Data destinations or sinks in the pipeline. They also inherit an "Execute during Preview" setting.<br />*Example: File Writer* 
+<img src="images/HmYs.png" /> | **PARSE** |	Parse unstructured input data into structured output data.<br />*Example: CSV Parser*
+<img src="images/LNZC.png" /> | **FORMAT** | Change data format.<br />*Example: CSV Formatter*
+<img src="images/oETU.png" /> | **TRANSFORM** | Modify data significantly.<br />*Example: Aggregate, Join*
+<img src="images/NQNT.png" /> | **FLOW** | Change the direction or output of data in the pipeline.<br />*Example: Filter, Router*
 
 As you develop Snaps, choose the appropriate Snap Category for your use cases.
 
@@ -878,7 +878,7 @@ Now that we understand the basics of a Snap, we can extend the `SimpleSnap` clas
 
 `SimpleSnap` takes care of iterating over the incoming documents (if any) and allowing you to process each document at a time. It also handles the dependency injection for the `Input/Output/ErrorViews`, the `DocumentUtility`, and the `ExecutionUtil` (which handles iterating over the documents in the incoming input view(s) on your behalf, and writing any thrown `SnapDataException` instances to the error view).
 
-![Two Inputs](https://dl.dropboxusercontent.com/u/3519578/Screenshots/IVTO.png)
+![Two Inputs](images/IVTO.png)
 
 There are a number of other "Simple" Snap implementations that can help getting started quickly, including:
 
@@ -974,7 +974,7 @@ In the sample, the `process()` method's implementation writes an anonymous `Bina
 
 The provided `ReadableByteChannel` argument is used to create an `InputStream`. The logic for counting each occurrence of each letter then follows before the results are written to an `OutputStream`, which is sent the `write()` method's `WritableByteChannel`, and then on to the Snap's binary output view:
 
-![Character Counter Binary Output](https://dl.dropboxusercontent.com/u/3519578/Screenshots/xNKZ.png)
+![Character Counter Binary Output](images/xNKZ.png)
 
 ## Reading Binary Data from an Input View
 
@@ -1093,7 +1093,7 @@ public class DocGenerator implements Snap {
 
 The `DocGenerator` Snap is similar to the [`SingleDocGenerator`](#basic-snap-implementation) Snap, except the number of documents generated is configurable through user input:
 
-![Doc Generator](https://dl.dropboxusercontent.com/u/3519578/Screenshots/lJqe.png)
+![Doc Generator](images/lJqe.png)
 
 <aside class="success">
 All Snaps will have a required <strong>Label</strong> property for customizing the display label of the Snap within a Pipeline.
@@ -1113,7 +1113,7 @@ See the [PropertyBuilder Reference](#propertybuilder-reference) section for more
 
 The SnapLogic Platform will attempt to provide some basic type validation on user input:
 
-![Auto validation](https://dl.dropboxusercontent.com/u/3519578/Screenshots/mi8k.png)
+![Auto validation](images/mi8k.png)
 
 If more advanced validation is required, provide the implementation in the `configure` method and throw a `ConfigurationException` when invalid input is encountered. See [Exceptions and Error Views](#exceptions-and-error-views) for more.
 
@@ -1175,7 +1175,7 @@ Within `execute()`, we can then use the `count` in the loop.
 
 To demonstrate this new capability, we can use a "count" [Pipeline Property](http://doc.snaplogic.com/pipeline-properties) and then reference this in the Snap within a `parseInt` expression function:
 
-![Doc Generator with Expression](https://dl.dropboxusercontent.com/u/3519578/Screenshots/Zin9.png)
+![Doc Generator with Expression](images/Zin9.png)
 
 For [composite and table properties](#propertybuilder-reference), the `getExpressionPropertyFor()` method can be used to evaluate child properties embedded in a parent. See [this example provided in the reference DemoSnapPack GitHub repository](https://github.com/SnapLogic/DemoSnapPack/blob/master/src/main/java/com/snaplogic/snaps/PropertyTypes.java#L136).
 
@@ -1245,7 +1245,7 @@ A Snap can make "suggestions" to the user about property values. This is useful 
 
 In the "Suggest" sample Snap, the user enters in a value for the "name" property. The "echo" property's suggest action then reads that value and allows the user to select it.
 
-![Suggest](https://dl.dropboxusercontent.com/u/3519578/Screenshots/e2S6.png)
+![Suggest](images/e2S6.png)
 
 The suggest capability is enabled through use of the the `PropertyBuilder.withSuggestions(Suggestions suggestions)` method. Implementations of the `Suggestions` interface should be provided to it.
 
@@ -1289,7 +1289,7 @@ propertyBuilder.describe("table", "table")
 	.add();
 </div>
 
-![Table Suggest](https://dl.dropboxusercontent.com/u/3519578/Screenshots/NlQw.png)
+![Table Suggest](images/NlQw.png)
 
 <aside class="warning">
 Suggestions are not supported within Composite properties.
@@ -1381,13 +1381,13 @@ When understanding how to use a Schema, you must first understand how declaring 
 
 A Snap's input view schema becomes the Target Schema of the Snap (e.g. Mapper) immediately preceding it in the pipeline. This allows the user the opportunity to shape the data to the desired form:
 
-![Input Schema](https://dl.dropboxusercontent.com/u/3519578/Screenshots/M3WA.png)
+![Input Schema](images/M3WA.png)
 
 In the `SchemaExample` sample (which creates the **"View Schema"** Snap), an input schema is declared by implementing the `InputSchemaProvider` interface. This interface has a `defineInputSchema` method, where the `SchemaProvider` argument can be used to create child schemas and add them to the provider through a `SchemaBuilder`.
 
 Similarly the Snap's output view schema becomes the Input Schema of the Snap immediately following it in the pipeline, allowing users to anticipate the shape of the data exiting the Snap:
 
-![Output Schema](https://dl.dropboxusercontent.com/u/3519578/Screenshots/gqxF.png)
+![Output Schema](images/gqxF.png)
 
 ### Enforcing a Schema
 
@@ -1399,11 +1399,11 @@ In the `SchemaExample` sample above, the `validate` method is called before the 
 
 If the input data contains those keys, the document is written to the output view:
 
-![Valid Input](https://dl.dropboxusercontent.com/u/3519578/Screenshots/fiAa.png)
+![Valid Input](images/fiAa.png)
 
 If the input data does not contain all of those keys, a `SnapDataException` is thrown and the document is written to the error view:
 
-![Invalid Input](https://dl.dropboxusercontent.com/u/3519578/Screenshots/f4sZ.png)
+![Invalid Input](images/f4sZ.png)
 
 ## Exceptions and Error Views
 
@@ -1504,7 +1504,7 @@ public void execute() throws ExecutionException {
 
 This results in the following user experience:
 
-![Basic Exception](https://dl.dropboxusercontent.com/u/3519578/Screenshots/eX3K.png)
+![Basic Exception](images/eX3K.png)
 
 When creating exceptions, we recommend providing a failure message, a reason, and a resolution:
 
@@ -1531,7 +1531,7 @@ public void execute() throws ExecutionException {
 }		
 </div>
 
-![Reason and Resolution](https://dl.dropboxusercontent.com/u/3519578/Screenshots/FjIr.png)
+![Reason and Resolution](images/FjIr.png)
 
 ### ConfigurationException
 
@@ -1546,7 +1546,7 @@ public void configure(PropertyValues propertyValues) throws ConfigurationExcepti
 }
 </div>
 
-![Config Exception](https://dl.dropboxusercontent.com/u/3519578/Screenshots/JAB9.png)
+![Config Exception](images/JAB9.png)
 
 ### Writing Exceptions to the Error View
 
@@ -1568,7 +1568,7 @@ public void execute() throws ExecutionException {
 
 will result in the following content written to the error view:
 
-![Error View Exception](https://dl.dropboxusercontent.com/u/3519578/Screenshots/DmKE.png)
+![Error View Exception](images/DmKE.png)
 
 If your Snap extends `SimpleSnap`, it is even easier - just throw the `SnapDataException` and it will be written to the error view as above:
 
@@ -1666,7 +1666,7 @@ public class TwoInputsTwoOutputs extends SimpleSnap implements ViewProvider {
 
 The `TwoInputsTwoOutputs` sample accepts documents from two input views and routes to a particular output view based on the value of the "gender" field:
 
-![TwoInOut](https://dl.dropboxusercontent.com/u/3519578/Screenshots/oHpC.png)
+![TwoInOut](images/oHpC.png)
 
 ### Reading from Multiple Input Views
 
@@ -1707,7 +1707,7 @@ public void defineViews(final ViewBuilder viewBuilder) {
 }
 </div>
 
-![Remove Views](https://dl.dropboxusercontent.com/u/3519578/Screenshots/nFE8.png)
+![Remove Views](images/nFE8.png)
 
 ### Writing to Multiple Output Views
 
@@ -2026,7 +2026,7 @@ After a `mvn clean install` execution, the Snap's `target` directory will contai
 
 This ZIP file can then be uploaded through the Manager UI to the root/project folder/Project Space directory of your choice.
 
-![Manager](https://dl.dropboxusercontent.com/u/3519578/Screenshots/WhVl.png)
+![Manager](images/WhVl.png)
 
 <aside class="success">
 We recommended using this method of deployment when releasing a stable version of your custom Snap to your users, and when uploading to the Organization's root shared directory. Preferably, development versions of the Snap Pack should be deleted from development project folders and/or Project Spaces prior to this to avoid confusion.
@@ -2043,7 +2043,7 @@ If multiple versions of a custom Snap exist in different location, and with inco
 
 Also, always refresh the browser after uploading a new version of a Snap Pack containing Snap or Account Schema changes. If the problem persists, also consider deleting the entries in your browser's session storage:
 
-![Session Storage](https://dl.dropboxusercontent.com/u/3519578/Screenshots/s45d.png)
+![Session Storage](images/s45d.png)
 
 If during local development your find your local Snaplex/JCC picking up Snap changes, stop and restart it.
 
@@ -2200,7 +2200,7 @@ Similarly to Snaps, you may use the `defineProperties()` method to build the Set
 Unlike Snaps, you cannot <a href="#expression-enabled-properties">expression-enable</a> Account properties.
 </aside>
 
-![Create Custom Account](https://dl.dropboxusercontent.com/u/3519578/Screenshots/fNOT.png)
+![Create Custom Account](images/fNOT.png)
 
 <aside class="success">
 Remember to declare the new Account in the Snap POM's <code>&lt;account.classes&gt;</code> element e.g.
@@ -2327,7 +2327,7 @@ To do this, have the Account implement the `AccountVariableProvider` interface a
 
 The `account.userId` and `account.passphrase` expression variables can then be used within the Snap's expression-enabled properties:
 
-![Account Expression Variable](https://dl.dropboxusercontent.com/u/3519578/Screenshots/yF6t.png)
+![Account Expression Variable](images/yF6t.png)
 
 <aside class="notice">
 Do not prefix the <code>account</code> expression variable with <code>$</code> as it is not in the document. It also has the limitation that it is not listed within the expression UI's "Functions and properites" dropdown/tree.
@@ -2374,7 +2374,7 @@ public class ExampleAccount implements <strong>ValidatableAccount&lt;String&gt;<
 
 When clicked, this will trigger a call to the Account's `connect()` method. If the `connect()` method returns successfully (an exception is not thrown), the Account will be deemed validated:
 
-![Successful Account Validation](https://dl.dropboxusercontent.com/u/3519578/Screenshots/KsZR.png)
+![Successful Account Validation](images/KsZR.png)
 
 ## Validation-specific Behavior
 
@@ -2814,11 +2814,11 @@ We saw earlier in [Providing Input Test Data](#providing-input-test-data) how to
 
 The `expectedOutputPath` and `expectedErrorPath` attributes specify folders that contains files that following a naming convertion. The file must match the test name plus a suffix like `"-out.json"` or `"-err.json"`. However, if those files do not exist or differ, the test runner will write the actual output to a temporary file, making it easy to copy them over (if valid):
 
-![Temp result file](https://dl.dropboxusercontent.com/u/3519578/Screenshots/xamy.png)
+![Temp result file](images/xamy.png)
 
 If the output is of [binary type](#writing-binary-data-to-an-output-view), then a folder matching the test name and containing the expected header and data files must be created:
 
-![Expected Test File Name Format](https://dl.dropboxusercontent.com/u/3519578/Screenshots/Tw5f.png)
+![Expected Test File Name Format](images/Tw5f.png)
 
 `DocGeneratorTest` contains two tests that demonstrate externalizing expected output and error content, and `CharacterCounterTest` shows similar but for a binary-output Snap.
 
@@ -3113,7 +3113,7 @@ public class PropertyTypes extends SimpleSnap {
 
 The `PropertyTypes` sample Snap in the [Snap Maven Archetype](#snap-maven-archetype) demonstrates a number of the various UI components available to a Snap's Settings UI.
 
-![Property Values](https://dl.dropboxusercontent.com/u/3519578/Screenshots/LxWM.png)
+![Property Values](images/LxWM.png)
 
 The `PropertyTypesTest` test class references a properties file that outlines the JSON structure of complex Snap settings like the above:
 
