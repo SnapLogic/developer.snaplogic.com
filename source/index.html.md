@@ -296,7 +296,7 @@ The Snaplex/JCC supports debugging a Snap's execution with your chosen IDE. Simp
 
 ```shell
 $ cd $SNAP_HOME
-$ mvn archetype:generate -DarchetypeCatalog=http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
+$ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCatalog=http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
 [INFO] Scanning for projects...
 [INFO]                                                                         
 [INFO] ------------------------------------------------------------------------
@@ -355,6 +355,8 @@ A [Maven Archetype](https://maven.apache.org/guides/introduction/introduction-to
 
 <aside class="notice">
 The Snap archetype catalog is available at <a href="http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/">http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/</a>
+<p>
+Version 3.0.0 of Maven Archetype Plugin removed the ability to reference a remote, non-central archetype catalog - hence the use of the 2.4 version of the plugin above. See [ARCHETYPE-519](https://issues.apache.org/jira/browse/ARCHETYPE-519) for more details.
 </aside>
 
 `SnapArchetype` ships with eight sample Snaps for demonstration purposes:
