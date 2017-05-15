@@ -314,19 +314,13 @@ Choose archetype:
 1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/ -> com.snaplogic.tools:SnapArchetype (This is a sample snap project.)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 1.0
-2: 1.1
-3: 1.2
-4: 1.3
-5: 1.4
-6: 1.5
-7: 1.6
-8: 1.7
-Choose a number: 8: 8
-Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.jar
-Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.jar (44 KB at 65.5 KB/sec)
-Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.pom
-Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.7/SnapArchetype-1.7.pom (3 KB at 10.5 KB/sec)
+1: 1.7
+2: 1.8
+Choose a number: 2: 2
+Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.jar
+Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.jar (44 KB at 65.5 KB/sec)
+Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.pom
+Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.pom (3 KB at 10.5 KB/sec)
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -346,7 +340,7 @@ snapPack: Demo Snap Pack
 user: rhowlett@snaplogic.com
  Y: : Y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.7
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.8
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ```
