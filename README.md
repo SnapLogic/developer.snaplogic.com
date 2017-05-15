@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/oANO.png" alt="SnapLogic Logo" width="226">
+  <img src="https://i.imgur.com/Re56AbY.png" alt="SnapLogic Logo" width="226">
 </p>
 
 <p align="center">The <a href="http://developer.snaplogic.com">Snap Development Documentation</a> guides a developer creating Snaps for the <a href="https://www.snaplogic.com/">SnapLogic Elastic Integration Platform</a>.</p>
 
-<p align="center"><img src="https://dl.dropboxusercontent.com/u/3519578/Screenshots/dmbo.png" width=700 alt="Screenshot of Snap Development Documentation"></p>
+<p align="center"><img src="https://i.imgur.com/Ile65Kr.png" width=700 alt="Screenshot of Snap Development Documentation"></p>
 
 # Highlights
 
