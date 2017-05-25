@@ -59,7 +59,8 @@ Need to build/deploy/etc | No deployment, quick & simple
 
 * Java 8 (JDK)
 * Maven 3
-* A Snaplex, including the `keys.properties` and `global.properties` files/data provided by [SnapLogic Support](mailto:support@snaplogic.zendesk.com?subject=Requesting%20Snap%20Development%20Credentials) upon request for Snap development
+* A Snaplex, including the `keys.properties` and `global.properties` files, 
+or alternatively including the `.slpropz` file.  These files are provided by [SnapLogic Support](mailto:support@snaplogic.zendesk.com?subject=Requesting%20Snap%20Development%20Credentials) upon request for Snap development
 
 <aside class="notice">
 We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a>, <a href="https://eclipse.org/ide">Eclipse</a>, or <a href="https://netbeans.org/">NetBeans</a>.
@@ -1988,7 +1989,11 @@ The [Snap Archetype](#snap-maven-archetype) POM includes the `snappack-installer
 
 After building the Snap Pack with `mvn clean package`, the `snappack:deploy` goal POSTs the Snap Schema to endpoint associated to the `jcc.sldb_uri` property in `~/opt/snaplogic/etc/keys.properties`. 
 
-It will use the properties and credentials defined in the Snap's `pom.xml` and the `~/opt/snaplogic/etc/keys.properties` file respectively - it is imperatively that they are configured correctly.
+It will use the properties and credentials defined in the Snap's `pom.xml` and the `~/opt/snaplogic/etc/keys.properties` file respectively - it is imperative that they are configured correctly.
+
+<aside class="notice">
+In a future release, these critical properties will also be readable from the `.slpropz` file.  At this time, the `.slpropz` file is not supported for the `snapback:deploy` goal.
+</aside>
 
 By default, the binaries will not be deployed (it will look for the ZIP of JARs using the `$SNAP_HOME` environment variable) and will deploy to [the `ASSET_DIR_PATH` specified in the `directives` file](#project-structure) in *src/main/config*.
 
