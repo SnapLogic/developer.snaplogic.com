@@ -231,7 +231,8 @@
 <ul>
 <li>Java 8 (JDK)</li>
 <li>Maven 3</li>
-<li>A Snaplex, including the <code class="prettyprint">keys.properties</code> and <code class="prettyprint">global.properties</code> files/data provided by <a href="mailto:support@snaplogic.zendesk.com?subject=Requesting%20Snap%20Development%20Credentials">SnapLogic Support</a> upon request for Snap development</li>
+<li>A Snaplex, including the <code class="prettyprint">keys.properties</code> and <code class="prettyprint">global.properties</code> files, 
+or alternatively including the <code class="prettyprint">.slpropz</code> file.  These files are provided by <a href="mailto:support@snaplogic.zendesk.com?subject=Requesting%20Snap%20Development%20Credentials">SnapLogic Support</a> upon request for Snap development</li>
 </ul>
 
 <aside class="notice">
@@ -2224,7 +2225,11 @@ if (data.get(&ldquo;gender&rdquo;).equals(&ldquo;male&rdquo;)) {
 
 <p>After building the Snap Pack with <code class="prettyprint">mvn clean package</code>, the <code class="prettyprint">snappack:deploy</code> goal POSTs the Snap Schema to endpoint associated to the <code class="prettyprint">jcc.sldb_uri</code> property in <code class="prettyprint">~/opt/snaplogic/etc/keys.properties</code>. </p>
 
-<p>It will use the properties and credentials defined in the Snap&rsquo;s <code class="prettyprint">pom.xml</code> and the <code class="prettyprint">~/opt/snaplogic/etc/keys.properties</code> file respectively - it is imperatively that they are configured correctly.</p>
+<p>It will use the properties and credentials defined in the Snap&rsquo;s <code class="prettyprint">pom.xml</code> and the <code class="prettyprint">~/opt/snaplogic/etc/keys.properties</code> file respectively - it is imperative that they are configured correctly.</p>
+
+<aside class="notice">
+In a future release, these critical properties will also be readable from the `.slpropz` file.  At this time, the `.slpropz` file is not supported for the `snapback:deploy` goal.
+</aside>
 
 <p>By default, the binaries will not be deployed (it will look for the ZIP of JARs using the <code class="prettyprint">$SNAP_HOME</code> environment variable) and will deploy to <a href="#project-structure">the <code class="prettyprint">ASSET_DIR_PATH</code> specified in the <code class="prettyprint">directives</code> file</a> in <em>src/main/config</em>.</p>
 
