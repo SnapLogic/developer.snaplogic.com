@@ -126,7 +126,7 @@ $ rpm2cpio.pl snaplogic-sidekick-4.mrc244-x86_64.rpm | cpio -idvm
 ```
 
 1. `cd` to your home directory
-1. Download the latest RHEL/CentOS/Amazon RPM file from the [Snaplex downloads page](http://doc.snaplogic.com/snaplex-downloads).
+1. Please contact Snaplogic Support Team for downloading the latest RHEL/CentOS/Amazon RPM file
 1. Download and install [Homebrew](http://brew.sh/)
 1. Install the `rpm2cpio` library
 1. Extract the downloaded Snaplex `.rpm` file
