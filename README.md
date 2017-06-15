@@ -66,6 +66,15 @@ bundle exec middleman server
 # OR run this to run with vagrant
 vagrant up
 ```
+NOTE: If you face issue while running this to locally then follow the below steps:
+```shell
+brew install libxml2
+sudo gem install nokogiri:1.6.7.2 -- --use-system-libraries --with-xml2-include=/usr/include/libxml2 --with-xml2-lib=/usr/lib/
+sudo gem install bundler
+bundle install
+bundle exec middleman server
+```
+
 
 You can now see the docs at http://localhost:4567. Whoa! That was fast!
 
