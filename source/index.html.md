@@ -4,8 +4,8 @@ title: Snap Development Documentation
 language_tabs:
 
 toc_footers:
-  - <a href='http://doc.snaplogic.com/home'>Product Documentation</a>
-  - <a href='http://www.snaplogic.com'>SnapLogic website</a>
+  - <a href='https://doc.snaplogic.com'>Product Documentation</a>
+  - <a href='https://www.snaplogic.com'>SnapLogic website</a>
 
 includes:
 
@@ -18,7 +18,7 @@ This documentation guides a developer through the steps necessary to develop **S
 
 ## Snaps and Snap Packs
 
-SnapLogic [Snaps](https://www.snaplogic.com/snaps) are modular collections of integration components built for a specific application or data source. Snaps shield both business users and developers from much of the complexity of the underlying application, data model, and service.
+SnapLogic [Snaps](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439259/Snap+Reference) are modular collections of integration components built for a specific application or data source. Snaps shield both business users and developers from much of the complexity of the underlying application, data model, and service.
 
 ![Transform Snap Pack](images/WmuJ.png)
 
@@ -63,12 +63,12 @@ Need to build/deploy/etc | No deployment, quick & simple
 or alternatively including the `.slpropz` file.  These files are provided by [SnapLogic Support](mailto:support@snaplogic.zendesk.com?subject=Requesting%20Snap%20Development%20Credentials) upon request for Snap development
 
 <aside class="notice">
-We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a>, <a href="https://eclipse.org/ide">Eclipse</a>, or <a href="https://netbeans.org/">NetBeans</a>.
+We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a>, <a href="https://eclipse.org/ide/">Eclipse</a>, or <a href="https://netbeans.org/">NetBeans</a>.
 </aside>
 
 # Setting up the Snaplex
 
-A [Snaplex](http://doc.snaplogic.com/snaplex) is the data processing engine of the [SnapLogic Elastic Integration Platform](https://www.snaplogic.com/why-snaplogic/how-it-works). A locally-installed/on-premises Snaplex (also known as a "Groundplex" or "JCC") will be used throughout this guide to develop, execute and debug a Snap.
+A [Snaplex](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437953/Snaplex) is the data processing engine of the [SnapLogic Elastic Integration Platform](https://www.snaplogic.com/products/how-it-works). A locally-installed/on-premises Snaplex (also known as a "Groundplex" or "JCC") will be used throughout this guide to develop, execute and debug a Snap.
 
 ## Downloads
 
@@ -79,14 +79,14 @@ A Snaplex may be installed on:
 * Mac OS X (for development only)
 
 <aside class="notice">
-The current list of Snaplex downloads is maintained at <a href="http://doc.snaplogic.com/snaplex-downloads">http://doc.snaplogic.com/snaplex-downloads</a>.
+The current list of Snaplex downloads is maintained at <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads">https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads</a>.
 </aside>
 
 ## Installation
 
 ### Linux & Microsoft Windows 
 
-Please visit the official SnapLogic documentation for detailed instructions for installing a Snaplex on [Linux](http://doc.snaplogic.com/snaplex-installation-on-linux) or [Microsoft Windows](http://doc.snaplogic.com/installing-snaplex-on-windows). 
+Please visit the official SnapLogic documentation for detailed instructions for installing a Snaplex on [Linux](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438367/Snaplex+Installation+on+Linux) or [Microsoft Windows](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439002/Snaplex+Installation+on+Windows). 
 
 ### Mac OS X
 
@@ -127,7 +127,7 @@ $ rpm2cpio.pl snaplogic-sidekick-4.mrc244-x86_64.rpm | cpio -idvm
 
 1. `cd` to your home directory
 1. Instructions for downloading the `.rpm` file can be found [here](https://doc.snaplogic.com/wiki/display/SD/Snaplex+Installation+on+Linux)
-1. Download and install [Homebrew](http://brew.sh/)
+1. Download and install [Homebrew](https://brew.sh/)
 1. Install the `rpm2cpio` library
 1. Extract the downloaded Snaplex `.rpm` file
 1. Export the `SL_ROOT` environment variable to your `~/.bash_profile`
@@ -559,7 +559,7 @@ In [the "Single Doc Generator" sample Snap](#basic-snap-implementation) above, a
 
 For example, when previewing or executing the "Single Doc Generator" Snap in the Designer, the value of the `counter` variable is written to the log. 
 
-This entry can then be viewed in the Snaplex's `jcc.json` log file (we recommend using [LNAV, the log file navigator](http://www.snaplogic.com/blog/lnav/) created by SnapLogic's own Timothy Stack):
+This entry can then be viewed in the Snaplex's `jcc.json` log file (we recommend using [LNAV, the log file navigator](https://www.snaplogic.com/blog/lnav/) created by SnapLogic's own Timothy Stack):
 
 ## Creating Documents with DocumentUtility
 
@@ -607,7 +607,7 @@ Data should be created either as a single <code>LinkedHashMap</code> instance (t
 
 ### Lineage
 
-For Snaps that have input views and process documents, you should preserve [data lineage](https://en.wikipedia.org/wiki/Data_lineage) (required by [Ultra Pipelines](https://www.snaplogic.com/ultra-pipelines)) between the new output document to be written and the incoming original document by using one of the highlighted `DocumentUtility` methods:
+For Snaps that have input views and process documents, you should preserve [data lineage](https://en.wikipedia.org/wiki/Data_lineage) (required by [Ultra Pipelines](https://www.snaplogic.com/blog/ultra_pipeline_design)) between the new output document to be written and the incoming original document by using one of the highlighted `DocumentUtility` methods:
 
 *Establishes lineage between the new document and the incoming original document, but discards the incoming data:*<br />
 `Document newDocumentWithLineage = documentUtility.newDocumentFor(originalDocument, data);`
@@ -1162,7 +1162,7 @@ public class DocGenerator implements Snap {
 }
 ```
 
-Snaplogic's [Expression Language](http://doc.snaplogic.com/expression-language) is an incredibly powerful tool available to Snaps. Using a JavaScript-like syntax, users have access to functions and properties to dynamically set property values.
+Snaplogic's [Expression Language](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438042/Expression+Language+Overview) is an incredibly powerful tool available to Snaps. Using a JavaScript-like syntax, users have access to functions and properties to dynamically set property values.
 
 Comparing to the [previous implementation](#accepting-user-input-with-propertybuilder) of `DocGenerator`, we can see that `.expression()` has been added to the `propertyBuilder()`. 
 
@@ -1170,7 +1170,7 @@ The `configure` method's `BigInteger countValue` local variable has been replace
 
 Within `execute()`, we can then use the `count` in the loop.
 
-To demonstrate this new capability, we can use a "count" [Pipeline Property](http://doc.snaplogic.com/pipeline-properties) and then reference this in the Snap within a `parseInt` expression function:
+To demonstrate this new capability, we can use a "count" [Pipeline Property](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438254/Pipeline+Properties) and then reference this in the Snap within a `parseInt` expression function:
 
 ![Doc Generator with Expression](images/Zin9.png)
 
@@ -1675,7 +1675,7 @@ If you cannot guarantee that all input views will be written to, use <code>Input
 
 ### Configuring Optional Views
 
-It is rarely a good idea to prevent either an input or an output view for a Snap. For one, it prevents using that Snap as unlinked input at the beginning of [a Task pipeline](http://doc.snaplogic.com/tasks), and restricts its ability to be used mid-pipeline.
+It is rarely a good idea to prevent either an input or an output view for a Snap. For one, it prevents using that Snap as unlinked input at the beginning of [a Task pipeline](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439408/Tasks+Page), and restricts its ability to be used mid-pipeline.
 
 However, if you wish to allow the user to remove all input and output views, it's best to declare the views as optional, to open them by default, and then have the user remove them through the **Views** tab of the Snap.
 
@@ -1965,7 +1965,7 @@ Snaps that implement the `DependencyManager` interface can return a [Guice Modul
 
 In the "Currency Converter" example shown, DependencyManager's `getManagedModule` method is implemented to return an `AbstractModule` instance, with the `ForEx` interface bound to the `ForExImpl` implementation, and the `JfsUtils` interface bound to a specific instance.
 
-This allows taking advantage of the ["inversion of control"](http://www.martinfowler.com/articles/injection.html) software design pattern to provide different implementations of a service interface for a hierarchy of related Snaps.
+This allows taking advantage of the ["inversion of control"](https://www.martinfowler.com/articles/injection.html) software design pattern to provide different implementations of a service interface for a hierarchy of related Snaps.
 
 It also greatly benefits unit testing, since it permits injecting in stub or mock versions of service dependencies; see the `CurrencyConverterTest` test class for more.
 
@@ -2213,7 +2213,7 @@ Remember to declare the new Account in the Snap POM's <code>&lt;account.classes&
 
 It can also be particular useful to mark particular properties as containing sensitive information and/or requiring input masking. 
 
-The `sensitivity()` builder method allows setting a `LOW`, `MEDIUM`, or `HIGH` `SensitivityLevel`, which instructs the SnapLogic Platform's [Enhanced Account Encryption](http://doc.snaplogic.com/account-encryption) feature to encrypt the marked account data.
+The `sensitivity()` builder method allows setting a `LOW`, `MEDIUM`, or `HIGH` `SensitivityLevel`, which instructs the SnapLogic Platform's [Enhanced Account Encryption](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437994/Enhanced+Account+Encryption) feature to encrypt the marked account data.
 
 The `obfuscate()` builder method masks user input and automatically sets the property to `SensitivityLevel.HIGH`.
 
