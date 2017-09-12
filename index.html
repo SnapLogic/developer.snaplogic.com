@@ -147,8 +147,8 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='http://doc.snaplogic.com/home'>Product Documentation</a></li>
-            <li><a href='http://www.snaplogic.com'>SnapLogic website</a></li>
+            <li><a href='https://doc.snaplogic.com'>Product Documentation</a></li>
+            <li><a href='https://www.snaplogic.com'>SnapLogic website</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -160,7 +160,7 @@
 
 <h2 id="snaps-and-snap-packs">Snaps and Snap Packs</h2>
 
-<p>SnapLogic <a href="https://www.snaplogic.com/snaps">Snaps</a> are modular collections of integration components built for a specific application or data source. Snaps shield both business users and developers from much of the complexity of the underlying application, data model, and service.</p>
+<p>SnapLogic <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439259/Snap+Reference">Snaps</a> are modular collections of integration components built for a specific application or data source. Snaps shield both business users and developers from much of the complexity of the underlying application, data model, and service.</p>
 
 <p><img alt="Transform Snap Pack" src="images/WmuJ.png" /></p>
 
@@ -236,12 +236,12 @@ or alternatively including the <code class="prettyprint">.slpropz</code> file.  
 </ul>
 
 <aside class="notice">
-We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a>, <a href="https://eclipse.org/ide">Eclipse</a>, or <a href="https://netbeans.org/">NetBeans</a>.
+We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a>, <a href="https://eclipse.org/ide/">Eclipse</a>, or <a href="https://netbeans.org/">NetBeans</a>.
 </aside>
 
 <h1 id="setting-up-the-snaplex">Setting up the Snaplex</h1>
 
-<p>A <a href="http://doc.snaplogic.com/snaplex">Snaplex</a> is the data processing engine of the <a href="https://www.snaplogic.com/why-snaplogic/how-it-works">SnapLogic Elastic Integration Platform</a>. A locally-installed/on-premises Snaplex (also known as a &ldquo;Groundplex&rdquo; or &ldquo;JCC&rdquo;) will be used throughout this guide to develop, execute and debug a Snap.</p>
+<p>A <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437953/Snaplex">Snaplex</a> is the data processing engine of the <a href="https://www.snaplogic.com/products/how-it-works">SnapLogic Elastic Integration Platform</a>. A locally-installed/on-premises Snaplex (also known as a &ldquo;Groundplex&rdquo; or &ldquo;JCC&rdquo;) will be used throughout this guide to develop, execute and debug a Snap.</p>
 
 <h2 id="downloads">Downloads</h2>
 
@@ -254,14 +254,14 @@ We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea
 </ul>
 
 <aside class="notice">
-The current list of Snaplex downloads is maintained at <a href="http://doc.snaplogic.com/snaplex-downloads">http://doc.snaplogic.com/snaplex-downloads</a>.
+The current list of Snaplex downloads is maintained at <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads">https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads</a>.
 </aside>
 
 <h2 id="installation">Installation</h2>
 
 <h3 id="linux-amp-microsoft-windows">Linux &amp; Microsoft Windows</h3>
 
-<p>Please visit the official SnapLogic documentation for detailed instructions for installing a Snaplex on <a href="http://doc.snaplogic.com/snaplex-installation-on-linux">Linux</a> or <a href="http://doc.snaplogic.com/installing-snaplex-on-windows">Microsoft Windows</a>. </p>
+<p>Please visit the official SnapLogic documentation for detailed instructions for installing a Snaplex on <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438367/Snaplex+Installation+on+Linux">Linux</a> or <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439002/Snaplex+Installation+on+Windows">Microsoft Windows</a>. </p>
 
 <h3 id="mac-os-x">Mac OS X</h3>
 
@@ -301,7 +301,7 @@ Use of a Snaplex in a Mac OS X environment is supported only for developing Snap
 <ol>
 <li><code class="prettyprint">cd</code> to your home directory</li>
 <li>Instructions for downloading the <code class="prettyprint">.rpm</code> file can be found <a href="https://doc.snaplogic.com/wiki/display/SD/Snaplex+Installation+on+Linux">here</a></li>
-<li>Download and install <a href="http://brew.sh/">Homebrew</a></li>
+<li>Download and install <a href="https://brew.sh/">Homebrew</a></li>
 <li>Install the <code class="prettyprint">rpm2cpio</code> library</li>
 <li>Extract the downloaded Snaplex <code class="prettyprint">.rpm</code> file</li>
 <li>Export the <code class="prettyprint">SL_ROOT</code> environment variable to your <code class="prettyprint">~/.bash_profile</code></li>
@@ -761,7 +761,7 @@ For simplicity, the <strong>&ldquo;Single Doc Generator&rdquo;</strong> Snap doe
 
 <p>For example, when previewing or executing the &ldquo;Single Doc Generator&rdquo; Snap in the Designer, the value of the <code class="prettyprint">counter</code> variable is written to the log. </p>
 
-<p>This entry can then be viewed in the Snaplex&rsquo;s <code class="prettyprint">jcc.json</code> log file (we recommend using <a href="http://www.snaplogic.com/blog/lnav/">LNAV, the log file navigator</a> created by SnapLogic&rsquo;s own Timothy Stack):</p>
+<p>This entry can then be viewed in the Snaplex&rsquo;s <code class="prettyprint">jcc.json</code> log file (we recommend using <a href="https://www.snaplogic.com/blog/lnav/">LNAV, the log file navigator</a> created by SnapLogic&rsquo;s own Timothy Stack):</p>
 
 <h2 id="creating-documents-with-documentutility">Creating Documents with DocumentUtility</h2>
 <pre class="highlight java"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">snaplogic</span><span class="o">.</span><span class="na">snap</span><span class="o">.</span><span class="na">api</span><span class="o">;</span>
@@ -807,7 +807,7 @@ Data should be created either as a single <code>LinkedHashMap</code> instance (t
 
 <h3 id="lineage">Lineage</h3>
 
-<p>For Snaps that have input views and process documents, you should preserve <a href="https://en.wikipedia.org/wiki/Data_lineage">data lineage</a> (required by <a href="https://www.snaplogic.com/ultra-pipelines">Ultra Pipelines</a>) between the new output document to be written and the incoming original document by using one of the highlighted <code class="prettyprint">DocumentUtility</code> methods:</p>
+<p>For Snaps that have input views and process documents, you should preserve <a href="https://en.wikipedia.org/wiki/Data_lineage">data lineage</a> (required by <a href="https://www.snaplogic.com/blog/ultra_pipeline_design">Ultra Pipelines</a>) between the new output document to be written and the incoming original document by using one of the highlighted <code class="prettyprint">DocumentUtility</code> methods:</p>
 
 <p><em>Establishes lineage between the new document and the incoming original document, but discards the incoming data:</em><br />
 <code class="prettyprint">Document newDocumentWithLineage = documentUtility.newDocumentFor(originalDocument, data);</code></p>
@@ -1380,7 +1380,7 @@ All Snaps will have a required <strong>Label</strong> property for customizing t
 <span class="o">}</span>
 </code></pre>
 
-<p>Snaplogic&rsquo;s <a href="http://doc.snaplogic.com/expression-language">Expression Language</a> is an incredibly powerful tool available to Snaps. Using a JavaScript-like syntax, users have access to functions and properties to dynamically set property values.</p>
+<p>Snaplogic&rsquo;s <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438042/Expression+Language+Overview">Expression Language</a> is an incredibly powerful tool available to Snaps. Using a JavaScript-like syntax, users have access to functions and properties to dynamically set property values.</p>
 
 <p>Comparing to the <a href="#accepting-user-input-with-propertybuilder">previous implementation</a> of <code class="prettyprint">DocGenerator</code>, we can see that <code class="prettyprint">.expression()</code> has been added to the <code class="prettyprint">propertyBuilder()</code>. </p>
 
@@ -1388,7 +1388,7 @@ All Snaps will have a required <strong>Label</strong> property for customizing t
 
 <p>Within <code class="prettyprint">execute()</code>, we can then use the <code class="prettyprint">count</code> in the loop.</p>
 
-<p>To demonstrate this new capability, we can use a &ldquo;count&rdquo; <a href="http://doc.snaplogic.com/pipeline-properties">Pipeline Property</a> and then reference this in the Snap within a <code class="prettyprint">parseInt</code> expression function:</p>
+<p>To demonstrate this new capability, we can use a &ldquo;count&rdquo; <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438254/Pipeline+Properties">Pipeline Property</a> and then reference this in the Snap within a <code class="prettyprint">parseInt</code> expression function:</p>
 
 <p><img alt="Doc Generator with Expression" src="images/Zin9.png" /></p>
 
@@ -1917,7 +1917,7 @@ If you cannot guarantee that all input views will be written to, use <code>Input
 
 <h3 id="configuring-optional-views">Configuring Optional Views</h3>
 
-<p>It is rarely a good idea to prevent either an input or an output view for a Snap. For one, it prevents using that Snap as unlinked input at the beginning of <a href="http://doc.snaplogic.com/tasks">a Task pipeline</a>, and restricts its ability to be used mid-pipeline.</p>
+<p>It is rarely a good idea to prevent either an input or an output view for a Snap. For one, it prevents using that Snap as unlinked input at the beginning of <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439408/Tasks+Page">a Task pipeline</a>, and restricts its ability to be used mid-pipeline.</p>
 
 <p>However, if you wish to allow the user to remove all input and output views, it&rsquo;s best to declare the views as optional, to open them by default, and then have the user remove them through the <strong>Views</strong> tab of the Snap.</p>
 
@@ -2203,7 +2203,7 @@ if (data.get(&ldquo;gender&rdquo;).equals(&ldquo;male&rdquo;)) {
 
 <p>In the &ldquo;Currency Converter&rdquo; example shown, DependencyManager&rsquo;s <code class="prettyprint">getManagedModule</code> method is implemented to return an <code class="prettyprint">AbstractModule</code> instance, with the <code class="prettyprint">ForEx</code> interface bound to the <code class="prettyprint">ForExImpl</code> implementation, and the <code class="prettyprint">JfsUtils</code> interface bound to a specific instance.</p>
 
-<p>This allows taking advantage of the <a href="http://www.martinfowler.com/articles/injection.html">&ldquo;inversion of control&rdquo;</a> software design pattern to provide different implementations of a service interface for a hierarchy of related Snaps.</p>
+<p>This allows taking advantage of the <a href="https://www.martinfowler.com/articles/injection.html">&ldquo;inversion of control&rdquo;</a> software design pattern to provide different implementations of a service interface for a hierarchy of related Snaps.</p>
 
 <p>It also greatly benefits unit testing, since it permits injecting in stub or mock versions of service dependencies; see the <code class="prettyprint">CurrencyConverterTest</code> test class for more.</p>
 
@@ -2443,7 +2443,7 @@ Remember to declare the new Account in the Snap POM&rsquo;s <code>&lt;account.cl
 
 <p>It can also be particular useful to mark particular properties as containing sensitive information and/or requiring input masking. </p>
 
-<p>The <code class="prettyprint">sensitivity()</code> builder method allows setting a <code class="prettyprint">LOW</code>, <code class="prettyprint">MEDIUM</code>, or <code class="prettyprint">HIGH</code> <code class="prettyprint">SensitivityLevel</code>, which instructs the SnapLogic Platform&rsquo;s <a href="http://doc.snaplogic.com/account-encryption">Enhanced Account Encryption</a> feature to encrypt the marked account data.</p>
+<p>The <code class="prettyprint">sensitivity()</code> builder method allows setting a <code class="prettyprint">LOW</code>, <code class="prettyprint">MEDIUM</code>, or <code class="prettyprint">HIGH</code> <code class="prettyprint">SensitivityLevel</code>, which instructs the SnapLogic Platform&rsquo;s <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437994/Enhanced+Account+Encryption">Enhanced Account Encryption</a> feature to encrypt the marked account data.</p>
 
 <p>The <code class="prettyprint">obfuscate()</code> builder method masks user input and automatically sets the property to <code class="prettyprint">SensitivityLevel.HIGH</code>.</p>
 
