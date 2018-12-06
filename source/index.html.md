@@ -1996,7 +1996,7 @@ After building the Snap Pack with `mvn clean package`, the `snappack:deploy` goa
 It will use the properties and credentials defined in the Snap's `pom.xml` and the `~/opt/snaplogic/etc/keys.properties` file respectively - it is imperative that they are configured correctly.
 
 <aside class="notice">
-In a future release, these critical properties will also be readable from the `.slpropz` file.  At this time, the `.slpropz` file is not supported for the `snapback:deploy` goal.
+In a future release, these critical properties will also be readable from the `.slpropz` file.  At this time, the `.slpropz` file is not supported for the `snappack:deploy` goal.
 </aside>
 
 By default, the binaries will not be deployed (it will look for the ZIP of JARs using the `$SNAP_HOME` environment variable) and will deploy to [the `ASSET_DIR_PATH` specified in the `directives` file](#project-structure) in *src/main/config*.
