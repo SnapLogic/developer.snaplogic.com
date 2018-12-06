@@ -47,9 +47,9 @@ Contributing to this documentation is straightforward. Simply fork or clone (Sna
 
 You're going to need:
 
- - **Linux or OS X** — Windows may work, but is unsupported.
- - **Ruby, version 2.0 or newer**
- - **Bundler** — If Ruby is already installed, but the `bundle` command doesn't work, just run `sudo gem install bundler` in a terminal.
+ - **Linux or macOS** — Windows may work, but is unsupported.
+ - **Ruby, version 2.3.1 or newer**
+ - **Bundler** — If Ruby is already installed, but the `bundle` command doesn't work, just run `gem install bundler` in a terminal.
 
 ### Getting Set Up
 
@@ -66,15 +66,6 @@ bundle exec middleman server
 # OR run this to run with vagrant
 vagrant up
 ```
-NOTE: If you face issue while running this to locally then follow the below steps:
-```shell
-brew install libxml2
-sudo gem install nokogiri:1.6.7.2 -- --use-system-libraries --with-xml2-include=/usr/include/libxml2 --with-xml2-lib=/usr/lib/
-sudo gem install bundler
-bundle install
-bundle exec middleman server
-```
-
 
 You can now see the docs at http://localhost:4567. Whoa! That was fast!
 

@@ -62,6 +62,10 @@ Need to build/deploy/etc | No deployment, quick & simple
 * A Snaplex, including the `keys.properties` and `global.properties` files, 
 or alternatively including the `.slpropz` file.  These files are provided by [SnapLogic Support](mailto:support@snaplogic.zendesk.com?subject=Requesting%20Snap%20Development%20Credentials) upon request for Snap development
 
+<aside class="warning">
+Java 9 or later is not supported currently.
+</aside>
+
 <aside class="notice">
 We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a>, <a href="https://eclipse.org/ide/">Eclipse</a>, or <a href="https://netbeans.org/">NetBeans</a>.
 </aside>
@@ -76,7 +80,7 @@ A Snaplex may be installed on:
 
 * Linux
 * Microsoft Windows
-* Mac OS X (for development only)
+* macOS (for development only)
 
 <aside class="notice">
 The current list of Snaplex downloads is maintained at <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads">https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads</a>.
@@ -88,10 +92,10 @@ The current list of Snaplex downloads is maintained at <a href="https://docs-sna
 
 Please visit the official SnapLogic documentation for detailed instructions for installing a Snaplex on [Linux](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438367/Snaplex+Installation+on+Linux) or [Microsoft Windows](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439002/Snaplex+Installation+on+Windows). 
 
-### Mac OS X
+### macOS
 
 <aside class="warning">
-Use of a Snaplex in a Mac OS X environment is supported only for developing Snaps.
+Use of a Snaplex in a macOS environment is supported only for developing Snaps.
 </aside>
 
 ```shell
