@@ -259,7 +259,9 @@ Use of a Snaplex in a macOS environment is supported only for developing Snaps.
 <span class="gp">$ </span>/usr/bin/ruby -e <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">"</span>
 <span class="gp">$ </span>brew install rpm2cpio
 <span class="gp">$ </span>rpm2cpio.pl snaplogic-sidekick...rpm | cpio -idvm
-<span class="gp">$ </span><span class="nb">echo</span> <span class="s1">'export SL_ROOT=/opt/snaplogic'</span> &gt;&gt; ~/.bash_profile
+<span class="gp">$ </span>mkdir -p ~/opt/snaplogic/etc
+<span class="gp">$ </span>unzip myplex.slpropz -d ~/opt/snaplogic/etc
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s1">'export SL_ROOT=~/opt/snaplogic'</span> &gt;&gt; ~/.bash_profile
 <span class="gp">$ </span><span class="nb">source</span> ~/.bash_profile
 </code></pre>
 <blockquote>
@@ -269,9 +271,6 @@ Use of a Snaplex in a macOS environment is supported only for developing Snaps.
 ./opt/snaplogic/bin/functions
 ./opt/snaplogic/bin/jcc.sh
 ./opt/snaplogic/bin/logstash.sh
-./opt/snaplogic/etc/global.properties
-./opt/snaplogic/etc/keys.properties
-./opt/snaplogic/etc/logstash.conf
 ./opt/snaplogic/ldlib/libsapjco3.jnilib
 ./opt/snaplogic/ldlib/libsapjco3.so
 ./opt/snaplogic/pkgs/jre1.8.0_45/COPYRIGHT
@@ -287,6 +286,7 @@ Use of a Snaplex in a macOS environment is supported only for developing Snaps.
 <li>Download and install <a href="https://brew.sh/">Homebrew</a></li>
 <li>Install the <code>rpm2cpio</code> library</li>
 <li>Extract the downloaded Snaplex <code>.rpm</code> file</li>
+<li>Unzip the downloaded <code>.slpropz</code> file to the <code>etc</code> directory of your Snaplex</li>
 <li>Export the <code>SL_ROOT</code> environment variable to your <code>~/.bash_profile</code></li>
 </ol>
 <h2 id='configuration'>Configuration</h2><pre class="highlight shell tab-shell"><code><span class="gp">$ </span>cat ~/opt/snaplogic/etc/keys.properties
@@ -302,7 +302,7 @@ jcc.sldb_uri <span class="o">=</span> https://elastic.snaplogic.com:443
 ...
 <span class="c"># The subscriber ID assigned for the customer. This will be available after</span>
 <span class="c"># the customer account is created. Usually this should match your Organization name.</span>
-jcc.subscriber_id <span class="o">=</span> snaplogic
+jcc.subscriber_id <span class="o">=</span> Partners
 
 <span class="c"># This is the runtime environment in which the Snaplex should be started.</span>
 jcc.environment <span class="o">=</span> devsnaplex
@@ -422,54 +422,48 @@ See the <a href="#exceptions-and-error-views">Exceptions and Error Views</a> sec
 </blockquote>
 
 <p>The Snaplex/JCC supports debugging a Snap&#39;s execution with your chosen IDE. Simply launch the JCC with the additional <code>agentlib</code> parameter with shown value, and attach to it using your IDE&#39;s remote debugging capability.</p>
-<h2 id='snap-maven-archetype'>Snap Maven Archetype</h2><pre class="highlight shell tab-shell"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$SNAP_HOME</span>
-<span class="gp">$ </span>mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCatalog<span class="o">=</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
-<span class="o">[</span>INFO] Scanning <span class="k">for </span>projects...
-<span class="o">[</span>INFO]                                                                         
-<span class="o">[</span>INFO] ------------------------------------------------------------------------
-<span class="o">[</span>INFO] Building Maven Stub Project <span class="o">(</span>No POM<span class="o">)</span> 1
-<span class="o">[</span>INFO] ------------------------------------------------------------------------
-<span class="o">[</span>INFO] 
-<span class="o">[</span>INFO] &gt;&gt;&gt; maven-archetype-plugin:2.4:generate <span class="o">(</span>default-cli<span class="o">)</span> &gt; generate-sources @ standalone-pom &gt;&gt;&gt;
-<span class="o">[</span>INFO] 
-<span class="o">[</span>INFO] <span class="o">&lt;&lt;&lt;</span> maven-archetype-plugin:2.4:generate <span class="o">(</span>default-cli<span class="o">)</span> &lt; generate-sources @ standalone-pom <span class="o">&lt;&lt;&lt;</span>
-<span class="o">[</span>INFO] 
-<span class="o">[</span>INFO] --- maven-archetype-plugin:2.4:generate <span class="o">(</span>default-cli<span class="o">)</span> @ standalone-pom ---
-<span class="o">[</span>INFO] Generating project <span class="k">in </span>Interactive mode
-<span class="o">[</span>INFO] No archetype defined. Using maven-archetype-quickstart <span class="o">(</span>org.apache.maven.archetypes:maven-archetype-quickstart:1.0<span class="o">)</span>
+<h2 id='snap-maven-archetype'>Snap Maven Archetype</h2><pre class="highlight plaintext"><code>$ cd $SNAP_HOME
+$ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCatalog=http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------&lt; org.apache.maven:standalone-pom &gt;-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] &gt;&gt;&gt; maven-archetype-plugin:2.4:generate (default-cli) &gt; generate-sources @ standalone-pom &gt;&gt;&gt;
+[INFO] 
+[INFO] &lt;&lt;&lt; maven-archetype-plugin:2.4:generate (default-cli) &lt; generate-sources @ standalone-pom &lt;&lt;&lt;
+[INFO] 
+[INFO] 
+[INFO] --- maven-archetype-plugin:2.4:generate (default-cli) @ standalone-pom ---
+[INFO] Generating project in Interactive mode
+[INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
 Choose archetype:
-1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/ -&gt; com.snaplogic.tools:SnapArchetype <span class="o">(</span>This is a sample snap project.<span class="o">)</span>
-Choose a number or apply filter <span class="o">(</span>format: <span class="o">[</span>groupId:]artifactId, <span class="k">case</span> sensitive contains<span class="p">)</span>: : 1
-Choose com.snaplogic.tools:SnapArchetype version: 
-1: 1.7
-2: 1.8
-Choose a number: 2: 2
-Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.jar
-Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.jar <span class="o">(</span>44 KB at 65.5 KB/sec<span class="o">)</span>
-Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.pom
-Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.pom <span class="o">(</span>3 KB at 10.5 KB/sec<span class="o">)</span>
-Define value <span class="k">for </span>property <span class="s1">'groupId'</span>: : com.snaplogic
-Define value <span class="k">for </span>property <span class="s1">'artifactId'</span>: : demosnappack
-Define value <span class="k">for </span>property <span class="s1">'version'</span>:  1.0-SNAPSHOT: : 
-Define value <span class="k">for </span>property <span class="s1">'package'</span>:  com.snaplogic: : com.snaplogic.snaps
-Define value <span class="k">for </span>property <span class="s1">'organization'</span>: : snaplogic
-Define value <span class="k">for </span>property <span class="s1">'assetPath'</span>:  /snaplogic/shared: : /snaplogic/robin/shared
-Define value <span class="k">for </span>property <span class="s1">'snapPack'</span>:  demosnappack: : Demo Snap Pack
-Define value <span class="k">for </span>property <span class="s1">'user'</span>: : rhowlett@snaplogic.com
+1: local -&gt; com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
+Define value for property 'groupId': : com.snaplogic
+Define value for property 'artifactId': : demosnappack
+Define value for property 'version':  1.0-SNAPSHOT: : 
+Define value for property 'package':  com.snaplogic: : com.snaplogic.snaps
+Define value for property 'organization': : Partners
+Define value for property 'assetPath':  /Partners/shared: : /Partners/MyCompany/shared
+Define value for property 'snapPack':  demosnappack: : Demo Snap Pack
+Define value for property 'user': : cc+partners@snaplogic.com    (should match cc.username in $SL_ROOT/etc/keys.properties)
 Confirm properties configuration:
 groupId: com.snaplogic
 artifactId: demosnappack
 version: 1.0-SNAPSHOT
 package: com.snaplogic.snaps
-organization: snaplogic
-assetPath: /snaplogic/robin/shared
+organization: Partners
+assetPath: /Partners/MyCompany/shared
 snapPack: Demo Snap Pack
-user: rhowlett@snaplogic.com
+user: cc+partners@snaplogic.com
  Y: : Y
-<span class="o">[</span>INFO] ----------------------------------------------------------------------------
-<span class="o">[</span>INFO] Using following parameters <span class="k">for </span>creating project from Archetype: SnapArchetype:1.8
-<span class="o">[</span>INFO] ----------------------------------------------------------------------------
-<span class="o">[</span>INFO] Parameter: groupId, Value: com.snaplogic
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.9
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: groupId, Value: com.snaplogic
+...
 </code></pre>
 <p>A <a href="https://maven.apache.org/guides/introduction/introduction-to-archetypes.html">Maven Archetype</a> is a Maven project templating toolkit. SnapLogic provides <code>SnapArchetype</code> for quickly starting Snap development.</p>
 
