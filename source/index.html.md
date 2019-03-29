@@ -105,7 +105,9 @@ $ wget https://s3.amazonaws.com/elastic.snaplogic.com/snaplogic-sidekick...rpm
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ brew install rpm2cpio
 $ rpm2cpio.pl snaplogic-sidekick...rpm | cpio -idvm
-$ echo 'export SL_ROOT=/opt/snaplogic' >> ~/.bash_profile
+$ mkdir -p ~/opt/snaplogic/etc
+$ unzip myplex.slpropz -d ~/opt/snaplogic/etc
+$ echo 'export SL_ROOT=~/opt/snaplogic' >> ~/.bash_profile
 $ source ~/.bash_profile
 ```
 
@@ -116,9 +118,6 @@ $ rpm2cpio.pl snaplogic-sidekick-4.mrc244-x86_64.rpm | cpio -idvm
 ./opt/snaplogic/bin/functions
 ./opt/snaplogic/bin/jcc.sh
 ./opt/snaplogic/bin/logstash.sh
-./opt/snaplogic/etc/global.properties
-./opt/snaplogic/etc/keys.properties
-./opt/snaplogic/etc/logstash.conf
 ./opt/snaplogic/ldlib/libsapjco3.jnilib
 ./opt/snaplogic/ldlib/libsapjco3.so
 ./opt/snaplogic/pkgs/jre1.8.0_45/COPYRIGHT
@@ -134,6 +133,7 @@ $ rpm2cpio.pl snaplogic-sidekick-4.mrc244-x86_64.rpm | cpio -idvm
 1. Download and install [Homebrew](https://brew.sh/)
 1. Install the `rpm2cpio` library
 1. Extract the downloaded Snaplex `.rpm` file
+1. Unzip the downloaded `.slpropz` file to the `etc` directory of your Snaplex
 1. Export the `SL_ROOT` environment variable to your `~/.bash_profile`
 
 ## Configuration
@@ -155,7 +155,7 @@ jcc.sldb_uri = https://elastic.snaplogic.com:443
 ...
 # The subscriber ID assigned for the customer. This will be available after
 # the customer account is created. Usually this should match your Organization name.
-jcc.subscriber_id = snaplogic
+jcc.subscriber_id = Partners
 
 # This is the runtime environment in which the Snaplex should be started.
 jcc.environment = devsnaplex
@@ -299,55 +299,49 @@ The Snaplex/JCC supports debugging a Snap's execution with your chosen IDE. Simp
 
 ## Snap Maven Archetype
 
-```shell
+```
 $ cd $SNAP_HOME
 $ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCatalog=http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
 [INFO] Scanning for projects...
-[INFO]                                                                         
-[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
 [INFO] Building Maven Stub Project (No POM) 1
-[INFO] ------------------------------------------------------------------------
+[INFO] --------------------------------[ pom ]---------------------------------
 [INFO] 
 [INFO] >>> maven-archetype-plugin:2.4:generate (default-cli) > generate-sources @ standalone-pom >>>
 [INFO] 
 [INFO] <<< maven-archetype-plugin:2.4:generate (default-cli) < generate-sources @ standalone-pom <<<
 [INFO] 
+[INFO] 
 [INFO] --- maven-archetype-plugin:2.4:generate (default-cli) @ standalone-pom ---
 [INFO] Generating project in Interactive mode
 [INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
 Choose archetype:
-1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/ -> com.snaplogic.tools:SnapArchetype (This is a sample snap project.)
+1: local -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
-Choose com.snaplogic.tools:SnapArchetype version: 
-1: 1.7
-2: 1.8
-Choose a number: 2: 2
-Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.jar
-Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.jar (44 KB at 65.5 KB/sec)
-Downloading: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.pom
-Downloaded: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/tools/SnapArchetype/1.8/SnapArchetype-1.8.pom (3 KB at 10.5 KB/sec)
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
 Define value for property 'package':  com.snaplogic: : com.snaplogic.snaps
-Define value for property 'organization': : snaplogic
-Define value for property 'assetPath':  /snaplogic/shared: : /snaplogic/robin/shared
+Define value for property 'organization': : Partners
+Define value for property 'assetPath':  /Partners/shared: : /Partners/MyCompany/shared
 Define value for property 'snapPack':  demosnappack: : Demo Snap Pack
-Define value for property 'user': : rhowlett@snaplogic.com
+Define value for property 'user': : cc+partners@snaplogic.com    (should match cc.username in $SL_ROOT/etc/keys.properties)
 Confirm properties configuration:
 groupId: com.snaplogic
 artifactId: demosnappack
 version: 1.0-SNAPSHOT
 package: com.snaplogic.snaps
-organization: snaplogic
-assetPath: /snaplogic/robin/shared
+organization: Partners
+assetPath: /Partners/MyCompany/shared
 snapPack: Demo Snap Pack
-user: rhowlett@snaplogic.com
+user: cc+partners@snaplogic.com
  Y: : Y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.8
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.9
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
+...
 ```
 
 A [Maven Archetype](https://maven.apache.org/guides/introduction/introduction-to-archetypes.html) is a Maven project templating toolkit. SnapLogic provides `SnapArchetype` for quickly starting Snap development.
