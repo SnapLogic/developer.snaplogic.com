@@ -88,11 +88,13 @@ The current list of Snaplex downloads is maintained at <a href="https://docs-sna
 
 ## Installation
 
-### Linux & Microsoft Windows 
+A Snaplex is the data processing engine of the SnapLogic Elastic Integration Platform. An Org Admin can select **Provision this user as a Snap Developer** in the Update User dialog, automatically creating a Snaplex for that user in the Org.
+
+### Linux & Microsoft Windows
 
 Please visit the official SnapLogic documentation for detailed instructions for installing a Snaplex on [Linux](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438367/Snaplex+Installation+on+Linux) or [Microsoft Windows](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439002/Snaplex+Installation+on+Windows). 
 
-### macOS
+### macOS 
 
 <aside class="warning">
 Use of a Snaplex in a macOS environment is supported only for developing Snaps.
