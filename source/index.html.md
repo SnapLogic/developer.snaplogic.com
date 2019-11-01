@@ -59,8 +59,7 @@ Need to build/deploy/etc | No deployment, quick & simple
 
 * Java 8 (JDK)
 * Maven 3
-* A Snaplex, including the `keys.properties` and `global.properties` files, 
-or alternatively including the `.slpropz` file.  These files are provided by [SnapLogic Support](mailto:support@snaplogic.zendesk.com?subject=Requesting%20Snap%20Development%20Credentials) upon request for Snap development
+* A Snaplex
 
 <aside class="warning">
 Java 9 or later is not supported currently.
@@ -88,7 +87,7 @@ The current list of Snaplex downloads is maintained at <a href="https://docs-sna
 
 ## Installation
 
-A Snaplex is the data processing engine of the SnapLogic Elastic Integration Platform. An Org Admin can select **Provision this user as a Snap Developer** in the Update User dialog, automatically creating a Snaplex for that user in the Org.
+A Snaplex is the data processing engine of the SnapLogic Elastic Integration Platform. An Org admin can select **Provision this user as a Snap Developer** in the **Update User** dialog, automatically creating a dedicated Snaplex for that user to run and test pipelines. This Snaplex should be created in the Snap Developer’s project folder so that other users do not inadvertently run production pipelines on that Snaplex.
 
 ### Linux & Microsoft Windows
 
@@ -138,34 +137,6 @@ $ rpm2cpio.pl snaplogic-sidekick-4.mrc244-x86_64.rpm | cpio -idvm
 1. Unzip the downloaded `.slpropz` file to the `etc` directory of your Snaplex
 1. Export the `SL_ROOT` environment variable to your `~/.bash_profile`
 
-## Configuration
-
-```shell
-$ cat ~/opt/snaplogic/etc/keys.properties
-cc.admin_uri = https://elastic.snaplogic.com:443
-cc.username = rhowlett@snaplogic.com
-cc.api_key = JDAFBDAD....9dAg43
-cc.ssl_verify = True
-```
-
-For approved customers, SnapLogic Support will provide the necessary instructions for authentication and configuration of the Snaplex.
-
-```shell
-$ cat ~/opt/snaplogic/etc/global.properties
-jcc.location = sidekick
-jcc.sldb_uri = https://elastic.snaplogic.com:443
-...
-# The subscriber ID assigned for the customer. This will be available after
-# the customer account is created. Usually this should match your Organization name.
-jcc.subscriber_id = Partners
-
-# This is the runtime environment in which the Snaplex should be started.
-jcc.environment = devsnaplex
-```
-
-The `~/opt/snaplogic/etc/keys.properties` file contains the information required for authenticating to the SnapLogic Elastic Integration Platform APIs to run the Snaplex and deploy the developed Snaps.
-
-The `~/opt/snaplogic/etc/global.properties` file contains the information required for general configuration of the Snaplex.
 
 ## Running
 
