@@ -2045,6 +2045,74 @@ if (data.get("gender").equals("male")) {
 <p>This allows taking advantage of the <a href="https://www.martinfowler.com/articles/injection.html">&quot;inversion of control&quot;</a> software design pattern to provide different implementations of a service interface for a hierarchy of related Snaps.</p>
 
 <p>It also greatly benefits unit testing, since it permits injecting in stub or mock versions of service dependencies; see the <code>CurrencyConverterTest</code> test class for more.</p>
+<h2 id='handling-pipeline-lifecycle-events'>Handling Pipeline Lifecycle Events</h2><pre class="highlight java tab-java"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeSnap</span> <span class="kd">implements</span> <span class="n">com</span><span class="o">.</span><span class="na">snaplogic</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">LifecycleCallback</span> <span class="o">{</span>
+
+    <span class="o">...</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handle</span><span class="o">(</span><span class="kd">final</span> <span class="n">com</span><span class="o">.</span><span class="na">snaplogic</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">LifecycleEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">switch</span> <span class="o">(</span><span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="nl">CLOSE:</span>
+            <span class="k">case</span> <span class="nl">FAILURE:</span>
+            <span class="k">case</span> <span class="nl">STOP:</span>
+                <span class="n">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Got a lifecycle event to stop the Snap's execution: {}"</span><span class="o">,</span>
+                        <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">event</span><span class="o">));</span>
+                <span class="c1">// perhaps set a volatile boolean</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">SUCCESS:</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">default</span><span class="o">:</span>
+                <span class="n">LOGGER</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Got the lifecycle event: {}"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">event</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="o">...</span>
+
+<span class="o">}</span>
+</code></pre>
+<p>Snaps can be notified of Pipeline Lifecyle events by implementing the <code>LifecycleEvent</code> interface. This can be especially useful when unexpected actions have been taken; for example, if a user manually stopped an executing pipeline causing a thread to be interrupted, a &quot;STOP&quot; <code>LifecycleEvent</code> can be handled by the Snap and some cleanup activities can be programmed. </p>
+
+<aside class="notice">
+<code>STOP</code> and <code>CLOSE</code> are asynchronous events that are delivered in a separate thread from the Snap thread. Consider using multithreaded-sensitive solutions e.g. <code>volatile</code> variables etc.
+</aside>
+
+<p>Implementing the interface requires providing an implementation for the <code>void handle(final com.snaplogic.api.LifecycleEvent event)</code> method. <code>LifecycleEvent</code> is an enum with the following values:</p>
+
+<table><thead>
+<tr>
+<th>Lifecycle Event</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CREATE</td>
+<td>Event that happens when an instance of the Snap is created.</td>
+</tr>
+<tr>
+<td>CONFIGURE</td>
+<td>Event that happens when the Snap is configured with the user provided property values before execution</td>
+</tr>
+<tr>
+<td>START</td>
+<td>Event that happens when the Snap execution starts.</td>
+</tr>
+<tr>
+<td>CLOSE</td>
+<td>Async event that is triggered when the pipeline needs to shutdown gracefully.<p />WARNING: This event is delivered in a thread separate from the Snap thread, so any changes to Snap state should be done carefully.</td>
+</tr>
+<tr>
+<td>STOP</td>
+<td>Async event that is triggered when the pipeline is stopped.<p />WARNING: This event is delivered in a thread separate from the Snap thread, so any changes to Snap state should be done carefully.</td>
+</tr>
+<tr>
+<td>FAILURE</td>
+<td>Event that happens when the Snap execution fails.</td>
+</tr>
+<tr>
+<td>SUCCESS</td>
+<td>Event that happens when the Snap execution completes successfully.</td>
+</tr>
+</tbody></table>
 <h1 id='deploying-snap-packs'>Deploying Snap Packs</h1>
 <p>Now that we understand how to build a Snap, let&#39;s see how to deploy it so it can be used within the SnapLogic Platform.</p>
 
