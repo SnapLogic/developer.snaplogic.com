@@ -1940,6 +1940,53 @@ This allows taking advantage of the ["inversion of control"](https://www.martinf
 
 It also greatly benefits unit testing, since it permits injecting in stub or mock versions of service dependencies; see the `CurrencyConverterTest` test class for more.
 
+## Handling Pipeline Lifecycle Events
+
+```java
+public class SomeSnap implements com.snaplogic.api.LifecycleCallback {
+
+	...
+	
+    @Override
+    public void handle(final com.snaplogic.api.LifecycleEvent event) {
+        switch (event) {
+            case CLOSE:
+            case FAILURE:
+            case STOP:
+                LOGGER.debug("Got a lifecycle event to stop the Snap's execution: {}",
+                        String.valueOf(event));
+                // perhaps set a volatile boolean
+                break;
+            case SUCCESS:
+                break;
+            default:
+                LOGGER.debug("Got the lifecycle event: {}", String.valueOf(event));
+        }
+    }
+	
+	...
+
+}
+```
+
+Snaps can be notified of Pipeline Lifecyle events by implementing the `LifecycleEvent` interface. This can be especially useful when unexpected actions have been taken; for example, if a user manually stopped an executing pipeline causing a thread to be interrupted, a "STOP" `LifecycleEvent` can be handled by the Snap and some cleanup activities can be programmed. 
+
+<aside class="notice">
+<code>STOP</code> and <code>CLOSE</code> are asynchronous events that are delivered in a separate thread from the Snap thread. Consider using multithreaded-sensitive solutions e.g. <code>volatile</code> variables etc.
+</aside>
+
+Implementing the interface requires providing an implementation for the `void handle(final com.snaplogic.api.LifecycleEvent event)` method. `LifecycleEvent` is an enum with the following values:
+
+Lifecycle Event | Description
+----------- | -----------
+CREATE | Event that happens when an instance of the Snap is created.
+CONFIGURE | Event that happens when the Snap is configured with the user provided property values before execution
+START | Event that happens when the Snap execution starts.
+CLOSE | Async event that is triggered when the pipeline needs to shutdown gracefully.<p />WARNING: This event is delivered in a thread separate from the Snap thread, so any changes to Snap state should be done carefully.
+STOP | Async event that is triggered when the pipeline is stopped.<p />WARNING: This event is delivered in a thread separate from the Snap thread, so any changes to Snap state should be done carefully.
+FAILURE | Event that happens when the Snap execution fails.
+SUCCESS | Event that happens when the Snap execution completes successfully.
+
 # Deploying Snap Packs
 
 Now that we understand how to build a Snap, let's see how to deploy it so it can be used within the SnapLogic Platform.
