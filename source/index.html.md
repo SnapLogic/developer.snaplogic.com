@@ -1975,7 +1975,7 @@ Snaps can be notified of Pipeline Lifecyle events by implementing the `Lifecycle
 <code>STOP</code> and <code>CLOSE</code> are asynchronous events that are delivered in a separate thread from the Snap thread. Consider using multithreaded-sensitive solutions e.g. <code>volatile</code> variables etc.
 </aside>
 
-Implementing the interface requires providing an implementation for the `void handle(final com.snaplogic.api.LifecycleEvent event)` method. `LifecycleEvent` is an enum with the following values:
+Implementing the interface requires providing an implementation for the `void handle(final LifecycleEvent event)` method. `LifecycleEvent` is an enum with the following values:
 
 Lifecycle Event | Description
 ----------- | -----------
