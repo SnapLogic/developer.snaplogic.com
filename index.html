@@ -2076,7 +2076,7 @@ if (data.get("gender").equals("male")) {
 <code>STOP</code> and <code>CLOSE</code> are asynchronous events that are delivered in a separate thread from the Snap thread. Consider using multithreaded-sensitive solutions e.g. <code>volatile</code> variables etc.
 </aside>
 
-<p>Implementing the interface requires providing an implementation for the <code>void handle(final com.snaplogic.api.LifecycleEvent event)</code> method. <code>LifecycleEvent</code> is an enum with the following values:</p>
+<p>Implementing the interface requires providing an implementation for the <code>void handle(final LifecycleEvent event)</code> method. <code>LifecycleEvent</code> is an enum with the following values:</p>
 
 <table><thead>
 <tr>
