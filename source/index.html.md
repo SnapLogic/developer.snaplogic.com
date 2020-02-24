@@ -292,6 +292,13 @@ $ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCa
 Choose archetype:
 1: local -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
+Choose com.snaplogic.tools:SnapArchetype version: 
+1: 1.7
+2: 1.8
+3: 1.9
+4: 1.10
+5: 1.11
+Choose a number: 5: 
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -311,7 +318,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : Y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.9
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.11
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -384,7 +391,69 @@ Files and folders within these directories will be on the test classpath, as per
 
 This is the Maven POM file. You will change this file when registering new Snaps and Accounts, when new dependencies or plugins are required, or when needing to modify the build properties.
 
+The `dependencyManagement` section imports the SnapLogic BOM file, `com.snaplogic.snaps:bom`, to simplify dependency management:
+
+```xml
+<dependencyManagement>
+    <dependencies>
+        <!-- import dependency management declarations from the SnapLogic snaps BOM -->
+        <dependency>
+            <groupId>com.snaplogic.snaps</groupId>
+            <artifactId>bom</artifactId>
+            <version>${snaplogic.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+The `dependencies` section of the POM file can reference dependencies managed by the BOM file without specifying their version:
+
+```xml
+<!-- SnapLogic jsdk + japis dependencies, declared in bom -->
+<dependency>
+    <groupId>com.snaplogic</groupId>
+    <artifactId>jsdk</artifactId>
+</dependency>
+<dependency>
+    <groupId>com.snaplogic</groupId>
+    <artifactId>jutils</artifactId>
+</dependency>
+<dependency>
+    <groupId>com.snaplogic</groupId>
+    <artifactId>jtest</artifactId>
+    <scope>test</scope>
+</dependency>
+
+<!-- third-party dependencies bundled in jcc and declared in bom with provided scope -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+</dependency>
+...
+```
+
+The POM also includes other `dependencies` needed by the sample Snaps:
+
+```xml
+<dependency>
+    <groupId>commons-codec</groupId>
+    <artifactId>commons-codec</artifactId>
+    <version>${commons-codec.version}</version>
+</dependency>
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>${commons-io.version}</version>
+</dependency>
+...
+```
+
 # Developing Snaps
+
+The `properties` section of the POM file has two properties, `snap.classes` and `account.classes`, which list the names
+of the Java classes which define the Snaps and Accounts provided by this Snap pack:
 
 ```xml
 <!-- This identifies the classes which represent the actual Snaps
@@ -920,11 +989,8 @@ public class CharacterCounter extends SimpleBinaryWriteSnap {
 
             @Override
             public void write(WritableByteChannel writeChannel) throws IOException {
-                OutputStream outputStream = Channels.newOutputStream(writeChannel);
-                try {
+                try (OutputStream outputStream = Channels.newOutputStream(writeChannel)) {
                     IOUtils.write(sb.toString(), outputStream, UTF_8);
-                } finally {
-                    IOUtils.closeQuietly(outputStream);
                 }
             }
         });
@@ -1030,7 +1096,7 @@ public class DocGenerator implements Snap {
 
     @Override
     public void configure(PropertyValues propertyValues) throws ConfigurationException {
-        BigInteger countValue = propertyValues.get(COUNT);
+        Number countValue = propertyValues.get(COUNT);
         count = countValue.intValue();
     }
 
@@ -1803,8 +1869,6 @@ A thrown `SuggestViewAbortException` can indicate that the pipeline validation/p
 public class CurrencyConverter extends SimpleSnap implements DependencyManager {
 
     private static final String INPUT_FILE_PROP = "inputFile";
-    private static final String REGEX_PATTERN_PROTOCOL = "^sldb:///|^http://|^https://|^file:///";
-    private static final Pattern PATTERN = Pattern.compile(REGEX_PATTERN_PROTOCOL);
 
     private String filePath;
     private TypeReference<Map<String, Object>> mapTypeReference =
@@ -1816,10 +1880,6 @@ public class CurrencyConverter extends SimpleSnap implements DependencyManager {
     private ObjectMapper mapper;
     @Inject
     private ForEx foreignExchange;
-    @Inject
-    private URLEncoder urlEncoder;
-    @Inject
-    private JfsUtils jfsUtils;
 
     // Use an instance of Guice's AbstractModule to bind implementations to interfaces
     @Override
@@ -1828,7 +1888,6 @@ public class CurrencyConverter extends SimpleSnap implements DependencyManager {
             @Override
             protected void configure() {
                 bind(ForEx.class).to(ForExImpl.class);
-                bind(JfsUtils.class).toInstance(JfsUtils.getInstance());
             }
         };
     }
@@ -1851,7 +1910,6 @@ public class CurrencyConverter extends SimpleSnap implements DependencyManager {
 
     @Override
     protected void process(Document document, String inputViewName) {
-        @SuppressWarnings("unchecked")
         Map<String, Object> docAsMap = documentUtility.getAsMap(document, errorViews);
         String targetCurrency = (String) docAsMap.get("to");
         BigDecimal amount = BigDecimal.valueOf(((Number) docAsMap.get("amount")).doubleValue());
@@ -1874,22 +1932,18 @@ public class CurrencyConverter extends SimpleSnap implements DependencyManager {
 
     private Map<String, Object> getExchangeRatesFromFile(Document document) {
         Map<String, Object> exchangeRates;
-        InputStream inputStream = null;
-        try {
-            URI filePathUri = urlEncoder.validateAndEncodeURI(filePath, PATTERN, null);
-            inputStream = jfsUtils.openURLConnection(filePathUri).getInputStream();
+        try (InputStream inputStream = new URL(filePath).openStream()) {
             exchangeRates = mapper.readValue(inputStream, mapTypeReference);
         } catch (IOException e) {
             throw new SnapDataException(document, e,
                     String.format("Unable to read from file path %s", filePath));
-        } finally {
-            IOUtils.closeQuietly(inputStream);
         }
         return exchangeRates;
     }
 
     private Map<String, BigDecimal> getExchangeRateForCurrency(String targetCurrency,
             BigDecimal amount, Map<String, Object> rate) {
+        @SuppressWarnings("unchecked")
         Map<String, Object> forExRates = (Map<String, Object>) rate.get("rates");
         BigDecimal forExRate = BigDecimal.valueOf(
                 ((Number) forExRates.get(targetCurrency)).doubleValue());
@@ -1934,7 +1988,7 @@ Snaps use Google's [Guice](https://github.com/google/guice) library for dependen
 
 Snaps that implement the `DependencyManager` interface can return a [Guice Module](https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Module.html) that can configure interface bindings to be used by SnapLogic's [Injector](https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Injector.html). 
 
-In the "Currency Converter" example shown, DependencyManager's `getManagedModule` method is implemented to return an `AbstractModule` instance, with the `ForEx` interface bound to the `ForExImpl` implementation, and the `JfsUtils` interface bound to a specific instance.
+In the "Currency Converter" example shown, DependencyManager's `getManagedModule` method is implemented to return an `AbstractModule` instance, with the `ForEx` interface bound to the `ForExImpl` implementation.
 
 This allows taking advantage of the ["inversion of control"](https://www.martinfowler.com/articles/injection.html) software design pattern to provide different implementations of a service interface for a hierarchy of related Snaps.
 
@@ -1999,7 +2053,7 @@ There are two ways to deploy a Snap Pack - one targeted for developers seeking r
 
 ```shell
 $ cd $SNAP_HOME/demosnappack
-$ mvn clean install
+$ mvn clean package
 $ mvn snappack:deploy
 ```
 
@@ -2053,6 +2107,21 @@ We recommended using this method of deployment when releasing a stable version o
 <br />
 In the near future, SnapLogic will update the <code>snappack:deploy</code> goal to upload the Snap Pack ZIP file to match this process.
 </aside>
+
+
+### Deploying a New Version
+
+When you've made changes to your Snap Pack and wish to deploy a new version, it is important to use a new, unique value
+for the `sl_build` property defined in the `pom.xml` file's `properties` section, which is initially set to `0001`.  You can
+either update the value of this property in the file, or set it from the command-line when building your Snap Pack.
+For example:
+```shell
+mvn clean package -Dsl_build=0002
+```
+Avoid using a hyphen (`-`) in your `sl_build` value.  One idea is to use the Unix timestamp of the build:
+```shell
+mvn clean package -Dsl_build=`date +%s`
+```
 
 ### Troubleshooting
 
