@@ -421,6 +421,13 @@ $ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCa
 Choose archetype:
 1: local -&gt; com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
+Choose com.snaplogic.tools:SnapArchetype version: 
+1: 1.7
+2: 1.8
+3: 1.9
+4: 1.10
+5: 1.11
+Choose a number: 5: 
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -440,7 +447,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : Y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.9
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.11
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -539,7 +546,60 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 <p>Files and folders within these directories will be on the test classpath, as per Maven convention. Unit and integration tests (and supporting resources) are located in these directories.</p>
 <h3 id='pom-xml'><code>pom.xml</code></h3>
 <p>This is the Maven POM file. You will change this file when registering new Snaps and Accounts, when new dependencies or plugins are required, or when needing to modify the build properties.</p>
-<h1 id='developing-snaps'>Developing Snaps</h1><pre class="highlight xml tab-xml"><code><span class="c">&lt;!-- This identifies the classes which represent the actual Snaps
+
+<p>The <code>dependencyManagement</code> section imports the SnapLogic BOM file, <code>com.snaplogic.snaps:bom</code>, to simplify dependency management:</p>
+<pre class="highlight xml tab-xml"><code><span class="nt">&lt;dependencyManagement&gt;</span>
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="c">&lt;!-- import dependency management declarations from the SnapLogic snaps BOM --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.snaplogic.snaps<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>bom<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${snaplogic.version}<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/dependencyManagement&gt;</span>
+</code></pre>
+<p>The <code>dependencies</code> section of the POM file can reference dependencies managed by the BOM file without specifying their version:</p>
+<pre class="highlight xml tab-xml"><code><span class="c">&lt;!-- SnapLogic jsdk + japis dependencies, declared in bom --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.snaplogic<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>jsdk<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.snaplogic<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>jutils<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.snaplogic<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>jtest<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+
+<span class="c">&lt;!-- third-party dependencies bundled in jcc and declared in bom with provided scope --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>jackson-databind<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+...
+</code></pre>
+<p>The POM also includes other <code>dependencies</code> needed by the sample Snaps:</p>
+<pre class="highlight xml tab-xml"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>commons-codec<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>commons-codec<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${commons-codec.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>commons-io<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>commons-io<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${commons-io.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+...
+</code></pre><h1 id='developing-snaps'>Developing Snaps</h1>
+<p>The <code>properties</code> section of the POM file has two properties, <code>snap.classes</code> and <code>account.classes</code>, which list the names
+of the Java classes which define the Snaps and Accounts provided by this Snap pack:</p>
+<pre class="highlight xml tab-xml"><code><span class="c">&lt;!-- This identifies the classes which represent the actual Snaps
     (and become accessible on the Snaplex/JCC after deployment).
 
     After creating a new Snap class, add it here.
@@ -1060,11 +1120,8 @@ SnapLogic's Platform will enforce that all input documents have been fully consu
 
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="n">WritableByteChannel</span> <span class="n">writeChannel</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-                <span class="n">OutputStream</span> <span class="n">outputStream</span> <span class="o">=</span> <span class="n">Channels</span><span class="o">.</span><span class="na">newOutputStream</span><span class="o">(</span><span class="n">writeChannel</span><span class="o">);</span>
-                <span class="k">try</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">(</span><span class="n">OutputStream</span> <span class="n">outputStream</span> <span class="o">=</span> <span class="n">Channels</span><span class="o">.</span><span class="na">newOutputStream</span><span class="o">(</span><span class="n">writeChannel</span><span class="o">))</span> <span class="o">{</span>
                     <span class="n">IOUtils</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span> <span class="n">outputStream</span><span class="o">,</span> <span class="n">UTF_8</span><span class="o">);</span>
-                <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-                    <span class="n">IOUtils</span><span class="o">.</span><span class="na">closeQuietly</span><span class="o">(</span><span class="n">outputStream</span><span class="o">);</span>
                 <span class="o">}</span>
             <span class="o">}</span>
         <span class="o">});</span>
@@ -1158,7 +1215,7 @@ We recommend using standard/popular specification field names, lowercased, when 
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="n">PropertyValues</span> <span class="n">propertyValues</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ConfigurationException</span> <span class="o">{</span>
-        <span class="n">BigInteger</span> <span class="n">countValue</span> <span class="o">=</span> <span class="n">propertyValues</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">COUNT</span><span class="o">);</span>
+        <span class="n">Number</span> <span class="n">countValue</span> <span class="o">=</span> <span class="n">propertyValues</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">COUNT</span><span class="o">);</span>
         <span class="n">count</span> <span class="o">=</span> <span class="n">countValue</span><span class="o">.</span><span class="na">intValue</span><span class="o">();</span>
     <span class="o">}</span>
 
@@ -1910,8 +1967,6 @@ if (data.get("gender").equals("male")) {
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CurrencyConverter</span> <span class="kd">extends</span> <span class="n">SimpleSnap</span> <span class="kd">implements</span> <span class="n">DependencyManager</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">INPUT_FILE_PROP</span> <span class="o">=</span> <span class="s">"inputFile"</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">REGEX_PATTERN_PROTOCOL</span> <span class="o">=</span> <span class="s">"^sldb:///|^http://|^https://|^file:///"</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Pattern</span> <span class="n">PATTERN</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="na">compile</span><span class="o">(</span><span class="n">REGEX_PATTERN_PROTOCOL</span><span class="o">);</span>
 
     <span class="kd">private</span> <span class="n">String</span> <span class="n">filePath</span><span class="o">;</span>
     <span class="kd">private</span> <span class="n">TypeReference</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">mapTypeReference</span> <span class="o">=</span>
@@ -1923,10 +1978,6 @@ if (data.get("gender").equals("male")) {
     <span class="kd">private</span> <span class="n">ObjectMapper</span> <span class="n">mapper</span><span class="o">;</span>
     <span class="nd">@Inject</span>
     <span class="kd">private</span> <span class="n">ForEx</span> <span class="n">foreignExchange</span><span class="o">;</span>
-    <span class="nd">@Inject</span>
-    <span class="kd">private</span> <span class="n">URLEncoder</span> <span class="n">urlEncoder</span><span class="o">;</span>
-    <span class="nd">@Inject</span>
-    <span class="kd">private</span> <span class="n">JfsUtils</span> <span class="n">jfsUtils</span><span class="o">;</span>
 
     <span class="c1">// Use an instance of Guice's AbstractModule to bind implementations to interfaces</span>
     <span class="nd">@Override</span>
@@ -1935,7 +1986,6 @@ if (data.get("gender").equals("male")) {
             <span class="nd">@Override</span>
             <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">()</span> <span class="o">{</span>
                 <span class="n">bind</span><span class="o">(</span><span class="n">ForEx</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">ForExImpl</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-                <span class="n">bind</span><span class="o">(</span><span class="n">JfsUtils</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">toInstance</span><span class="o">(</span><span class="n">JfsUtils</span><span class="o">.</span><span class="na">getInstance</span><span class="o">());</span>
             <span class="o">}</span>
         <span class="o">};</span>
     <span class="o">}</span>
@@ -1958,7 +2008,6 @@ if (data.get("gender").equals("male")) {
 
     <span class="nd">@Override</span>
     <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">process</span><span class="o">(</span><span class="n">Document</span> <span class="n">document</span><span class="o">,</span> <span class="n">String</span> <span class="n">inputViewName</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
         <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">docAsMap</span> <span class="o">=</span> <span class="n">documentUtility</span><span class="o">.</span><span class="na">getAsMap</span><span class="o">(</span><span class="n">document</span><span class="o">,</span> <span class="n">errorViews</span><span class="o">);</span>
         <span class="n">String</span> <span class="n">targetCurrency</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">docAsMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"to"</span><span class="o">);</span>
         <span class="n">BigDecimal</span> <span class="n">amount</span> <span class="o">=</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(((</span><span class="n">Number</span><span class="o">)</span> <span class="n">docAsMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"amount"</span><span class="o">)).</span><span class="na">doubleValue</span><span class="o">());</span>
@@ -1981,22 +2030,18 @@ if (data.get("gender").equals("male")) {
 
     <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">getExchangeRatesFromFile</span><span class="o">(</span><span class="n">Document</span> <span class="n">document</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">exchangeRates</span><span class="o">;</span>
-        <span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">URI</span> <span class="n">filePathUri</span> <span class="o">=</span> <span class="n">urlEncoder</span><span class="o">.</span><span class="na">validateAndEncodeURI</span><span class="o">(</span><span class="n">filePath</span><span class="o">,</span> <span class="n">PATTERN</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-            <span class="n">inputStream</span> <span class="o">=</span> <span class="n">jfsUtils</span><span class="o">.</span><span class="na">openURLConnection</span><span class="o">(</span><span class="n">filePathUri</span><span class="o">).</span><span class="na">getInputStream</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">(</span><span class="n">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">filePath</span><span class="o">).</span><span class="na">openStream</span><span class="o">())</span> <span class="o">{</span>
             <span class="n">exchangeRates</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">inputStream</span><span class="o">,</span> <span class="n">mapTypeReference</span><span class="o">);</span>
         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">throw</span> <span class="k">new</span> <span class="nf">SnapDataException</span><span class="o">(</span><span class="n">document</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span>
                     <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Unable to read from file path %s"</span><span class="o">,</span> <span class="n">filePath</span><span class="o">));</span>
-        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-            <span class="n">IOUtils</span><span class="o">.</span><span class="na">closeQuietly</span><span class="o">(</span><span class="n">inputStream</span><span class="o">);</span>
         <span class="o">}</span>
         <span class="k">return</span> <span class="n">exchangeRates</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">BigDecimal</span><span class="o">&gt;</span> <span class="nf">getExchangeRateForCurrency</span><span class="o">(</span><span class="n">String</span> <span class="n">targetCurrency</span><span class="o">,</span>
             <span class="n">BigDecimal</span> <span class="n">amount</span><span class="o">,</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">rate</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
         <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">forExRates</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;)</span> <span class="n">rate</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"rates"</span><span class="o">);</span>
         <span class="n">BigDecimal</span> <span class="n">forExRate</span> <span class="o">=</span> <span class="n">BigDecimal</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span>
                 <span class="o">((</span><span class="n">Number</span><span class="o">)</span> <span class="n">forExRates</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">targetCurrency</span><span class="o">)).</span><span class="na">doubleValue</span><span class="o">());</span>
@@ -2040,7 +2085,7 @@ if (data.get("gender").equals("male")) {
 
 <p>Snaps that implement the <code>DependencyManager</code> interface can return a <a href="https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Module.html">Guice Module</a> that can configure interface bindings to be used by SnapLogic&#39;s <a href="https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Injector.html">Injector</a>. </p>
 
-<p>In the &quot;Currency Converter&quot; example shown, DependencyManager&#39;s <code>getManagedModule</code> method is implemented to return an <code>AbstractModule</code> instance, with the <code>ForEx</code> interface bound to the <code>ForExImpl</code> implementation, and the <code>JfsUtils</code> interface bound to a specific instance.</p>
+<p>In the &quot;Currency Converter&quot; example shown, DependencyManager&#39;s <code>getManagedModule</code> method is implemented to return an <code>AbstractModule</code> instance, with the <code>ForEx</code> interface bound to the <code>ForExImpl</code> implementation.</p>
 
 <p>This allows taking advantage of the <a href="https://www.martinfowler.com/articles/injection.html">&quot;inversion of control&quot;</a> software design pattern to provide different implementations of a service interface for a hierarchy of related Snaps.</p>
 
@@ -2120,7 +2165,7 @@ if (data.get("gender").equals("male")) {
 
 <p>There are two ways to deploy a Snap Pack - one targeted for developers seeking rapid deployment during Snap development, the other for Organization admin and/or operational users to upload through the SnapLogic Manager UI.</p>
 <h2 id='mvn-snappack-deploy'>mvn snappack:deploy</h2><pre class="highlight shell tab-shell"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$SNAP_HOME</span>/demosnappack
-<span class="gp">$ </span>mvn clean install
+<span class="gp">$ </span>mvn clean package
 <span class="gp">$ </span>mvn snappack:deploy
 </code></pre>
 <p>The <a href="#snap-maven-archetype">Snap Archetype</a> POM includes the <code>snappack-installer</code> plugin which contains the <code>snappack:deploy</code> goal.</p>
@@ -2164,6 +2209,18 @@ We recommended using this method of deployment when releasing a stable version o
 <br />
 In the near future, SnapLogic will update the <code>snappack:deploy</code> goal to upload the Snap Pack ZIP file to match this process.
 </aside>
+<h3 id='deploying-a-new-version'>Deploying a New Version</h3>
+<p>When you&#39;ve made changes to your Snap Pack and wish to deploy a new version, it is important to use a new, unique value
+for the <code>sl_build</code> property defined in the <code>pom.xml</code> file&#39;s <code>properties</code> section, which is initially set to <code>0001</code>.  You can
+either update the value of this property in the file, or set it from the command-line when building your Snap Pack.
+For example:
+<code>shell
+mvn clean package -Dsl_build=0002
+</code>
+Avoid using a hyphen (<code>-</code>) in your <code>sl_build</code> value.  One idea is to use the Unix timestamp of the build:
+<code>shell
+mvn clean package -Dsl_build=`date +%s`
+</code></p>
 <h3 id='troubleshooting'>Troubleshooting</h3>
 <p>The SnapLogic Platform will attempt to load the version of the Snap Pack associated with the pipeline&#39;s saved location, falling back to the Organization&#39;s root shared directory if needed.</p>
 
