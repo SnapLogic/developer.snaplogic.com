@@ -2114,11 +2114,13 @@ In the near future, SnapLogic will update the <code>snappack:deploy</code> goal 
 When you've made changes to your Snap Pack and wish to deploy a new version, it is important to use a new, unique value
 for the `sl_build` property defined in the `pom.xml` file's `properties` section, which is initially set to `0001`.  You can
 either update the value of this property in the file, or set it from the command-line when building your Snap Pack.
-Avoid using a hyphen (`-`) in your `sl_build` value. 
 
 For example:
 
 `mvn clean package -Dsl_build=0002`
+
+Important: Avoid using a hyphen (`-`) in your `sl_build` value. 
+
 
 
 ### Troubleshooting
