@@ -2212,12 +2212,13 @@ In the near future, SnapLogic will update the <code>snappack:deploy</code> goal 
 <h3 id='deploying-a-new-version'>Deploying a New Version</h3>
 <p>When you&#39;ve made changes to your Snap Pack and wish to deploy a new version, it is important to use a new, unique value
 for the <code>sl_build</code> property defined in the <code>pom.xml</code> file&#39;s <code>properties</code> section, which is initially set to <code>0001</code>.  You can
-either update the value of this property in the file, or set it from the command-line when building your Snap Pack.
-Avoid using a hyphen (<code>-</code>) in your <code>sl_build</code> value. </p>
+either update the value of this property in the file, or set it from the command-line when building your Snap Pack.</p>
 
 <p>For example:</p>
 
 <p><code>mvn clean package -Dsl_build=0002</code></p>
+
+<p>Important: Avoid using a hyphen (<code>-</code>) in your <code>sl_build</code> value. </p>
 <h3 id='troubleshooting'>Troubleshooting</h3>
 <p>The SnapLogic Platform will attempt to load the version of the Snap Pack associated with the pipeline&#39;s saved location, falling back to the Organization&#39;s root shared directory if needed.</p>
 
