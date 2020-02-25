@@ -2214,11 +2214,11 @@ In the near future, SnapLogic will update the <code>snappack:deploy</code> goal 
 for the <code>sl_build</code> property defined in the <code>pom.xml</code> file&#39;s <code>properties</code> section, which is initially set to <code>0001</code>.  You can
 either update the value of this property in the file, or set it from the command-line when building your Snap Pack.
 For example:</p>
-<pre class="highlight shell tab-shell"><code>mvn clean package -Dsl_build<span class="o">=</span>0002
-</code></pre>
-<p>Avoid using a hyphen (<code>-</code>) in your <code>sl_build</code> value.  One idea is to use the Unix timestamp of the build:</p>
-<pre class="highlight shell tab-shell"><code>mvn clean package -Dsl_build<span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
-</code></pre><h3 id='troubleshooting'>Troubleshooting</h3>
+
+<p><code>mvn clean package -Dsl_build=0002</code></p>
+
+<p>Avoid using a hyphen (<code>-</code>) in your <code>sl_build</code> value. </p>
+<h3 id='troubleshooting'>Troubleshooting</h3>
 <p>The SnapLogic Platform will attempt to load the version of the Snap Pack associated with the pipeline&#39;s saved location, falling back to the Organization&#39;s root shared directory if needed.</p>
 
 <p>If multiple versions of a custom Snap exist in different location, and with incompatible Snap Schemas, the Platform can experience issues if pipelines containing that custom Snaps are moved between the locations.</p>
