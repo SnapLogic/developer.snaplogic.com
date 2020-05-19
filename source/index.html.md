@@ -293,12 +293,11 @@ Choose archetype:
 1: local -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 1.7
-2: 1.8
-3: 1.9
-4: 1.10
-5: 1.11
-Choose a number: 5: 
+1: 1.10
+2: 1.11
+3: 1.12
+4: 4.21
+Choose a number: 4: 
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -318,7 +317,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : Y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.11
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:4.21
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -356,8 +355,7 @@ Once `SnapArchetype` has been generated, it can be imported as a Maven project i
 
 ## Project Structure
 
-> ![Project Structure Main](images/Eop8.png)
-> ![Project Structure Test](images/odZU.png)
+> ![Project Structure](images/Eop9.png)
 
 A Snap Project's structure follows [Maven's Standard Directory Layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
 
@@ -440,12 +438,19 @@ The POM also includes other `dependencies` needed by the sample Snaps:
 <dependency>
     <groupId>commons-codec</groupId>
     <artifactId>commons-codec</artifactId>
-    <version>${commons-codec.version}</version>
 </dependency>
 <dependency>
     <groupId>commons-io</groupId>
     <artifactId>commons-io</artifactId>
-    <version>${commons-io.version}</version>
+</dependency>
+<dependency>
+    <groupId>com.google.guava</groupId>
+    <artifactId>guava</artifactId>
+</dependency>
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <scope>test</scope>
 </dependency>
 ...
 ```
@@ -731,7 +736,6 @@ public class SingleDocGeneratorTest {
             outputs = "output0")
     public void singleDocGenerator_WithOutputView_OutputsCorrectNumDocuments(TestResult testResult)
             throws Exception {
-        assertNull(testResult.getException());
         OutputRecorder outputRecorder = testResult.getOutputViewByName("output0");
         assertEquals(1, outputRecorder.getRecordedData().size());
     }
@@ -762,7 +766,7 @@ The ["jtest: Snap Unit Testing Framework"](#jtest-snap-unit-testing-framework) s
 @Category(snap = SnapCategory.WRITE)
 public class DocConsumer implements Snap {
     private static final Logger log = LoggerFactory.getLogger(DocConsumer.class);
-    private AtomicInteger count = new AtomicInteger(0);
+    private final AtomicInteger count = new AtomicInteger(0);
 
     @Inject
     private InputViews inputViews;
@@ -2606,7 +2610,6 @@ public class SingleDocGeneratorTest {
             outputs = "output0")
     public void singleDocGenerator_WithOutputView_OutputsCorrectNumDocuments(TestResult testResult)
             throws Exception {
-        assertNull(testResult.getException());
         OutputRecorder outputRecorder = testResult.getOutputViewByName("output0");
         assertEquals(1, outputRecorder.getRecordedData().size());
     }
@@ -2744,7 +2747,6 @@ public class DocGeneratorTest {
             outputs = "output0",
             properties = "data/doc_generator_properties.json")
     public void testDocGeneratorFunctionality(TestResult testResult) throws Exception {
-        assertNull(testResult.getException());
         OutputRecorder outputRecorder = testResult.getOutputViewByName("output0");
         assertEquals(5, outputRecorder.getRecordedData().size());
     }
@@ -2798,7 +2800,6 @@ public class DocGeneratorTest {
             propertyOverrides = {"$.settings.count.value", "20"})
     public void docGenerator_WithPropertyOverrides_OutputsCorrectNumDocuments(TestResult testResult)
             throws Exception {
-        assertNull(testResult.getException());
         OutputRecorder outputRecorder = testResult.getOutputViewByName("output0");
         assertEquals(20, outputRecorder.getRecordedData().size());
     }
@@ -2836,7 +2837,6 @@ public class DocConsumerTest {
         testSetup.inject().fieldName("count").dependency(count).add();
 
         TestResult testResult = testSetup.test(); // test the Snap by running through its lifecycle
-        assertNull(testResult.getException());
         assertEquals(4, count.get());
     }
 }
@@ -2956,12 +2956,12 @@ The former executes the `Suggestions` instance assigned to the specified propert
 
 ```java
 @RunWith(SnapTestRunner.class)
+@TestFixture(snap = CurrencyConverter.class,
+        expectedOutputPath = "data/currency_converter/expected",
+        expectedErrorPath = "data/currency_converter/expected")
 public class CurrencyConverterTest {
 
-    @TestFixture(snap = CurrencyConverter.class,
-            input = "data/currency_converter/input_documents.json",
-            outputs = "output0",
-            expectedOutputPath = "data/currency_converter")
+    @TestFixture(input = "data/currency_converter/input_documents.json")
     public void currencyConverstion_WithFieldMockedDirectly_ConvertsCorrectly(TestSetup testSetup)
             throws Exception {
         // This demonstrates how to inject mocks into Snap fields.
@@ -2973,20 +2973,27 @@ public class CurrencyConverterTest {
         testSetup.inject().fieldName("foreignExchange").dependency(forExMock).add();
 
         TestResult testResult = testSetup.test();
-        assertNull(testResult.getException());
 
         verify(forExMock);
     }
 
-    @TestFixture(snap = CurrencyConverter.class,
-            input = "data/currency_converter/input_documents.json",
-            outputs = "output0",
-            expectedOutputPath = "data/currency_converter",
+    @TestFixture(input = "data/currency_converter/input_documents.json",
             injectorModule = FakeForeignExchangeInjector.class)
-    public void currencyConversion_WithCustomInjector_ConvertsCorrectly() throws Exception {
-
+    public void currencyConversion_WithCustomInjector_ConvertsCorrectly() {
     }
-    
+
+    @TestFixture(input = "data/currency_converter/input_documents.json",
+            properties = "data/currency_converter/exchange_rates_from_file_properties.json",
+            dataFiles = {"data/currency_converter/exchange_rates_file.json"})
+    public void currencyConversion_WithExchangeRatesFromDataFiles_ConvertsCorrectly() {
+    }
+
+    @TestFixture(input = "data/currency_converter/input_documents.json",
+            properties = "data/currency_converter/exchange_rates_from_file_properties.json",
+            dataFilesSupplier = ExchangeRatesSupplier.class)
+    public void currencyConversion_WithExchangeRatesDataSupplier_ConvertsCorrectly() {
+    }
+
     public static class FakeForeignExchangeInjector extends AbstractModule {
         FakeForeignExchange fakeForeignExchange = new FakeForeignExchange();
 
@@ -3018,7 +3025,15 @@ public class CurrencyConverterTest {
             return rate;
         }
     }
-    
+
+    public static class ExchangeRatesSupplier implements Supplier<String[]> {
+        @Override
+        public String[] get() {
+            return new String[]{
+                    "data/currency_converter/exchange_rates_file.json"
+            };
+        }
+    }
 }
 ```
 
