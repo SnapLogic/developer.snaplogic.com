@@ -422,12 +422,11 @@ Choose archetype:
 1: local -&gt; com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 1.7
-2: 1.8
-3: 1.9
-4: 1.10
-5: 1.11
-Choose a number: 5: 
+1: 1.10
+2: 1.11
+3: 1.12
+4: 4.21
+Choose a number: 4: 
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -447,7 +446,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : Y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:1.11
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:4.21
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -521,8 +520,7 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 <p>Once <code>SnapArchetype</code> has been generated, it can be imported as a Maven project into your IDE (<a href="https://www.jetbrains.com/help/idea/2016.1/importing-project-from-maven-model.html">IntelliJ IDEA</a>, <a href="https://books.sonatype.com/m2eclipse-book/reference/creating-sect-importing-projects.html">Eclipse</a>, <a href="http://wiki.netbeans.org/MavenBestPractices">Netbeans</a>).</p>
 <h2 id='project-structure'>Project Structure</h2>
 <blockquote>
-<p><img src="images/Eop8.png" alt="Project Structure Main" />
-<img src="images/odZU.png" alt="Project Structure Test" /></p>
+<p><img src="images/Eop9.png" alt="Project Structure" /></p>
 </blockquote>
 
 <p>A Snap Project&#39;s structure follows <a href="https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html">Maven&#39;s Standard Directory Layout</a>.</p>
@@ -588,12 +586,19 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 <pre class="highlight xml tab-xml"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>commons-codec<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>commons-codec<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>${commons-codec.version}<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>commons-io<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>commons-io<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>${commons-io.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.google.guava<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>guava<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 ...
 </code></pre><h1 id='developing-snaps'>Developing Snaps</h1>
@@ -845,7 +850,6 @@ We recommend that you do pass through the original document for greatest flexibi
             <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">)</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">singleDocGenerator_WithOutputView_OutputsCorrectNumDocuments</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span>
             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
         <span class="n">OutputRecorder</span> <span class="n">outputRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getOutputViewByName</span><span class="o">(</span><span class="s">"output0"</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">outputRecorder</span><span class="o">.</span><span class="na">getRecordedData</span><span class="o">().</span><span class="na">size</span><span class="o">());</span>
     <span class="o">}</span>
@@ -871,7 +875,7 @@ We recommend that you do pass through the original document for greatest flexibi
 <span class="nd">@Category</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">SnapCategory</span><span class="o">.</span><span class="na">WRITE</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocConsumer</span> <span class="kd">implements</span> <span class="n">Snap</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">log</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">DocConsumer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-    <span class="kd">private</span> <span class="n">AtomicInteger</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicInteger</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">AtomicInteger</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicInteger</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
 
     <span class="nd">@Inject</span>
     <span class="kd">private</span> <span class="n">InputViews</span> <span class="n">inputViews</span><span class="o">;</span>
@@ -2707,7 +2711,6 @@ public class ExampleAccount implements ExtendedValidatableAccount&lt;String, Str
             <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">)</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">singleDocGenerator_WithOutputView_OutputsCorrectNumDocuments</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span>
             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
         <span class="n">OutputRecorder</span> <span class="n">outputRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getOutputViewByName</span><span class="o">(</span><span class="s">"output0"</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">outputRecorder</span><span class="o">.</span><span class="na">getRecordedData</span><span class="o">().</span><span class="na">size</span><span class="o">());</span>
     <span class="o">}</span>
@@ -2830,7 +2833,6 @@ public class ExampleAccount implements ExtendedValidatableAccount&lt;String, Str
             <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">,</span>
             <span class="n">properties</span> <span class="o">=</span> <span class="s">"data/doc_generator_properties.json"</span><span class="o">)</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testDocGeneratorFunctionality</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
         <span class="n">OutputRecorder</span> <span class="n">outputRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getOutputViewByName</span><span class="o">(</span><span class="s">"output0"</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="n">outputRecorder</span><span class="o">.</span><span class="na">getRecordedData</span><span class="o">().</span><span class="na">size</span><span class="o">());</span>
     <span class="o">}</span>
@@ -2879,7 +2881,6 @@ public class ExampleAccount implements ExtendedValidatableAccount&lt;String, Str
             <span class="n">propertyOverrides</span> <span class="o">=</span> <span class="o">{</span><span class="s">"$.settings.count.value"</span><span class="o">,</span> <span class="s">"20"</span><span class="o">})</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">docGenerator_WithPropertyOverrides_OutputsCorrectNumDocuments</span><span class="o">(</span><span class="n">TestResult</span> <span class="n">testResult</span><span class="o">)</span>
             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
         <span class="n">OutputRecorder</span> <span class="n">outputRecorder</span> <span class="o">=</span> <span class="n">testResult</span><span class="o">.</span><span class="na">getOutputViewByName</span><span class="o">(</span><span class="s">"output0"</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span> <span class="n">outputRecorder</span><span class="o">.</span><span class="na">getRecordedData</span><span class="o">().</span><span class="na">size</span><span class="o">());</span>
     <span class="o">}</span>
@@ -2912,7 +2913,6 @@ propertyOverrides = {
         <span class="n">testSetup</span><span class="o">.</span><span class="na">inject</span><span class="o">().</span><span class="na">fieldName</span><span class="o">(</span><span class="s">"count"</span><span class="o">).</span><span class="na">dependency</span><span class="o">(</span><span class="n">count</span><span class="o">).</span><span class="na">add</span><span class="o">();</span>
 
         <span class="n">TestResult</span> <span class="n">testResult</span> <span class="o">=</span> <span class="n">testSetup</span><span class="o">.</span><span class="na">test</span><span class="o">();</span> <span class="c1">// test the Snap by running through its lifecycle</span>
-        <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="n">count</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -3017,12 +3017,12 @@ propertyOverrides = {
 }
 </div>
 <h2 id='injecting-test-dependencies'>Injecting Test Dependencies</h2><pre class="highlight java tab-java"><code><span class="nd">@RunWith</span><span class="o">(</span><span class="n">SnapTestRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">CurrencyConverter</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+        <span class="n">expectedOutputPath</span> <span class="o">=</span> <span class="s">"data/currency_converter/expected"</span><span class="o">,</span>
+        <span class="n">expectedErrorPath</span> <span class="o">=</span> <span class="s">"data/currency_converter/expected"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CurrencyConverterTest</span> <span class="o">{</span>
 
-    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">CurrencyConverter</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
-            <span class="n">input</span> <span class="o">=</span> <span class="s">"data/currency_converter/input_documents.json"</span><span class="o">,</span>
-            <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">,</span>
-            <span class="n">expectedOutputPath</span> <span class="o">=</span> <span class="s">"data/currency_converter"</span><span class="o">)</span>
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">input</span> <span class="o">=</span> <span class="s">"data/currency_converter/input_documents.json"</span><span class="o">)</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">currencyConverstion_WithFieldMockedDirectly_ConvertsCorrectly</span><span class="o">(</span><span class="n">TestSetup</span> <span class="n">testSetup</span><span class="o">)</span>
             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="c1">// This demonstrates how to inject mocks into Snap fields.</span>
@@ -3034,18 +3034,25 @@ propertyOverrides = {
         <span class="n">testSetup</span><span class="o">.</span><span class="na">inject</span><span class="o">().</span><span class="na">fieldName</span><span class="o">(</span><span class="s">"foreignExchange"</span><span class="o">).</span><span class="na">dependency</span><span class="o">(</span><span class="n">forExMock</span><span class="o">).</span><span class="na">add</span><span class="o">();</span>
 
         <span class="n">TestResult</span> <span class="n">testResult</span> <span class="o">=</span> <span class="n">testSetup</span><span class="o">.</span><span class="na">test</span><span class="o">();</span>
-        <span class="n">assertNull</span><span class="o">(</span><span class="n">testResult</span><span class="o">.</span><span class="na">getException</span><span class="o">());</span>
 
         <span class="n">verify</span><span class="o">(</span><span class="n">forExMock</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">snap</span> <span class="o">=</span> <span class="n">CurrencyConverter</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
-            <span class="n">input</span> <span class="o">=</span> <span class="s">"data/currency_converter/input_documents.json"</span><span class="o">,</span>
-            <span class="n">outputs</span> <span class="o">=</span> <span class="s">"output0"</span><span class="o">,</span>
-            <span class="n">expectedOutputPath</span> <span class="o">=</span> <span class="s">"data/currency_converter"</span><span class="o">,</span>
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">input</span> <span class="o">=</span> <span class="s">"data/currency_converter/input_documents.json"</span><span class="o">,</span>
             <span class="n">injectorModule</span> <span class="o">=</span> <span class="n">FakeForeignExchangeInjector</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">currencyConversion_WithCustomInjector_ConvertsCorrectly</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">currencyConversion_WithCustomInjector_ConvertsCorrectly</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
 
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">input</span> <span class="o">=</span> <span class="s">"data/currency_converter/input_documents.json"</span><span class="o">,</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="s">"data/currency_converter/exchange_rates_from_file_properties.json"</span><span class="o">,</span>
+            <span class="n">dataFiles</span> <span class="o">=</span> <span class="o">{</span><span class="s">"data/currency_converter/exchange_rates_file.json"</span><span class="o">})</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">currencyConversion_WithExchangeRatesFromDataFiles_ConvertsCorrectly</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="nd">@TestFixture</span><span class="o">(</span><span class="n">input</span> <span class="o">=</span> <span class="s">"data/currency_converter/input_documents.json"</span><span class="o">,</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="s">"data/currency_converter/exchange_rates_from_file_properties.json"</span><span class="o">,</span>
+            <span class="n">dataFilesSupplier</span> <span class="o">=</span> <span class="n">ExchangeRatesSupplier</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">currencyConversion_WithExchangeRatesDataSupplier_ConvertsCorrectly</span><span class="o">()</span> <span class="o">{</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">FakeForeignExchangeInjector</span> <span class="kd">extends</span> <span class="n">AbstractModule</span> <span class="o">{</span>
@@ -3080,6 +3087,14 @@ propertyOverrides = {
         <span class="o">}</span>
     <span class="o">}</span>
 
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">ExchangeRatesSupplier</span> <span class="kd">implements</span> <span class="n">Supplier</span><span class="o">&lt;</span><span class="n">String</span><span class="o">[]&gt;</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]{</span>
+                    <span class="s">"data/currency_converter/exchange_rates_file.json"</span>
+            <span class="o">};</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre>
 <p>There are two ways of injecting test dependencies - with the <code>inject()</code> approach described previously or with <code>injectorModule</code>. Both are shown here in <code>CurrencyConverterTest</code>.</p>
