@@ -221,7 +221,7 @@
 <h1 id='prerequisites'>Prerequisites</h1>
 <ul>
 <li>Java 8 (JDK)</li>
-<li>Maven 3</li>
+<li>Maven 3.2.1 or later</li>
 <li>A Snaplex</li>
 </ul>
 
@@ -3337,6 +3337,122 @@ ANY("any", Object.class),
 COMPOSITE("object", Map.class),
 BYTES("bytes", String.class);
 </div>
+<h1 id='updating-custom-snap-packs'>Updating Custom Snap Packs</h1><h2 id='overview-of-dependency-improvements'>Overview of Dependency Improvements</h2>
+<p>The SnapLogic development team has performed a maintenance review of third-party library
+dependencies in our platform and Snap Packs. This accomplished several objectives, including the
+following:</p>
+
+<ul>
+<li>Upgrade to more recent versions of some important libraries, such as the AWS SDK, Apache 
+HttpClient, Jackson, and Guava.</li>
+<li>Use consistent versions of libraries across the platform and Snaps, where possible.</li>
+<li>Eliminate dependencies that are no longer needed, resulting in a smaller memory footprint and 
+better performance.</li>
+<li>Provide a better foundation for parties building custom Snaps.</li>
+<li>Bundle more dependencies into Snap Packs to reduce the need for the platform to provide those 
+dependencies, allowing the version used by Snaps to vary from the version used by the platform when necessary.</li>
+</ul>
+
+<p>Previously, many dependencies that were used by both the platform and by Snaps were included only in 
+the platform and referenced as provided scope dependencies by the Snaps rather than bundling them into the Snap Packs. 
+However, any dependencies at the platform layer carry a rather substantial burden, since they are available globally in 
+the classpath of the platform and all Snaps.</p>
+
+<p>Our dependency audit found a number of dependencies that are no longer used by the platform per se. 
+To eliminate the burden of these globally-available dependencies, they have been removed from the platform layer. 
+However, this means that any Snap Packs that relied on any of those dependencies must be updated to bundle these 
+dependencies using compile scope rather than provided scope when building the packs. SnapLogic has updated our 
+standard Snap Packs accordingly. <strong>Custom Snap Packs must also be updated, rebuilt and redeployed to ensure proper 
+functioning against the May (4.21) release of the platform.</strong></p>
+<h2 id='updating-a-custom-snap-pack'>Updating a Custom Snap Pack</h2><h3 id='update-your-pom'>Update Your POM</h3>
+<p>To ease the upgrade and ongoing maintenance of custom Snap Packs, SnapLogic now provides a Maven BOM 
+(Bill Of Materials) file that declares a set of dependencies to use for building Snaps. 
+This set of dependencies includes specific versions of both SnapLogic libraries and third-party libraries used by 
+SnapLogic. This BOM can be imported into a Snap Pack’s POM file which reduces the amount of dependency information
+that needs to be specified directly in the POM file.</p>
+
+<p>Steps to update the POM file (pom.xml):</p>
+<pre class="highlight xml tab-xml"><code>(step 1)
+<span class="nt">&lt;dependencyManagement&gt;</span>
+    <span class="nt">&lt;dependencies&gt;</span>
+        ...
+        <span class="c">&lt;!-- import dependencies from the SnapLogic BOM --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.snaplogic.snaps<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>bom<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${snaplogic.version}<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        ...
+    <span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/dependencyManagement&gt;</span>
+</code></pre><pre class="highlight xml tab-xml"><code>(step 6)
+<span class="nt">&lt;plugin&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.snaplogic.tools<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>snappack-installer<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${snaplogic.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</code></pre>
+<ol>
+<li><p>Import the BOM into your POM by adding the text shown in the code snippet to the <code>&lt;dependencyManagement&gt;</code> section.
+If you don’t already have this section, add the <code>&lt;dependencyManagement&gt;</code> and <code>&lt;dependencies&gt;</code> elements.</p></li>
+<li><p><a href="http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/snaps/bom/4.21/bom-4.21.pom">Open the BOM file</a> in your web browser.</p></li>
+<li><p>If your POM already had a <code>&lt;dependencyManagement&gt;</code> section before importing the BOM, review each <code>&lt;dependency&gt;</code> in that 
+section to see if it’s declared by the BOM. If so, remove that dependency from the <code>&lt;dependencyManagement&gt;</code> section.</p></li>
+<li><p>Review the <code>&lt;dependencies&gt;</code> section (the one that’s a direct child of the root <code>&lt;project&gt;</code> element, not the one inside 
+the <code>&lt;dependencyManagement&gt;</code> section). For each <code>&lt;dependency&gt;</code> in that section, see if it’s declared by the BOM. If so, 
+keep the <code>&lt;dependency&gt;</code> and its <code>&lt;groupId&gt;</code> and <code>&lt;artifactId&gt;</code> but remove any <code>&lt;version&gt;</code>, <code>&lt;scope&gt;</code>, and <code>&lt;exclusions&gt;</code> so that those are declared only by the BOM.</p>
+
+<p>You can also remove the <code>com.snaplogic:mrjob</code> dependency if it’s in your POM.</p></li>
+<li><p>Add the following to the <code>&lt;properties&gt;</code> section of your POM.</p>
+
+<p><code>&lt;snaplogic.version&gt;4.21&lt;/snaplogic.version&gt;</code></p></li>
+<li><p>In the <code>&lt;pluginManagement&gt;</code> section of your POM, update the version of the snaplogic-installer plugins so that it references the property added in the last step. (See code snippet.)</p>
+
+<p>Also update these plugins to the version listed here:</p>
+
+<ul>
+<li>maven-assembly-plugin: 3.2 </li>
+<li>maven-compiler-plugin: 3.5.1</li>
+<li>properties-maven-plugin: 1.0.0</li>
+</ul></li>
+<li><p>In the <code>&lt;plugins&gt;</code> section, update maven-compiler-plugin’s source/target values to 1.8.</p></li>
+<li><p>In the <code>&lt;repositories&gt;</code> section, look for the Maven Central repository with this URL:</p>
+
+<p><code>&lt;url&gt;http://repo1.maven.org/maven2&lt;/url&gt;</code></p>
+
+<p>This repository now requires https, so add an “s” to the protocol specifier:</p>
+
+<p><code>&lt;url&gt;https://repo1.maven.org/maven2&lt;/url&gt;</code></p></li>
+<li><p>In the <code>&lt;properties&gt;</code> section of your POM, find the <code>sl_build</code> property and increment its value so that the new build of your Snap Pack has a unique version number. <a href="#deploying-a-new-version">(Read more about this property.)</a></p></li>
+</ol>
+<h3 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h3>
+<p>After updating your POM, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.</p>
+
+<p>Check that you have java version 1.8.x:</p>
+
+<p><code>java -version</code></p>
+
+<p>Check that you have Maven version 3.2.1 or later:</p>
+
+<p><code>mvn --version</code></p>
+
+<p>Build your Snap Pack:</p>
+
+<p><code>mvn clean package</code></p>
+<h3 id='deploy-your-snap-pack'>Deploy Your Snap Pack</h3>
+<p>See <a href="#deploying-snap-packs">Deploying Snap Packs</a> for details about how to deploy your rebuilt Snap Pack.</p>
+<h2 id='requesting-assistance'>Requesting Assistance</h2>
+<p>We regret that our dependency improvements may have caused some of our customers disruptions with their custom Snaps.
+We are offering direct support from the SnapLogic developers to resolve such issues. 
+Please don’t hesitate to reach our team through one of the following channels:</p>
+
+<ul>
+<li><p>Post to the <a href="https://community.snaplogic.com/">SnapLogic Community</a> forum.
+Any such posts and their responses become resources that others may find beneficial.</p></li>
+<li><p>Email snap-dev@snaplogic.com and CC support@snaplogic.com. </p></li>
+</ul>
 
       </div>
       <div class="dark-box">
