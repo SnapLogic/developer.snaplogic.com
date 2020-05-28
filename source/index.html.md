@@ -3375,7 +3375,7 @@ keep the `<dependency>` and its `<groupId>` and `<artifactId>` but remove any `<
 6. In the `<pluginManagement>` section of your POM, update the version of the snaplogic-installer plugins so that it references the property added in the last step. (See code snippet.)
 
     Also update these plugins to the version listed here:
-    * maven-assembly-plugin: 3.2 
+    * maven-assembly-plugin: 3.2.0 
     * maven-compiler-plugin: 3.5.1
     * properties-maven-plugin: 1.0.0
 
