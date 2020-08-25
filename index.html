@@ -3523,7 +3523,7 @@ keep the <code>&lt;dependency&gt;</code> and its <code>&lt;groupId&gt;</code> an
 
 <p><code>&lt;url&gt;https://repo1.maven.org/maven2&lt;/url&gt;</code></p></li>
 </ol>
-<h3 id='pom-changes-for-august-2020-release'>POM Changes for August 2020 release</h3>
+<h2 id='pom-changes-for-august-2020-release'>POM Changes for August 2020 release</h2>
 <p>Starting with the August 2020 (4.22) release, the SnapLogic libraries required by Snaps are no longer deployed to
 SnapLogic&#39;s Nexus server on maven.clouddev.snaplogic.com but are instead deployed to Github at https://github.com/SnapLogicDev/sdk/packages.
 Furthermore, SnapLogic&#39;s maven artifacts now follow a more consistent, straightforward versioning strategy, and it is no longer necessary to use Maven profiles (develop, release, master) to reference different subdirectories within
@@ -3532,8 +3532,6 @@ the repository as it was when using pre-4.22 artifacts hosted on Nexus.</p>
 <p>Accordingly, we recommend updating custom snap POMs to remove SnapLogic-specific <code>&lt;profile&gt;</code> definitions, move 
 <code>&lt;repository&gt;</code> and <code>&lt;pluginRepository&gt;</code> elements from those profiles to the top level, and update the repository definitions
 to reflect the new locations.</p>
-<h4 id='remove-profiles'>Remove profiles</h4>
-<p><strong>Remove</strong> the <code>profiles</code> and <code>repositories</code> as summarized in the adjacent sample.</p>
 <pre class="highlight xml tab-xml"><code>(REMOVE)
 
     <span class="nt">&lt;profiles&gt;</span>
@@ -3543,26 +3541,17 @@ to reflect the new locations.</p>
             <span class="nt">&lt;repositories&gt;</span>
                 <span class="nt">&lt;repository&gt;</span>
                     <span class="nt">&lt;id&gt;</span>Snaplogic-Maven-Cloud-Repository<span class="nt">&lt;/id&gt;</span>
-                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
-                    <span class="nt">&lt;url&gt;</span>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop/
-                    <span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop/<span class="nt">&lt;/url&gt;</span>
                     ...
                 <span class="nt">&lt;/repository&gt;</span>
                 <span class="nt">&lt;repository&gt;</span>
                     <span class="nt">&lt;id&gt;</span>Snaplogic-Maven-Cloud-Dev-Repository<span class="nt">&lt;/id&gt;</span>
-                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
-                    <span class="nt">&lt;url&gt;</span>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
-                    <span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/<span class="nt">&lt;/url&gt;</span>
                     ...
                 <span class="nt">&lt;/repository&gt;</span>
                 <span class="nt">&lt;repository&gt;</span>
                     <span class="nt">&lt;id&gt;</span>Snaplogic-ThirdPartyMaven-Repository<span class="nt">&lt;/id&gt;</span>
-                    <span class="nt">&lt;name&gt;</span>Snaplogic ThirdParty Repository<span class="nt">&lt;/name&gt;</span>
-                    <span class="nt">&lt;url&gt;</span>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
-                    <span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/<span class="nt">&lt;/url&gt;</span>
                     ...
                 <span class="nt">&lt;/repository&gt;</span>
             <span class="nt">&lt;/repositories&gt;</span>
@@ -3573,18 +3562,12 @@ to reflect the new locations.</p>
             <span class="nt">&lt;repositories&gt;</span>
                 <span class="nt">&lt;repository&gt;</span>
                     <span class="nt">&lt;id&gt;</span>sl_release<span class="nt">&lt;/id&gt;</span>
-                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
-                    <span class="nt">&lt;url&gt;</span>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
-                    <span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/<span class="nt">&lt;/url&gt;</span>
                     ...
                 <span class="nt">&lt;/repository&gt;</span>
                 <span class="nt">&lt;repository&gt;</span>
                     <span class="nt">&lt;id&gt;</span>Snaplogic-ThirdPartyMaven-Repository<span class="nt">&lt;/id&gt;</span>
-                    <span class="nt">&lt;name&gt;</span>Snaplogic ThirdParty Repository<span class="nt">&lt;/name&gt;</span>
-                    <span class="nt">&lt;url&gt;</span>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
-                    <span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/<span class="nt">&lt;/url&gt;</span>
                     ...
                 <span class="nt">&lt;/repository&gt;</span>
             <span class="nt">&lt;/repositories&gt;</span>
@@ -3592,17 +3575,13 @@ to reflect the new locations.</p>
                 <span class="nt">&lt;pluginRepository&gt;</span>
                     <span class="nt">&lt;id&gt;</span>sl_release<span class="nt">&lt;/id&gt;</span>
                     <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
-                    <span class="nt">&lt;url&gt;</span>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
-                    <span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/<span class="nt">&lt;/url&gt;</span>
                     ...
                 <span class="nt">&lt;/pluginRepository&gt;</span>
                 <span class="nt">&lt;pluginRepository&gt;</span>
                     <span class="nt">&lt;id&gt;</span>sl_develop_snapshot<span class="nt">&lt;/id&gt;</span>
                     <span class="nt">&lt;name&gt;</span>Snaplogic Maven Snapshot Repository<span class="nt">&lt;/name&gt;</span>
-                    <span class="nt">&lt;url&gt;</span>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop-snapshot/
-                    <span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop-snapshot/<span class="nt">&lt;/url&gt;</span>
                     ...
                 <span class="nt">&lt;/pluginRepository&gt;</span>
             <span class="nt">&lt;/pluginRepositories&gt;</span>
@@ -3613,39 +3592,43 @@ to reflect the new locations.</p>
             <span class="nt">&lt;repositories&gt;</span>
                 <span class="nt">&lt;repository&gt;</span>
                     <span class="nt">&lt;id&gt;</span>sl_master<span class="nt">&lt;/id&gt;</span>
-                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
-                    <span class="nt">&lt;url&gt;</span>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
-                    <span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/<span class="nt">&lt;/url&gt;</span>
                     ...
                 <span class="nt">&lt;/repository&gt;</span>
                 <span class="nt">&lt;repository&gt;</span>
                     <span class="nt">&lt;id&gt;</span>Snaplogic-ThirdPartyMaven-Repository<span class="nt">&lt;/id&gt;</span>
-                    <span class="nt">&lt;name&gt;</span>Snaplogic ThirdParty Repository<span class="nt">&lt;/name&gt;</span>
-                    <span class="nt">&lt;url&gt;</span>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
-                    <span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/<span class="nt">&lt;/url&gt;</span>
                     ...
                 <span class="nt">&lt;/repository&gt;</span>
             <span class="nt">&lt;/repositories&gt;</span>
             <span class="nt">&lt;pluginRepositories&gt;</span>
                 <span class="nt">&lt;pluginRepository&gt;</span>
                     <span class="nt">&lt;id&gt;</span>sl_master<span class="nt">&lt;/id&gt;</span>
-                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
-                    <span class="nt">&lt;url&gt;</span>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
-                    <span class="nt">&lt;/url&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/<span class="nt">&lt;/url&gt;</span>
                     ...
                 <span class="nt">&lt;/pluginRepository&gt;</span>
             <span class="nt">&lt;/pluginRepositories&gt;</span>
         <span class="nt">&lt;/profile&gt;</span>
     <span class="nt">&lt;/profiles&gt;</span>
-</code></pre><h4 id='define-repositories'>Define repositories</h4>
-<p><strong>Create</strong> or <strong>update</strong> the <code>&lt;repositories&gt;</code> at the top-level of your POM to include each <code>&lt;repository&gt;</code> shown in the sample:
- * central (Maven Central)
- * github_SnapLogicDev
- * Snaplogic-ThirdPartyMaven-Repository (still hosted on SnapLogic&#39;s Nexus repository)
- * any other repositories needed for other dependencies of your custom Snap project</p>
+</code></pre><h3 id='remove-profiles'>Remove profiles</h3>
+<p><strong>Remove</strong> the <code>profiles</code> and <code>repositories</code> as summarized in the adjacent sample.</p>
+<h3 id='define-repositories-and-pluginrepositories'>Define repositories and pluginRepositories</h3>
+<p><strong>Create</strong> or <strong>update</strong> the <code>&lt;repositories&gt;</code> at the top-level of your POM to include each <code>&lt;repository&gt;</code> shown in the sample:</p>
+
+<ul>
+<li>central (Maven Central)</li>
+<li>github_SnapLogicDev</li>
+<li>Snaplogic-ThirdPartyMaven-Repository (still hosted on SnapLogic&#39;s Nexus repository)</li>
+<li>any other repositories needed for other dependencies of your custom Snap project</li>
+</ul>
+
+<p><strong>Create</strong> or <strong>update</strong> the <code>&lt;pluginRepositories&gt;</code> at the top-level of your POM to include each <code>&lt;pluginRepository&gt;</code> shown in the sample:</p>
+
+<ul>
+<li>central (Maven Central)</li>
+<li>github_SnapLogicDev</li>
+<li>any other repositories needed for other dependencies of your custom Snap project</li>
+</ul>
 <pre class="highlight xml tab-xml"><code>(ADD)
     <span class="nt">&lt;repositories&gt;</span>
         <span class="nt">&lt;repository&gt;</span>
@@ -3683,12 +3666,6 @@ to reflect the new locations.</p>
         <span class="nt">&lt;/repository&gt;</span>
         ...
     <span class="nt">&lt;/repositories&gt;</span>
-</code></pre><h4 id='define-pluginrepositories'>Define pluginRepositories</h4>
-<p><strong>Create</strong> or <strong>update</strong> the <code>&lt;pluginRepositories&gt;</code> at the top-level of your POM to include each <code>&lt;pluginRepository&gt;</code> shown in the sample:
- * central (Maven Central)
- * github_SnapLogicDev
- * any other repositories needed for other dependencies of your custom Snap project</p>
-<pre class="highlight xml tab-xml"><code>(ADD)
     <span class="nt">&lt;pluginRepositories&gt;</span>
         <span class="nt">&lt;pluginRepository&gt;</span>
             <span class="nt">&lt;id&gt;</span>central<span class="nt">&lt;/id&gt;</span>
@@ -3713,7 +3690,7 @@ to reflect the new locations.</p>
             <span class="nt">&lt;/releases&gt;</span>
         <span class="nt">&lt;/pluginRepository&gt;</span>
     <span class="nt">&lt;/pluginRepositories&gt;</span>
-</code></pre><h4 id='add-mvn-maven-config-and-settings-xml'>Add .mvn/maven.config and settings.xml</h4>
+</code></pre><h3 id='add-mvn-maven-config-and-settings-xml'>Add .mvn/maven.config and settings.xml</h3>
 <p>Currently, the Github Package Registry cannot be accessed anonymously like other public repositories like Maven Central.
 See <a href="https://github.community/t/download-from-github-package-registry-without-authentication/14407">this post</a> for more information.</p>
 
@@ -3732,9 +3709,7 @@ for a more detailed discussion of this solution.</p>
 <pre class="highlight xml tab-xml"><code><span class="c">&lt;!-- settings.xml --&gt;</span>
 <span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0"</span>
   <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
-  <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0</span>
-                      <span class="err">http://maven.apache.org/xsd/settings-1.0.0.xsd"</span><span class="nt">&gt;</span>
-
+  <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;servers&gt;</span>
     <span class="nt">&lt;server&gt;</span>
       <span class="nt">&lt;id&gt;</span>github_SnapLogicDev<span class="nt">&lt;/id&gt;</span>
