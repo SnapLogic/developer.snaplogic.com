@@ -3493,7 +3493,7 @@ keep the `<dependency>` and its `<groupId>` and `<artifactId>` but remove any `<
 
     `<url>https://repo1.maven.org/maven2</url>`
 
-### POM Changes for August 2020 release
+## POM Changes for August 2020 release
 
 Starting with the August 2020 (4.22) release, the SnapLogic libraries required by Snaps are no longer deployed to
 SnapLogic's Nexus server on maven.clouddev.snaplogic.com but are instead deployed to Github at https://github.com/SnapLogicDev/sdk/packages.
@@ -3503,10 +3503,6 @@ the repository as it was when using pre-4.22 artifacts hosted on Nexus.
 Accordingly, we recommend updating custom snap POMs to remove SnapLogic-specific `<profile>` definitions, move 
 `<repository>` and `<pluginRepository>` elements from those profiles to the top level, and update the repository definitions
 to reflect the new locations.
-
-#### Remove profiles
-
-**Remove** the `profiles` and `repositories` as summarized in the adjacent sample.
 
 ```xml
 (REMOVE)
@@ -3518,26 +3514,17 @@ to reflect the new locations.
             <repositories>
                 <repository>
                     <id>Snaplogic-Maven-Cloud-Repository</id>
-                    <name>Snaplogic Maven Repository</name>
-                    <url>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop/
-                    </url>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop/</url>
                     ...
                 </repository>
                 <repository>
                     <id>Snaplogic-Maven-Cloud-Dev-Repository</id>
-                    <name>Snaplogic Maven Repository</name>
-                    <url>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
-                    </url>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/</url>
                     ...
                 </repository>
                 <repository>
                     <id>Snaplogic-ThirdPartyMaven-Repository</id>
-                    <name>Snaplogic ThirdParty Repository</name>
-                    <url>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
-                    </url>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/</url>
                     ...
                 </repository>
             </repositories>
@@ -3548,18 +3535,12 @@ to reflect the new locations.
             <repositories>
                 <repository>
                     <id>sl_release</id>
-                    <name>Snaplogic Maven Repository</name>
-                    <url>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
-                    </url>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/</url>
                     ...
                 </repository>
                 <repository>
                     <id>Snaplogic-ThirdPartyMaven-Repository</id>
-                    <name>Snaplogic ThirdParty Repository</name>
-                    <url>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
-                    </url>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/</url>
                     ...
                 </repository>
             </repositories>
@@ -3567,17 +3548,13 @@ to reflect the new locations.
                 <pluginRepository>
                     <id>sl_release</id>
                     <name>Snaplogic Maven Repository</name>
-                    <url>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
-                    </url>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/</url>
                     ...
                 </pluginRepository>
                 <pluginRepository>
                     <id>sl_develop_snapshot</id>
                     <name>Snaplogic Maven Snapshot Repository</name>
-                    <url>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop-snapshot/
-                    </url>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop-snapshot/</url>
                     ...
                 </pluginRepository>
             </pluginRepositories>
@@ -3588,28 +3565,19 @@ to reflect the new locations.
             <repositories>
                 <repository>
                     <id>sl_master</id>
-                    <name>Snaplogic Maven Repository</name>
-                    <url>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
-                    </url>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/</url>
                     ...
                 </repository>
                 <repository>
                     <id>Snaplogic-ThirdPartyMaven-Repository</id>
-                    <name>Snaplogic ThirdParty Repository</name>
-                    <url>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
-                    </url>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/</url>
                     ...
                 </repository>
             </repositories>
             <pluginRepositories>
                 <pluginRepository>
                     <id>sl_master</id>
-                    <name>Snaplogic Maven Repository</name>
-                    <url>
-                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
-                    </url>
+                    <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/</url>
                     ...
                 </pluginRepository>
             </pluginRepositories>
@@ -3617,12 +3585,23 @@ to reflect the new locations.
     </profiles>
 ```
 
-#### Define repositories 
+### Remove profiles
+
+**Remove** the `profiles` and `repositories` as summarized in the adjacent sample.
+
+### Define repositories and pluginRepositories
 
 **Create** or **update** the `<repositories>` at the top-level of your POM to include each `<repository>` shown in the sample:
+
  * central (Maven Central)
  * github_SnapLogicDev
  * Snaplogic-ThirdPartyMaven-Repository (still hosted on SnapLogic's Nexus repository)
+ * any other repositories needed for other dependencies of your custom Snap project
+ 
+**Create** or **update** the `<pluginRepositories>` at the top-level of your POM to include each `<pluginRepository>` shown in the sample:
+ 
+ * central (Maven Central)
+ * github_SnapLogicDev
  * any other repositories needed for other dependencies of your custom Snap project
 
 ```xml
@@ -3663,17 +3642,6 @@ to reflect the new locations.
         </repository>
         ...
     </repositories>
-```
-
-#### Define pluginRepositories 
-
-**Create** or **update** the `<pluginRepositories>` at the top-level of your POM to include each `<pluginRepository>` shown in the sample:
- * central (Maven Central)
- * github_SnapLogicDev
- * any other repositories needed for other dependencies of your custom Snap project
-
-```xml
-(ADD)
     <pluginRepositories>
         <pluginRepository>
             <id>central</id>
@@ -3700,7 +3668,7 @@ to reflect the new locations.
     </pluginRepositories>
 ```
 
-#### Add .mvn/maven.config and settings.xml 
+### Add .mvn/maven.config and settings.xml 
 
 Currently, the Github Package Registry cannot be accessed anonymously like other public repositories like Maven Central.
 See [this post](https://github.community/t/download-from-github-package-registry-without-authentication/14407) for more information.
@@ -3721,9 +3689,7 @@ for a more detailed discussion of this solution.
 <!-- settings.xml -->
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
-
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
   <servers>
     <server>
       <id>github_SnapLogicDev</id>
