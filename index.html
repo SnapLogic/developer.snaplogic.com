@@ -3642,10 +3642,10 @@ to reflect the new locations.</p>
     <span class="nt">&lt;/profiles&gt;</span>
 </code></pre><h4 id='define-repositories'>Define repositories</h4>
 <p><strong>Create</strong> or <strong>update</strong> the <code>&lt;repositories&gt;</code> at the top-level of your POM to include each <code>&lt;repository&gt;</code> shown in the sample:
-* central (Maven Central)
-* github_SnapLogicDev
-* Snaplogic-ThirdPartyMaven-Repository (still hosted on SnapLogic&#39;s Nexus repository)
-* any other repositories needed for other dependencies of your custom Snap project</p>
+ * central (Maven Central)
+ * github_SnapLogicDev
+ * Snaplogic-ThirdPartyMaven-Repository (still hosted on SnapLogic&#39;s Nexus repository)
+ * any other repositories needed for other dependencies of your custom Snap project</p>
 <pre class="highlight xml tab-xml"><code>(ADD)
     <span class="nt">&lt;repositories&gt;</span>
         <span class="nt">&lt;repository&gt;</span>
@@ -3685,9 +3685,9 @@ to reflect the new locations.</p>
     <span class="nt">&lt;/repositories&gt;</span>
 </code></pre><h4 id='define-pluginrepositories'>Define pluginRepositories</h4>
 <p><strong>Create</strong> or <strong>update</strong> the <code>&lt;pluginRepositories&gt;</code> at the top-level of your POM to include each <code>&lt;pluginRepository&gt;</code> shown in the sample:
-* central (Maven Central)
-* github_SnapLogicDev
-* any other repositories needed for other dependencies of your custom Snap project</p>
+ * central (Maven Central)
+ * github_SnapLogicDev
+ * any other repositories needed for other dependencies of your custom Snap project</p>
 <pre class="highlight xml tab-xml"><code>(ADD)
     <span class="nt">&lt;pluginRepositories&gt;</span>
         <span class="nt">&lt;pluginRepository&gt;</span>
@@ -3713,14 +3713,21 @@ to reflect the new locations.</p>
             <span class="nt">&lt;/releases&gt;</span>
         <span class="nt">&lt;/pluginRepository&gt;</span>
     <span class="nt">&lt;/pluginRepositories&gt;</span>
-</code></pre><h4 id='add-settings-xml-and-mvn-maven-config'>Add settings.xml and .mvn/maven.config</h4>
+</code></pre><h4 id='add-mvn-maven-config-and-settings-xml'>Add .mvn/maven.config and settings.xml</h4>
 <p>Currently, the Github Package Registry cannot be accessed anonymously like other public repositories like Maven Central.
 See <a href="https://github.community/t/download-from-github-package-registry-without-authentication/14407">this post</a> for more information.</p>
 
-<p>However, to provide the required authentication during Maven builds, two files can be added to your snap project:</p>
+<p>However, to provide the required authentication during Maven builds, two files can be added to your snap project, shown
+below. See <a href="https://github.community/t/how-to-allow-unauthorised-read-access-to-github-packages-maven-repository/115517">this post</a> 
+for a more detailed discussion of this solution.</p>
 
 <ul>
-<li>settings.xml</li>
+<li><p>.mvn/maven.config</p>
+
+<p><code>-s settings.xml</code></p></li>
+<li><p>settings.xml</p>
+
+<p>(see sidebar)</p></li>
 </ul>
 <pre class="highlight xml tab-xml"><code><span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0"</span>
   <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -3736,14 +3743,7 @@ See <a href="https://github.community/t/download-from-github-package-registry-wi
     <span class="nt">&lt;/server&gt;</span>
   <span class="nt">&lt;/servers&gt;</span>
 <span class="nt">&lt;/settings&gt;</span>
-</code></pre>
-<ul>
-<li>.mvn/maven.config
-<code>
--s settings.xml 
-</code></li>
-</ul>
-<h3 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h3>
+</code></pre><h3 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h3>
 <p>After updating your POM, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.</p>
 
 <p>Check that you have java version 1.8.x:</p>
