@@ -3620,10 +3620,10 @@ to reflect the new locations.
 #### Define repositories 
 
 **Create** or **update** the `<repositories>` at the top-level of your POM to include each `<repository>` shown in the sample:
-* central (Maven Central)
-* github_SnapLogicDev
-* Snaplogic-ThirdPartyMaven-Repository (still hosted on SnapLogic's Nexus repository)
-* any other repositories needed for other dependencies of your custom Snap project
+ * central (Maven Central)
+ * github_SnapLogicDev
+ * Snaplogic-ThirdPartyMaven-Repository (still hosted on SnapLogic's Nexus repository)
+ * any other repositories needed for other dependencies of your custom Snap project
 
 ```xml
 (ADD)
@@ -3668,9 +3668,9 @@ to reflect the new locations.
 #### Define pluginRepositories 
 
 **Create** or **update** the `<pluginRepositories>` at the top-level of your POM to include each `<pluginRepository>` shown in the sample:
-* central (Maven Central)
-* github_SnapLogicDev
-* any other repositories needed for other dependencies of your custom Snap project
+ * central (Maven Central)
+ * github_SnapLogicDev
+ * any other repositories needed for other dependencies of your custom Snap project
 
 ```xml
 (ADD)
@@ -3700,14 +3700,22 @@ to reflect the new locations.
     </pluginRepositories>
 ```
 
-#### Add settings.xml and .mvn/maven.config
+#### Add .mvn/maven.config and settings.xml 
 
 Currently, the Github Package Registry cannot be accessed anonymously like other public repositories like Maven Central.
 See [this post](https://github.community/t/download-from-github-package-registry-without-authentication/14407) for more information.
 
-However, to provide the required authentication during Maven builds, two files can be added to your snap project:
+However, to provide the required authentication during Maven builds, two files can be added to your snap project, shown
+below. See [this post](https://github.community/t/how-to-allow-unauthorised-read-access-to-github-packages-maven-repository/115517) 
+for a more detailed discussion of this solution.
+
+* .mvn/maven.config
+
+    `-s settings.xml`
 
 * settings.xml
+
+    (see sidebar)
 
 ```xml
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -3725,12 +3733,6 @@ However, to provide the required authentication during Maven builds, two files c
   </servers>
 </settings>
 ```
-
-* .mvn/maven.config
-```
--s settings.xml 
-```
-
 
 ### Rebuild Your Snap Pack
 
