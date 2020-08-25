@@ -419,13 +419,13 @@ $ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCa
 [INFO] Generating project in Interactive mode
 [INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
 Choose archetype:
-1: local -&gt; com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
+1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/ -&gt; com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 1.10
-2: 1.11
-3: 1.12
-4: 4.21
+1: 1.12
+2: 4.21
+3: 4.22
+4: 4.22.1
 Choose a number: 4: 
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
@@ -444,9 +444,9 @@ organization: Partners
 assetPath: /Partners/MyCompany/shared
 snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
- Y: : Y
+ Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:4.21
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:4.22.1
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -518,11 +518,101 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 </aside>
 
 <p>Once <code>SnapArchetype</code> has been generated, it can be imported as a Maven project into your IDE (<a href="https://www.jetbrains.com/help/idea/2016.1/importing-project-from-maven-model.html">IntelliJ IDEA</a>, <a href="https://books.sonatype.com/m2eclipse-book/reference/creating-sect-importing-projects.html">Eclipse</a>, <a href="http://wiki.netbeans.org/MavenBestPractices">Netbeans</a>).</p>
-<h2 id='project-structure'>Project Structure</h2>
-<blockquote>
-<p><img src="images/Eop9.png" alt="Project Structure" /></p>
-</blockquote>
-
+<h2 id='project-structure'>Project Structure</h2><pre class="highlight plaintext"><code>demosnappack
+├── .mvn
+│   └── maven.config
+├── pom.xml
+├── settings.xml
+└── src
+    ├── main
+    │   ├── assembly
+    │   │   ├── final.xml
+    │   │   └── snap.xml
+    │   ├── config
+    │   │   └── directives
+    │   ├── java
+    │   │   └── com
+    │   │       └── snaplogic
+    │   │           └── snaps
+    │   │               ├── CharacterCounter.java
+    │   │               ├── CurrencyConverter.java
+    │   │               ├── DocConsumer.java
+    │   │               ├── DocGenerator.java
+    │   │               ├── ExampleAccount.java
+    │   │               ├── PropertyTypes.java
+    │   │               ├── SchemaExample.java
+    │   │               ├── SingleDocGenerator.java
+    │   │               ├── SnapWithAccount.java
+    │   │               ├── Suggest.java
+    │   │               ├── TwoInputs.java
+    │   │               └── TwoInputsTwoOutputs.java
+    │   └── resources
+    └── test
+        ├── java
+        │   └── com
+        │       └── snaplogic
+        │           └── snaps
+        │               ├── CharacterCounterTest.java
+        │               ├── CurrencyConverterTest.java
+        │               ├── DocConsumerTest.java
+        │               ├── DocGeneratorTest.java
+        │               ├── PropertyTypesTest.java
+        │               ├── SchemaExampleTest.java
+        │               ├── SingleDocGeneratorTest.java
+        │               ├── SnapWithAccountTest.java
+        │               ├── SuggestTest.java
+        │               └── TwoInputsTwoOutputsTest.java
+        └── resources
+            └── data
+                ├── character_counter
+                │   ├── binary_input.txt
+                │   ├── character_counter_input_pointer.json
+                │   └── expected
+                │       └── characterCounter_WithSnapLogicAsInput_CountsOccurrences
+                │           ├── outbin-output0-data-0.data
+                │           └── outbin-output0-headers.json
+                ├── currency_converter
+                │   ├── exchange_rates_file.json
+                │   ├── exchange_rates_from_file_properties.json
+                │   ├── expected
+                │   │   ├── currencyConversion_WithCustomInjector_ConvertsCorrectly-out.json
+                │   │   ├── currencyConversion_WithExchangeRatesDataSupplier_ConvertsCorrectly-out.json
+                │   │   ├── currencyConversion_WithExchangeRatesFromDataFiles_ConvertsCorrectly-out.json
+                │   │   └── currencyConverstion_WithFieldMockedDirectly_ConvertsCorrectly-out.json
+                │   └── input_documents.json
+                ├── doc_generator
+                │   ├── doc_generator_properties.json
+                │   └── expected
+                │       ├── docGenerator_WithExpectedErrorPath_OutputsErrorDocumentCorrectly-err.json
+                │       ├── docGenerator_WithExpectedOutputPath_OutputsDocumentsCorrectly-out.json
+                │       ├── docGenerator_WithProperties_OutputsCorrectNumberOfDocuments-out.json
+                │       └── docGenerator_WithPropertyOverrides_OutputsCorrectNumDocuments-out.json
+                ├── property_types
+                │   ├── expected
+                │   │   └── propertyTypes_WithFieldsCompositesAndTables_OutputsEvaluatedValuesDocument-out.json
+                │   └── property_types_properties.json
+                ├── schema_example
+                │   ├── expected
+                │   │   ├── schemaExample_WithInvalidData_OutputsErrorDocumentOnly-err.json
+                │   │   └── schemaExample_WithValidData_OutputsDocument-out.json
+                │   ├── schema_invalid_input.data
+                │   └── schema_valid_input.data
+                ├── single_doc_generator
+                │   └── expected
+                │       └── singleDocGenerator_WithOutputView_OutputsCorrectNumDocuments-out.json
+                ├── snap_with_account
+                │   ├── account_properties.json
+                │   └── expected
+                │       └── snapWithAccount_WithAccountProperties_OutputsCorrectToken-out.json
+                ├── suggest
+                │   ├── expected
+                │   │   └── suggest_WithSuggestProperty_WritesResultsToSpecialOutputView-out.json
+                │   └── suggest_properties.json
+                └── two_inputs_two_outputs
+                    ├── expected
+                    │   └── twoInputsTwoOutputs_WithParentsAndChildren_GroupsByGender-out.json
+                    └── input_files.json
+</code></pre>
 <p>A Snap Project&#39;s structure follows <a href="https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html">Maven&#39;s Standard Directory Layout</a>.</p>
 <h3 id='src-main-assembly'><code>src/main/assembly</code></h3>
 <p><code>final.xml</code> and <code>snap.xml</code> are used by the <code>maven-assembly-plugin</code> to build the Snap Pack zip file that can be uploaded to the SnapLogic Manager. You should not need to alter these files.</p>
@@ -552,7 +642,7 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
         <span class="nt">&lt;dependency&gt;</span>
             <span class="nt">&lt;groupId&gt;</span>com.snaplogic.snaps<span class="nt">&lt;/groupId&gt;</span>
             <span class="nt">&lt;artifactId&gt;</span>bom<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>${snaplogic.version}<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${snaplogic.snaps.version}<span class="nt">&lt;/version&gt;</span>
             <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
             <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
         <span class="nt">&lt;/dependency&gt;</span>
@@ -3363,7 +3453,7 @@ To eliminate the burden of these globally-available dependencies, they have been
 However, this means that any Snap Packs that relied on any of those dependencies must be updated to bundle these 
 dependencies using compile scope rather than provided scope when building the packs. SnapLogic has updated our 
 standard Snap Packs accordingly. <strong>Custom Snap Packs must also be updated, rebuilt and redeployed to ensure proper 
-functioning against the May (4.21) release of the platform.</strong></p>
+functioning against the May 2020 (4.21) release of the platform.</strong></p>
 <h2 id='updating-a-custom-snap-pack'>Updating a Custom Snap Pack</h2><h3 id='update-your-pom'>Update Your POM</h3>
 <p>To ease the upgrade and ongoing maintenance of custom Snap Packs, SnapLogic now provides a Maven BOM 
 (Bill Of Materials) file that declares a set of dependencies to use for building Snaps. 
@@ -3380,7 +3470,7 @@ that needs to be specified directly in the POM file.</p>
         <span class="nt">&lt;dependency&gt;</span>
             <span class="nt">&lt;groupId&gt;</span>com.snaplogic.snaps<span class="nt">&lt;/groupId&gt;</span>
             <span class="nt">&lt;artifactId&gt;</span>bom<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>${snaplogic.version}<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${snaplogic.snaps.version}<span class="nt">&lt;/version&gt;</span>
             <span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
             <span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
         <span class="nt">&lt;/dependency&gt;</span>
@@ -3388,16 +3478,23 @@ that needs to be specified directly in the POM file.</p>
     <span class="nt">&lt;/dependencies&gt;</span>
 <span class="nt">&lt;/dependencyManagement&gt;</span>
 </code></pre><pre class="highlight xml tab-xml"><code>(step 6)
+<span class="nt">&lt;properties&gt;</span>
+    ...
+    <span class="c">&lt;!-- SnapLogic SDK versions --&gt;</span>
+    <span class="nt">&lt;snaplogic.platform.version&gt;</span>4.22.8138<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
+    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>4.22.6586<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
+<span class="nt">&lt;/properties&gt;</span>
+</code></pre><pre class="highlight xml tab-xml"><code>(step 7)
 <span class="nt">&lt;plugin&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>com.snaplogic.tools<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>snappack-installer<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>${snaplogic.version}<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${snaplogic.platform.version}<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/plugin&gt;</span>
 </code></pre>
 <ol>
 <li><p>Import the BOM into your POM by adding the text shown in the code snippet to the <code>&lt;dependencyManagement&gt;</code> section.
 If you don’t already have this section, add the <code>&lt;dependencyManagement&gt;</code> and <code>&lt;dependencies&gt;</code> elements.</p></li>
-<li><p><a href="http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/com/snaplogic/snaps/bom/4.21/bom-4.21.pom">Open the BOM file</a> in your web browser.</p></li>
+<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=4.22.6542">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
 <li><p>If your POM already had a <code>&lt;dependencyManagement&gt;</code> section before importing the BOM, review each <code>&lt;dependency&gt;</code> in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the <code>&lt;dependencyManagement&gt;</code> section.</p></li>
 <li><p>Review the <code>&lt;dependencies&gt;</code> section (the one that’s a direct child of the root <code>&lt;project&gt;</code> element, not the one inside 
@@ -3405,19 +3502,19 @@ the <code>&lt;dependencyManagement&gt;</code> section). For each <code>&lt;depen
 keep the <code>&lt;dependency&gt;</code> and its <code>&lt;groupId&gt;</code> and <code>&lt;artifactId&gt;</code> but remove any <code>&lt;version&gt;</code>, <code>&lt;scope&gt;</code>, and <code>&lt;exclusions&gt;</code> so that those are declared only by the BOM.</p>
 
 <p>You can also remove the <code>com.snaplogic:mrjob</code> dependency if it’s in your POM.</p></li>
-<li><p>Add the following to the <code>&lt;properties&gt;</code> section of your POM.</p>
-
-<p><code>&lt;snaplogic.version&gt;4.21&lt;/snaplogic.version&gt;</code></p></li>
-<li><p>In the <code>&lt;pluginManagement&gt;</code> section of your POM, update the version of the snaplogic-installer plugins so that it references the property added in the last step. (See code snippet.)</p>
+<li><p>In the <code>&lt;properties&gt;</code> section of your POM, find the <code>sl_build</code> property and increment its value so that the new build of your Snap Pack has a unique version number. <a href="#deploying-a-new-version">(Read more about this property.)</a></p></li>
+<li><p>Define <code>snaplogic.platform.version</code> and <code>snaplogic.snaps.version</code> in the <code>&lt;properties&gt;</code> section of your POM, as shown.</p></li>
+<li><p>In the <code>&lt;pluginManagement&gt;</code> section of your POM, update the version of the <code>snaplogic-installer</code> plugins so that it references the
+<code>snaplogic.platform.property</code> property added in the last step. (See code snippet.)</p>
 
 <p>Also update these plugins to the version listed here:</p>
 
 <ul>
-<li>maven-assembly-plugin: 3.2.0 </li>
-<li>maven-compiler-plugin: 3.5.1</li>
-<li>properties-maven-plugin: 1.0.0</li>
+<li><code>maven-assembly-plugin</code>: 3.2.0 </li>
+<li><code>maven-compiler-plugin</code>: 3.5.1</li>
+<li><code>properties-maven-plugin</code>: 1.0.0</li>
 </ul></li>
-<li><p>In the <code>&lt;plugins&gt;</code> section, update maven-compiler-plugin’s source/target values to 1.8.</p></li>
+<li><p>In the <code>&lt;plugins&gt;</code> section, update <code>maven-compiler-plugin</code>’s <code>source</code>/<code>target</code> values to 1.8.</p></li>
 <li><p>In the <code>&lt;repositories&gt;</code> section, look for the Maven Central repository with this URL:</p>
 
 <p><code>&lt;url&gt;http://repo1.maven.org/maven2&lt;/url&gt;</code></p>
@@ -3425,8 +3522,227 @@ keep the <code>&lt;dependency&gt;</code> and its <code>&lt;groupId&gt;</code> an
 <p>This repository now requires https, so add an “s” to the protocol specifier:</p>
 
 <p><code>&lt;url&gt;https://repo1.maven.org/maven2&lt;/url&gt;</code></p></li>
-<li><p>In the <code>&lt;properties&gt;</code> section of your POM, find the <code>sl_build</code> property and increment its value so that the new build of your Snap Pack has a unique version number. <a href="#deploying-a-new-version">(Read more about this property.)</a></p></li>
 </ol>
+<h3 id='pom-changes-for-august-2020-release'>POM Changes for August 2020 release</h3>
+<p>Starting with the August 2020 (4.22) release, the SnapLogic libraries required by Snaps are no longer deployed to
+SnapLogic&#39;s Nexus server on maven.clouddev.snaplogic.com but are instead deployed to Github at https://github.com/SnapLogicDev/sdk/packages.
+Furthermore, SnapLogic&#39;s maven artifacts now follow a more consistent, straightforward versioning strategy, and it is no longer necessary to use Maven profiles (develop, release, master) to reference different subdirectories within
+the repository as it was when using pre-4.22 artifacts hosted on Nexus.</p>
+
+<p>Accordingly, we recommend updating custom snap POMs to remove SnapLogic-specific <code>&lt;profile&gt;</code> definitions, move 
+<code>&lt;repository&gt;</code> and <code>&lt;pluginRepository&gt;</code> elements from those profiles to the top level, and update the repository definitions
+to reflect the new locations.</p>
+<h4 id='remove-profiles'>Remove profiles</h4>
+<p><strong>Remove</strong> the <code>profiles</code> and <code>repositories</code> as summarized in the adjacent sample.</p>
+<pre class="highlight xml tab-xml"><code>(REMOVE)
+
+    <span class="nt">&lt;profiles&gt;</span>
+        <span class="nt">&lt;profile&gt;</span>
+            <span class="nt">&lt;id&gt;</span>develop<span class="nt">&lt;/id&gt;</span>
+            ...
+            <span class="nt">&lt;repositories&gt;</span>
+                <span class="nt">&lt;repository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>Snaplogic-Maven-Cloud-Repository<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop/
+                    <span class="nt">&lt;/url&gt;</span>
+                    ...
+                <span class="nt">&lt;/repository&gt;</span>
+                <span class="nt">&lt;repository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>Snaplogic-Maven-Cloud-Dev-Repository<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
+                    <span class="nt">&lt;/url&gt;</span>
+                    ...
+                <span class="nt">&lt;/repository&gt;</span>
+                <span class="nt">&lt;repository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>Snaplogic-ThirdPartyMaven-Repository<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Snaplogic ThirdParty Repository<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
+                    <span class="nt">&lt;/url&gt;</span>
+                    ...
+                <span class="nt">&lt;/repository&gt;</span>
+            <span class="nt">&lt;/repositories&gt;</span>
+        <span class="nt">&lt;/profile&gt;</span>
+        <span class="nt">&lt;profile&gt;</span>
+            <span class="nt">&lt;id&gt;</span>release<span class="nt">&lt;/id&gt;</span>
+            ...
+            <span class="nt">&lt;repositories&gt;</span>
+                <span class="nt">&lt;repository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>sl_release<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
+                    <span class="nt">&lt;/url&gt;</span>
+                    ...
+                <span class="nt">&lt;/repository&gt;</span>
+                <span class="nt">&lt;repository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>Snaplogic-ThirdPartyMaven-Repository<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Snaplogic ThirdParty Repository<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
+                    <span class="nt">&lt;/url&gt;</span>
+                    ...
+                <span class="nt">&lt;/repository&gt;</span>
+            <span class="nt">&lt;/repositories&gt;</span>
+            <span class="nt">&lt;pluginRepositories&gt;</span>
+                <span class="nt">&lt;pluginRepository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>sl_release<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/releases/
+                    <span class="nt">&lt;/url&gt;</span>
+                    ...
+                <span class="nt">&lt;/pluginRepository&gt;</span>
+                <span class="nt">&lt;pluginRepository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>sl_develop_snapshot<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Snapshot Repository<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/develop-snapshot/
+                    <span class="nt">&lt;/url&gt;</span>
+                    ...
+                <span class="nt">&lt;/pluginRepository&gt;</span>
+            <span class="nt">&lt;/pluginRepositories&gt;</span>
+        <span class="nt">&lt;/profile&gt;</span>
+        <span class="nt">&lt;profile&gt;</span>
+            <span class="nt">&lt;id&gt;</span>master<span class="nt">&lt;/id&gt;</span>
+            ...
+            <span class="nt">&lt;repositories&gt;</span>
+                <span class="nt">&lt;repository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>sl_master<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
+                    <span class="nt">&lt;/url&gt;</span>
+                    ...
+                <span class="nt">&lt;/repository&gt;</span>
+                <span class="nt">&lt;repository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>Snaplogic-ThirdPartyMaven-Repository<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Snaplogic ThirdParty Repository<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
+                    <span class="nt">&lt;/url&gt;</span>
+                    ...
+                <span class="nt">&lt;/repository&gt;</span>
+            <span class="nt">&lt;/repositories&gt;</span>
+            <span class="nt">&lt;pluginRepositories&gt;</span>
+                <span class="nt">&lt;pluginRepository&gt;</span>
+                    <span class="nt">&lt;id&gt;</span>sl_master<span class="nt">&lt;/id&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Snaplogic Maven Repository<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;url&gt;</span>
+                        http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
+                    <span class="nt">&lt;/url&gt;</span>
+                    ...
+                <span class="nt">&lt;/pluginRepository&gt;</span>
+            <span class="nt">&lt;/pluginRepositories&gt;</span>
+        <span class="nt">&lt;/profile&gt;</span>
+    <span class="nt">&lt;/profiles&gt;</span>
+</code></pre><h4 id='define-repositories'>Define repositories</h4>
+<p><strong>Create</strong> or <strong>update</strong> the <code>&lt;repositories&gt;</code> at the top-level of your POM to include each <code>&lt;repository&gt;</code> shown in the sample:
+* central (Maven Central)
+* github_SnapLogicDev
+* Snaplogic-ThirdPartyMaven-Repository (still hosted on SnapLogic&#39;s Nexus repository)
+* any other repositories needed for other dependencies of your custom Snap project</p>
+<pre class="highlight xml tab-xml"><code>(ADD)
+    <span class="nt">&lt;repositories&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>central<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Maven Central<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>https://repo1.maven.org/maven2<span class="nt">&lt;/url&gt;</span>
+            <span class="nt">&lt;snapshots&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/snapshots&gt;</span>
+            <span class="nt">&lt;releases&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/releases&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>github_SnapLogicDev<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>SnapLogic Public SDK GitHub Packages<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>https://maven.pkg.github.com/SnapLogicDev/sdk<span class="nt">&lt;/url&gt;</span>
+            <span class="nt">&lt;snapshots&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/snapshots&gt;</span>
+            <span class="nt">&lt;releases&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/releases&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>Snaplogic-ThirdPartyMaven-Repository<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Snaplogic ThirdParty Repository<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/<span class="nt">&lt;/url&gt;</span>
+            <span class="nt">&lt;releases&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/releases&gt;</span>
+            <span class="nt">&lt;snapshots&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/snapshots&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        ...
+    <span class="nt">&lt;/repositories&gt;</span>
+</code></pre><h4 id='define-pluginrepositories'>Define pluginRepositories</h4>
+<p><strong>Create</strong> or <strong>update</strong> the <code>&lt;pluginRepositories&gt;</code> at the top-level of your POM to include each <code>&lt;pluginRepository&gt;</code> shown in the sample:
+* central (Maven Central)
+* github_SnapLogicDev
+* any other repositories needed for other dependencies of your custom Snap project</p>
+<pre class="highlight xml tab-xml"><code>(ADD)
+    <span class="nt">&lt;pluginRepositories&gt;</span>
+        <span class="nt">&lt;pluginRepository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>central<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Maven Central<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>https://repo1.maven.org/maven2<span class="nt">&lt;/url&gt;</span>
+            <span class="nt">&lt;snapshots&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/snapshots&gt;</span>
+            <span class="nt">&lt;releases&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/releases&gt;</span>
+        <span class="nt">&lt;/pluginRepository&gt;</span>
+        <span class="nt">&lt;pluginRepository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>github_SnapLogicDev<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>SnapLogic Public SDK GitHub Packages<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>https://maven.pkg.github.com/SnapLogicDev/sdk<span class="nt">&lt;/url&gt;</span>
+            <span class="nt">&lt;snapshots&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/snapshots&gt;</span>
+            <span class="nt">&lt;releases&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/releases&gt;</span>
+        <span class="nt">&lt;/pluginRepository&gt;</span>
+    <span class="nt">&lt;/pluginRepositories&gt;</span>
+</code></pre><h4 id='add-settings-xml-and-mvn-maven-config'>Add settings.xml and .mvn/maven.config</h4>
+<p>Currently, the Github Package Registry cannot be accessed anonymously like other public repositories like Maven Central.
+See <a href="https://github.community/t/download-from-github-package-registry-without-authentication/14407">this post</a> for more information.</p>
+
+<p>However, to provide the required authentication during Maven builds, two files can be added to your snap project:</p>
+
+<ul>
+<li>settings.xml</li>
+</ul>
+<pre class="highlight xml tab-xml"><code><span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0"</span>
+  <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0</span>
+                      <span class="err">http://maven.apache.org/xsd/settings-1.0.0.xsd"</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;servers&gt;</span>
+    <span class="nt">&lt;server&gt;</span>
+      <span class="nt">&lt;id&gt;</span>github_SnapLogicDev<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;username&gt;</span>thirdpartysnapdev<span class="nt">&lt;/username&gt;</span>
+      <span class="c">&lt;!-- Public token with `read:packages` scope --&gt;</span>
+      <span class="nt">&lt;password&gt;</span><span class="ni">&amp;#50;&amp;#53;&amp;#49;&amp;#55;&amp;#56;&amp;#54;&amp;#54;&amp;#48;&amp;#52;&amp;#102;&amp;#57;&amp;#54;&amp;#53;&amp;#102;&amp;#97;&amp;#100;&amp;#100;&amp;#54;&amp;#54;&amp;#57;&amp;#51;&amp;#52;&amp;#50;&amp;#53;&amp;#49;&amp;#52;&amp;#97;&amp;#51;&amp;#100;&amp;#57;&amp;#101;&amp;#101;&amp;#48;&amp;#99;&amp;#50;&amp;#54;&amp;#102;&amp;#48;&amp;#54;&amp;#98;</span><span class="nt">&lt;/password&gt;</span>
+    <span class="nt">&lt;/server&gt;</span>
+  <span class="nt">&lt;/servers&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>
+</code></pre>
+<ul>
+<li>.mvn/maven.config
+<code>
+-s settings.xml 
+</code></li>
+</ul>
 <h3 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h3>
 <p>After updating your POM, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.</p>
 
