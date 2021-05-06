@@ -403,7 +403,7 @@ See the <a href="#exceptions-and-error-views">Exceptions and Error Views</a> sec
 
 <p>The Snaplex/JCC supports debugging a Snap&#39;s execution with your chosen IDE. Simply launch the JCC with the additional <code>agentlib</code> parameter with shown value, and attach to it using your IDE&#39;s remote debugging capability.</p>
 <h2 id='snap-maven-archetype'>Snap Maven Archetype</h2><pre class="highlight plaintext"><code>$ cd $SNAP_HOME
-$ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCatalog=http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/
+$ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCatalog=http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ------------------&lt; org.apache.maven:standalone-pom &gt;-------------------
@@ -419,14 +419,8 @@ $ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCa
 [INFO] Generating project in Interactive mode
 [INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
 Choose archetype:
-1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/ -&gt; com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
+1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/ -&gt; com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
-Choose com.snaplogic.tools:SnapArchetype version: 
-1: 1.12
-2: 4.21
-3: 4.22
-4: 4.22.1
-Choose a number: 4: 
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -446,17 +440,33 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:4.22.1
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:4.25
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
+</code></pre><pre class="highlight plaintext"><code>~/.m2/settings.xml (needed if using Maven 3.8.1 or later to create the project from the archetype)
+
+&lt;?xml version="1.0"?&gt;
+&lt;settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0                       https://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+    &lt;mirrors&gt;
+        &lt;!-- . --&gt;
+        &lt;mirror&gt;
+            &lt;id&gt;thirdparty&lt;/id&gt;
+            &lt;name&gt;Snaplogic-ThirdPartyMaven-Repository&lt;/name&gt;
+            &lt;url&gt;http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty&lt;/url&gt;
+            &lt;mirrorOf&gt;Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo&lt;/mirrorOf&gt;
+        &lt;/mirror&gt;
+    &lt;/mirrors&gt;
+&lt;/settings&gt;
 </code></pre>
 <p>A <a href="https://maven.apache.org/guides/introduction/introduction-to-archetypes.html">Maven Archetype</a> is a Maven project templating toolkit. SnapLogic provides <code>SnapArchetype</code> for quickly starting Snap development.</p>
 
 <aside class="notice">
-The Snap archetype catalog is available at <a href="http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/">http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/master/</a>
+The Snap archetype catalog is available at <a href="http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/">http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/</a>
 <p><p>
 Version 3.0.0 of Maven Archetype Plugin removed the ability to reference a remote, non-central archetype catalog - hence the use of the 2.4 version of the plugin above. See <a href="https://issues.apache.org/jira/browse/ARCHETYPE-519">ARCHETYPE-519</a> for more details.
+<p><p>
+If using Maven 3.8.1 or later, you will need to update your Maven settings.xml file as shown.
 </aside>
 
 <p><code>SnapArchetype</code> ships with eight sample Snaps for demonstration purposes:</p>
@@ -3481,8 +3491,8 @@ that needs to be specified directly in the POM file.</p>
 <span class="nt">&lt;properties&gt;</span>
     ...
     <span class="c">&lt;!-- SnapLogic SDK versions --&gt;</span>
-    <span class="nt">&lt;snaplogic.platform.version&gt;</span>4.22.8138<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
-    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>4.22.6586<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
+    <span class="nt">&lt;snaplogic.platform.version&gt;</span>4.25.9642<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
+    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>4.25.9578<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
 <span class="nt">&lt;/properties&gt;</span>
 </code></pre><pre class="highlight xml tab-xml"><code>(step 7)
 <span class="nt">&lt;plugin&gt;</span>
@@ -3494,7 +3504,7 @@ that needs to be specified directly in the POM file.</p>
 <ol>
 <li><p>Import the BOM into your POM by adding the text shown in the code snippet to the <code>&lt;dependencyManagement&gt;</code> section.
 If you don’t already have this section, add the <code>&lt;dependencyManagement&gt;</code> and <code>&lt;dependencies&gt;</code> elements.</p></li>
-<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=4.22.6542">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
+<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=4.25.9578">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
 <li><p>If your POM already had a <code>&lt;dependencyManagement&gt;</code> section before importing the BOM, review each <code>&lt;dependency&gt;</code> in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the <code>&lt;dependencyManagement&gt;</code> section.</p></li>
 <li><p>Review the <code>&lt;dependencies&gt;</code> section (the one that’s a direct child of the root <code>&lt;project&gt;</code> element, not the one inside 
@@ -3710,19 +3720,27 @@ for a more detailed discussion of this solution.</p>
 <span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0"</span>
   <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
   <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;servers&gt;</span>
-    <span class="nt">&lt;server&gt;</span>
-      <span class="nt">&lt;id&gt;</span>github_SnapLogicDev<span class="nt">&lt;/id&gt;</span>
-      <span class="nt">&lt;username&gt;</span>thirdpartysnapdev<span class="nt">&lt;/username&gt;</span>
-      <span class="c">&lt;!-- Public token with `read:packages` scope --&gt;</span>
-      <span class="nt">&lt;password&gt;</span><span class="ni">&amp;#50;&amp;#53;&amp;#49;&amp;#55;&amp;#56;&amp;#54;&amp;#54;&amp;#48;&amp;#52;&amp;#102;&amp;#57;&amp;#54;&amp;#53;&amp;#102;&amp;#97;&amp;#100;&amp;#100;&amp;#54;&amp;#54;&amp;#57;&amp;#51;&amp;#52;&amp;#50;&amp;#53;&amp;#49;&amp;#52;&amp;#97;&amp;#51;&amp;#100;&amp;#57;&amp;#101;&amp;#101;&amp;#48;&amp;#99;&amp;#50;&amp;#54;&amp;#102;&amp;#48;&amp;#54;&amp;#98;</span><span class="nt">&lt;/password&gt;</span>
-    <span class="nt">&lt;/server&gt;</span>
-  <span class="nt">&lt;/servers&gt;</span>
+    <span class="nt">&lt;servers&gt;</span>
+        <span class="nt">&lt;server&gt;</span>
+            <span class="nt">&lt;id&gt;</span>github_SnapLogicDev<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;username&gt;</span>thirdpartysnapdev<span class="nt">&lt;/username&gt;</span>
+            <span class="c">&lt;!-- Public token with `read:packages` scope --&gt;</span>
+            <span class="nt">&lt;password&gt;</span><span class="ni">&amp;#50;&amp;#53;&amp;#49;&amp;#55;&amp;#56;&amp;#54;&amp;#54;&amp;#48;&amp;#52;&amp;#102;&amp;#57;&amp;#54;&amp;#53;&amp;#102;&amp;#97;&amp;#100;&amp;#100;&amp;#54;&amp;#54;&amp;#57;&amp;#51;&amp;#52;&amp;#50;&amp;#53;&amp;#49;&amp;#52;&amp;#97;&amp;#51;&amp;#100;&amp;#57;&amp;#101;&amp;#101;&amp;#48;&amp;#99;&amp;#50;&amp;#54;&amp;#102;&amp;#48;&amp;#54;&amp;#98;</span><span class="nt">&lt;/password&gt;</span>
+        <span class="nt">&lt;/server&gt;</span>
+    <span class="nt">&lt;/servers&gt;</span>
+    <span class="nt">&lt;mirrors&gt;</span>
+        <span class="nt">&lt;mirror&gt;</span>
+            <span class="nt">&lt;id&gt;</span>thirdparty<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Snaplogic-ThirdPartyMaven-Repository<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty<span class="nt">&lt;/url&gt;</span>
+            <span class="nt">&lt;mirrorOf&gt;</span>Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo<span class="nt">&lt;/mirrorOf&gt;</span>
+        <span class="nt">&lt;/mirror&gt;</span>
+    <span class="nt">&lt;/mirrors&gt;</span>
 <span class="nt">&lt;/settings&gt;</span>
 </code></pre><h3 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h3>
 <p>After updating your POM, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.</p>
 
-<p>Check that you have java version 1.8.x:</p>
+<p>Check that you have java version 1.8.x or later:</p>
 
 <p><code>java -version</code></p>
 
