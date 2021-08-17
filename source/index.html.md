@@ -57,16 +57,12 @@ Need to build/deploy/etc | No deployment, quick & simple
 
 # Prerequisites
 
-* Java 8 (JDK)
+* Java 11 (JDK)
 * Maven 3.2.1 or later
 * A Snaplex
 
-<aside class="warning">
-Java 9 or later is not supported currently.
-</aside>
-
 <aside class="notice">
-We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a>, <a href="https://eclipse.org/ide/">Eclipse</a>, or <a href="https://netbeans.org/">NetBeans</a>.
+We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a> or <a href="https://eclipse.org/ide/">Eclipse</a>.
 </aside>
 
 # Setting up the Snaplex
@@ -3455,8 +3451,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-    <snaplogic.platform.version>4.25.9642</snaplogic.platform.version>
-    <snaplogic.snaps.version>4.25.9578</snaplogic.snaps.version>
+    <snaplogic.platform.version>4.26.10240</snaplogic.platform.version>
+    <snaplogic.snaps.version>4.26.11320</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3472,7 +3468,7 @@ Steps to update the POM file (pom.xml):
 1. Import the BOM into your POM by adding the text shown in the code snippet to the `<dependencyManagement>` section.
 If you don’t already have this section, add the `<dependencyManagement>` and `<dependencies>` elements.
 
-2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=4.25.9578).
+2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=4.26.11320).
 
 3. If your POM already had a `<dependencyManagement>` section before importing the BOM, review each `<dependency>` in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the `<dependencyManagement>` section.
@@ -3495,7 +3491,7 @@ keep the `<dependency>` and its `<groupId>` and `<artifactId>` but remove any `<
     * `maven-compiler-plugin`: 3.5.1
     * `properties-maven-plugin`: 1.0.0
 
-8. In the `<plugins>` section, update `maven-compiler-plugin`’s `source`/`target` values to 1.8.
+8. In the `<plugins>` section, update `maven-compiler-plugin`’s `source`/`target` values to 11.
 
 9. In the `<repositories>` section, look for the Maven Central repository with this URL:
 
