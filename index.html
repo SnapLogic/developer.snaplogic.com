@@ -220,17 +220,13 @@
 </tbody></table>
 <h1 id='prerequisites'>Prerequisites</h1>
 <ul>
-<li>Java 8 (JDK)</li>
+<li>Java 11 (JDK)</li>
 <li>Maven 3.2.1 or later</li>
 <li>A Snaplex</li>
 </ul>
 
-<aside class="warning">
-Java 9 or later is not supported currently.
-</aside>
-
 <aside class="notice">
-We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a>, <a href="https://eclipse.org/ide/">Eclipse</a>, or <a href="https://netbeans.org/">NetBeans</a>.
+We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a> or <a href="https://eclipse.org/ide/">Eclipse</a>.
 </aside>
 <h1 id='setting-up-the-snaplex'>Setting up the Snaplex</h1>
 <p>A <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437953/Snaplex">Snaplex</a> is the data processing engine of the <a href="https://www.snaplogic.com/products/how-it-works">SnapLogic Elastic Integration Platform</a>. A locally-installed/on-premises Snaplex (also known as a &quot;Groundplex&quot; or &quot;JCC&quot;) will be used throughout this guide to develop, execute and debug a Snap.</p>
@@ -3490,8 +3486,8 @@ that needs to be specified directly in the POM file.</p>
 <span class="nt">&lt;properties&gt;</span>
     ...
     <span class="c">&lt;!-- SnapLogic SDK versions --&gt;</span>
-    <span class="nt">&lt;snaplogic.platform.version&gt;</span>4.25.9642<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
-    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>4.25.9578<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
+    <span class="nt">&lt;snaplogic.platform.version&gt;</span>4.26.10240<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
+    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>4.26.11320<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
 <span class="nt">&lt;/properties&gt;</span>
 </code></pre><pre class="highlight xml tab-xml"><code>(step 7)
 <span class="nt">&lt;plugin&gt;</span>
@@ -3503,7 +3499,7 @@ that needs to be specified directly in the POM file.</p>
 <ol>
 <li><p>Import the BOM into your POM by adding the text shown in the code snippet to the <code>&lt;dependencyManagement&gt;</code> section.
 If you don’t already have this section, add the <code>&lt;dependencyManagement&gt;</code> and <code>&lt;dependencies&gt;</code> elements.</p></li>
-<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=4.25.9578">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
+<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=4.26.11320">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
 <li><p>If your POM already had a <code>&lt;dependencyManagement&gt;</code> section before importing the BOM, review each <code>&lt;dependency&gt;</code> in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the <code>&lt;dependencyManagement&gt;</code> section.</p></li>
 <li><p>Review the <code>&lt;dependencies&gt;</code> section (the one that’s a direct child of the root <code>&lt;project&gt;</code> element, not the one inside 
@@ -3523,7 +3519,7 @@ keep the <code>&lt;dependency&gt;</code> and its <code>&lt;groupId&gt;</code> an
 <li><code>maven-compiler-plugin</code>: 3.5.1</li>
 <li><code>properties-maven-plugin</code>: 1.0.0</li>
 </ul></li>
-<li><p>In the <code>&lt;plugins&gt;</code> section, update <code>maven-compiler-plugin</code>’s <code>source</code>/<code>target</code> values to 1.8.</p></li>
+<li><p>In the <code>&lt;plugins&gt;</code> section, update <code>maven-compiler-plugin</code>’s <code>source</code>/<code>target</code> values to 11.</p></li>
 <li><p>In the <code>&lt;repositories&gt;</code> section, look for the Maven Central repository with this URL:</p>
 
 <p><code>&lt;url&gt;http://repo1.maven.org/maven2&lt;/url&gt;</code></p>
