@@ -3714,6 +3714,7 @@ for a more detailed discussion of this solution.
 In pom.xml, update these two properties:
 
 `<snaplogic.platform.version>4.27.10704</snaplogic.platform.version>`
+
 `<snaplogic.snaps.version>4.27.12971</snaplogic.snaps.version>`
 
 ### Update thirdparty repository URL
