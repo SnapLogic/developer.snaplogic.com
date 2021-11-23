@@ -270,7 +270,7 @@ The Snaplex/JCC supports debugging a Snap's execution with your chosen IDE. Simp
 
 ```
 $ cd $SNAP_HOME
-$ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCatalog=http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/
+$ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCatalog=https://snaplogiceng.jfrog.io/artifactory/thirdparty/
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ------------------< org.apache.maven:standalone-pom >-------------------
@@ -286,8 +286,13 @@ $ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeCa
 [INFO] Generating project in Interactive mode
 [INFO] No archetype defined. Using maven-archetype-quickstart (org.apache.maven.archetypes:maven-archetype-quickstart:1.0)
 Choose archetype:
-1: http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/ -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
+1: https://snaplogiceng.jfrog.io/artifactory/thirdparty/ -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
+Choose com.snaplogic.tools:SnapArchetype version: 
+1: 4.25
+2: 4.26
+3: 4.27
+Choose a number: 3: 
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -307,36 +312,19 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:4.25
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:4.27
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
 ```
 
-```
-~/.m2/settings.xml (needed if using Maven 3.8.1 or later to create the project from the archetype)
-
-<?xml version="1.0"?>
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0                       https://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <mirrors>
-        <mirror>
-            <id>thirdparty</id>
-            <name>Snaplogic-ThirdPartyMaven-Repository</name>
-            <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty</url>
-            <mirrorOf>Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo</mirrorOf>
-        </mirror>
-    </mirrors>
-</settings>
-```
 
 A [Maven Archetype](https://maven.apache.org/guides/introduction/introduction-to-archetypes.html) is a Maven project templating toolkit. SnapLogic provides `SnapArchetype` for quickly starting Snap development.
 
 <aside class="notice">
-The Snap archetype catalog is available at <a href="http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/">http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/</a>
+The Snap archetype catalog is available at <a href="https://snaplogiceng.jfrog.io/artifactory/thirdparty/">https://snaplogiceng.jfrog.io/artifactory/thirdparty/</a>
 <p><p>
 Version 3.0.0 of Maven Archetype Plugin removed the ability to reference a remote, non-central archetype catalog - hence the use of the 2.4 version of the plugin above. See <a href="https://issues.apache.org/jira/browse/ARCHETYPE-519">ARCHETYPE-519</a> for more details.
-<p><p>
-If using Maven 3.8.1 or later, you will need to update your Maven settings.xml file as shown.
 </aside>
 
 `SnapArchetype` ships with eight sample Snaps for demonstration purposes:
@@ -3451,8 +3439,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-    <snaplogic.platform.version>4.26.10240</snaplogic.platform.version>
-    <snaplogic.snaps.version>4.26.11320</snaplogic.snaps.version>
+    <snaplogic.platform.version>4.27.10704</snaplogic.platform.version>
+    <snaplogic.snaps.version>4.27.12971</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3468,7 +3456,7 @@ Steps to update the POM file (pom.xml):
 1. Import the BOM into your POM by adding the text shown in the code snippet to the `<dependencyManagement>` section.
 If you don’t already have this section, add the `<dependencyManagement>` and `<dependencies>` elements.
 
-2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=4.26.11320).
+2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=4.27.12971).
 
 3. If your POM already had a `<dependencyManagement>` section before importing the BOM, review each `<dependency>` in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the `<dependencyManagement>` section.
@@ -3502,6 +3490,8 @@ keep the `<dependency>` and its `<groupId>` and `<artifactId>` but remove any `<
     `<url>https://repo1.maven.org/maven2</url>`
 
 ## POM Changes for August 2020 release
+
+(Note: A few details in this section have been updated to keep them current for the latest release.)
 
 Starting with the August 2020 (4.22) release, the SnapLogic libraries required by Snaps are no longer deployed to
 SnapLogic's Nexus server on maven.clouddev.snaplogic.com but are instead deployed to Github at https://github.com/SnapLogicDev/sdk/packages.
@@ -3603,7 +3593,7 @@ to reflect the new locations.
 
  * central (Maven Central)
  * github_SnapLogicDev
- * Snaplogic-ThirdPartyMaven-Repository (still hosted on SnapLogic's Nexus repository)
+ * Snaplogic-ThirdPartyMaven-Repository (now hosted on JFrog Artifactory repository)
  * any other repositories needed for other dependencies of your custom Snap project
  
 **Create** or **update** the `<pluginRepositories>` at the top-level of your POM to include each `<pluginRepository>` shown in the sample:
@@ -3640,7 +3630,7 @@ to reflect the new locations.
         <repository>
             <id>Snaplogic-ThirdPartyMaven-Repository</id>
             <name>Snaplogic ThirdParty Repository</name>
-            <url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty/</url>
+			<url>https://snaplogiceng.jfrog.io/artifactory/thirdparty</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -3710,18 +3700,37 @@ for a more detailed discussion of this solution.
 		<mirror>
 			<id>thirdparty</id>
 			<name>Snaplogic-ThirdPartyMaven-Repository</name>
-			<url>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty</url>
+			<url>https://snaplogiceng.jfrog.io/artifactory/thirdparty</url>
 			<mirrorOf>Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo</mirrorOf>
 		</mirror>
 	</mirrors>
 </settings>
 ```
 
-### Rebuild Your Snap Pack
+## Changes for November 2021 (4.27) release
 
-After updating your POM, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.
+### Update SnapLogic artifact version numbers
 
-Check that you have java version 1.8.x or later:
+In pom.xml, update these two properties:
+
+```
+    <snaplogic.platform.version>4.27.10704</snaplogic.platform.version>
+    <snaplogic.snaps.version>4.27.12971</snaplogic.snaps.version>
+```
+
+### Update thirdparty repository URL
+
+The `thirdparty` repository URL has changed. Pease change the URL in pom.xml and settings.xml as follows:
+
+Old URL: `http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty`
+
+New URL: `https://snaplogiceng.jfrog.io/artifactory/thirdparty`
+
+## Rebuild Your Snap Pack
+
+After updating, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.
+
+Check that you have java version 11.x or later:
 
 `java -version`
 
