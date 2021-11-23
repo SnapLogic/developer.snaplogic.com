@@ -3719,7 +3719,7 @@ In pom.xml, update these two properties:
 
 ### Update thirdparty repository URL
 
-The `thirdparty` repository URL has changed. Pease change the URL in pom.xml and settings.xml as follows:
+The `thirdparty` repository URL has changed. Please change the URL in pom.xml and settings.xml as follows:
 
 Old URL: `http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty`
 
