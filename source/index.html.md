@@ -58,7 +58,7 @@ Need to build/deploy/etc | No deployment, quick & simple
 # Prerequisites
 
 * Java 11 (JDK)
-* Maven 3.2.1 or later
+* Maven 3.8.1 or later
 * A Snaplex
 
 <aside class="notice">
