@@ -254,7 +254,7 @@
       </span>
     </a>
     <div class="tocify-wrapper">
-      <img src="images/logo-e3ddb449.png" alt="" />
+      <img src="images/snaplogic-logo-white-f16ecc71.svg" style="vertical-align:middle;margin:10px 10px" alt="" />
         <div class="lang-selector">
         </div>
         <div class="search">
@@ -269,19 +269,20 @@
         <ul class="toc-footer">
             <li><a href='https://doc.snaplogic.com'>Product Documentation</a></li>
             <li><a href='https://www.snaplogic.com'>SnapLogic website</a></li>
+            <li>ⓒ 2022 - SnapLogic Inc.</li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>This documentation guides a developer through the steps necessary to develop <strong>Snaps</strong> for the <a href="https://www.snaplogic.com/">SnapLogic Elastic Integration Platform</a>.</p>
+<p>This documentation guides a developer through the steps necessary to develop <strong>Snaps</strong> for the <a href="https://www.snaplogic.com/">SnapLogic Intelligent Integration Platform</a>.</p>
 <h2 id='snaps-and-snap-packs'>Snaps and Snap Packs</h2>
 <p>SnapLogic <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439259/Snap+Reference">Snaps</a> are modular collections of integration components built for a specific application or data source. Snaps shield both business users and developers from much of the complexity of the underlying application, data model, and service.</p>
 
 <p><img src="images/WmuJ-b94d592f.png" alt="Transform Snap Pack" /></p>
 
-<p>Snap Packs logically organize Snaps and are the deployable unit when adding/modifying Snaps to the SnapLogic Elastic Integration Platform. For instance, in the above example, the Aggregate Snap is part of the Transform Snap Pack. </p>
+<p>Snap Packs logically organize Snaps and are the deployable unit when adding/modifying Snaps to the SnapLogic Intelligent Integration Platform. For instance, in the above example, the Aggregate Snap is part of the Transform Snap Pack. </p>
 
 <p>Snaps may be related by functionality or share common code. A Snap Pack may contain a single Snap or multiple Snaps.</img></p>
 <h2 id='snap-fundamentals'>Snap Fundamentals</h2>
@@ -349,7 +350,7 @@
 We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea">IntelliJ IDEA</a> or <a href="https://eclipse.org/ide/">Eclipse</a>.
 </aside>
 <h1 id='setting-up-the-snaplex'>Setting up the Snaplex</h1>
-<p>A <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437953/Snaplex">Snaplex</a> is the data processing engine of the <a href="https://www.snaplogic.com/products/how-it-works">SnapLogic Elastic Integration Platform</a>. A locally-installed/on-premises Snaplex (also known as a &quot;Groundplex&quot; or &quot;JCC&quot;) will be used throughout this guide to develop, execute and debug a Snap.</p>
+<p>A <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437953/Snaplex">Snaplex</a> is the data processing engine of the <a href="https://www.snaplogic.com/products/how-it-works">SnapLogic Intelligent Integration Platform</a>. A locally-installed/on-premises Snaplex (also known as a &quot;Groundplex&quot; or &quot;JCC&quot;) will be used throughout this guide to develop, execute and debug a Snap.</p>
 <h2 id='downloads'>Downloads</h2>
 <p>A Snaplex may be installed on:</p>
 
@@ -363,7 +364,7 @@ We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea
 The current list of Snaplex downloads is maintained at <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads">https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads</a>.
 </aside>
 <h2 id='installation'>Installation</h2>
-<p>A Snaplex is the data processing engine of the SnapLogic Elastic Integration Platform. An Org admin can select <strong>Provision this user as a Snap Developer</strong> in the <strong>Update User</strong> dialog, automatically creating a dedicated Snaplex for that user to run and test pipelines. This Snaplex should be created in the Snap Developer’s project folder so that other users do not inadvertently run production pipelines on that Snaplex.</p>
+<p>A Snaplex is the data processing engine of the SnapLogic Intelligent Integration Platform. An Org admin can select <strong>Provision this user as a Snap Developer</strong> in the <strong>Update User</strong> dialog, automatically creating a dedicated Snaplex for that user to run and test pipelines. This Snaplex should be created in the Snap Developer’s project folder so that other users do not inadvertently run production pipelines on that Snaplex.</p>
 <h3 id='linux-amp-microsoft-windows'>Linux &amp; Microsoft Windows</h3>
 <p>Please visit the official SnapLogic documentation for detailed instructions for installing a Snaplex on <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438367/Snaplex+Installation+on+Linux">Linux</a> or <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439002/Snaplex+Installation+on+Windows">Microsoft Windows</a>. </p>
 <h3 id='macos'>macOS</h3>
@@ -1533,7 +1534,7 @@ All Snaps will have a required <strong>Label</strong> property for customizing t
 
 <p><img src="images/Zin9-968f5e4f.png" alt="Doc Generator with Expression" /></p>
 
-<p>For <a href="#propertybuilder-reference">composite and table properties</a>, the <code>getExpressionPropertyFor()</code> method can be used to evaluate child properties embedded in a parent. See <a href="https://github.com/SnapLogic/DemoSnapPack/blob/master/src/main/java/com/snaplogic/snaps/PropertyTypes.java#L136">this example provided in the reference DemoSnapPack GitHub repository</a>.</p>
+<p>For <a href="#propertybuilder-reference">composite and table properties</a>, the <code>getExpressionPropertyFor()</code> method can be used to evaluate child properties embedded in a parent. See <a href="https://github.com/SnapLogic/DemoSnapPack/blob/main/src/main/java/com/snaplogic/snaps/PropertyTypes.java#L136">this example provided in the reference DemoSnapPack GitHub repository</a>.</p>
 <h2 id='suggesting-property-values'>Suggesting Property Values</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="cm">/**
  * This Snap has one output and writes one document that contains the suggested
  * value.
