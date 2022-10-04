@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://i.imgur.com/Re56AbY.png" alt="SnapLogic Logo" width="226">
+  <img src="https://www.snaplogic.com/wp-content/themes/snaplogic/public/img/snaplogic-logo-white.svg" alt="SnapLogic Logo" width="226" style="vertical-align:middle;margin:10px 10px">
 </p>
 
-<p align="center">The <a href="http://developer.snaplogic.com">Snap Development Documentation</a> guides a developer creating Snaps for the <a href="https://www.snaplogic.com/">SnapLogic Elastic Integration Platform</a>.</p>
+<p align="center">The <a href="http://developer.snaplogic.com">Snap Development Documentation</a> guides a developer creating Snaps for the <a href="https://www.snaplogic.com/">SnapLogic Intelligent Integration Platform</a>.</p>
 
 <p align="center"><img src="https://i.imgur.com/Ile65Kr.png" width=700 alt="Screenshot of Snap Development Documentation"></p>
 

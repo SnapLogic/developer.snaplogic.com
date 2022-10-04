@@ -6,6 +6,7 @@ language_tabs:
 toc_footers:
   - <a href='https://doc.snaplogic.com'>Product Documentation</a>
   - <a href='https://www.snaplogic.com'>SnapLogic website</a>
+  - ⓒ 2022 - SnapLogic Inc.
 
 includes:
 
@@ -14,7 +15,7 @@ search: true
 
 # Introduction
 
-This documentation guides a developer through the steps necessary to develop **Snaps** for the [SnapLogic Elastic Integration Platform](https://www.snaplogic.com/).
+This documentation guides a developer through the steps necessary to develop **Snaps** for the [SnapLogic Intelligent Integration Platform](https://www.snaplogic.com/).
 
 ## Snaps and Snap Packs
 
@@ -22,7 +23,7 @@ SnapLogic [Snaps](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439
 
 ![Transform Snap Pack](images/WmuJ.png)
 
-Snap Packs logically organize Snaps and are the deployable unit when adding/modifying Snaps to the SnapLogic Elastic Integration Platform. For instance, in the above example, the Aggregate Snap is part of the Transform Snap Pack. 
+Snap Packs logically organize Snaps and are the deployable unit when adding/modifying Snaps to the SnapLogic Intelligent Integration Platform. For instance, in the above example, the Aggregate Snap is part of the Transform Snap Pack. 
 
 Snaps may be related by functionality or share common code. A Snap Pack may contain a single Snap or multiple Snaps.</img>
 
@@ -67,7 +68,7 @@ We also recommend using an Java IDE like <a href="https://www.jetbrains.com/idea
 
 # Setting up the Snaplex
 
-A [Snaplex](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437953/Snaplex) is the data processing engine of the [SnapLogic Elastic Integration Platform](https://www.snaplogic.com/products/how-it-works). A locally-installed/on-premises Snaplex (also known as a "Groundplex" or "JCC") will be used throughout this guide to develop, execute and debug a Snap.
+A [Snaplex](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1437953/Snaplex) is the data processing engine of the [SnapLogic Intelligent Integration Platform](https://www.snaplogic.com/products/how-it-works). A locally-installed/on-premises Snaplex (also known as a "Groundplex" or "JCC") will be used throughout this guide to develop, execute and debug a Snap.
 
 ## Downloads
 
@@ -83,7 +84,7 @@ The current list of Snaplex downloads is maintained at <a href="https://docs-sna
 
 ## Installation
 
-A Snaplex is the data processing engine of the SnapLogic Elastic Integration Platform. An Org admin can select **Provision this user as a Snap Developer** in the **Update User** dialog, automatically creating a dedicated Snaplex for that user to run and test pipelines. This Snaplex should be created in the Snap Developer’s project folder so that other users do not inadvertently run production pipelines on that Snaplex.
+A Snaplex is the data processing engine of the SnapLogic Intelligent Integration Platform. An Org admin can select **Provision this user as a Snap Developer** in the **Update User** dialog, automatically creating a dedicated Snaplex for that user to run and test pipelines. This Snaplex should be created in the Snap Developer’s project folder so that other users do not inadvertently run production pipelines on that Snaplex.
 
 ### Linux & Microsoft Windows
 
@@ -1306,7 +1307,7 @@ To demonstrate this new capability, we can use a "count" [Pipeline Property](htt
 
 ![Doc Generator with Expression](images/Zin9.png)
 
-For [composite and table properties](#propertybuilder-reference), the `getExpressionPropertyFor()` method can be used to evaluate child properties embedded in a parent. See [this example provided in the reference DemoSnapPack GitHub repository](https://github.com/SnapLogic/DemoSnapPack/blob/master/src/main/java/com/snaplogic/snaps/PropertyTypes.java#L136).
+For [composite and table properties](#propertybuilder-reference), the `getExpressionPropertyFor()` method can be used to evaluate child properties embedded in a parent. See [this example provided in the reference DemoSnapPack GitHub repository](https://github.com/SnapLogic/DemoSnapPack/blob/main/src/main/java/com/snaplogic/snaps/PropertyTypes.java#L136).
 
 ## Suggesting Property Values
 
