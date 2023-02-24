@@ -1391,11 +1391,13 @@ The `Suggestions` instance (often an anonymous instance) implements the single `
 
 Using the `SuggestionBuilder` instance, we can configure simple String varargs for `suggestions()` for a selected `node()` that will result in a list of suggested values.
 
+<!--
 <aside class="success">
 Alternatively, use <code>objectSuggestions()</code> to add a list of values, with each entry representing a suggestion. The entry must be a map which provides a <strong>"label"</strong> key.
 
 The label will be displayed by the UI as the selectable entry, the rest of the object definition will be hidden.
 </aside>
+-->
 
 ### Suggestions within Tables and Composites
 
