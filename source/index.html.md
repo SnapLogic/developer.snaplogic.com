@@ -79,7 +79,7 @@ A Snaplex may be installed on:
 * macOS (for development only)
 
 <aside class="notice">
-The current list of Snaplex downloads is maintained at <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads">https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads</a>.
+A guide for installing a local snaplex can be found at <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/2552922128/Install+a+Groundplex+in+Your+Environment">https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/2552922128/Install+a+Groundplex+in+Your+Environment</a>.
 </aside>
 
 ## Installation
