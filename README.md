@@ -65,6 +65,12 @@ bundle exec middleman server
 
 # OR run this to run with vagrant
 vagrant up
+
+# OR with docker, you can serve the live documents with the following (from the root of this repository)
+docker run --rm --name slate -p 4567:4567 -v $(pwd)/source:/srv/slate/source slatedocs/slate:latest serve
+
+# With docker, to build for deploying, run the following (from the root of this repository)
+docker run --rm --name slate -v $(pwd)/build:/srv/slate/build -v $(pwd)/source:/srv/slate/source slatedocs/slate:latest build
 ```
 
 You can now see the docs at http://localhost:4567. Whoa! That was fast!
@@ -74,6 +80,12 @@ You can now see the docs at http://localhost:4567. Whoa! That was fast!
 * `git commit -a -m "Commit message"`
 * `git push`
 * `./deploy.sh`
+
+If running via docker locally, follow these steps:
+* `git commit -a -m "Commit message"`
+* `git push`
+* `docker run --rm --name slate -v $(pwd)/build:/srv/slate/build -v $(pwd)/source:/srv/slate/source slatedocs/slate:latest build`
+* `./deploy.sh --push-only`
 
 Learn more about [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax).
 
