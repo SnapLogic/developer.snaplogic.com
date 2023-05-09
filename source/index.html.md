@@ -298,7 +298,8 @@ Choose com.snaplogic.tools:SnapArchetype version:
 6: 4.30
 7: 4.31
 8: 4.32
-Choose a number: 8:
+9: 33.0
+Choose a number: 9:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -318,7 +319,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:4.32
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:33.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3447,8 +3448,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-	<snaplogic.platform.version>4.32.15843</snaplogic.platform.version>
-	<snaplogic.snaps.version>4.32.19844</snaplogic.snaps.version>
+	<snaplogic.platform.version>33.0.17599</snaplogic.platform.version>
+	<snaplogic.snaps.version>33.0.21015</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3464,7 +3465,7 @@ Steps to update the POM file (pom.xml):
 1. Import the BOM into your POM by adding the text shown in the code snippet to the `<dependencyManagement>` section.
 If you don’t already have this section, add the `<dependencyManagement>` and `<dependencies>` elements.
 
-2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=4.32.19844).
+2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=33.0.21015).
 
 3. If your POM already had a `<dependencyManagement>` section before importing the BOM, review each `<dependency>` in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the `<dependencyManagement>` section.
@@ -3715,15 +3716,15 @@ for a more detailed discussion of this solution.
 </settings>
 ```
 
-## Changes for February 2023 (4.32) release
+## Changes for May 2023 (33.0) release
 
 ### Update SnapLogic artifact version numbers
 
-In pom.xml, update these two properties:
+In pom.xml, update these two properties (note they are now 33.0 rather than 4.33):
 
-`<snaplogic.platform.version>4.32.15843</snaplogic.platform.version>`
+`<snaplogic.platform.version>33.0.17599</snaplogic.platform.version>`
 
-`<snaplogic.snaps.version>4.32.19844</snaplogic.snaps.version>`
+`<snaplogic.snaps.version>33.0.21015</snaplogic.snaps.version>`
 
 ### Update thirdparty repository URL
 
