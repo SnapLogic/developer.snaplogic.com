@@ -547,7 +547,8 @@ Choose com.snaplogic.tools:SnapArchetype version:
 6: 4.30
 7: 4.31
 8: 4.32
-Choose a number: 8:
+9: 33.0
+Choose a number: 9:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -567,7 +568,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:4.32
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:33.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3604,8 +3605,8 @@ that needs to be specified directly in the POM file.</p>
 <span class="nt">&lt;properties&gt;</span>
     ...
     <span class="c">&lt;!-- SnapLogic SDK versions --&gt;</span>
-    <span class="nt">&lt;snaplogic.platform.version&gt;</span>4.32.15843<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
-    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>4.32.19844<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
+    <span class="nt">&lt;snaplogic.platform.version&gt;</span>33.0.17599<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
+    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>33.0.21015<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
 <span class="nt">&lt;/properties&gt;</span>
 </code></pre></div><div class="highlight"><pre class="highlight xml tab-xml"><code>(step 7)
 <span class="nt">&lt;plugin&gt;</span>
@@ -3617,7 +3618,7 @@ that needs to be specified directly in the POM file.</p>
 <ol>
 <li><p>Import the BOM into your POM by adding the text shown in the code snippet to the <code>&lt;dependencyManagement&gt;</code> section.
 If you don’t already have this section, add the <code>&lt;dependencyManagement&gt;</code> and <code>&lt;dependencies&gt;</code> elements.</p></li>
-<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=4.32.19844">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
+<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=33.0.21015">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
 <li><p>If your POM already had a <code>&lt;dependencyManagement&gt;</code> section before importing the BOM, review each <code>&lt;dependency&gt;</code> in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the <code>&lt;dependencyManagement&gt;</code> section.</p></li>
 <li><p>Review the <code>&lt;dependencies&gt;</code> section (the one that’s a direct child of the root <code>&lt;project&gt;</code> element, not the one inside 
@@ -3852,12 +3853,12 @@ for a more detailed discussion of this solution.</p>
         <span class="nt">&lt;/mirror&gt;</span>
     <span class="nt">&lt;/mirrors&gt;</span>
 <span class="nt">&lt;/settings&gt;</span>
-</code></pre></div><h2 id='changes-for-february-2023-4-32-release'>Changes for February 2023 (4.32) release</h2><h3 id='update-snaplogic-artifact-version-numbers'>Update SnapLogic artifact version numbers</h3>
-<p>In pom.xml, update these two properties:</p>
+</code></pre></div><h2 id='changes-for-may-2023-33-0-release'>Changes for May 2023 (33.0) release</h2><h3 id='update-snaplogic-artifact-version-numbers'>Update SnapLogic artifact version numbers</h3>
+<p>In pom.xml, update these two properties (note they are now 33.0 rather than 4.33):</p>
 
-<p><code>&lt;snaplogic.platform.version&gt;4.32.15843&lt;/snaplogic.platform.version&gt;</code></p>
+<p><code>&lt;snaplogic.platform.version&gt;33.0.17599&lt;/snaplogic.platform.version&gt;</code></p>
 
-<p><code>&lt;snaplogic.snaps.version&gt;4.32.19844&lt;/snaplogic.snaps.version&gt;</code></p>
+<p><code>&lt;snaplogic.snaps.version&gt;33.0.21015&lt;/snaplogic.snaps.version&gt;</code></p>
 <h3 id='update-thirdparty-repository-url'>Update thirdparty repository URL</h3>
 <p>The <code>thirdparty</code> repository URL has changed. Please change the URL in pom.xml and settings.xml as follows:</p>
 
