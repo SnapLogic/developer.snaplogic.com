@@ -127,7 +127,7 @@ $ rpm2cpio.pl snaplogic-sidekick-4.mrc244-x86_64.rpm | cpio -idvm
 ```
 
 1. `cd` to your home directory
-1. Instructions for downloading the `.rpm` file can be found [here](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads)
+1. Instructions for downloading the `.rpm` file can be found [here](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/2552922128/Install+a+Groundplex+in+Your+Environment)
 1. Download and install [Homebrew](https://brew.sh/)
 1. Install the `rpm2cpio` library
 1. Extract the downloaded Snaplex `.rpm` file
