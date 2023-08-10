@@ -3449,8 +3449,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-	<snaplogic.platform.version>34.0.TODOPLAT</snaplogic.platform.version>
-	<snaplogic.snaps.version>34.0.TODOSNAP</snaplogic.snaps.version>
+	<snaplogic.platform.version>34.0.19739</snaplogic.platform.version>
+	<snaplogic.snaps.version>34.0.22460</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3466,7 +3466,7 @@ Steps to update the POM file (pom.xml):
 1. Import the BOM into your POM by adding the text shown in the code snippet to the `<dependencyManagement>` section.
 If you don’t already have this section, add the `<dependencyManagement>` and `<dependencies>` elements.
 
-2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=34.0.TODOSNAP).
+2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=34.0.22460).
 
 3. If your POM already had a `<dependencyManagement>` section before importing the BOM, review each `<dependency>` in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the `<dependencyManagement>` section.
@@ -3741,9 +3741,9 @@ New URL: `https://snaplogiceng.jfrog.io/artifactory/thirdparty`
 
 In pom.xml, update these two properties to the appropriate build for the 34.0 GA release:
 
-`<snaplogic.platform.version>34.0.TODOPLAT</snaplogic.platform.version>`
+`<snaplogic.platform.version>34.0.19739</snaplogic.platform.version>`
 
-`<snaplogic.snaps.version>34.0.TODOSNAP</snaplogic.snaps.version>`
+`<snaplogic.snaps.version>34.0.22460</snaplogic.snaps.version>`
 
 ### Update usage of jackson ObjectMapper
 
