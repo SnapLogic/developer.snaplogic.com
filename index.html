@@ -400,7 +400,7 @@ Use of a Snaplex in a macOS environment is supported only for developing Snaps.
 </code></pre></div>
 <ol>
 <li><code>cd</code> to your home directory</li>
-<li>Instructions for downloading the <code>.rpm</code> file can be found <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1438332/Snaplex+Downloads">here</a></li>
+<li>Instructions for downloading the <code>.rpm</code> file can be found <a href="https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/2552922128/Install+a+Groundplex+in+Your+Environment">here</a></li>
 <li>Download and install <a href="https://brew.sh/">Homebrew</a></li>
 <li>Install the <code>rpm2cpio</code> library</li>
 <li>Extract the downloaded Snaplex <code>.rpm</code> file</li>
@@ -548,7 +548,8 @@ Choose com.snaplogic.tools:SnapArchetype version:
 7: 4.31
 8: 4.32
 9: 33.0
-Choose a number: 9:
+10: 34.0
+Choose a number: 10:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -568,7 +569,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:33.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:34.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3605,8 +3606,8 @@ that needs to be specified directly in the POM file.</p>
 <span class="nt">&lt;properties&gt;</span>
     ...
     <span class="c">&lt;!-- SnapLogic SDK versions --&gt;</span>
-    <span class="nt">&lt;snaplogic.platform.version&gt;</span>33.0.17599<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
-    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>33.0.21015<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
+    <span class="nt">&lt;snaplogic.platform.version&gt;</span>34.0.19739<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
+    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>34.0.22460<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
 <span class="nt">&lt;/properties&gt;</span>
 </code></pre></div><div class="highlight"><pre class="highlight xml tab-xml"><code>(step 7)
 <span class="nt">&lt;plugin&gt;</span>
@@ -3618,7 +3619,7 @@ that needs to be specified directly in the POM file.</p>
 <ol>
 <li><p>Import the BOM into your POM by adding the text shown in the code snippet to the <code>&lt;dependencyManagement&gt;</code> section.
 If you don’t already have this section, add the <code>&lt;dependencyManagement&gt;</code> and <code>&lt;dependencies&gt;</code> elements.</p></li>
-<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=33.0.21015">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
+<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=34.0.22460">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
 <li><p>If your POM already had a <code>&lt;dependencyManagement&gt;</code> section before importing the BOM, review each <code>&lt;dependency&gt;</code> in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the <code>&lt;dependencyManagement&gt;</code> section.</p></li>
 <li><p>Review the <code>&lt;dependencies&gt;</code> section (the one that’s a direct child of the root <code>&lt;project&gt;</code> element, not the one inside 
@@ -3865,7 +3866,42 @@ for a more detailed discussion of this solution.</p>
 <p>Old URL: <code>http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty</code></p>
 
 <p>New URL: <code>https://snaplogiceng.jfrog.io/artifactory/thirdparty</code></p>
-<h2 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h2>
+<h2 id='changes-for-august-2023-34-0-release'>Changes for August 2023 (34.0) release</h2><h3 id='update-snaplogic-artifact-version-numbers-2'>Update SnapLogic artifact version numbers</h3>
+<p>In pom.xml, update these two properties to the appropriate build for the 34.0 GA release:</p>
+
+<p><code>&lt;snaplogic.platform.version&gt;34.0.19739&lt;/snaplogic.platform.version&gt;</code></p>
+
+<p><code>&lt;snaplogic.snaps.version&gt;34.0.22460&lt;/snaplogic.snaps.version&gt;</code></p>
+<h3 id='update-usage-of-jackson-objectmapper'>Update usage of jackson ObjectMapper</h3>
+<p>With the August release, the SnapLogic platform is updating the jackson version to 2.15.2.<br>
+With this update, Jackson has restricted the default parsable length of intput to parse from an unrestricted value to 20 million bytes (characters).
+This may cause some issues for certain input data to snaps, and as a result SnapLogic provides a jackson module that should be registered if you are creating new ObjectMapper instances.</p>
+
+<p>For any instances in your code where you have the following (or some other values of this):</p>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="o">(</span><span class="no">BEFORE</span><span class="o">)</span>
+
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+
+<span class="o">...</span>
+
+<span class="nc">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span>
+</code></pre></div>
+<p>It is suggested that you update to register the <code>JsonFactoryModule</code> provided by the <code>jsdk</code> as follows, you should also be registering the Joda and JavaTime Modules respectively.  The previous code should now look like the following to best support the data that streams through the SnapLogic pipelines:</p>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="o">(</span><span class="no">AFTER</span><span class="o">)</span>
+
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.datatype.joda.JodaModule</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.datatype.jsr310.JavaTimeModule</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.snaplogic.common.JsonFactoryModule</span><span class="o">;</span>
+
+<span class="o">...</span>
+
+<span class="nc">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">registerModule</span><span class="o">(</span><span class="k">new</span> <span class="nc">JsonFactoryModule</span><span class="o">())</span>
+        <span class="o">.</span><span class="na">registerModule</span><span class="o">(</span><span class="k">new</span> <span class="nc">JodaModule</span><span class="o">())</span>
+        <span class="o">.</span><span class="na">registerModule</span><span class="o">(</span><span class="k">new</span> <span class="nc">JavaTimeModule</span><span class="o">());</span>
+
+</code></pre></div><h2 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h2>
 <p>After updating, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.</p>
 
 <p>Check that you have java version 11.x or later:</p>
