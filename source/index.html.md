@@ -3752,8 +3752,9 @@ With the August release, the SnapLogic platform is updating the jackson version 
 With this update, Jackson has restricted the default parsable length of intput to parse from an unrestricted value to 20 million bytes (characters).
 This may cause some issues for certain input data to snaps, and as a result SnapLogic provides a jackson module that should be registered if you are creating new ObjectMapper instances.
 
-For any instances in your code where you have the following (or some other values of this):
 ```java
+(BEFORE)
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 ...
@@ -3761,8 +3762,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 ObjectMapper mapper = new ObjectMapper();
 ```
 
-It is suggested that you update to register the `JsonFactoryModule` provided by the `jsdk` as follows, you should also be registering the Joda and JavaTime Modules respectively.  The previous code should now look like the following to best support the data that streams through the SnapLogic pipelines:
+For any instances in your code where you have the following (or some other values of this in the sidebar)
+
 ```java
+(AFTER)
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -3775,6 +3779,8 @@ ObjectMapper mapper = new ObjectMapper()
         .registerModule(new JodaModule())
         .registerModule(new JavaTimeModule());
 ```
+
+It is suggested that you update to register the `JsonFactoryModule` provided by the `jsdk` as follows, you should also be registering the Joda and JavaTime Modules respectively.  The previous code should now look like the following to best support the data that streams through the SnapLogic pipelines.
 
 ## Rebuild Your Snap Pack
 
