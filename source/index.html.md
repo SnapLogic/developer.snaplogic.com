@@ -299,7 +299,8 @@ Choose com.snaplogic.tools:SnapArchetype version:
 7: 4.31
 8: 4.32
 9: 33.0
-Choose a number: 9:
+10: 34.0
+Choose a number: 10:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -319,7 +320,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:33.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:34.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3448,8 +3449,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-	<snaplogic.platform.version>33.0.17599</snaplogic.platform.version>
-	<snaplogic.snaps.version>33.0.21015</snaplogic.snaps.version>
+	<snaplogic.platform.version>34.0.19739</snaplogic.platform.version>
+	<snaplogic.snaps.version>34.0.22460</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3465,7 +3466,7 @@ Steps to update the POM file (pom.xml):
 1. Import the BOM into your POM by adding the text shown in the code snippet to the `<dependencyManagement>` section.
 If you don’t already have this section, add the `<dependencyManagement>` and `<dependencies>` elements.
 
-2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=33.0.21015).
+2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=34.0.22460).
 
 3. If your POM already had a `<dependencyManagement>` section before importing the BOM, review each `<dependency>` in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the `<dependencyManagement>` section.
@@ -3733,6 +3734,47 @@ The `thirdparty` repository URL has changed. Please change the URL in pom.xml an
 Old URL: `http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty`
 
 New URL: `https://snaplogiceng.jfrog.io/artifactory/thirdparty`
+
+## Changes for August 2023 (34.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the 34.0 GA release:
+
+`<snaplogic.platform.version>34.0.19739</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>34.0.22460</snaplogic.snaps.version>`
+
+### Update usage of jackson ObjectMapper
+
+With the August release, the SnapLogic platform is updating the jackson version to 2.15.2.  
+With this update, Jackson has restricted the default parsable length of intput to parse from an unrestricted value to 20 million bytes (characters).
+This may cause some issues for certain input data to snaps, and as a result SnapLogic provides a jackson module that should be registered if you are creating new ObjectMapper instances.
+
+For any instances in your code where you have the following (or some other values of this):
+```java
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+...
+
+ObjectMapper mapper = new ObjectMapper();
+```
+
+It is suggested that you update to register the `JsonFactoryModule` provided by the `jsdk` as follows, you should also be registering the Joda and JavaTime Modules respectively.  The previous code should now look like the following to best support the data that streams through the SnapLogic pipelines:
+```java
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.snaplogic.common.JsonFactoryModule;
+
+...
+
+ObjectMapper mapper = new ObjectMapper()
+        .registerModule(new JsonFactoryModule())
+        .registerModule(new JodaModule())
+        .registerModule(new JavaTimeModule());
+
+```
 
 ## Rebuild Your Snap Pack
 
