@@ -300,7 +300,8 @@ Choose com.snaplogic.tools:SnapArchetype version:
 8: 4.32
 9: 33.0
 10: 34.0
-Choose a number: 10:
+11: 35.0
+Choose a number: 11:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -320,7 +321,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:34.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:35.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3449,8 +3450,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-	<snaplogic.platform.version>34.0.19739</snaplogic.platform.version>
-	<snaplogic.snaps.version>34.0.22460</snaplogic.snaps.version>
+	<snaplogic.platform.version>35.0.21052</snaplogic.platform.version>
+	<snaplogic.snaps.version>35.0.23721</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3773,7 +3774,6 @@ ObjectMapper mapper = new ObjectMapper()
         .registerModule(new JsonFactoryModule())
         .registerModule(new JodaModule())
         .registerModule(new JavaTimeModule());
-
 ```
 
 ## Rebuild Your Snap Pack
