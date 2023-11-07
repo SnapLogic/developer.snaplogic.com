@@ -3753,8 +3753,6 @@ With this update, Jackson has restricted the default parsable length of intput t
 This may cause some issues for certain input data to snaps, and as a result SnapLogic provides a jackson module that should be registered if you are creating new ObjectMapper instances.
 
 ```java
-(BEFORE)
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 ...
@@ -3765,8 +3763,6 @@ ObjectMapper mapper = new ObjectMapper();
 For any instances in your code where you have the following (or some other values of this in the sidebar)
 
 ```java
-(AFTER)
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
