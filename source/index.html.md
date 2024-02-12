@@ -290,19 +290,9 @@ Choose archetype:
 1: https://snaplogiceng.jfrog.io/artifactory/thirdparty/ -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 4.25
-2: 4.26
-3: 4.27
-4: 4.28
-5: 4.29
-6: 4.30
-7: 4.31
-8: 4.32
-9: 33.0
-10: 34.0
-11: 35.0
-12: 36.0
-Choose a number: 12:
+1: 35.0
+2: 36.0
+Choose a number: 2:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
