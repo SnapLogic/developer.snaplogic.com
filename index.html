@@ -539,18 +539,9 @@ Choose archetype:
 1: https://snaplogiceng.jfrog.io/artifactory/thirdparty/ -&gt; com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 4.25
-2: 4.26
-3: 4.27
-4: 4.28
-5: 4.29
-6: 4.30
-7: 4.31
-8: 4.32
-9: 33.0
-10: 34.0
-11: 35.0
-Choose a number: 11:
+1: 35.0
+2: 36.0
+Choose a number: 2:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -570,7 +561,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:35.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:36.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3607,8 +3598,8 @@ that needs to be specified directly in the POM file.</p>
 <span class="nt">&lt;properties&gt;</span>
     ...
     <span class="c">&lt;!-- SnapLogic SDK versions --&gt;</span>
-    <span class="nt">&lt;snaplogic.platform.version&gt;</span>35.0.21052<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
-    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>35.0.23721<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
+    <span class="nt">&lt;snaplogic.platform.version&gt;</span>36.0.22564<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
+    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>36.0.25112<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
 <span class="nt">&lt;/properties&gt;</span>
 </code></pre></div><div class="highlight"><pre class="highlight xml tab-xml"><code>(step 7)
 <span class="nt">&lt;plugin&gt;</span>
@@ -3897,6 +3888,16 @@ This may cause some issues for certain input data to snaps, and as a result Snap
         <span class="o">.</span><span class="na">registerModule</span><span class="o">(</span><span class="k">new</span> <span class="nc">JavaTimeModule</span><span class="o">());</span>
 </code></pre></div>
 <p>It is suggested that you update to register the <code>JsonFactoryModule</code> provided by the <code>jsdk</code> as follows, you should also be registering the Joda and JavaTime Modules respectively.  The previous code should now look like the following to best support the data that streams through the SnapLogic pipelines.</p>
+<h2 id='changes-for-february-2024-36-0-release'>Changes for February 2024 (36.0) release</h2><h3 id='update-snaplogic-artifact-version-numbers-3'>Update SnapLogic artifact version numbers</h3>
+<p>In pom.xml, update these two properties to the appropriate build for the February 2024 (36.0) GA release:</p>
+
+<p><code>&lt;snaplogic.platform.version&gt;36.0.22564&lt;/snaplogic.platform.version&gt;</code>
+<code>&lt;snaplogic.snaps.version&gt;36.0.25112&lt;/snaplogic.snaps.version&gt;</code></p>
+<h3 id='breaking-changes-for-provided-dependencies'>Breaking Changes for Provided Dependencies</h3>
+<p>With the February 2024 release, the SnapLogic platform is no longer providing the <code>com.ning:async-http-client</code> in the BOM.
+If your Snap Pack relies on this library being present, you will need to change it to be a compile-time dependency and bundle it with your Snap Pack specifically.
+The BOM is being updated with the February 2024 (36.0) release and the JCC will remove the dependency completely with the May 2024 (37.0) release.
+Snap Packs will continue to work with the February 2024 (36.0) release, but will no longer work with the May 2024 (37.0) release unless the scope of the dependency is changed in your snap pack bundle as the dependency will no longer be available with the JCC.</p>
 <h2 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h2>
 <p>After updating, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.</p>
 
