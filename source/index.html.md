@@ -290,18 +290,9 @@ Choose archetype:
 1: https://snaplogiceng.jfrog.io/artifactory/thirdparty/ -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 4.25
-2: 4.26
-3: 4.27
-4: 4.28
-5: 4.29
-6: 4.30
-7: 4.31
-8: 4.32
-9: 33.0
-10: 34.0
-11: 35.0
-Choose a number: 11:
+1: 35.0
+2: 36.0
+Choose a number: 2:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
 Define value for property 'version':  1.0-SNAPSHOT: : 
@@ -321,7 +312,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:35.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:36.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3450,8 +3441,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-	<snaplogic.platform.version>35.0.21052</snaplogic.platform.version>
-	<snaplogic.snaps.version>35.0.23721</snaplogic.snaps.version>
+	<snaplogic.platform.version>36.0.22564</snaplogic.platform.version>
+	<snaplogic.snaps.version>36.0.25112</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3777,6 +3768,22 @@ ObjectMapper mapper = new ObjectMapper()
 ```
 
 It is suggested that you update to register the `JsonFactoryModule` provided by the `jsdk` as follows, you should also be registering the Joda and JavaTime Modules respectively.  The previous code should now look like the following to best support the data that streams through the SnapLogic pipelines.
+
+## Changes for February 2024 (36.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the February 2024 (36.0) GA release:
+
+`<snaplogic.platform.version>36.0.22564</snaplogic.platform.version>`
+`<snaplogic.snaps.version>36.0.25112</snaplogic.snaps.version>`
+
+### Breaking Changes for Provided Dependencies
+
+With the February 2024 release, the SnapLogic platform is no longer providing the `com.ning:async-http-client` in the BOM.
+If your Snap Pack relies on this library being present, you will need to change it to be a compile-time dependency and bundle it with your Snap Pack specifically.
+The BOM is being updated with the February 2024 (36.0) release and the JCC will remove the dependency completely with the May 2024 (37.0) release.
+Snap Packs will continue to work with the February 2024 (36.0) release, but will no longer work with the May 2024 (37.0) release unless the scope of the dependency is changed in your snap pack bundle as the dependency will no longer be available with the JCC.
 
 ## Rebuild Your Snap Pack
 
