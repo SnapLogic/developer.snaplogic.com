@@ -41,7 +41,7 @@ Snaps can provide design-time Suggest/lookup and Preview/validate data capabilit
 
 ## Snaps vs Scripts
 
-SnapLogic's [Script Snap](http://doc.snaplogic.com/com-snaplogic-snaps-script-script_2) executes a JavaScript, Jython, or JRuby script using the JVM `ScriptEngine` mechanism. 
+SnapLogic's [Script Snap](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/1439321/Script) executes a JavaScript, Jython, or JRuby script using the JVM `ScriptEngine` mechanism. 
 
 Consider the following when deciding whether to develop a custom Snap vs using the Script Snap:
 
@@ -180,7 +180,7 @@ import com.snaplogic.snap.api.capabilities.Errors;
 import com.snaplogic.snap.api.capabilities.ViewType;
 
 @General(title = "Snap Name", purpose = "Description", 
-		author = "Company Name", docLink = "http://www.docs.com/mysnap")
+		author = "Company Name", docLink = "https://yourdocslinkhere.com")
 @Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Errors(min = 1, max = 1, offers = {ViewType.DOCUMENT})
@@ -347,7 +347,7 @@ Sample | Description
 If you choose a <code>groupId</code>/<code>package</code> value other than <code>com.snaplogic.snaps</code>, you must provide a HTTP URL value to the <code>docLink</code> parameter of a Snap's <code>@General</code> annotation on a Snap.
 </aside>
 
-Once `SnapArchetype` has been generated, it can be imported as a Maven project into your IDE ([IntelliJ IDEA](https://www.jetbrains.com/help/idea/2016.1/importing-project-from-maven-model.html), [Eclipse](https://books.sonatype.com/m2eclipse-book/reference/creating-sect-importing-projects.html), [Netbeans](http://wiki.netbeans.org/MavenBestPractices)).
+Once `SnapArchetype` has been generated, it can be imported as a Maven project into your IDE ([IntelliJ IDEA](https://www.jetbrains.com/help/idea/2016.1/importing-project-from-maven-model.html), [Eclipse](https://books.sonatype.com/m2eclipse-book/reference/creating-sect-importing-projects.html), [Netbeans](https://netbeans.apache.org/wiki/main/wiki/MavenBestPractices/)).
 
 ## Project Structure
 ```
@@ -590,7 +590,7 @@ The [Snap Maven Archetype](#snap-maven-archetype) ships with sample Snaps that w
 // Set the Snap title, description etc
 // Also, use the "docLink" parameter to set a link to the documentation
 @General(title = "Single Doc Generator", purpose = "Generates one document and completes",
-        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+        author = "Your Company Name", docLink = "https://yourdocslinkhere.com")
 // This Snap does not permit input views for demonstration purposes, however, in practice, there
 // should almost always be an input view
 @Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
@@ -847,7 +847,7 @@ The ["jtest: Snap Unit Testing Framework"](#jtest-snap-unit-testing-framework) s
 
 ```java
 @General(title = "Doc Consumer", purpose = "Consumes the incoming documents",
-        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+        author = "Your Company Name", docLink = "https://yourdocslinkhere.com")
 @Inputs(min = 1, max = 1, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 0, max = 0, offers = {ViewType.DOCUMENT})
 @Errors(min = 1, max = 1, offers = {ViewType.DOCUMENT})
@@ -944,7 +944,7 @@ As you develop Snaps, choose the appropriate Snap Category for your use cases.
  * for you.
  */
 @General(title = "Two Inputs", purpose = "Accepts two inputs (expected phone books, merges them)",
-        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+        author = "Your Company Name", docLink = "https://yourdocslinkhere.com")
 @Inputs(min = 2, max = 2, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Errors(min = 0, max = 1, offers = {ViewType.DOCUMENT})
@@ -1027,7 +1027,7 @@ There are a number of other "Simple" Snap implementations that can help getting 
  * incoming data, and writes the result to a binary output view
  */
 @General(title = "Character Counter", purpose = "Demo writing to Binary Output View",
-        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+        author = "Your Company Name", docLink = "https://yourdocslinkhere.com")
 @Outputs(min = 1, max = 1, offers = ViewType.BINARY)
 @Errors(min = 1, max = 1, offers = ViewType.DOCUMENT)
 @Version(snap = 1)
@@ -1162,7 +1162,7 @@ We recommend using standard/popular specification field names, lowercased, when 
 
 ```java
 @General(title = "Doc Generator", purpose = "Generates documents based on the configuration",
-        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+        author = "Your Company Name", docLink = "https://yourdocslinkhere.com")
 @Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Errors(min = 1, max = 1, offers = {ViewType.DOCUMENT})
@@ -1318,7 +1318,7 @@ For [composite and table properties](#propertybuilder-reference), the `getExpres
  */
 @Version(snap = 1)
 @General(title = "Suggest", purpose = "Demo suggest functionality.",
-        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+        author = "Your Company Name", docLink = "https://yourdocslinkhere.com")
 @Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Errors(min = 1, max = 1, offers = {ViewType.DOCUMENT})
@@ -1434,7 +1434,7 @@ Suggestions are not supported within Composite properties.
  * to the error view.
  */
 @General(title = "View Schema", purpose = "Demonstrates view schema definition",
-        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+        author = "Your Company Name", docLink = "https://yourdocslinkhere.com")
 @Inputs(min = 1, max = 1, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Errors(min = 1, max = 1, offers = {ViewType.DOCUMENT})
@@ -1729,7 +1729,7 @@ SnapLogic recommends always enabling a Document error view:
  * one for only males and another for females. Unknowns will get sent to both.</p>
  */
 @General(title = "Two Ins/Outs", purpose = "Accepts two inputs, sends to two outputs.",
-        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+        author = "Your Company Name", docLink = "https://yourdocslinkhere.com")
 @Inputs(min = 2, max = 2, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 2, max = 2, offers = {ViewType.DOCUMENT})
 @Version(snap = 1)
@@ -1956,7 +1956,7 @@ A thrown `SuggestViewAbortException` can indicate that the pipeline validation/p
  */
 @General(title = "Currency Converter", author = "Your Company Name",
         purpose = "Demonstrates dependency injection",
-        docLink = "http://yourdocslinkhere.com")
+        docLink = "https://yourdocslinkhere.com")
 @Inputs(min = 1, max = 1, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Version(snap = 1)
@@ -2411,7 +2411,7 @@ For demonstration purposes, we've chosen to implement a simple hash-token scheme
 package com.snaplogic.snaps;
 ...
 @General(title = "Account Example", purpose = "Authenticates with an Account",
-        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+        author = "Your Company Name", docLink = "https://yourdocslinkhere.com")
 @Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
 @Outputs(min = 1, max = 1, offers = {ViewType.DOCUMENT})
 @Version(snap = 1)
@@ -3138,7 +3138,7 @@ In the test, a `FakeForeignExchange` instance is bound to the `ForEx` instance i
 
 ```java
 @General(title = "Property Types", purpose = "Demonstrates use of different property types",
-        author = "Your Company Name", docLink = "http://yourdocslinkhere.com")
+        author = "Your Company Name", docLink = "https://yourdocslinkhere.com")
 @Category(snap = SnapCategory.READ)
 @Version(snap = 1)
 @Inputs(min = 0, max = 1, accepts = {ViewType.DOCUMENT})
