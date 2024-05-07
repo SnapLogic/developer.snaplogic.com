@@ -3785,6 +3785,21 @@ If your Snap Pack relies on this library being present, you will need to change 
 The BOM is being updated with the February 2024 (36.0) release and the JCC will remove the dependency completely with the May 2024 (37.0) release.
 Snap Packs will continue to work with the February 2024 (36.0) release, but will no longer work with the May 2024 (37.0) release unless the scope of the dependency is changed in your snap pack bundle as the dependency will no longer be available with the JCC.
 
+## Changes for May 2024 (37.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the February 2024 (36.0) GA release:
+
+`<snaplogic.platform.version>37.0.24152</snaplogic.platform.version>`
+`<snaplogic.snaps.version>37.0.26341</snaplogic.snaps.version>`
+
+### Breaking Changes for Provided Dependencies Coming Soon
+
+With the August 2024 release, the SnapLogic platform will be changing the version of `org.jruby:jruby` in the BOM from 9.2.19.0 to 9.4.6.0.
+If your Snap Pack relies on this library it is suggested that you start to update your jruby version for runtime locally as the underlying ruby version will be updated with this change.
+The BOM is being updated with the August 2024 (38.0) release.
+
 ## Rebuild Your Snap Pack
 
 After updating, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.
