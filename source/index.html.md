@@ -3789,7 +3789,7 @@ Snap Packs will continue to work with the February 2024 (36.0) release, but will
 
 ### Update SnapLogic artifact version numbers
 
-In pom.xml, update these two properties to the appropriate build for the February 2024 (36.0) GA release:
+In pom.xml, update these two properties to the appropriate build for the May 2024 (37.0) GA release:
 
 `<snaplogic.platform.version>37.0.24152</snaplogic.platform.version>`
 `<snaplogic.snaps.version>37.0.26341</snaplogic.snaps.version>`
