@@ -538,8 +538,8 @@ Choose archetype:
 1: https://snaplogiceng.jfrog.io/artifactory/thirdparty/ -&gt; com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 35.0
-2: 36.0
+1: 36.0
+2: 37.0
 Choose a number: 2:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
@@ -560,7 +560,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:36.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:37.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3597,8 +3597,8 @@ that needs to be specified directly in the POM file.</p>
 <span class="nt">&lt;properties&gt;</span>
     ...
     <span class="c">&lt;!-- SnapLogic SDK versions --&gt;</span>
-    <span class="nt">&lt;snaplogic.platform.version&gt;</span>36.0.22564<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
-    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>36.0.25112<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
+    <span class="nt">&lt;snaplogic.platform.version&gt;</span>37.0.24152<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
+    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>37.0.26341<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
 <span class="nt">&lt;/properties&gt;</span>
 </code></pre></div><div class="highlight"><pre class="highlight xml tab-xml"><code>(step 7)
 <span class="nt">&lt;plugin&gt;</span>
@@ -3610,7 +3610,7 @@ that needs to be specified directly in the POM file.</p>
 <ol>
 <li><p>Import the BOM into your POM by adding the text shown in the code snippet to the <code>&lt;dependencyManagement&gt;</code> section.
 If you don’t already have this section, add the <code>&lt;dependencyManagement&gt;</code> and <code>&lt;dependencies&gt;</code> elements.</p></li>
-<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=34.0.22460">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
+<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=37.0.26341">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
 <li><p>If your POM already had a <code>&lt;dependencyManagement&gt;</code> section before importing the BOM, review each <code>&lt;dependency&gt;</code> in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the <code>&lt;dependencyManagement&gt;</code> section.</p></li>
 <li><p>Review the <code>&lt;dependencies&gt;</code> section (the one that’s a direct child of the root <code>&lt;project&gt;</code> element, not the one inside 
@@ -3897,6 +3897,15 @@ This may cause some issues for certain input data to snaps, and as a result Snap
 If your Snap Pack relies on this library being present, you will need to change it to be a compile-time dependency and bundle it with your Snap Pack specifically.
 The BOM is being updated with the February 2024 (36.0) release and the JCC will remove the dependency completely with the May 2024 (37.0) release.
 Snap Packs will continue to work with the February 2024 (36.0) release, but will no longer work with the May 2024 (37.0) release unless the scope of the dependency is changed in your snap pack bundle as the dependency will no longer be available with the JCC.</p>
+<h2 id='changes-for-may-2024-37-0-release'>Changes for May 2024 (37.0) release</h2><h3 id='update-snaplogic-artifact-version-numbers-4'>Update SnapLogic artifact version numbers</h3>
+<p>In pom.xml, update these two properties to the appropriate build for the May 2024 (37.0) GA release:</p>
+
+<p><code>&lt;snaplogic.platform.version&gt;37.0.24152&lt;/snaplogic.platform.version&gt;</code>
+<code>&lt;snaplogic.snaps.version&gt;37.0.26341&lt;/snaplogic.snaps.version&gt;</code></p>
+<h3 id='breaking-changes-for-provided-dependencies-coming-soon'>Breaking Changes for Provided Dependencies Coming Soon</h3>
+<p>With the August 2024 release, the SnapLogic platform will be changing the version of <code>org.jruby:jruby</code> in the BOM from 9.2.19.0 to 9.4.6.0.
+If your Snap Pack relies on this library it is suggested that you start to update your jruby version for runtime locally as the underlying ruby version will be updated with this change.
+The BOM is being updated with the August 2024 (38.0) release.</p>
 <h2 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h2>
 <p>After updating, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.</p>
 
