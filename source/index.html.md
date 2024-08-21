@@ -6,7 +6,7 @@ language_tabs:
 toc_footers:
   - <a href='https://doc.snaplogic.com'>Product Documentation</a>
   - <a href='https://www.snaplogic.com'>SnapLogic website</a>
-  - ⓒ 2023 - SnapLogic Inc.
+  - ⓒ 2024 - SnapLogic Inc.
 
 includes:
 
@@ -290,8 +290,8 @@ Choose archetype:
 1: https://snaplogiceng.jfrog.io/artifactory/thirdparty/ -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 36.0
-2: 37.0
+1: 37.0
+2: 38.0
 Choose a number: 2:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
@@ -312,7 +312,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:37.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:38.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3441,8 +3441,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-	<snaplogic.platform.version>37.0.24152</snaplogic.platform.version>
-	<snaplogic.snaps.version>37.0.26341</snaplogic.snaps.version>
+	<snaplogic.platform.version>38.0.26385</snaplogic.platform.version>
+	<snaplogic.snaps.version>38.0.27765</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3458,7 +3458,7 @@ Steps to update the POM file (pom.xml):
 1. Import the BOM into your POM by adding the text shown in the code snippet to the `<dependencyManagement>` section.
 If you don’t already have this section, add the `<dependencyManagement>` and `<dependencies>` elements.
 
-2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=37.0.26341).
+2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=38.0.27765).
 
 3. If your POM already had a `<dependencyManagement>` section before importing the BOM, review each `<dependency>` in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the `<dependencyManagement>` section.
@@ -3776,6 +3776,7 @@ It is suggested that you update to register the `JsonFactoryModule` provided by 
 In pom.xml, update these two properties to the appropriate build for the February 2024 (36.0) GA release:
 
 `<snaplogic.platform.version>36.0.22564</snaplogic.platform.version>`
+
 `<snaplogic.snaps.version>36.0.25112</snaplogic.snaps.version>`
 
 ### Breaking Changes for Provided Dependencies
@@ -3792,6 +3793,7 @@ Snap Packs will continue to work with the February 2024 (36.0) release, but will
 In pom.xml, update these two properties to the appropriate build for the May 2024 (37.0) GA release:
 
 `<snaplogic.platform.version>37.0.24152</snaplogic.platform.version>`
+
 `<snaplogic.snaps.version>37.0.26341</snaplogic.snaps.version>`
 
 ### Breaking Changes for Provided Dependencies Coming Soon
@@ -3799,6 +3801,20 @@ In pom.xml, update these two properties to the appropriate build for the May 202
 With the August 2024 release, the SnapLogic platform will be changing the version of `org.jruby:jruby` in the BOM from 9.2.19.0 to 9.4.6.0.
 If your Snap Pack relies on this library it is suggested that you start to update your jruby version for runtime locally as the underlying ruby version will be updated with this change.
 The BOM is being updated with the August 2024 (38.0) release.
+
+## Changes for August 2024 (38.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the August 2024 (38.0) GA release:
+
+`<snaplogic.platform.version>38.0.26385</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>38.0.27765</snaplogic.snaps.version>`
+
+### Important Note Regarding Development on  Windows Subsystem for Linux (WSL)
+
+With the August 2024 release of the Archetype, we've updated the default property handling during the Snap generation to address an issue in developing on Windows via Windows Subsystem for Linux (WSL), for more information see [the post](https://community.snaplogic.com/t5/developing-snaps/developing-snaps-on-windows-via-wsl/td-p/26326) on Integration Nation.
 
 ## Rebuild Your Snap Pack
 
