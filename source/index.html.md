@@ -3806,7 +3806,7 @@ The BOM is being updated with the August 2024 (38.0) release.
 
 ### Update SnapLogic artifact version numbers
 
-In pom.xml, update these two properties to the appropriate build for the May 2024 (37.0) GA release:
+In pom.xml, update these two properties to the appropriate build for the August 2024 (38.0) GA release:
 
 `<snaplogic.platform.version>38.0.26385</snaplogic.platform.version>`
 
@@ -3814,9 +3814,7 @@ In pom.xml, update these two properties to the appropriate build for the May 202
 
 ### Important Note Regarding Development on  Windows Subsystem for Linux (WSL)
 
-We received a question in our mailbox about an issue with an account aligning with the snaps in designer vs. creating the account in manager. 
-During the investigation we found out that the user was developing on Windows via Windows Subsystem for Linux (WSL) and it seems there was some strange behavior. 
-With the August 2024 release of the Archetype, we've updated the default property handling around the snap generation to address this issue, for more information see [the post](https://community.snaplogic.com/t5/developing-snaps/developing-snaps-on-windows-via-wsl/td-p/26326) on Integration Nation.
+With the August 2024 release of the Archetype, we've updated the default property handling during the Snap generation to address an issue in developing on Windows via Windows Subsystem for Linux (WSL), for more information see [the post](https://community.snaplogic.com/t5/developing-snaps/developing-snaps-on-windows-via-wsl/td-p/26326) on Integration Nation.
 
 ## Rebuild Your Snap Pack
 
