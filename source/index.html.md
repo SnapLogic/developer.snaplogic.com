@@ -3820,7 +3820,7 @@ With the August 2024 release of the Archetype, we've updated the default propert
 
 ### update SnapLogic artifact version numbers
 
-In pom.xml, update these two properties to the appropriate build for the Novemeber 2024 (39.0) GA release:
+In pom.xml, update these two properties to the appropriate build for the November 2024 (39.0) GA release:
 
 `<snaplogic.platform.version>39.0.28252</snaplogic.platform.version>`
 
