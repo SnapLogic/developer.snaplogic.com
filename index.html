@@ -538,8 +538,8 @@ Choose archetype:
 1: https://snaplogiceng.jfrog.io/artifactory/thirdparty/ -&gt; com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 37.0
-2: 38.0
+1: 38.0
+2: 39.0
 Choose a number: 2:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
@@ -560,7 +560,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:38.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:39.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3597,8 +3597,8 @@ that needs to be specified directly in the POM file.</p>
 <span class="nt">&lt;properties&gt;</span>
     ...
     <span class="c">&lt;!-- SnapLogic SDK versions --&gt;</span>
-    <span class="nt">&lt;snaplogic.platform.version&gt;</span>38.0.26385<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
-    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>38.0.27765<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
+    <span class="nt">&lt;snaplogic.platform.version&gt;</span>39.0.28252<span class="nt">&lt;/snaplogic.platform.version&gt;</span>
+    <span class="nt">&lt;snaplogic.snaps.version&gt;</span>39.0.28965<span class="nt">&lt;/snaplogic.snaps.version&gt;</span>
 <span class="nt">&lt;/properties&gt;</span>
 </code></pre></div><div class="highlight"><pre class="highlight xml tab-xml"><code>(step 7)
 <span class="nt">&lt;plugin&gt;</span>
@@ -3610,7 +3610,7 @@ that needs to be specified directly in the POM file.</p>
 <ol>
 <li><p>Import the BOM into your POM by adding the text shown in the code snippet to the <code>&lt;dependencyManagement&gt;</code> section.
 If you don’t already have this section, add the <code>&lt;dependencyManagement&gt;</code> and <code>&lt;dependencies&gt;</code> elements.</p></li>
-<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=38.0.27765">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
+<li><p><a href="https://github.com/SnapLogicDev/sdk/packages/358891?version=39.0.28965">Download and view the BOM file using the link under Assets on this page.</a>.</p></li>
 <li><p>If your POM already had a <code>&lt;dependencyManagement&gt;</code> section before importing the BOM, review each <code>&lt;dependency&gt;</code> in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the <code>&lt;dependencyManagement&gt;</code> section.</p></li>
 <li><p>Review the <code>&lt;dependencies&gt;</code> section (the one that’s a direct child of the root <code>&lt;project&gt;</code> element, not the one inside 
@@ -3916,6 +3916,12 @@ The BOM is being updated with the August 2024 (38.0) release.</p>
 <p><code>&lt;snaplogic.snaps.version&gt;38.0.27765&lt;/snaplogic.snaps.version&gt;</code></p>
 <h3 id='important-note-regarding-development-on-windows-subsystem-for-linux-wsl'>Important Note Regarding Development on  Windows Subsystem for Linux (WSL)</h3>
 <p>With the August 2024 release of the Archetype, we&#39;ve updated the default property handling during the Snap generation to address an issue in developing on Windows via Windows Subsystem for Linux (WSL), for more information see <a href="https://community.snaplogic.com/t5/developing-snaps/developing-snaps-on-windows-via-wsl/td-p/26326">the post</a> on Integration Nation.</p>
+<h2 id='changes-for-november-2024-39-0-release'>Changes for November 2024 (39.0) release</h2><h3 id='update-snaplogic-artifact-version-numbers-6'>update SnapLogic artifact version numbers</h3>
+<p>In pom.xml, update these two properties to the appropriate build for the November 2024 (39.0) GA release:</p>
+
+<p><code>&lt;snaplogic.platform.version&gt;39.0.28252&lt;/snaplogic.platform.version&gt;</code></p>
+
+<p><code>&lt;snaplogic.snaps.version&gt;39.0.28965&lt;/snaplogic.snaps.version&gt;</code></p>
 <h2 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h2>
 <p>After updating, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.</p>
 
