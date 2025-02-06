@@ -290,8 +290,8 @@ Choose archetype:
 1: https://snaplogiceng.jfrog.io/artifactory/thirdparty/ -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 38.0
-2: 39.0
+1: 39.0
+2: 40.0
 Choose a number: 2:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
@@ -312,7 +312,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:39.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:40.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3441,8 +3441,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-	<snaplogic.platform.version>39.0.28252</snaplogic.platform.version>
-	<snaplogic.snaps.version>39.0.28965</snaplogic.snaps.version>
+	<snaplogic.platform.version>40.0.30027</snaplogic.platform.version>
+	<snaplogic.snaps.version>40.0.29887</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3458,7 +3458,7 @@ Steps to update the POM file (pom.xml):
 1. Import the BOM into your POM by adding the text shown in the code snippet to the `<dependencyManagement>` section.
 If you don’t already have this section, add the `<dependencyManagement>` and `<dependencies>` elements.
 
-2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=39.0.28965).
+2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=40.0.29887).
 
 3. If your POM already had a `<dependencyManagement>` section before importing the BOM, review each `<dependency>` in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the `<dependencyManagement>` section.
@@ -3818,13 +3818,23 @@ With the August 2024 release of the Archetype, we've updated the default propert
 
 ## Changes for November 2024 (39.0) release
 
-### update SnapLogic artifact version numbers
+### Update SnapLogic artifact version numbers
 
 In pom.xml, update these two properties to the appropriate build for the November 2024 (39.0) GA release:
 
 `<snaplogic.platform.version>39.0.28252</snaplogic.platform.version>`
 
 `<snaplogic.snaps.version>39.0.28965</snaplogic.snaps.version>`
+
+## Changes for February 2025 (40.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the February 2025 (40.0) GA release:
+
+`<snaplogic.platform.version>40.0.30027</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>40.0.29887</snaplogic.snaps.version>`
 
 ## Rebuild Your Snap Pack
 
