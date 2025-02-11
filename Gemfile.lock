@@ -12,6 +12,8 @@ GEM
     autoprefixer-rails (10.2.5.0)
       execjs (< 2.8.0)
     backports (3.23.0)
+    base64 (0.2.0)
+    bigdecimal (3.1.9)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -82,6 +84,7 @@ GEM
       rouge (~> 3.2)
     mini_portile2 (2.8.0)
     minitest (5.17.0)
+    mutex_m (0.3.0)
     nokogiri (1.13.9)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
@@ -128,10 +131,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  base64
+  bigdecimal
   middleman (~> 4.4)
   middleman-autoprefixer (~> 3.0)
   middleman-sprockets (~> 4.1)
   middleman-syntax (~> 3.2)
+  mutex_m
   nokogiri (~> 1.13.3)
   redcarpet (~> 3.6.0)
   rouge (~> 3.21)
@@ -139,7 +145,7 @@ DEPENDENCIES
   webrick
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 3.4.1
 
 BUNDLED WITH
-   2.2.22
+   2.6.3
