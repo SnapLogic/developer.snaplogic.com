@@ -6,7 +6,7 @@ language_tabs:
 toc_footers:
   - <a href='https://doc.snaplogic.com'>Product Documentation</a>
   - <a href='https://www.snaplogic.com'>SnapLogic website</a>
-  - ⓒ 2024 - SnapLogic Inc.
+  - ⓒ 2025 - SnapLogic Inc.
 
 includes:
 
