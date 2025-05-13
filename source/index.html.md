@@ -3491,6 +3491,143 @@ keep the `<dependency>` and its `<groupId>` and `<artifactId>` but remove any `<
 
     `<url>https://repo1.maven.org/maven2</url>`
 
+## Changes for May 2025 (41.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the February 2025 (41.0) GA release:
+
+`<snaplogic.platform.version>41.0.33084</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>41.0.31003</snaplogic.snaps.version>`
+
+## Changes for February 2025 (40.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the February 2025 (40.0) GA release:
+
+`<snaplogic.platform.version>40.0.30027</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>40.0.29887</snaplogic.snaps.version>`
+
+## Changes for November 2024 (39.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the November 2024 (39.0) GA release:
+
+`<snaplogic.platform.version>39.0.28252</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>39.0.28965</snaplogic.snaps.version>`
+
+### Breaking Changes for Provided Dependencies
+
+With the February 2024 release, the SnapLogic platform is no longer providing the `com.ning:async-http-client` in the BOM.
+If your Snap Pack relies on this library being present, you will need to change it to be a compile-time dependency and bundle it with your Snap Pack specifically.
+The BOM is being updated with the February 2024 (36.0) release and the JCC will remove the dependency completely with the May 2024 (37.0) release.
+Snap Packs will continue to work with the February 2024 (36.0) release, but will no longer work with the May 2024 (37.0) release unless the scope of the dependency is changed in your snap pack bundle as the dependency will no longer be available with the JCC.
+
+## Changes for August 2024 (38.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the August 2024 (38.0) GA release:
+
+`<snaplogic.platform.version>38.0.26385</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>38.0.27765</snaplogic.snaps.version>`
+
+### Important Note Regarding Development on  Windows Subsystem for Linux (WSL)
+
+With the August 2024 release of the Archetype, we've updated the default property handling during the Snap generation to address an issue in developing on Windows via Windows Subsystem for Linux (WSL), for more information see [the post](https://community.snaplogic.com/t5/developing-snaps/developing-snaps-on-windows-via-wsl/td-p/26326) on Integration Nation.
+
+## Changes for May 2024 (37.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the May 2024 (37.0) GA release:
+
+`<snaplogic.platform.version>37.0.24152</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>37.0.26341</snaplogic.snaps.version>`
+
+### Breaking Changes for Provided Dependencies Coming Soon
+
+With the August 2024 release, the SnapLogic platform will be changing the version of `org.jruby:jruby` in the BOM from 9.2.19.0 to 9.4.6.0.
+If your Snap Pack relies on this library it is suggested that you start to update your jruby version for runtime locally as the underlying ruby version will be updated with this change.
+The BOM is being updated with the August 2024 (38.0) release.
+
+## Changes for February 2024 (36.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the February 2024 (36.0) GA release:
+
+`<snaplogic.platform.version>36.0.22564</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>36.0.25112</snaplogic.snaps.version>`
+
+## Changes for August 2023 (34.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the 34.0 GA release:
+
+`<snaplogic.platform.version>34.0.19739</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>34.0.22460</snaplogic.snaps.version>`
+
+### Update usage of jackson ObjectMapper
+
+With the August release, the SnapLogic platform is updating the jackson version to 2.15.2.  
+With this update, Jackson has restricted the default parsable length of intput to parse from an unrestricted value to 20 million bytes (characters).
+This may cause some issues for certain input data to snaps, and as a result SnapLogic provides a jackson module that should be registered if you are creating new ObjectMapper instances.
+
+```java
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+...
+
+ObjectMapper mapper = new ObjectMapper();
+```
+
+For any instances in your code where you have the following (or some other values of this in the sidebar)
+
+```java
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.snaplogic.common.JsonFactoryModule;
+
+...
+
+ObjectMapper mapper = new ObjectMapper()
+        .registerModule(new JsonFactoryModule())
+        .registerModule(new JodaModule())
+        .registerModule(new JavaTimeModule());
+```
+
+It is suggested that you update to register the `JsonFactoryModule` provided by the `jsdk` as follows, you should also be registering the Joda and JavaTime Modules respectively.  The previous code should now look like the following to best support the data that streams through the SnapLogic pipelines.
+
+## Changes for May 2023 (33.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties (note they are now 33.0 rather than 4.33):
+
+`<snaplogic.platform.version>33.0.17599</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>33.0.21015</snaplogic.snaps.version>`
+
+### Update thirdparty repository URL
+
+The `thirdparty` repository URL has changed. Please change the URL in pom.xml and settings.xml as follows:
+
+Old URL: `http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty`
+
+New URL: `https://snaplogiceng.jfrog.io/artifactory/thirdparty`
+
 ## POM Changes for August 2020 release
 
 (Note: A few details in this section have been updated to keep them current for the latest release.)
@@ -3708,143 +3845,6 @@ for a more detailed discussion of this solution.
 	</mirrors>
 </settings>
 ```
-
-## Changes for May 2023 (33.0) release
-
-### Update SnapLogic artifact version numbers
-
-In pom.xml, update these two properties (note they are now 33.0 rather than 4.33):
-
-`<snaplogic.platform.version>33.0.17599</snaplogic.platform.version>`
-
-`<snaplogic.snaps.version>33.0.21015</snaplogic.snaps.version>`
-
-### Update thirdparty repository URL
-
-The `thirdparty` repository URL has changed. Please change the URL in pom.xml and settings.xml as follows:
-
-Old URL: `http://maven.clouddev.snaplogic.com:8080/nexus/content/repositories/thirdparty`
-
-New URL: `https://snaplogiceng.jfrog.io/artifactory/thirdparty`
-
-## Changes for August 2023 (34.0) release
-
-### Update SnapLogic artifact version numbers
-
-In pom.xml, update these two properties to the appropriate build for the 34.0 GA release:
-
-`<snaplogic.platform.version>34.0.19739</snaplogic.platform.version>`
-
-`<snaplogic.snaps.version>34.0.22460</snaplogic.snaps.version>`
-
-### Update usage of jackson ObjectMapper
-
-With the August release, the SnapLogic platform is updating the jackson version to 2.15.2.  
-With this update, Jackson has restricted the default parsable length of intput to parse from an unrestricted value to 20 million bytes (characters).
-This may cause some issues for certain input data to snaps, and as a result SnapLogic provides a jackson module that should be registered if you are creating new ObjectMapper instances.
-
-```java
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-...
-
-ObjectMapper mapper = new ObjectMapper();
-```
-
-For any instances in your code where you have the following (or some other values of this in the sidebar)
-
-```java
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.snaplogic.common.JsonFactoryModule;
-
-...
-
-ObjectMapper mapper = new ObjectMapper()
-        .registerModule(new JsonFactoryModule())
-        .registerModule(new JodaModule())
-        .registerModule(new JavaTimeModule());
-```
-
-It is suggested that you update to register the `JsonFactoryModule` provided by the `jsdk` as follows, you should also be registering the Joda and JavaTime Modules respectively.  The previous code should now look like the following to best support the data that streams through the SnapLogic pipelines.
-
-## Changes for February 2024 (36.0) release
-
-### Update SnapLogic artifact version numbers
-
-In pom.xml, update these two properties to the appropriate build for the February 2024 (36.0) GA release:
-
-`<snaplogic.platform.version>36.0.22564</snaplogic.platform.version>`
-
-`<snaplogic.snaps.version>36.0.25112</snaplogic.snaps.version>`
-
-### Breaking Changes for Provided Dependencies
-
-With the February 2024 release, the SnapLogic platform is no longer providing the `com.ning:async-http-client` in the BOM.
-If your Snap Pack relies on this library being present, you will need to change it to be a compile-time dependency and bundle it with your Snap Pack specifically.
-The BOM is being updated with the February 2024 (36.0) release and the JCC will remove the dependency completely with the May 2024 (37.0) release.
-Snap Packs will continue to work with the February 2024 (36.0) release, but will no longer work with the May 2024 (37.0) release unless the scope of the dependency is changed in your snap pack bundle as the dependency will no longer be available with the JCC.
-
-## Changes for May 2024 (37.0) release
-
-### Update SnapLogic artifact version numbers
-
-In pom.xml, update these two properties to the appropriate build for the May 2024 (37.0) GA release:
-
-`<snaplogic.platform.version>37.0.24152</snaplogic.platform.version>`
-
-`<snaplogic.snaps.version>37.0.26341</snaplogic.snaps.version>`
-
-### Breaking Changes for Provided Dependencies Coming Soon
-
-With the August 2024 release, the SnapLogic platform will be changing the version of `org.jruby:jruby` in the BOM from 9.2.19.0 to 9.4.6.0.
-If your Snap Pack relies on this library it is suggested that you start to update your jruby version for runtime locally as the underlying ruby version will be updated with this change.
-The BOM is being updated with the August 2024 (38.0) release.
-
-## Changes for August 2024 (38.0) release
-
-### Update SnapLogic artifact version numbers
-
-In pom.xml, update these two properties to the appropriate build for the August 2024 (38.0) GA release:
-
-`<snaplogic.platform.version>38.0.26385</snaplogic.platform.version>`
-
-`<snaplogic.snaps.version>38.0.27765</snaplogic.snaps.version>`
-
-### Important Note Regarding Development on  Windows Subsystem for Linux (WSL)
-
-With the August 2024 release of the Archetype, we've updated the default property handling during the Snap generation to address an issue in developing on Windows via Windows Subsystem for Linux (WSL), for more information see [the post](https://community.snaplogic.com/t5/developing-snaps/developing-snaps-on-windows-via-wsl/td-p/26326) on Integration Nation.
-
-## Changes for November 2024 (39.0) release
-
-### Update SnapLogic artifact version numbers
-
-In pom.xml, update these two properties to the appropriate build for the November 2024 (39.0) GA release:
-
-`<snaplogic.platform.version>39.0.28252</snaplogic.platform.version>`
-
-`<snaplogic.snaps.version>39.0.28965</snaplogic.snaps.version>`
-
-## Changes for February 2025 (40.0) release
-
-### Update SnapLogic artifact version numbers
-
-In pom.xml, update these two properties to the appropriate build for the February 2025 (40.0) GA release:
-
-`<snaplogic.platform.version>40.0.30027</snaplogic.platform.version>`
-
-`<snaplogic.snaps.version>40.0.29887</snaplogic.snaps.version>`
-
-## Changes for May 2025 (41.0) release
-
-### Update SnapLogic artifact version numbers
-
-In pom.xml, update these two properties to the appropriate build for the February 2025 (41.0) GA release:
-
-`<snaplogic.platform.version>41.0.33084</snaplogic.platform.version>`
-
-`<snaplogic.snaps.version>41.0.31003</snaplogic.snaps.version>`
 
 ## Rebuild Your Snap Pack
 
