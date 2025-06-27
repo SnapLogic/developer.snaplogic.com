@@ -48,7 +48,7 @@
 
     $('#input-search').on('keyup', function(e) {
       clearTimeout(timeoutHandle);
-      timeoutHandle = setTimeout(() => {
+      timeoutHandle = setTimeout(function() {
         search(e);
       }, searchDelay);
     });
