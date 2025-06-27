@@ -46,14 +46,9 @@
     content = $('.content');
     searchResults = $('.search-results');
 
-    $('#input-search').on('keyup',function(e) {
-      var wait = function() {
-        return function(executingFunction, waitTime){
-          clearTimeout(timeoutHandle);
-          timeoutHandle = setTimeout(executingFunction, waitTime);
-        };
-      }();
-      wait(function(){
+    $('#input-search').on('keyup', function(e) {
+      clearTimeout(timeoutHandle);
+      timeoutHandle = setTimeout(() => {
         search(e);
       }, searchDelay);
     });
@@ -70,7 +65,7 @@
     if (event.keyCode === 27) searchInput.value = '';
 
     if (searchInput.value) {
-      var results = index.search(searchInput.value).filter(function(r) {
+      var results = index.search("*" + searchInput.value + "*").filter(function(r) {
         return r.score > 0.0001;
       });
 
