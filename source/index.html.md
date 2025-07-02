@@ -11,6 +11,8 @@ toc_footers:
 includes:
 
 search: true
+
+code_clipboard: true
 ---
 
 # Introduction
