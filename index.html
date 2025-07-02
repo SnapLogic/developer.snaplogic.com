@@ -28,7 +28,7 @@
 	<!-- Google Search Console verification -->
 	<meta name="google-site-verification" content="Y5HefmIT29LMZPMWI4B6aCgKFIDgH1H49VwABxZM-r8" />
 
-    <style>
+    <style media="screen">
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight .gh {
@@ -228,9 +228,99 @@
   color: #f92672;
 }
     </style>
-    <link href="stylesheets/screen-ed62ca27.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print-ee17e13d.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all-13f669fd.js"></script>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-e8f7e799.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-19a72a7e.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-c07bcc20.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
     
 	<!-- Google Analytics -->
     <script>
@@ -252,19 +342,262 @@
         <img src="images/navbar-cad8cdcb.png" alt="" />
       </span>
     </a>
-    <div class="tocify-wrapper">
-      <img src="images/snaplogic-logo-white-e360a3e0.svg" style="vertical-align:middle;margin:10px 10px" alt="" />
-        <div class="lang-selector">
-        </div>
+    <div class="toc-wrapper">
+      <img src="images/snaplogic-logo-white-e360a3e0.svg" class="logo" style="vertical-align:middle;margin:10px 10px" alt="" />
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
         <ul class="search-results"></ul>
-      <!--<div>
-      	<ul class="tocify-header"><li id="expand-collapse" class="tocify-item"><a>Expand All</a></li></ul>
-      </div>-->
-      <div id="toc">
-      </div>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#snaps-and-snap-packs" class="toc-h2 toc-link" data-title="Snaps and Snap Packs">Snaps and Snap Packs</a>
+                  </li>
+                  <li>
+                    <a href="#snap-fundamentals" class="toc-h2 toc-link" data-title="Snap Fundamentals">Snap Fundamentals</a>
+                  </li>
+                  <li>
+                    <a href="#snaps-vs-scripts" class="toc-h2 toc-link" data-title="Snaps vs Scripts">Snaps vs Scripts</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#prerequisites" class="toc-h1 toc-link" data-title="Prerequisites">Prerequisites</a>
+          </li>
+          <li>
+            <a href="#setting-up-the-snaplex" class="toc-h1 toc-link" data-title="Setting up the Snaplex">Setting up the Snaplex</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#downloads" class="toc-h2 toc-link" data-title="Downloads">Downloads</a>
+                  </li>
+                  <li>
+                    <a href="#installation" class="toc-h2 toc-link" data-title="Installation">Installation</a>
+                  </li>
+                  <li>
+                    <a href="#running" class="toc-h2 toc-link" data-title="Running">Running</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#snap-anatomy-101" class="toc-h1 toc-link" data-title="Snap Anatomy 101">Snap Anatomy 101</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#metadata-annotations" class="toc-h2 toc-link" data-title="Metadata annotations">Metadata annotations</a>
+                  </li>
+                  <li>
+                    <a href="#snap-interface" class="toc-h2 toc-link" data-title="Snap interface">Snap interface</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#getting-started" class="toc-h1 toc-link" data-title="Getting Started">Getting Started</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#debugging" class="toc-h2 toc-link" data-title="Debugging">Debugging</a>
+                  </li>
+                  <li>
+                    <a href="#snap-maven-archetype" class="toc-h2 toc-link" data-title="Snap Maven Archetype">Snap Maven Archetype</a>
+                  </li>
+                  <li>
+                    <a href="#project-structure" class="toc-h2 toc-link" data-title="Project Structure">Project Structure</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#developing-snaps" class="toc-h1 toc-link" data-title="Developing Snaps">Developing Snaps</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#basic-snap-implementation" class="toc-h2 toc-link" data-title="Basic Snap Implementation">Basic Snap Implementation</a>
+                  </li>
+                  <li>
+                    <a href="#logging" class="toc-h2 toc-link" data-title="Logging">Logging</a>
+                  </li>
+                  <li>
+                    <a href="#creating-documents-with-documentutility" class="toc-h2 toc-link" data-title="Creating Documents with DocumentUtility">Creating Documents with DocumentUtility</a>
+                  </li>
+                  <li>
+                    <a href="#writing-documents-to-an-output-view" class="toc-h2 toc-link" data-title="Writing Documents to an Output View">Writing Documents to an Output View</a>
+                  </li>
+                  <li>
+                    <a href="#unit-testing-snaps-with-snaptestrunner" class="toc-h2 toc-link" data-title="Unit Testing Snaps with SnapTestRunner">Unit Testing Snaps with SnapTestRunner</a>
+                  </li>
+                  <li>
+                    <a href="#reading-documents-from-an-input-view" class="toc-h2 toc-link" data-title="Reading Documents from an Input View">Reading Documents from an Input View</a>
+                  </li>
+                  <li>
+                    <a href="#snap-categories" class="toc-h2 toc-link" data-title="Snap Categories">Snap Categories</a>
+                  </li>
+                  <li>
+                    <a href="#bootstrapping-with-simplesnap" class="toc-h2 toc-link" data-title="Bootstrapping with SimpleSnap">Bootstrapping with SimpleSnap</a>
+                  </li>
+                  <li>
+                    <a href="#writing-binary-data-to-an-output-view" class="toc-h2 toc-link" data-title="Writing Binary Data to an Output View">Writing Binary Data to an Output View</a>
+                  </li>
+                  <li>
+                    <a href="#reading-binary-data-from-an-input-view" class="toc-h2 toc-link" data-title="Reading Binary Data from an Input View">Reading Binary Data from an Input View</a>
+                  </li>
+                  <li>
+                    <a href="#accepting-user-input-with-propertybuilder" class="toc-h2 toc-link" data-title="Accepting User Input with PropertyBuilder">Accepting User Input with PropertyBuilder</a>
+                  </li>
+                  <li>
+                    <a href="#validating-user-input" class="toc-h2 toc-link" data-title="Validating User Input">Validating User Input</a>
+                  </li>
+                  <li>
+                    <a href="#expression-enabled-properties" class="toc-h2 toc-link" data-title="Expression-enabled Properties">Expression-enabled Properties</a>
+                  </li>
+                  <li>
+                    <a href="#suggesting-property-values" class="toc-h2 toc-link" data-title="Suggesting Property Values">Suggesting Property Values</a>
+                  </li>
+                  <li>
+                    <a href="#input-output-view-schemas" class="toc-h2 toc-link" data-title="Input/Output View Schemas">Input/Output View Schemas</a>
+                  </li>
+                  <li>
+                    <a href="#exceptions-and-error-views" class="toc-h2 toc-link" data-title="Exceptions and Error Views">Exceptions and Error Views</a>
+                  </li>
+                  <li>
+                    <a href="#customizing-input-output-views" class="toc-h2 toc-link" data-title="Customizing Input/Output Views">Customizing Input/Output Views</a>
+                  </li>
+                  <li>
+                    <a href="#pipeline-validation-preview-specific-behavior" class="toc-h2 toc-link" data-title="Pipeline Validation/Preview-specific Behavior">Pipeline Validation/Preview-specific Behavior</a>
+                  </li>
+                  <li>
+                    <a href="#dependency-injection" class="toc-h2 toc-link" data-title="Dependency Injection">Dependency Injection</a>
+                  </li>
+                  <li>
+                    <a href="#handling-pipeline-lifecycle-events" class="toc-h2 toc-link" data-title="Handling Pipeline Lifecycle Events">Handling Pipeline Lifecycle Events</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#deploying-snap-packs" class="toc-h1 toc-link" data-title="Deploying Snap Packs">Deploying Snap Packs</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#mvn-snappack-deploy" class="toc-h2 toc-link" data-title="mvn snappack:deploy">mvn snappack:deploy</a>
+                  </li>
+                  <li>
+                    <a href="#uploading-zip-file-through-manager-ui" class="toc-h2 toc-link" data-title="Uploading ZIP File through Manager UI">Uploading ZIP File through Manager UI</a>
+                  </li>
+                  <li>
+                    <a href="#deploying-a-new-version" class="toc-h2 toc-link" data-title="Deploying a New Version">Deploying a New Version</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#authenticating-with-accounts" class="toc-h1 toc-link" data-title="Authenticating with Accounts">Authenticating with Accounts</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#account-configuration" class="toc-h2 toc-link" data-title="Account Configuration">Account Configuration</a>
+                  </li>
+                  <li>
+                    <a href="#associating-accounts-with-snaps" class="toc-h2 toc-link" data-title="Associating Accounts with Snaps">Associating Accounts with Snaps</a>
+                  </li>
+                  <li>
+                    <a href="#exposing-account-properties" class="toc-h2 toc-link" data-title="Exposing Account Properties">Exposing Account Properties</a>
+                  </li>
+                  <li>
+                    <a href="#validating-accounts" class="toc-h2 toc-link" data-title="Validating Accounts">Validating Accounts</a>
+                  </li>
+                  <li>
+                    <a href="#validation-specific-behavior" class="toc-h2 toc-link" data-title="Validation-specific Behavior">Validation-specific Behavior</a>
+                  </li>
+                  <li>
+                    <a href="#supporting-multiple-accounts" class="toc-h2 toc-link" data-title="Supporting Multiple Accounts">Supporting Multiple Accounts</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#jtest-snap-unit-testing-framework" class="toc-h1 toc-link" data-title="jtest: Snap Unit Testing Framework">jtest: Snap Unit Testing Framework</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#declarative-testing-with-testfixture" class="toc-h2 toc-link" data-title="Declarative Testing with TestFixture">Declarative Testing with TestFixture</a>
+                  </li>
+                  <li>
+                    <a href="#recording-output-test-data" class="toc-h2 toc-link" data-title="Recording Output Test Data">Recording Output Test Data</a>
+                  </li>
+                  <li>
+                    <a href="#examining-error-views" class="toc-h2 toc-link" data-title="Examining Error Views">Examining Error Views</a>
+                  </li>
+                  <li>
+                    <a href="#providing-input-test-data" class="toc-h2 toc-link" data-title="Providing Input Test Data">Providing Input Test Data</a>
+                  </li>
+                  <li>
+                    <a href="#specifying-snap-test-properties" class="toc-h2 toc-link" data-title="Specifying Snap Test Properties">Specifying Snap Test Properties</a>
+                  </li>
+                  <li>
+                    <a href="#overriding-specific-properties" class="toc-h2 toc-link" data-title="Overriding Specific Properties">Overriding Specific Properties</a>
+                  </li>
+                  <li>
+                    <a href="#modifying-private-fields-with-testsetup" class="toc-h2 toc-link" data-title="Modifying Private Fields with TestSetup">Modifying Private Fields with TestSetup</a>
+                  </li>
+                  <li>
+                    <a href="#declarative-testing" class="toc-h2 toc-link" data-title="Declarative Testing">Declarative Testing</a>
+                  </li>
+                  <li>
+                    <a href="#testing-suggestions" class="toc-h2 toc-link" data-title="Testing Suggestions">Testing Suggestions</a>
+                  </li>
+                  <li>
+                    <a href="#injecting-test-dependencies" class="toc-h2 toc-link" data-title="Injecting Test Dependencies">Injecting Test Dependencies</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#propertybuilder-reference" class="toc-h1 toc-link" data-title="PropertyBuilder Reference">PropertyBuilder Reference</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#snaptype-reference" class="toc-h2 toc-link" data-title="SnapType Reference">SnapType Reference</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#updating-custom-snap-packs" class="toc-h1 toc-link" data-title="Updating Custom Snap Packs">Updating Custom Snap Packs</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#overview-of-dependency-improvements" class="toc-h2 toc-link" data-title="Overview of Dependency Improvements">Overview of Dependency Improvements</a>
+                  </li>
+                  <li>
+                    <a href="#updating-a-custom-snap-pack" class="toc-h2 toc-link" data-title="Updating a Custom Snap Pack">Updating a Custom Snap Pack</a>
+                  </li>
+                  <li>
+                    <a href="#changes-for-may-2025-41-0-release" class="toc-h2 toc-link" data-title="Changes for May 2025 (41.0) release">Changes for May 2025 (41.0) release</a>
+                  </li>
+                  <li>
+                    <a href="#changes-for-february-2025-40-0-release" class="toc-h2 toc-link" data-title="Changes for February 2025 (40.0) release">Changes for February 2025 (40.0) release</a>
+                  </li>
+                  <li>
+                    <a href="#changes-for-november-2024-39-0-release" class="toc-h2 toc-link" data-title="Changes for November 2024 (39.0) release">Changes for November 2024 (39.0) release</a>
+                  </li>
+                  <li>
+                    <a href="#changes-for-august-2024-38-0-release" class="toc-h2 toc-link" data-title="Changes for August 2024 (38.0) release">Changes for August 2024 (38.0) release</a>
+                  </li>
+                  <li>
+                    <a href="#changes-for-may-2024-37-0-release" class="toc-h2 toc-link" data-title="Changes for May 2024 (37.0) release">Changes for May 2024 (37.0) release</a>
+                  </li>
+                  <li>
+                    <a href="#changes-for-february-2024-36-0-release" class="toc-h2 toc-link" data-title="Changes for February 2024 (36.0) release">Changes for February 2024 (36.0) release</a>
+                  </li>
+                  <li>
+                    <a href="#changes-for-august-2023-34-0-release" class="toc-h2 toc-link" data-title="Changes for August 2023 (34.0) release">Changes for August 2023 (34.0) release</a>
+                  </li>
+                  <li>
+                    <a href="#changes-for-may-2023-33-0-release" class="toc-h2 toc-link" data-title="Changes for May 2023 (33.0) release">Changes for May 2023 (33.0) release</a>
+                  </li>
+                  <li>
+                    <a href="#pom-changes-for-august-2020-release" class="toc-h2 toc-link" data-title="POM Changes for August 2020 release">POM Changes for August 2020 release</a>
+                  </li>
+                  <li>
+                    <a href="#rebuild-your-snap-pack" class="toc-h2 toc-link" data-title="Rebuild Your Snap Pack">Rebuild Your Snap Pack</a>
+                  </li>
+                  <li>
+                    <a href="#requesting-assistance" class="toc-h2 toc-link" data-title="Requesting Assistance">Requesting Assistance</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#snaplogic-api-usage-agreement" class="toc-h1 toc-link" data-title="SnapLogic API Usage Agreement">SnapLogic API Usage Agreement</a>
+          </li>
+      </ul>
         <ul class="toc-footer">
             <li><a href='https://doc.snaplogic.com'>Product Documentation</a></li>
             <li><a href='https://www.snaplogic.com'>SnapLogic website</a></li>
@@ -3965,8 +4298,6 @@ Any such posts and their responses become resources that others may find benefic
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-          </div>
       </div>
     </div>
   </body>
