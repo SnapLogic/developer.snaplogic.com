@@ -4258,23 +4258,24 @@ for a more detailed discussion of this solution.</p>
 <div class="highlight"><pre class="highlight xml tab-xml"><code><span class="c">&lt;!-- settings.xml --&gt;</span>
 <span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0"</span>
   <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
-  <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;servers&gt;</span>
-        <span class="nt">&lt;server&gt;</span>
-            <span class="nt">&lt;id&gt;</span>github_SnapLogicDev<span class="nt">&lt;/id&gt;</span>
-            <span class="nt">&lt;username&gt;</span>thirdpartysnapdev<span class="nt">&lt;/username&gt;</span>
-            <span class="c">&lt;!-- Public token with `read:packages` scope --&gt;</span>
-            <span class="nt">&lt;password&gt;</span><span class="ni">&amp;#50;&amp;#53;&amp;#49;&amp;#55;&amp;#56;&amp;#54;&amp;#54;&amp;#48;&amp;#52;&amp;#102;&amp;#57;&amp;#54;&amp;#53;&amp;#102;&amp;#97;&amp;#100;&amp;#100;&amp;#54;&amp;#54;&amp;#57;&amp;#51;&amp;#52;&amp;#50;&amp;#53;&amp;#49;&amp;#52;&amp;#97;&amp;#51;&amp;#100;&amp;#57;&amp;#101;&amp;#101;&amp;#48;&amp;#99;&amp;#50;&amp;#54;&amp;#102;&amp;#48;&amp;#54;&amp;#98;</span><span class="nt">&lt;/password&gt;</span>
-        <span class="nt">&lt;/server&gt;</span>
-    <span class="nt">&lt;/servers&gt;</span>
-    <span class="nt">&lt;mirrors&gt;</span>
-        <span class="nt">&lt;mirror&gt;</span>
-            <span class="nt">&lt;id&gt;</span>thirdparty<span class="nt">&lt;/id&gt;</span>
-            <span class="nt">&lt;name&gt;</span>Snaplogic-ThirdPartyMaven-Repository<span class="nt">&lt;/name&gt;</span>
-            <span class="nt">&lt;url&gt;</span>https://snaplogiceng.jfrog.io/artifactory/thirdparty<span class="nt">&lt;/url&gt;</span>
-            <span class="nt">&lt;mirrorOf&gt;</span>Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo<span class="nt">&lt;/mirrorOf&gt;</span>
-        <span class="nt">&lt;/mirror&gt;</span>
-    <span class="nt">&lt;/mirrors&gt;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;servers&gt;</span>
+    <span class="nt">&lt;server&gt;</span>
+      <span class="nt">&lt;id&gt;</span>github_SnapLogicDev<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;username&gt;</span>thirdpartysnapdev<span class="nt">&lt;/username&gt;</span>
+      <span class="c">&lt;!-- Public token with `read:packages` scope --&gt;</span>
+      <span class="nt">&lt;password&gt;</span><span class="ni">&amp;#103;</span>hp_89ay3R2sVJjUre92ESi7XZCynSehfi1tiEDl<span class="nt">&lt;/password&gt;</span>
+    <span class="nt">&lt;/server&gt;</span>
+  <span class="nt">&lt;/servers&gt;</span>
+  <span class="nt">&lt;mirrors&gt;</span>
+    <span class="nt">&lt;mirror&gt;</span>
+      <span class="nt">&lt;id&gt;</span>thirdparty<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;name&gt;</span>Snaplogic-ThirdPartyMaven-Repository<span class="nt">&lt;/name&gt;</span>
+      <span class="nt">&lt;url&gt;</span>https://snaplogiceng.jfrog.io/artifactory/thirdparty<span class="nt">&lt;/url&gt;</span>
+      <span class="nt">&lt;mirrorOf&gt;</span>Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo<span class="nt">&lt;/mirrorOf&gt;</span>
+    <span class="nt">&lt;/mirror&gt;</span>
+  <span class="nt">&lt;/mirrors&gt;</span>
 <span class="nt">&lt;/settings&gt;</span>
 </code></pre></div><h2 id='rebuild-your-snap-pack'>Rebuild Your Snap Pack</h2>
 <p>After updating, rebuild your Snap Pack using Maven from the command-line. Ensure that your current directory is the root of your Snap Pack source code, where the pom.xml file is located.</p>
