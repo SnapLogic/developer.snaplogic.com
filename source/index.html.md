@@ -3838,23 +3838,24 @@ for a more detailed discussion of this solution.
 <!-- settings.xml -->
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-	<servers>
-		<server>
-			<id>github_SnapLogicDev</id>
-			<username>thirdpartysnapdev</username>
-			<!-- Public token with `read:packages` scope -->
-			<password>&#50;&#53;&#49;&#55;&#56;&#54;&#54;&#48;&#52;&#102;&#57;&#54;&#53;&#102;&#97;&#100;&#100;&#54;&#54;&#57;&#51;&#52;&#50;&#53;&#49;&#52;&#97;&#51;&#100;&#57;&#101;&#101;&#48;&#99;&#50;&#54;&#102;&#48;&#54;&#98;</password>
-		</server>
-	</servers>
-	<mirrors>
-		<mirror>
-			<id>thirdparty</id>
-			<name>Snaplogic-ThirdPartyMaven-Repository</name>
-			<url>https://snaplogiceng.jfrog.io/artifactory/thirdparty</url>
-			<mirrorOf>Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo</mirrorOf>
-		</mirror>
-	</mirrors>
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <servers>
+    <server>
+      <id>github_SnapLogicDev</id>
+      <username>thirdpartysnapdev</username>
+      <!-- Public token with `read:packages` scope -->
+      <password>&#103;hp_89ay3R2sVJjUre92ESi7XZCynSehfi1tiEDl</password>
+    </server>
+  </servers>
+  <mirrors>
+    <mirror>
+      <id>thirdparty</id>
+      <name>Snaplogic-ThirdPartyMaven-Repository</name>
+      <url>https://snaplogiceng.jfrog.io/artifactory/thirdparty</url>
+      <mirrorOf>Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo</mirrorOf>
+    </mirror>
+  </mirrors>
 </settings>
 ```
 
