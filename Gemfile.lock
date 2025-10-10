@@ -106,7 +106,7 @@ GEM
       stringio
     public_suffix (5.0.1)
     racc (1.8.1)
-    rack (2.2.19)
+    rack (2.2.20)
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -157,7 +157,7 @@ DEPENDENCIES
   mutex_m
   nokogiri (~> 1.18.9)
   ostruct
-  rack (~> 2.2.19)
+  rack (~> 2.2.20)
   rdoc
   redcarpet (~> 3.6.0)
   rexml (~> 3.4.2)
