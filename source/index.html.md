@@ -258,6 +258,48 @@ If a healthy Snaplex is running locally, Snap Development may begin.
 
 Make a directory where Snap Development will occur, export the location as the `SNAP_HOME` environment variable and set the port to use for debugging.
 
+## Maven Settings
+
+Open your Maven settings file (default location is `~/.m2/settings.xml`) and make sure the following Maven entries are added:
+
+- Under the `<servers>` section, add the required authentication details (username and access token).
+- Under the `<mirrors>` section, add the SnapLogic repository configuration.
+
+```xml
+<servers>
+    <server>
+       <id>archetype</id>
+      <username>thirdpartysnapdev</username>
+      <!-- Public token with `read:packages` scope -->
+      <password>&#103;hp_89ay3R2sVJjUre92ESi7XZCynSehfi1tiEDl</password>
+      <!--<username>snap-team@snaplogic.com</username>
+      <password>@n7V!CTT-Ux4PUfL</password> -->
+    </server>
+    <server>
+      <id>github_SnapLogicDev</id>
+      <username>thirdpartysnapdev</username>
+      <!-- Public token with `read:packages` scope -->
+      <password>&#103;hp_89ay3R2sVJjUre92ESi7XZCynSehfi1tiEDl</password>
+    </server>
+    <server>
+      <id>thirdparty</id>
+      <username>thirdpartysnapdev</username>
+      <password>&#103;hp_89ay3R2sVJjUre92ESi7XZCynSehfi1tiEDl</password>
+    </server>
+</servers>
+```
+
+```xml
+<mirrors>
+    <mirror>
+      <id>thirdparty</id>
+      <name>Snaplogic-ThirdPartyMaven-Repository</name>
+      <url>https://snaplogiceng.jfrog.io/artifactory/thirdparty</url>
+      <mirrorOf>Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo</mirrorOf>
+    </mirror>
+</mirrors>
+```
+
 ## Debugging
 
 ```shell
