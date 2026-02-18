@@ -321,6 +321,16 @@ user: cc+partners@snaplogic.com
 ```
 
 
+```
+<!-- SnapArchetype generation requires that you include this server config in the <servers> section of your Maven settings.xml file -->
+<server>
+    <id>archetype</id>
+    <username>thirdpartysnapdev</username>
+    <password>...</password>
+</server>
+```
+
+
 A [Maven Archetype](https://maven.apache.org/guides/introduction/introduction-to-archetypes.html) is a Maven project templating toolkit. SnapLogic provides `SnapArchetype` for quickly starting Snap development.
 
 <aside class="notice">
@@ -347,6 +357,10 @@ Sample | Description
 
 <aside class="warning">
 If you choose a <code>groupId</code>/<code>package</code> value other than <code>com.snaplogic.snaps</code>, you must provide a HTTP URL value to the <code>docLink</code> parameter of a Snap's <code>@General</code> annotation on a Snap.
+</aside>
+
+<aside class="notice">
+To generate the <code>SnapArchetype</code> with the Maven archetype plugin, you will need to configure server credentials so that the generation can access SnapLogic's third party dependencies repository and download the required dependecies. Make sure your Maven <code>settings.xml</code> includes the an "archetype" server configuration within its <code>servers</code> section.
 </aside>
 
 Once `SnapArchetype` has been generated, it can be imported as a Maven project into your IDE ([IntelliJ IDEA](https://www.jetbrains.com/help/idea/2016.1/importing-project-from-maven-model.html), [Eclipse](https://books.sonatype.com/m2eclipse-book/reference/creating-sect-importing-projects.html), [Netbeans](https://netbeans.apache.org/wiki/main/wiki/MavenBestPractices/)).
