@@ -90,7 +90,7 @@ GEM
     mini_portile2 (2.8.9)
     minitest (5.17.0)
     mutex_m (0.3.0)
-    nokogiri (1.18.9)
+    nokogiri (1.19.1)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     ostruct (0.6.2)
@@ -155,7 +155,7 @@ DEPENDENCIES
   middleman-sprockets (~> 4.1)
   middleman-syntax (~> 3.2)
   mutex_m
-  nokogiri (~> 1.18.9)
+  nokogiri (~> 1.19.1)
   ostruct
   rack (~> 2.2.19)
   rdoc
