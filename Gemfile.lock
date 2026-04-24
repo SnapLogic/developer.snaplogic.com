@@ -24,7 +24,7 @@ GEM
     csv (3.3.5)
     date (3.4.1)
     dotenv (2.8.1)
-    erb (5.0.1)
+    erb (6.0.1.1)
     erubis (2.7.0)
     execjs (2.7.0)
     fast_blank (1.0.1)
