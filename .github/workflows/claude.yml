@@ -26,7 +26,7 @@ jobs:
       (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
       (github.event_name == 'issues' && contains(github.event.issue.body, '@claude')) ||
       (github.event_name == 'pull_request' && github.event.label.name == 'claude-review')
-    uses: SnapLogic/.github/.github/workflows/claude-review.yml@main
+    uses: SnapLogic/.github/.github/workflows/claude-review.yml@v1
     # Passes all org-level secrets (AWS keys + GitHub App) to the reusable workflow.
     secrets: inherit
     with:
