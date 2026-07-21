@@ -1,0 +1,50 @@
+# Caller workflow — copy this into EACH repo's .github/workflows/ directory.
+# It only wires up triggers + delegates to the org's central reusable workflow.
+# `@v1` below should be a branch or tag in the SnapLogic/.github repo (e.g. main or a release tag).
+name: Claude
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+  issues:
+    types: [opened]
+  # Click-to-trigger: add the "claude-review" label to a PR to request a review
+  # (closest equivalent to selecting a reviewer from the dropdown).
+  pull_request:
+    types: [labeled]
+
+jobs:
+  claude:
+    # Only run when someone mentions @claude, or adds the claude-review label — keeps this on-demand only.
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@claude')) ||
+      (github.event_name == 'pull_request' && github.event.label.name == 'claude-review')
+    uses: SnapLogic/.github/.github/workflows/claude-review.yml@main
+    # Passes all org-level secrets (AWS keys + GitHub App) to the reusable workflow.
+    secrets: inherit
+    with:
+      # Label trigger has no @claude mention to respond to, so drive the official code-review
+      # plugin explicitly — it posts its findings back to the PR as inline comments.
+      # For mention/comment triggers these are empty and Claude uses the @claude mention (tag mode).
+      prompt: >-
+        ${{ (github.event_name == 'pull_request' && github.event.label.name == 'claude-review')
+        && format('/code-review:code-review {0}/pull/{1} --comment', github.repository, github.event.pull_request.number)
+        || '' }}
+      plugin_marketplaces: >-
+        ${{ (github.event_name == 'pull_request' && github.event.label.name == 'claude-review')
+        && 'https://github.com/anthropics/claude-code.git'
+        || '' }}
+      plugins: >-
+        ${{ (github.event_name == 'pull_request' && github.event.label.name == 'claude-review')
+        && 'code-review@claude-code-plugins'
+        || '' }}
+      # Optional per-repo overrides:
+      # model: us.anthropic.claude-opus-4-8
+      # aws_region: us-west-2
