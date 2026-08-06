@@ -292,8 +292,8 @@ Choose archetype:
 1: https://snaplogiceng.jfrog.io/artifactory/thirdparty/ -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 43.0
-2: 44.0
+1: 44.0
+2: 45.0
 Choose a number: 2:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
@@ -314,7 +314,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:44.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:45.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -322,12 +322,24 @@ user: cc+partners@snaplogic.com
 
 
 ```
-<!-- SnapArchetype generation requires that you include this server config in the <servers> section of your Maven settings.xml file -->
+<!-- SnapArchetype generation requires that you include these server configs in the <servers> section of your Maven settings.xml file -->
 <server>
     <id>archetype</id>
     <username>thirdpartysnapdev</username>
     <password>&#103;hp_89ay3R2sVJjUre92ESi7XZCynSehfi1tiEDl</password>
 </server>
+<server>
+      <id>thirdparty</id>
+      <username>thirdpartysnapdev</username>
+      <password>&#103;hp_89ay3R2sVJjUre92ESi7XZCynSehfi1tiEDl</password>
+</server>
+<!-- You will also need to add the following config to the <mirrors> section of your Maven settings.xml>
+<mirror>
+    <id>thirdparty</id>
+    <name>Snaplogic-ThirdPartyMaven-Repository</name>
+    <url>https://snaplogiceng.jfrog.io/artifactory/thirdparty</url>
+    <mirrorOf>Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo</mirrorOf>
+</mirror>
 ```
 
 
@@ -360,13 +372,39 @@ If you choose a <code>groupId</code>/<code>package</code> value other than <code
 </aside>
 
 <aside class="notice">
-To generate the <code>SnapArchetype</code> with the Maven archetype plugin, you will need to configure server credentials so that the generation can access SnapLogic's third party dependencies repository and download the required dependecies. Make sure your Maven <code>settings.xml</code> includes an "archetype" server configuration within its <code>servers</code> section. The server entry should be configured with the following values in the respective XML tags:
+To generate the <code>SnapArchetype</code> with the Maven archetype plugin, you will need to configure server credentials so that the generation can access SnapLogic's third party dependencies repository and download the required dependecies. Make sure your Maven <code>settings.xml</code> includes the following:
+
+<br />
+Two entries in the <code>servers</code> section:
+<br /> First entry:
 <br />
 id: <code>archetype</code>
 <br />
 username: <code>thirdpartysnapdev</code>
 <br />
 password: <code>&#103;hp_89ay3R2sVJjUre92ESi7XZCynSehfi1tiEDl</code>
+<br />
+<br />
+Second entry:
+<br />
+id: <code>thirdparty</code>
+<br />
+username: <code>thirdpartysnapdev</code>
+<br />
+password: <code>&#103;hp_89ay3R2sVJjUre92ESi7XZCynSehfi1tiEDl</code>
+<br />
+<br />
+One entry in the <code>mirrors</code> section:
+<br />
+id: <code>thirdparty</code>
+<br />
+name: <code>Snaplogic-ThirdPartyMaven-Repository</code>
+<br />
+url: <code>https://snaplogiceng.jfrog.io/artifactory/thirdparty</code>
+<br />
+mirrorOf <code>Snaplogic-ThirdPartyMaven-Repository,thirdparty,SnapArchetype-repo</code>
+<br />
+<br />
 </aside>
 
 Once `SnapArchetype` has been generated, it can be imported as a Maven project into your IDE ([IntelliJ IDEA](https://www.jetbrains.com/help/idea/2016.1/importing-project-from-maven-model.html), [Eclipse](https://books.sonatype.com/m2eclipse-book/reference/creating-sect-importing-projects.html), [Netbeans](https://netbeans.apache.org/wiki/main/wiki/MavenBestPractices/)).
@@ -3463,8 +3501,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-	<snaplogic.platform.version>44.0.39095</snaplogic.platform.version>
-	<snaplogic.snaps.version>44.0.33958</snaplogic.snaps.version>
+	<snaplogic.platform.version>45.0.45046</snaplogic.platform.version>
+	<snaplogic.snaps.version>45.0.35817</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3480,7 +3518,7 @@ Steps to update the POM file (pom.xml):
 1. Import the BOM into your POM by adding the text shown in the code snippet to the `<dependencyManagement>` section.
 If you don’t already have this section, add the `<dependencyManagement>` and `<dependencies>` elements.
 
-2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=44.0.33958).
+2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=45.0.35817).
 
 3. If your POM already had a `<dependencyManagement>` section before importing the BOM, review each `<dependency>` in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the `<dependencyManagement>` section.
@@ -3513,6 +3551,16 @@ keep the `<dependency>` and its `<groupId>` and `<artifactId>` but remove any `<
 
     `<url>https://repo1.maven.org/maven2</url>`
 
+## Changes for August 2026 (45.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the August 2026 (45.0) GA release:
+
+`<snaplogic.platform.version>45.0.45046</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>45.0.35817</snaplogic.snaps.version>`
+
 ## Changes for February 2026 (44.0) release
 
 ### Update SnapLogic artifact version numbers
@@ -3522,6 +3570,10 @@ In pom.xml, update these two properties to the appropriate build for the Februar
 `<snaplogic.platform.version>44.0.39095</snaplogic.platform.version>`
 
 `<snaplogic.snaps.version>44.0.33958</snaplogic.snaps.version>`
+
+### Update Maven settings.xml for repository access
+
+Access to SnapLogic's third party dependencies repository (to download required dependencies for generating the <code>SnapArchetype</code> with the Maven archetype plugin) now requires additional server and mirror configuration. See the [Snap Maven Archetype](#snap-maven-archetype) section under **Getting Started** for details.
 
 ## Changes for November 2025 (43.0) release
 
