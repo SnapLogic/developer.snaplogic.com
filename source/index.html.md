@@ -3555,7 +3555,7 @@ keep the `<dependency>` and its `<groupId>` and `<artifactId>` but remove any `<
 
 ### Update SnapLogic artifact version numbers
 
-In pom.xml, update these two properties to the appropriate build for the February 2026 (44.0) GA release:
+In pom.xml, update these two properties to the appropriate build for the August 2026 (45.0) GA release:
 
 `<snaplogic.platform.version>45.0.45046</snaplogic.platform.version>`
 
