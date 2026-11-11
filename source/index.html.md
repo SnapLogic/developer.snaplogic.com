@@ -98,44 +98,7 @@ Please visit the official SnapLogic documentation for detailed instructions for 
 Use of a Snaplex in a macOS environment is supported only for developing Snaps.
 </aside>
 
-```shell
-$ cd ~
-$ brew install wget
-$ wget https://s3.amazonaws.com/elastic.snaplogic.com/snaplogic-sidekick...rpm
-$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-$ brew install rpm2cpio
-$ rpm2cpio.pl snaplogic-sidekick...rpm | cpio -idvm
-$ mkdir -p ~/opt/snaplogic/etc
-$ unzip myplex.slpropz -d ~/opt/snaplogic/etc
-$ echo 'export SL_ROOT=~/opt/snaplogic' >> ~/.bash_profile
-$ source ~/.bash_profile
-```
-
-> If successful, the output of the `cpio` command will list the Snaplex files populating the newly created `~/opt/snaplogic` directory, for example:
-
-```shell
-$ rpm2cpio.pl snaplogic-sidekick-4.mrc244-x86_64.rpm | cpio -idvm
-./opt/snaplogic/bin/functions
-./opt/snaplogic/bin/jcc.sh
-./opt/snaplogic/bin/logstash.sh
-./opt/snaplogic/ldlib/libsapjco3.jnilib
-./opt/snaplogic/ldlib/libsapjco3.so
-./opt/snaplogic/pkgs/jre1.8.0_45/COPYRIGHT
-...
-./opt/snaplogic/run/lib/jcc.war
-./opt/snaplogic/run/lib/logstash.jar
-./opt/snaplogic/run/log
-1044673 blocks
-```
-
-1. `cd` to your home directory
-1. Instructions for downloading the `.rpm` file can be found [here](https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/2552922128/Install+a+Groundplex+in+Your+Environment)
-1. Download and install [Homebrew](https://brew.sh/)
-1. Install the `rpm2cpio` library
-1. Extract the downloaded Snaplex `.rpm` file
-1. Unzip the downloaded `.slpropz` file to the `etc` directory of your Snaplex
-1. Export the `SL_ROOT` environment variable to your `~/.bash_profile`
-
+Contact SnapLogic support for assistance with installation on macOS.
 
 ## Running
 
@@ -292,8 +255,8 @@ Choose archetype:
 1: https://snaplogiceng.jfrog.io/artifactory/thirdparty/ -> com.snaplogic.tools:SnapArchetype (An archetype that creates a Snap Pack, with example Snaps provided)
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : 1
 Choose com.snaplogic.tools:SnapArchetype version: 
-1: 44.0
-2: 45.0
+1: 45.0
+2: 46.0
 Choose a number: 2:
 Define value for property 'groupId': : com.snaplogic
 Define value for property 'artifactId': : demosnappack
@@ -314,7 +277,7 @@ snapPack: Demo Snap Pack
 user: cc+partners@snaplogic.com
  Y: : y
 [INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Archetype: SnapArchetype:45.0
+[INFO] Using following parameters for creating project from Archetype: SnapArchetype:46.0
 [INFO] ----------------------------------------------------------------------------
 [INFO] Parameter: groupId, Value: com.snaplogic
 ...
@@ -3501,8 +3464,8 @@ Steps to update the POM file (pom.xml):
 <properties>
     ...
     <!-- SnapLogic SDK versions -->
-	<snaplogic.platform.version>45.0.45046</snaplogic.platform.version>
-	<snaplogic.snaps.version>45.0.35817</snaplogic.snaps.version>
+	<snaplogic.platform.version>46.0.47587</snaplogic.platform.version>
+	<snaplogic.snaps.version>46.0.36611</snaplogic.snaps.version>
 </properties>
 ```
 
@@ -3518,7 +3481,7 @@ Steps to update the POM file (pom.xml):
 1. Import the BOM into your POM by adding the text shown in the code snippet to the `<dependencyManagement>` section.
 If you don’t already have this section, add the `<dependencyManagement>` and `<dependencies>` elements.
 
-2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=45.0.35817).
+2. [Download and view the BOM file using the link under Assets on this page.](https://github.com/SnapLogicDev/sdk/packages/358891?version=46.0.36611).
 
 3. If your POM already had a `<dependencyManagement>` section before importing the BOM, review each `<dependency>` in that 
 section to see if it’s declared by the BOM. If so, remove that dependency from the `<dependencyManagement>` section.
@@ -3550,6 +3513,16 @@ keep the `<dependency>` and its `<groupId>` and `<artifactId>` but remove any `<
     This repository now requires https, so add an “s” to the protocol specifier:
 
     `<url>https://repo1.maven.org/maven2</url>`
+
+## Changes for November 2026 (46.0) release
+
+### Update SnapLogic artifact version numbers
+
+In pom.xml, update these two properties to the appropriate build for the November 2026 (46.0) GA release:
+
+`<snaplogic.platform.version>46.0.47587</snaplogic.platform.version>`
+
+`<snaplogic.snaps.version>46.0.36611</snaplogic.snaps.version>`
 
 ## Changes for August 2026 (45.0) release
 
